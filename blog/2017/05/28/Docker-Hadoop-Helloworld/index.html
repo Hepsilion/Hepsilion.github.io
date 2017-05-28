@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Docker-Hadoop-Helloworld | Hepsilion的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion的博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion的博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+                    <a class="main-nav-link" href="/blog/project">Project</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/project">Project</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                32
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                20
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Docker-Hadoop-Helloworld" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Docker-Hadoop-Helloworld
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/">
+            <time datetime="2017-05-28T14:48:12.000Z" itemprop="datePublished">2017-05-28</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/环境配置/">环境配置</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/docker/">docker</a>, <a class="tag-link" href="/blog/tags/hadoop/">hadoop</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>使用Docker在本地搭建Hadoop分布式集群<br>本文档参考<a href="http://tashan10.com/yong-dockerda-jian-hadoopwei-fen-bu-shi-ji-qun/。" target="_blank" rel="external">http://tashan10.com/yong-dockerda-jian-hadoopwei-fen-bu-shi-ji-qun/。</a></p>
+<a id="more"></a>
+<h2 id="一、-Docker安装"><a href="#一、-Docker安装" class="headerlink" title="一、 Docker安装"></a>一、 Docker安装</h2><h2 id="二、构建含有Java运行环境的ubuntu镜像"><a href="#二、构建含有Java运行环境的ubuntu镜像" class="headerlink" title="二、构建含有Java运行环境的ubuntu镜像"></a>二、构建含有Java运行环境的ubuntu镜像</h2><h3 id="1-下载ubuntu镜像"><a href="#1-下载ubuntu镜像" class="headerlink" title="1. 下载ubuntu镜像"></a>1. 下载ubuntu镜像</h3><p>使用如下命令从Docker仓库中获取ubuntu的最新镜像。</p>
+<pre><code>SimontekiMacBook-Pro:~ liu$ docker pull ubuntu
+</code></pre><p>镜像下载完成后，使用命令<code>docker images</code>可以查看本地所有镜像。</p>
+<pre><code>SimontekiMacBook-Pro:~ liu$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+ubuntu              latest              f49eec89601e        4 weeks ago          129 MB
+SimontekiMacBook-Pro:~ liu$
+</code></pre><h3 id="2-启动容器"><a href="#2-启动容器" class="headerlink" title="2. 启动容器"></a>2. 启动容器</h3><p>下面，我们以ubuntu镜像作为基准镜像，构建包含Java运行环境的ubuntu镜像。</p>
+<p>先使用如下命令启动一个容器：</p>
+<pre><code>SimontekiMacBook-Pro:~ liu$ docker run -ti ubuntu
+root@52573ef1de5d:/#
+</code></pre><p>可以看到容器几乎瞬间就启动起来了，比虚拟机不知快了多少倍！</p>
+<h3 id="3-Java安装"><a href="#3-Java安装" class="headerlink" title="3. Java安装"></a>3. Java安装</h3><p>依次执行下面命令安装Java</p>
+<pre><code>root@52573ef1de5d:/# apt-get update
+root@52573ef1de5d:/# apt-get install software-properties-common python-software-properties
+root@52573ef1de5d:/# add-apt-repository ppa:webupd8team/java
+root@52573ef1de5d:/# apt-get update
+root@52573ef1de5d:/# apt-get install oracle-java7-installer
+root@52573ef1de5d:/# java -version
+</code></pre><p>注意：这里安装的Java7(JDK1.7)，如需其他版本请自行修改<code>apt-get install oracle-java7-installer</code>命令，例如命令<code>apt-get install oracle-java6-installer</code>将安装JDK1.6</p>
+<h3 id="4-保存镜像复本"><a href="#4-保存镜像复本" class="headerlink" title="4. 保存镜像复本"></a>4. 保存镜像复本</h3><p>现在可以将装好Java的容器保存为一个镜像副本，将来需要的时候可以在此复本基础上构建其他镜像。</p>
+<p>先退出上面启动的容器，将上面的容器保存为镜像<code>ubuntu:java</code>，然后使用<code>docker images</code>命令，发现<code>ubuntu:java</code>已保存为本地镜像。</p>
+<pre><code>root@52573ef1de5d:/# exit
+exit
+SimontekiMacBook-Pro:~ liu$ docker commit -m &quot;java install&quot; 52573ef1de5d ubuntu:java
+sha256:21716d1532e71a207cd80bcea8579e646a73d6e688ec0984562c92cdbc6296f4
+SimontekiMacBook-Pro:~ liu$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+ubuntu              java                21716d1532e7        About a minute ago   791 MB
+ubuntu              latest              f49eec89601e        4 weeks ago          129 MB
+SimontekiMacBook-Pro:~ liu$
+</code></pre><p>上面命令中<code>52573ef1de5d</code>为之前启动的容器的ID, <code>ubuntu:java</code>是为复本镜像的标识，<code>ubuntu</code>为仓库名，<code>java</code>是Tag。</p>
+<p><strong>如何获取容器ID：</strong></p>
+<p>在使用到容器的ID却不知道时，可以使用下面两个方法找到容器的ID：</p>
+<ul>
+<li>启动容器后，命令行中用户名@后面的那一串字符时当前启动的容器的ID，因此上面启动的容器的ID为52573ef1de5d。这个方法只在容器启动并且没有指定hostname时才能用。</li>
+<li>使用<code>docker ps</code>列出所有正在运行的容器，在命令结果中查看对应容器的ID。</li>
+</ul>
+<h2 id="三、-构建含有Hadoop运行环境的ubuntu镜像"><a href="#三、-构建含有Hadoop运行环境的ubuntu镜像" class="headerlink" title="三、 构建含有Hadoop运行环境的ubuntu镜像"></a>三、 构建含有Hadoop运行环境的ubuntu镜像</h2><p>下面，我们以包含Java运行环境的ubuntu镜像作为基准镜像，构建包含Hadoop运行环境的ubuntu镜像。</p>
+<h3 id="1-启动容器"><a href="#1-启动容器" class="headerlink" title="1. 启动容器"></a>1. 启动容器</h3><p>使用刚刚已经安装了Java的容器镜像启动一个容器：</p>
+<pre><code>SimontekiMacBook-Pro:~ liu$ docker run -ti ubuntu:java
+root@aac699216bce:/#
+</code></pre><p>装有Java的ubuntu容器启动成功了，现在我们开始安装Hadoop。</p>
+<p>这里，我们直接使用wget下载安装文件。</p>
+<h3 id="2-安装wget"><a href="#2-安装wget" class="headerlink" title="2. 安装wget"></a>2. 安装wget</h3><p>使用如下命令安装wget。</p>
+<pre><code>root@aac699216bce:/# apt-get install -y wget
+</code></pre><h3 id="3-下载并解压安装Hadoop文件"><a href="#3-下载并解压安装Hadoop文件" class="headerlink" title="3. 下载并解压安装Hadoop文件"></a>3. 下载并解压安装Hadoop文件</h3><p>使用如下命令下载并解压安装Hadoop。</p>
+<pre><code>root@aac699216bce:/# cd ~
+root@aac699216bce:~# mkdir software
+root@aac699216bce:~# cd software
+root@aac699216bce:~/software# mkdir apache
+root@aac699216bce:~/software# cd apache/
+root@aac699216bce:~/software/apache# mkdir hadoop
+root@aac699216bce:~/software/apache# cd hadoop/
+root@aac699216bce:~/software/apache/hadoop# wget http://mirrors.sonic.net/apache/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz
+root@aac699216bce:~/software/apache/hadoop# tar zxvf hadoop-2.6.0.tar.gz
+</code></pre><p>注意：这里我们安装的Hadoop版本是2.6.0</p>
+<h3 id="4-配置环境变量"><a href="#4-配置环境变量" class="headerlink" title="4. 配置环境变量"></a>4. 配置环境变量</h3><p>由于我们使用<code>apt-get</code>安装java，不知道java装在什么地方，使用如下命令查看Java安装目录</p>
+<pre><code>root@aac699216bce:~/software/apache/hadoop# update-alternatives --config java
+There is only one alternative in link group java (providing /usr/bin/java): /usr/lib/jvm/java-7-oracle/jre/bin/java
+Nothing to configure.
+root@aac699216bce:~/software/apache/hadoop#
+</code></pre><p>修改~/.bashrc文件，在文件末尾加入下面配置信息：</p>
+<pre><code>export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export HADOOP_HOME=/root/software/apache/hadoop/hadoop-2.6.0
+export HADOOP_CONFIG_HOME=$HADOOP_HOME/etc/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
+</code></pre><h3 id="5-配置Hadoop"><a href="#5-配置Hadoop" class="headerlink" title="5. 配置Hadoop"></a>5. 配置Hadoop</h3><p>下面，我们开始修改Hadoop的配置文件：core-site.xml、hdfs-site.xml、mapred-site.xml和hadoop-env.sh。</p>
+<h4 id="1-创建目录"><a href="#1-创建目录" class="headerlink" title="(1) 创建目录"></a>(1) 创建目录</h4><p>开始配置之前，执行下面命令，创建三个目录</p>
+<pre><code>root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0# mkdir tmp
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0# cd tmp/
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0/tmp# pwd
+/root/software/apache/hadoop/hadoop-2.6.0/tmp
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0/tmp# cd ..
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0# mkdir namenode
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0# cd namenode/
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0/namenode# pwd
+/root/software/apache/hadoop/hadoop-2.6.0/namenode
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0/namenode# cd ..
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0# mkdir datanode
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0# cd datanode/
+root@aac699216bce:~/software/apache/hadoop/hadoop-2.6.0/datanode# pwd
+/root/software/apache/hadoop/hadoop-2.6.0/datanode
+</code></pre><ul>
+<li>tmp：作为Hadoop的临时目录</li>
+<li>namenode：作为NameNode的存放目录</li>
+<li>datanode：作为DataNode的存放目录</li>
+</ul>
+<h4 id="2-core-site-xml配置"><a href="#2-core-site-xml配置" class="headerlink" title="(2) core-site.xml配置"></a>(2) core-site.xml配置</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;!--Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License. See accompanying LICENSE file.
+--&gt;
+
+&lt;!-- Put site-specific property overrides in this file. --&gt;
+
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+         &lt;value&gt;/root/soft/apache/hadoop/hadoop-2.6.0/tmp&lt;/value&gt;
+         &lt;description&gt;A base for other temporary directories.&lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+         &lt;name&gt;fs.default.name&lt;/name&gt;
+        &lt;value&gt;hdfs://master:9000&lt;/value&gt;
+        &lt;final&gt;true&lt;/final&gt;
+        &lt;description&gt;
+            The name of the default file system.  
+            A URI whose scheme and authority determine the FileSystem implementation.  
+            The uri&apos;s scheme determines the config property (fs.SCHEME.impl) naming the FileSystem implementation class.  
+            The uri&apos;s authority is used to determine the host, port, etc. for a filesystem.
+        &lt;/description&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p>注意：</p>
+<ul>
+<li><code>hadoop.tmp.dir</code>配置项值即为此前命令中创建的<code>tmp</code>目录路径。</li>
+<li><code>fs.default.name</code>配置为<code>hdfs://master:9000</code>，指向的是Master节点的主机（后续做集群配置时，需要配置这个节点，先写在这里）</li>
+</ul>
+<h4 id="3-hdfs-site-xml配置"><a href="#3-hdfs-site-xml配置" class="headerlink" title="(3) hdfs-site.xml配置"></a>(3) hdfs-site.xml配置</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;!--
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License. See accompanying LICENSE file.
+--&gt;
+
+&lt;!-- Put site-specific property overrides in this file. --&gt;
+
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;2&lt;/value&gt;
+        &lt;final&gt;true&lt;/final&gt;
+        &lt;description&gt;Default block replication.
+        The actual number of replications can be specified when the file is created.
+        The default is used if replication is not specified in create time.
+        &lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;/root/software/apache/hadoop/hadoop-2.6.0/namenode&lt;/value&gt;
+        &lt;final&gt;true&lt;/final&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;/root/software/apache/hadoop/hadoop-2.6.0/datanode&lt;/value&gt;
+        &lt;final&gt;true&lt;/final&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p>注意：</p>
+<ul>
+<li>我们后续搭建集群环境时，将配置一个master节点和两个slave节点，所以dfs.replication配置为2。</li>
+<li><code>dfs.namenode.name.dir</code>和<code>dfs.datanode.data.dir</code>分别配置为之前创建的<code>NameNode</code>和<code>DataNode</code>的目录路径。</li>
+</ul>
+<h4 id="4-mapred-site-xml配置"><a href="#4-mapred-site-xml配置" class="headerlink" title="(4) mapred-site.xml配置"></a>(4) mapred-site.xml配置</h4><ul>
+<li><p>创建mapred-site.xml文件</p>
+<pre><code>cp mapred-site.xml.template mapred-site.xml
+</code></pre></li>
+<li><p>配置mapref-site.xml文件</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;!--
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License. See accompanying LICENSE file.
+--&gt;
+
+&lt;!-- Put site-specific property overrides in this file. --&gt;
+
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapred.job.tracker&lt;/name&gt;
+        &lt;value&gt;master:9001&lt;/value&gt;
+        &lt;description&gt;The host and port that the MapReduce job tracker runs at.  
+If &quot;local&quot;, then jobs are run in-process as a single map and reduce task.
+        &lt;/description&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></li>
+</ul>
+<p>这里只有一个配置项<code>mapred.job.tracker</code>，我们指向master节点机器。</p>
+<h4 id="5-修改hadoop-env-sh配置"><a href="#5-修改hadoop-env-sh配置" class="headerlink" title="(5) 修改hadoop-env.sh配置"></a>(5) 修改hadoop-env.sh配置</h4><p>修改如下配置：</p>
+<pre><code># The java implementation to use.
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+</code></pre><h3 id="6-安装SSH"><a href="#6-安装SSH" class="headerlink" title="6. 安装SSH"></a>6. 安装SSH</h3><p>搭建集群环境，自然少不了使用SSH，这可以实现无密码访问，访问集群机器的时候很方便。</p>
+<pre><code>root@aac699216bce:~# apt-get install ssh
+</code></pre><h3 id="7-生成访问密钥"><a href="#7-生成访问密钥" class="headerlink" title="7. 生成访问密钥"></a>7. 生成访问密钥</h3><pre><code>root@aac699216bce:~# cd ~/
+root@aac699216bce:~# ssh-keygen -t rsa -P &apos;&apos; -f ~/.ssh/id_dsa
+Generating public/private rsa key pair.
+Created directory &apos;/root/.ssh&apos;.
+Your identification has been saved in /root/.ssh/id_dsa.
+Your public key has been saved in /root/.ssh/id_dsa.pub.
+The key fingerprint is:
+SHA256:SO6qH6zwvNUKDqVWDYcexe7OQBJ3Jy5vd/mZlF6FiWM root@aac699216bce
+The key&apos;s randomart image is:
++---[RSA 2048]----+
+|    ..           |
+| . .o+ .         |
+|  o++.+     . o  |
+| ..o== .   E o . |
+|  +o+.o S o o .  |
+| o.o * . o o .   |
+|+.. O + . + +    |
+|.* + *     =     |
+|  B++            |
++----[SHA256]-----+
+root@aac699216bce:~# cd .ssh
+root@aac699216bce:~/.ssh# cat id_dsa.pub &gt;&gt; authorized_keys
+</code></pre><p>注意： 这里思路是直接将密钥生成后写入镜像，免得在每个容器里面再单独生成一次，还要相互拷贝公钥，比较麻烦。<strong>当然这只是学习使用，实际操作时，应该不会这么搞，因为这样所有容器的密钥都是一样的</strong>！！</p>
+<h3 id="8-保存镜像"><a href="#8-保存镜像" class="headerlink" title="8. 保存镜像"></a>8. 保存镜像</h3><p>我们将安装好Hadoop的镜像保存为一个镜像副本<code>ubuntu:hadoop</code>，然后使用<code>docker images</code>命令，发现<code>ubuntu:hadoop</code>已保存为本地镜像。</p>
+<pre><code>root@aac699216bce:~# exit
+exit
+SimontekiMacBook-Pro:~ liu$ docker commit -m &quot;hadoop install&quot; aac699216bce ubuntu:hadoop
+sha256:b6c13157056ff28c5b8703991bd1c4ba993bc7a3fae17547bff82eedae571529
+SimontekiMacBook-Pro:~ liu$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              hadoop              b6c13157056f        18 seconds ago      1.35 GB
+ubuntu              java                21716d1532e7        About an hour ago   791 MB
+ubuntu              latest              f49eec89601e        4 weeks ago         129 MB
+</code></pre><h2 id="四、-搭建Hadoop分布式集群"><a href="#四、-搭建Hadoop分布式集群" class="headerlink" title="四、 搭建Hadoop分布式集群"></a>四、 搭建Hadoop分布式集群</h2><p>按照hadoop集群的基本要求，集群中至少需要有3个结点，其中一个为master结点，主要是用于运行hadoop集群中的namenode、secondorynamenode和jobtracker(新版本名字变了)任务；另外两个结点均为slave结点，其中一个节点作为冗余节点。</p>
+<h3 id="1-启动容器-1"><a href="#1-启动容器-1" class="headerlink" title="1. 启动容器"></a>1. 启动容器</h3><p>打开三个命令行，每个命令行各启动一个容器，其中一个容器作为master节点，另外两个容器作为slave节点。</p>
+<p>####(1)启动master容器</p>
+<pre><code>SimontekiMacBook-Pro:~ liu$ docker run -ti -d -p 50070:50070 -h master ubuntu:hadoop
+d13443e6f6e3575beee69e9cc51f0569067dc0b96fb24a756578aa610ce3310c
+</code></pre><p>这里使用镜像创建容器时，将容器的50070端口映射为本地的50070端口，便于后面可以直接在本地浏览器访问集群的状态。</p>
+<p>使用<code>docker ps</code>查看启动的master容器对应的ID，然后使用下面命令进入master容器。</p>
+<pre><code>SimontekiMacBook-Pro:~ liu$ docker attach d13443e6f6e3
+root@master:/#
+</code></pre><h4 id="2-启动slave1容器"><a href="#2-启动slave1容器" class="headerlink" title="(2)启动slave1容器"></a>(2)启动slave1容器</h4><pre><code>SimontekiMacBook-Pro:~ liu$ docker run -ti -h slave1 ubuntu:hadoop
+Missing privilege separation directory: /var/run/sshd
+root@slave1:/#
+</code></pre><h4 id="3-启动slave2容器"><a href="#3-启动slave2容器" class="headerlink" title="(3)启动slave2容器"></a>(3)启动slave2容器</h4><pre><code>SimontekiMacBook-Pro:~ liu$ docker run -ti -h slave2 ubuntu:hadoop
+Missing privilege separation directory: /var/run/sshd
+root@slave2:/#
+</code></pre><h3 id="2-配置hosts"><a href="#2-配置hosts" class="headerlink" title="2. 配置hosts"></a>2. 配置hosts</h3><h4 id="1-查看各节点ip"><a href="#1-查看各节点ip" class="headerlink" title="(1)查看各节点ip"></a>(1)查看各节点ip</h4><p>由于在不同的网络环境下，容器获取的ip可能不一样，例如本机三个容器获取的ip分别如下： </p>
+<ul>
+<li>master: 172.17.0.2</li>
+<li>slave1: 172.17.0.3</li>
+<li>slave2: 172.17.0.4</li>
+</ul>
+<h4 id="2-修改各节点的hosts文件"><a href="#2-修改各节点的hosts文件" class="headerlink" title="(2)修改各节点的hosts文件"></a>(2)修改各节点的hosts文件</h4><p>根据(1)中查看得到的各节点ip配置hosts文件</p>
+<pre><code>172.17.0.2      master
+172.17.0.3        slave1
+172.17.0.4      slave2
+</code></pre><h4 id="3-配置slaves"><a href="#3-配置slaves" class="headerlink" title="(3)配置slaves"></a>(3)配置slaves</h4><p>下面配置哪些节点是slave。</p>
+<p>较老版本的Hadoop中有一个masters文件和一个slaves文件，但新版本中只有slaves文件了。</p>
+<p>在master节点容器中执行如下命令打开slaves配置文件：</p>
+<pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/etc/hadoop# vim slaves
+</code></pre><p>将所有slave节点的hostname写入该文件：</p>
+<pre><code>slave1
+slave2
+</code></pre><h3 id="3-启动Hadoop"><a href="#3-启动Hadoop" class="headerlink" title="3. 启动Hadoop"></a>3. 启动Hadoop</h3><h4 id="1-启动SSH服务"><a href="#1-启动SSH服务" class="headerlink" title="(1)启动SSH服务"></a>(1)启动SSH服务</h4><p>在每个节点上之下下面命令，启动SSH服务，实现无密码访问。</p>
+<ul>
+<li><p>master节点</p>
+<pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/etc/hadoop# /etc/init.d/ssh start
+* Starting OpenBSD Secure Shell server sshd                                                                                                                     
+[ OK ] 
+root@master:~/software/apache/hadoop/hadoop-2.6.0/etc/hadoop#
+</code></pre></li>
+<li><p>slave1节点</p>
+<pre><code>root@slave1:~# /etc/init.d/ssh start
+* Starting OpenBSD Secure Shell server sshd                                                                                                            
+[ OK ] 
+root@slave1:~#
+</code></pre></li>
+<li><p>slave2节点</p>
+<pre><code>root@slave2:~# /etc/init.d/ssh start
+* Starting OpenBSD Secure Shell server sshd                                                                                                            
+[ OK ] 
+root@slave2:~#
+</code></pre></li>
+</ul>
+<h4 id="2-格式化-namenode"><a href="#2-格式化-namenode" class="headerlink" title="(2)格式化 namenode"></a>(2)格式化 namenode</h4><pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hadoop namenode -format
+</code></pre><h4 id="3-启动hadoop"><a href="#3-启动hadoop" class="headerlink" title="(3)启动hadoop"></a>(3)启动hadoop</h4><p>在master节点上执行<code>start-all.sh</code>命令，启动Hadoop</p>
+<pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/sbin# ./start-all.sh 
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [master]
+master: starting namenode, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/hadoop-root-namenode-master.out
+slave2: starting datanode, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/hadoop-root-datanode-slave2.out
+slave1: starting datanode, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/hadoop-root-datanode-slave1.out
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: starting secondarynamenode, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/hadoop-root-secondarynamenode-master.out
+starting yarn daemons
+starting resourcemanager, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/yarn--resourcemanager-master.out
+slave1: starting nodemanager, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/yarn-root-nodemanager-slave1.out
+slave2: starting nodemanager, logging to /root/software/apache/hadoop/hadoop-2.6.0/logs/yarn-root-nodemanager-slave2.out
+root@master:~/software/apache/hadoop/hadoop-2.6.0/sbin#
+</code></pre><p>如果看到如下信息，则说明启动成功了。</p>
+<p>在个节点上执行jps命令，结果如下：</p>
+<ul>
+<li><p>master节点</p>
+<pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/sbin# jps
+2149 Jps
+1887 ResourceManager
+1560 NameNode
+1736 SecondaryNameNode
+root@master:~/software/apache/hadoop/hadoop-2.6.0/sbin# 
+</code></pre></li>
+<li><p>slave1节点</p>
+<pre><code>root@slave1:~# jps
+352 DataNode
+454 NodeManager
+569 Jps
+</code></pre></li>
+<li><p>slave2节点</p>
+<pre><code>root@slave2:~# jps
+252 DataNode
+354 NodeManager
+469 Jps
+</code></pre></li>
+</ul>
+<p>下面，我们在master节点上通过命令<code>hdfs dfsadmin -report</code>查看DataNode是否正常启动</p>
+<pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hdfs dfsadmin -report
+Configured Capacity: 134743154688 (125.49 GB)
+Present Capacity: 117625421824 (109.55 GB)
+DFS Remaining: 117625372672 (109.55 GB)
+DFS Used: 49152 (48 KB)
+DFS Used%: 0.00%
+Under replicated blocks: 0
+Blocks with corrupt replicas: 0
+Missing blocks: 0
+
+-------------------------------------------------
+Live datanodes (2):
+
+Name: 172.17.0.4:50010 (slave2)
+Hostname: slave2
+Decommission Status : Normal
+Configured Capacity: 67371577344 (62.74 GB)
+DFS Used: 24576 (24 KB)
+Non DFS Used: 8558866432 (7.97 GB)
+DFS Remaining: 58812686336 (54.77 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 87.30%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Wed Feb 22 12:58:22 UTC 2017
+
+
+Name: 172.17.0.3:50010 (slave1)
+Hostname: slave1
+Decommission Status : Normal
+Configured Capacity: 67371577344 (62.74 GB)
+DFS Used: 24576 (24 KB)
+Non DFS Used: 8558866432 (7.97 GB)
+DFS Remaining: 58812686336 (54.77 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 87.30%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 1
+Last contact: Wed Feb 22 12:58:22 UTC 2017
+
+
+root@master:~/software/apache/hadoop/hadoop-2.6.0/bin#
+</code></pre><p>还可以通过Web页面<a href="http://127.0.0.1:50070/看到查看DataNode和NameNode的状态。" target="_blank" rel="external">http://127.0.0.1:50070/看到查看DataNode和NameNode的状态。</a></p>
+<center><br>    <img src="/2017/05/28/Docker-Hadoop-Helloworld/web.png" width="100%"><br></center>
+
+<h3 id="4-WordCount实例"><a href="#4-WordCount实例" class="headerlink" title="4. WordCount实例"></a>4. WordCount实例</h3><h4 id="1-创建本地单词文件words-txt"><a href="#1-创建本地单词文件words-txt" class="headerlink" title="(1) 创建本地单词文件words.txt"></a>(1) 创建本地单词文件words.txt</h4><pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# touch words.txt
+root@master:~/software/apache/hadoop/hadoop-2.6.0/bin#
+</code></pre><p>在words.txt文件中写入单词。</p>
+<h4 id="（2）将单词文件words-txt上传到到hdfs上"><a href="#（2）将单词文件words-txt上传到到hdfs上" class="headerlink" title="（2）将单词文件words.txt上传到到hdfs上"></a>（2）将单词文件words.txt上传到到hdfs上</h4><pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hdfs dfs -ls /
+root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hdfs dfs -put words.txt /
+root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hdfs dfs -ls /
+Found 1 items
+-rw-r--r--   2 root supergroup       1763 2017-02-22 14:42 /words.txt
+root@master:~/software/apache/hadoop/hadoop-2.6.0/bin#
+</code></pre><h4 id="3-执行wordcount程序"><a href="#3-执行wordcount程序" class="headerlink" title="(3) 执行wordcount程序"></a>(3) 执行wordcount程序</h4><pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hadoop jar ../share/    hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount /words.txt /out
+</code></pre><h4 id="4-查看结果"><a href="#4-查看结果" class="headerlink" title="(4) 查看结果"></a>(4) 查看结果</h4><pre><code>root@master:~/software/apache/hadoop/hadoop-2.6.0/bin# ./hdfs dfs -text /out/part-r-00000
+</code></pre>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/05/28/Docker-Hadoop-Helloworld/" data-id="cj38tnhc90021gwwrinkmkby0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/05/28/Docker-Hadoop-Helloworld/#comments" id="sourceId::2017/05/28/Docker-Hadoop-Helloworld/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2017/05/28/C-plus-plus/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">C plus plus</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="SOHUCS" sid="2017/05/28/Docker-Hadoop-Helloworld/"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Docker-Hadoop-Helloworld" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/环境配置/">环境配置</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="title">Docker-Hadoop-Helloworld</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T14:48:12.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/C-plus-plus/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="C plus plus" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/C-C/">C/C++</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/C-plus-plus/" class="title">C plus plus</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:03:50.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Probability-Theory/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Probability Theory" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Probability-Theory/" class="title">Probability Theory</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:02:06.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Security/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Security" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/信息安全/">信息安全</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Security/" class="title">Security</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Software-Testing/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Software Testing" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/软件测试/">软件测试</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Software-Testing/" class="title">Software Testing</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:00:19.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java/">Java</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/信息安全/">信息安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/操作系统/">操作系统</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机组成原理/">计算机组成原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机网络/">计算机网络</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/软件工程/">软件工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/软件测试/">软件测试</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/网络/">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt2dNhVw"></script>
+    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+    window.changyan.api.config({
+    appid: 'cyt2dNhVw',
+    conf: 'prod_8acceb4b82a359a3e4f200f748824a83'
+    });
+    </script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
