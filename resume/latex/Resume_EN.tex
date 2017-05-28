@@ -1,0 +1,145 @@
+\documentclass[letterpaper, UTF8]{article}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{sectsty}
+
+
+\def\name{Kevin Wu}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+	colorlinks = true,
+	urlcolor = black,
+	pdfauthor = {\name},
+	pdfkeywords = {economics, statistics, mathematics},
+	pdftitle = {\name: Curriculum Vitae},
+	pdfsubject = {Curriculum Vitae},
+	pdfpagemode = UseNone
+}
+
+\geometry{
+	body={7.0in, 8.5in},
+	left=1.0in, %1.0
+	top=1.0in   %1.5
+}
+
+% Customize page headers
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0em}
+
+% Make lists without bullets
+%\renewenvironment{itemize}{
+%	\begin{list}{}{
+%			\setlength{\leftmargin}{1.5em}
+%			\setlength{\itemsep}{0pt}
+%			%\setlength{\parsep}{0pt}
+%			%\setlength{\parskip}{0pt}
+%		}
+%	}{
+%\end{list}
+%}
+
+%set margin between item
+%\usepackage{enumitem}
+%\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+%\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+%\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+\begin{document}
+	
+	% Place name at left
+	{\huge \name}
+	
+	% Alternatively, print name centered and bold:
+	%\centerline{\huge \bf \name}
+	
+	\vspace{0.15in}  % add by Kevin Wu
+	
+	\begin{minipage}{0.45\linewidth}
+		\href{http://www.ecnu.edu.cn/}{East China Normal University} \\
+		\href{http://www.sei.ecnu.edu.cn}{Department of Computer Science}  \\
+		Putuo, Shanghai 200062
+	\end{minipage}
+	\begin{minipage}{0.45\linewidth}
+		\begin{tabular}{ll}
+			Phone: & (+86) 15921576683 \\
+			Email: & \href{mailto:wutingming@hotmail.com}{\tt wutingming@hotmail.com} \\
+			Github: &  \href{https://github.com/outDream}{https://github.com/outDream}\\
+		\end{tabular}
+	\end{minipage}
+	
+	\section*{Job Objective}
+	\begin{itemize}
+		\item Algorithm Engineer
+	\end{itemize}
+	\vspace{-0.25in}
+	
+	\section*{Skills}
+	\begin{itemize}
+		\item C++, Java 
+		\item Algorithm, Machine Learning, Deep Learning, Operating System
+		\item Linux, Android, SpringMVC, Tensorflow
+	\end{itemize}
+	\vspace{-0.25in}
+	
+	\section*{Education}
+	\begin{itemize}
+		\item M.A., Software Engineering - Cloud Computing\\
+		East China Normal University, 2015-2018.
+		\item B.S., Software Engineering\\
+		East China Normal University, 2011-2015.
+	\end{itemize}	
+	\vspace{-0.25in}
+	
+	\section*{Honors}
+	\begin{itemize}
+		\item Honor1
+		\item Honor2
+	\end{itemize}
+	\vspace{-0.25in}
+	
+	\section*{Working Experience}
+	\begin{itemize}
+		\item \textbf{Hewlett-Packard, Shanghai}, \emph{Intern}, 07/2014 - 12/2014  \\
+		 Detailed working experience
+		\item HP, Shanghai, \emph{Intern}, 07/2014 - 12/2014  \\
+		 Detailed working experience
+	\end{itemize}
+	\vspace{-0.25in}
+	
+	\section*{Projects}
+	\begin{itemize}
+		\item \textbf{Cloud Computing Conponent based on Cloudsim}~~~~~ 09/2015 - 01/2016\\
+		It is a cloud computing simulation toolkit. We can use it to 
+		
+		\item \textbf{Mobile Map}~~~~~02/2013 - 06/2013\\
+		It is an android map developed for sharing locations among a few friends. 
+	\end{itemize}
+	\vspace{-0.25in}
+	
+	\bigskip
+	% Footer
+	\begin{center}
+		\begin{footnotesize}
+			Last updated: \today 
+		\end{footnotesize}
+	\end{center}
+\end{document}
