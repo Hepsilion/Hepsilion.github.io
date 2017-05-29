@@ -227,7 +227,7 @@ var _hmt = _hmt || [];
             <p>计算机网络</p>
 <a id="more"></a>
 <h2 id="一、-计算机网络体系结构"><a href="#一、-计算机网络体系结构" class="headerlink" title="一、 计算机网络体系结构"></a>一、 计算机网络体系结构</h2><h3 id="问：OSI，TCP-IP，五层协议的体系结构，以及各层协议"><a href="#问：OSI，TCP-IP，五层协议的体系结构，以及各层协议" class="headerlink" title="问：OSI，TCP/IP，五层协议的体系结构，以及各层协议"></a>问：OSI，TCP/IP，五层协议的体系结构，以及各层协议</h3><p><strong>(1) OSI分层(7层)</strong>：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。</p>
-<center><br><img src="/2017/05/28/Computer-Network/OSI.jpg" width="100%"><br></center>
+<center><br><img src="/blog/2017/05/28/Computer-Network/OSI.jpg" width="100%"><br></center>
 
 <p>每一层的作用如下：</p>
 <blockquote>
@@ -252,7 +252,7 @@ var _hmt = _hmt || [];
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7978241/6063?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/7978241/6063?onlyWrong=0</a></p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8073949/44796?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8073949/44796?onlyWrong=0</a> TCP/IP模型中，ARP协议属于网络层，在OSI参考模型中，ARP属于数据链路层</p>
 <p><strong>(2) TCP/IP分层(4层)</strong>：网络接口层、网际层、运输层、应用层。</p>
-<center><br><img src="/2017/05/28/Computer-Network/OSI-TCP-IP.jpg" width="30%"><br></center>
+<center><br><img src="/blog/2017/05/28/Computer-Network/OSI-TCP-IP.jpg" width="30%"><br></center>
 
 <p><strong>(3) 五层协议(5层)</strong>：物理层、数据链路层、网络层、运输层、应用层。</p>
 <h3 id="问：各种协议的介绍"><a href="#问：各种协议的介绍" class="headerlink" title="问：各种协议的介绍"></a>问：各种协议的介绍</h3><p><strong>ICMP协议</strong>(因特网控制报文协议，TCP/IP协议族IP层子协议)： 为了提高IP数据报交付成功的机会，网络层使用ICMP协议来允许主机或路由器报告差错和异常情况。ICMP报文作为IP层数据报的数据，加上数据报的首部，组成IP数据报发送出去。</p>
@@ -338,7 +338,7 @@ C类：256个C类网段，即192.168.0.0~192.168.255.255
 <p>TFTP(Trival File Transfer Protocal)，简单文件传输协议，该协议在熟知端口69上使用UDP服务。</p>
 </blockquote>
 <h3 id="问：TCP三次握手和四次挥手的全过程"><a href="#问：TCP三次握手和四次挥手的全过程" class="headerlink" title="问：TCP三次握手和四次挥手的全过程"></a>问：TCP三次握手和四次挥手的全过程</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8073949/4687?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8073949/4687?onlyWrong=0</a>  图很好</p>
-<center><br><img src="/2017/05/28/Computer-Network/HandShaking.png" width="50%"><br></center>
+<center><br><img src="/blog/2017/05/28/Computer-Network/HandShaking.png" width="50%"><br></center>
 
 <p><strong>(1) 三次握手</strong></p>
 <p>第一次握手(<strong>SYN=1，seq=x</strong>)：客户端首先向服务器发送一个连接请求报文段，并进入SYN_SEND状态，等待服务器确认。这个报文段<strong>不含应用层数据</strong>，其首部中的SYN标志位被置为1，另外，客户端会随机选择一个起始序号seq=x。(连接请求报文段不懈怠数据，但要消耗一个序号)</p>
@@ -380,7 +380,7 @@ C类：256个C类网段，即192.168.0.0~192.168.255.255
 <h3 id="问：DNS域名系统，简单描述其工作原理。"><a href="#问：DNS域名系统，简单描述其工作原理。" class="headerlink" title="问：DNS域名系统，简单描述其工作原理。"></a>问：DNS域名系统，简单描述其工作原理。</h3><p>域名系统DNS(Domain Name System)是因特网使用的命名系统，用来把便于人们记忆的含有特定含义的主机名(如www.baidu.com)转换成便于机器处理的IP地址。DNS系统采用客户/服务器模型，其协议运行在UDP之上，使用53号端口。该应用一般不直接为用户使用，而是为其他应用服务，如HTTP，SMTP等在其中需要完成主机名到IP地址的转换。</p>
 <p><strong>工作原理</strong></p>
 <p>当客户端需要域名解析时，通过本机的DNS客户端构造一个DNS请求报文，以UDP数据报方式发往本地域名服务器。域名解析有两种方式：递归查询(实际中几乎不使用)和迭代查询。</p>
-<center><br><img src="/2017/05/28/Computer-Network/DNS.jpg" width="80%"><br></center>
+<center><br><img src="/blog/2017/05/28/Computer-Network/DNS.jpg" width="80%"><br></center>
 
 <p>(1) 递归查询</p>
 <p>如果本地主机所询问的本地域名服务器不知道被查询域名的IP地址，那么本地域名服务器就以DNS客户的身份，向根域名服务器继续发出查询请求报文(即替该主机继续查询)，而不是让主机自己进行下一步的查询。在这种情况下，本地域名服务器只需向根域名服务器查询一次，后面的几次查询都是递归地在其他几个域名服务器之间进行的(如图a步骤3-6)。在步骤7中，本地域名服务器从根域名服务器得到了所需的IP地址，最后在步骤8中，本地域名服务器把查询结果告诉主机。</p>
@@ -436,7 +436,7 @@ C类：256个C类网段，即192.168.0.0~192.168.255.255
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Computer-Network/" data-id="cj39vkjn3001i10wr6fnnzdop" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Computer-Network/" data-id="cj39x39qv001d0kwrq64ld22n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

@@ -312,7 +312,7 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
 <p>(2) Java堆内存不足时，GC会被调用。</p>
 <h3 id="问：System-gc-和Runtime-gc-会做什么事情？"><a href="#问：System-gc-和Runtime-gc-会做什么事情？" class="headerlink" title="问：System.gc()和Runtime.gc()会做什么事情？"></a>问：System.gc()和Runtime.gc()会做什么事情？</h3><p>Java提供了垃圾回收机制来帮助我们不定时的回收堆中不再使用的对象。当JVM启动时，除了启动我们的主线程外，还会启动垃圾回收线程，它运行优先非常低，会在JVM空闲时，自动回收我们不再使用的对象，释放内存空间。</p>
 <p>程序员不能强制执行垃圾回收，可以用这两个方法用来提示JVM要进行垃圾回收。但是，立即开始还是延迟进行垃圾回收是取决于JVM，即垃圾回收的具体时间和顺序是无法预知的。</p>
-<h3 id="问：垃圾回收器的演化"><a href="#问：垃圾回收器的演化" class="headerlink" title="问：垃圾回收器的演化"></a>问：垃圾回收器的演化</h3><p><img src="/2017/05/28/01-Java概述/GabageCollector.jpg" alt="logo"></p>
+<h3 id="问：垃圾回收器的演化"><a href="#问：垃圾回收器的演化" class="headerlink" title="问：垃圾回收器的演化"></a>问：垃圾回收器的演化</h3><p><img src="/blog/2017/05/28/01-Java概述/GabageCollector.jpg" alt="logo"></p>
 <h4 id="问：如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？"><a href="#问：如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？" class="headerlink" title="问：如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？"></a>问：如果对象的引用被置为null，垃圾收集器是否会立即释放对象占用的内存？</h4><p>不会立即释放对象占用的内存，如果对象的引用被置为null，只是断开了当前线程栈帧中对该对象的引用关系，在下一个垃圾回收周期中，这个对象将是可被回收的。</p>
 <h4 id="问：串行-serial-收集器和吞吐量-throughput-收集器的区别是什么？"><a href="#问：串行-serial-收集器和吞吐量-throughput-收集器的区别是什么？" class="headerlink" title="问：串行(serial)收集器和吞吐量(throughput)收集器的区别是什么？"></a>问：串行(serial)收集器和吞吐量(throughput)收集器的区别是什么？</h4><p>吞吐量收集器使用并行版本的新生代垃圾收集器，它适合于吞吐量要求较高的场合，用于中等规模和大规模数据的应用程序。</p>
 <p>串行收集器整个扫描和复制过程均采用单线程的方式，相对于吞吐量GC来说简单；适合于单CPU、客户端级别。串行对大多数的小应用(在现代处理器上需要大概100M左右的内存)就足够了。</p>
@@ -339,7 +339,7 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj39vkjl4000110wrx27rkfye" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj39x39ox00020kwrk2e9olto" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

@@ -267,7 +267,7 @@ head(tail(head(tail(LS))))=e
 
 正确。
 </code></pre><h3 id="问：算法的5个基本特征"><a href="#问：算法的5个基本特征" class="headerlink" title="问：算法的5个基本特征"></a>问：算法的5个基本特征</h3><p>有穷性、确定性、可行性、输入、输出。</p>
-<h3 id="问：主定理"><a href="#问：主定理" class="headerlink" title="问：主定理"></a>问：主定理</h3><center><br><img src="/2017/05/28/Data-Structure/MasterMethod.JPG" width="80%">图 1<br></center>
+<h3 id="问：主定理"><a href="#问：主定理" class="headerlink" title="问：主定理"></a>问：主定理</h3><center><br><img src="/blog/2017/05/28/Data-Structure/MasterMethod.JPG" width="80%">图 1<br></center>
 
 <h2 id="二、线性表"><a href="#二、线性表" class="headerlink" title="二、线性表"></a>二、线性表</h2><h3 id="问：静态链表"><a href="#问：静态链表" class="headerlink" title="问：静态链表"></a>问：静态链表</h3><p>用数组描述线性表的链式存储结构，即称为静态链表，它的节点有数据域和指针域，指针是节点的相对地址(数组下标)。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8144778/183?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
@@ -324,7 +324,7 @@ head(tail(head(tail(LS))))=e
 </code></pre><h3 id="问：算术表达式的中缀表达式、前缀表达式和后缀表达式"><a href="#问：算术表达式的中缀表达式、前缀表达式和后缀表达式" class="headerlink" title="问：算术表达式的中缀表达式、前缀表达式和后缀表达式"></a>问：算术表达式的中缀表达式、前缀表达式和后缀表达式</h3><p>表达式一般由操作数、运算符组成，例如算术表达式中，通常把运算符放在两个操作数的中间，这称为中缀表达式，如A+B。波兰数学家Jan Lukasiewicz提出了另一种数学表示法，它有两种表示形式：把运算符写在操作数之前，称为波兰表达式或前缀表达式，如+AB；把运算符写在操作数之后，称为逆波兰表达式或后缀表达式，如AB+。</p>
 <p><strong>将中缀表达式转换成后缀表达式的算法</strong>：</p>
 <p>例1：将中缀表达式a+b-a*((c+d)/e-f)+g转化为后缀表达式ab+acd+e/f-*-g+的过程。</p>
-<center><br><img src="/2017/05/28/Data-Structure/Stack-App.JPG" width="90%">图 1<br></center>
+<center><br><img src="/blog/2017/05/28/Data-Structure/Stack-App.JPG" width="90%">图 1<br></center>
 
 <p>例2：简易方法</p>
 <pre><code>中缀表达式：a+b*c-(d+e)
@@ -352,7 +352,7 @@ head(tail(head(tail(LS))))=e
 <p>4、如果扫描的项目是一个一元运算符，则对栈的最顶上操作数执行该运算。</p>
 <p>5、将运算结果重新压入堆栈。</p>
 <p>6、重复步骤2-5，堆栈中即为结果值。</p>
-<h3 id="问：稀疏矩阵的压缩存储方法有：三元组、十字链表"><a href="#问：稀疏矩阵的压缩存储方法有：三元组、十字链表" class="headerlink" title="问：稀疏矩阵的压缩存储方法有：三元组、十字链表"></a>问：稀疏矩阵的压缩存储方法有：三元组、十字链表</h3><h2 id="四、树与二叉树"><a href="#四、树与二叉树" class="headerlink" title="四、树与二叉树"></a>四、树与二叉树</h2><h3 id="问：平衡二叉树是平衡二叉排序树"><a href="#问：平衡二叉树是平衡二叉排序树" class="headerlink" title="问：平衡二叉树是平衡二叉排序树"></a>问：平衡二叉树是平衡二叉排序树</h3><h3 id="问：平衡二叉树的平衡操作"><a href="#问：平衡二叉树的平衡操作" class="headerlink" title="问：平衡二叉树的平衡操作"></a>问：平衡二叉树的平衡操作</h3><center><br><img src="/2017/05/28/Data-Structure/BalanceTree.JPG" width="80%">图 1<br></center>
+<h3 id="问：稀疏矩阵的压缩存储方法有：三元组、十字链表"><a href="#问：稀疏矩阵的压缩存储方法有：三元组、十字链表" class="headerlink" title="问：稀疏矩阵的压缩存储方法有：三元组、十字链表"></a>问：稀疏矩阵的压缩存储方法有：三元组、十字链表</h3><h2 id="四、树与二叉树"><a href="#四、树与二叉树" class="headerlink" title="四、树与二叉树"></a>四、树与二叉树</h2><h3 id="问：平衡二叉树是平衡二叉排序树"><a href="#问：平衡二叉树是平衡二叉排序树" class="headerlink" title="问：平衡二叉树是平衡二叉排序树"></a>问：平衡二叉树是平衡二叉排序树</h3><h3 id="问：平衡二叉树的平衡操作"><a href="#问：平衡二叉树的平衡操作" class="headerlink" title="问：平衡二叉树的平衡操作"></a>问：平衡二叉树的平衡操作</h3><center><br><img src="/blog/2017/05/28/Data-Structure/BalanceTree.JPG" width="80%">图 1<br></center>
 
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8104022/412?onlyWrong=0" title="Title" target="_blank" rel="external">例</a></p>
 <h3 id="问：完全二叉树的几个性质"><a href="#问：完全二叉树的几个性质" class="headerlink" title="问：完全二叉树的几个性质"></a>问：完全二叉树的几个性质</h3><p>(1) 完全二叉树中，编号为i的结点，其父节点为[i/2]（向下取整）。 </p>
@@ -369,7 +369,7 @@ head(tail(head(tail(LS))))=e
 <li>编号为i的结点的父结点编号为[i/2]（向下取整）（根节点除外）</li>
 </ul>
 <h3 id="问：二叉树在线索化后-仍不能有效求解的问题"><a href="#问：二叉树在线索化后-仍不能有效求解的问题" class="headerlink" title="问：二叉树在线索化后,仍不能有效求解的问题"></a>问：二叉树在线索化后,仍不能有效求解的问题</h3><p>例1：王道数据结构2015版118页27题</p>
-<center><br><img src="/2017/05/28/Data-Structure/PostOrder.JPG" width="20%"><br></center>
+<center><br><img src="/blog/2017/05/28/Data-Structure/PostOrder.JPG" width="20%"><br></center>
 
 <pre><code>二叉树在线索化后，仍不能有效求解的问题是(D)
 A. 先序线索二叉树中求先序后继
@@ -388,7 +388,7 @@ D. 后序线索二叉树中求后序后继
 <p>在二叉树中，节点的左指针指向其孩子，节点的右指针指向其兄弟。在一颗二叉树中，如果某个节点的左指针为NULL，就说明这个节点在原来的森林中没有孩子，是叶子节点；如果某个节点的右指针为NULL，就说明这个节点在原来的森林中没有兄弟。 所以森林中的叶子节点=二叉树中左指针为NULL的个数。</p>
 <h3 id="问：将森林F转换为对应的二叉树T，F中叶结点的个数等于T中左孩子指针为空的结点个数"><a href="#问：将森林F转换为对应的二叉树T，F中叶结点的个数等于T中左孩子指针为空的结点个数" class="headerlink" title="问：将森林F转换为对应的二叉树T，F中叶结点的个数等于T中左孩子指针为空的结点个数"></a>问：将森林F转换为对应的二叉树T，F中叶结点的个数等于T中左孩子指针为空的结点个数</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8046479/52545?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
 <h3 id="问：将森林F转换为对应的二叉树T，若F中有n个非终端结点，则T中右指针域为空的结点数为n-1。"><a href="#问：将森林F转换为对应的二叉树T，若F中有n个非终端结点，则T中右指针域为空的结点数为n-1。" class="headerlink" title="问：将森林F转换为对应的二叉树T，若F中有n个非终端结点，则T中右指针域为空的结点数为n+1。"></a>问：将森林F转换为对应的二叉树T，若F中有n个非终端结点，则T中右指针域为空的结点数为n+1。</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8104022/258?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
-<h3 id="问：树和森林的遍历与二叉树遍历的对应关系"><a href="#问：树和森林的遍历与二叉树遍历的对应关系" class="headerlink" title="问：树和森林的遍历与二叉树遍历的对应关系"></a>问：树和森林的遍历与二叉树遍历的对应关系</h3><center><br><img src="/2017/05/28/Data-Structure/Trees-BinaryTree.JPG" width="80%">图 1<br></center>
+<h3 id="问：树和森林的遍历与二叉树遍历的对应关系"><a href="#问：树和森林的遍历与二叉树遍历的对应关系" class="headerlink" title="问：树和森林的遍历与二叉树遍历的对应关系"></a>问：树和森林的遍历与二叉树遍历的对应关系</h3><center><br><img src="/blog/2017/05/28/Data-Structure/Trees-BinaryTree.JPG" width="80%">图 1<br></center>
 
 <h2 id="五、图"><a href="#五、图" class="headerlink" title="五、图"></a>五、图</h2><h3 id="问：顶点的度"><a href="#问：顶点的度" class="headerlink" title="问：顶点的度"></a>问：顶点的度</h3><p>有向图中，所有顶点的入度之和等于所有顶点的出度之和</p>
 <h3 id="问：连通图与强连通图，连通分量与强连通分量"><a href="#问：连通图与强连通图，连通分量与强连通分量" class="headerlink" title="问：连通图与强连通图，连通分量与强连通分量"></a>问：连通图与强连通图，连通分量与强连通分量</h3><p>在无向图中，如果从顶点v到顶点w有路径存在，则称v和w连通的。如果图中任意两个顶点之间都连通，则称该图为<strong>连通图</strong>，否则，称该图为非连通图。无向图的极大连通子图称为<strong>连通分量。</strong></p>
@@ -501,7 +501,7 @@ int main(){
 }
 </code></pre><p>(3) next数组求解，本质上在求模式串每一位的最大相同前后缀的长度</p>
 <p><a href="http://www.cnblogs.com/c-cloud/p/3224788.html" title="Title" target="_blank" rel="external">来源</a></p>
-<center><br><img src="/2017/05/28/Data-Structure/KMP-next.png" width="90%"><br></center>
+<center><br><img src="/blog/2017/05/28/Data-Structure/KMP-next.png" width="90%"><br></center>
 
 <pre><code>void computeNext(string pattern, vector&lt;int&gt;&amp; next){
     int len=pattern.size();
@@ -570,7 +570,7 @@ nextval[5]，比较s[next[5]]和s[5]，next[5]=3，s[3]=b，而s[5]=a，二者�
 这里是nextval的下标从-1开始，如果从1开始，则其余各位均＋1，nextval为0，1，0，1，0，4，1，0，1
 </code></pre><h3 id="问：动态查找表"><a href="#问：动态查找表" class="headerlink" title="问：动态查找表"></a>问：动态查找表</h3><p>动态查找表的表结构是在查找过程中动态生成的，对于给定key，若表中存在某关键字与key相等则查找成功返回，否则则插入关键字等于key的记录。常见的动态查找表有：二叉排序树、平衡二叉树、B树、B+树。</p>
 <p>静态查找表有：有序表、分块有序表、线性链表。</p>
-<h2 id="七、排序"><a href="#七、排序" class="headerlink" title="七、排序"></a>七、排序</h2><h3 id="问：各种内部排序算法性质"><a href="#问：各种内部排序算法性质" class="headerlink" title="问：各种内部排序算法性质"></a>问：各种内部排序算法性质</h3><center><br><img src="/2017/05/28/Data-Structure/ComparatorAlgorithms.JPG" width="90%">图 1<br></center>
+<h2 id="七、排序"><a href="#七、排序" class="headerlink" title="七、排序"></a>七、排序</h2><h3 id="问：各种内部排序算法性质"><a href="#问：各种内部排序算法性质" class="headerlink" title="问：各种内部排序算法性质"></a>问：各种内部排序算法性质</h3><center><br><img src="/blog/2017/05/28/Data-Structure/ComparatorAlgorithms.JPG" width="90%">图 1<br></center>
 
 <p>备注：这里的冒泡排序是指优化的冒泡排序。</p>
 <p>注意：</p>
@@ -616,7 +616,7 @@ nextval[5]，比较s[next[5]]和s[5]，next[5]=3，s[3]=b，而s[5]=a，二者�
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Data-Structure/" data-id="cj39vkjna001t10wre1ks3e0w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Data-Structure/" data-id="cj39x39rk001s0kwr1e5kv1f3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
