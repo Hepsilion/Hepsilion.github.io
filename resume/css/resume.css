@@ -399,6 +399,12 @@ body {
   }
   .container article {
     height: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .container header {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 @media screen and (max-width: 900px) {
@@ -451,16 +457,12 @@ body {
 @media screen and (max-width: 1000px) {
   .container article .education,
   .container article .personal {
-    width: 70%;
+    width: 100%;
     display: block;
     margin: 20px auto;
   }
 }
 @media screen and (max-width: 850px) {
-  .container article .education,
-  .container article .personal {
-    width: 90%;
-  }
   .container article section .item {
     display: block;
     width: 90%;
@@ -470,6 +472,12 @@ body {
 @media screen and (max-width: 700px) {
   .container article {
     padding: 10px;
+  }
+  .container article .education ul li span,
+  .container article .honor ul li span,
+  .container article .ex ul li span,
+  .container article .proj ul li span {
+    width: auto !important;
   }
 }
 @media screen and (max-width: 500px) {
