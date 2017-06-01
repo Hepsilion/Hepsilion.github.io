@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>操作系统总结 | Hepsilion</title>
+    <title>操作系统 | Hepsilion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="author" content="Hepsilion">
     <meta name="email" content="2428091608@qq.com">
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main"><article id="post-操作系统总结" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-操作系统" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -189,7 +189,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 class="article-title" itemprop="name">
-            操作系统总结
+            操作系统
         </h1>
     
 
@@ -198,7 +198,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/05/28/操作系统总结/">
+        <a href="/blog/2017/05/28/操作系统/">
             <time datetime="2017-05-28T10:53:28.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
@@ -286,19 +286,19 @@ var _hmt = _hmt || [];
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7920678/52607?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/7920678/52607?onlyWrong=0</a></p>
 <h3 id="问：RAID阵列"><a href="#问：RAID阵列" class="headerlink" title="问：RAID阵列"></a>问：RAID阵列</h3><p>RAID 0：无差错控制的带区组</p>
 <p>要实现RAID0必须要有两个以上硬盘驱动器，RAID0实现了带区组，数据并不是保存在一个硬盘上，而是分成数据块保存在不同驱动器上。在所有的级别中，RAID 0的速度是最快的。但是RAID 0没有冗余功能的，如果一个磁盘(物理)损坏，则所有的数据都无法使用。</p>
-<center><br><img src="/blog/2017/05/28/操作系统总结/RAID0.jpg" width="13%"><br></center>
+<center><br><img src="/blog/2017/05/28/操作系统/RAID0.jpg" width="13%"><br></center>
 
 <p>RAID 1：镜象结构</p>
 <p>当主硬盘损坏时，镜像硬盘就可以代替主硬盘工作。镜像硬盘相当于一个备份盘，可想而知，这种硬盘模式的安全性是非常高的，RAID 1的数据安全性在所有的RAID级别上来说是最好的。但是其磁盘的利用率却只有50%，是所有RAID级别中最低的。</p>
-<center><br><img src="/blog/2017/05/28/操作系统总结/RAID1.jpg" width="13%"><br></center>
+<center><br><img src="/blog/2017/05/28/操作系统/RAID1.jpg" width="13%"><br></center>
 
 <p>RAID5：分布式奇偶校验的独立磁盘结构</p>
 <p>RAID5最大的好处是在一块盘掉线的情况下，RAID照常工作，相对于RAID0必须每一块盘都正常才可以正常工作的状况容错性能好多了。因此 RAID5是RAID级别中最常见的一个类型。RAID5校验位即P位是通过其它条带数据做异或(xor)求得的。计算公式为 P=D0xorD1xorD2…xorDn，其中p代表校验块，Dn代表相应的数据块，xor是数学运算符号异或。</p>
-<center><br><img src="/blog/2017/05/28/操作系统总结/RAID5.png" width="25%"><br></center>
+<center><br><img src="/blog/2017/05/28/操作系统/RAID5.png" width="25%"><br></center>
 
 <p>RAID10：高可靠性与高效磁盘结构</p>
 <p>RAID 10是先镜射再分区数据。是将所有硬盘分为两组，视为是RAID 0的最低组合，然后将这两组各自视为RAID 1运作。RAID 10有着不错的读取速度，而且拥有比RAID 0更高的数据保护性。</p>
-<center><br><img src="/blog/2017/05/28/操作系统总结/RAID10.png" width="30%"><br></center>
+<center><br><img src="/blog/2017/05/28/操作系统/RAID10.png" width="30%"><br></center>
 
 <h2 id="四、-文件管理"><a href="#四、-文件管理" class="headerlink" title="四、 文件管理"></a>四、 文件管理</h2><h3 id="硬链接和软链接"><a href="#硬链接和软链接" class="headerlink" title="硬链接和软链接"></a>硬链接和软链接</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8129531/15818?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8129531/15818?onlyWrong=0</a></p>
 <h2 id="五、-输入输出-I-O-管理"><a href="#五、-输入输出-I-O-管理" class="headerlink" title="五、 输入输出(I/O)管理"></a>五、 输入输出(I/O)管理</h2><h3 id="问：I-O控制方式"><a href="#问：I-O控制方式" class="headerlink" title="问：I/O控制方式"></a>问：I/O控制方式</h3><ul>
@@ -361,7 +361,7 @@ a.x=0x11223344;//16 进制，则a.y[3]=0x11
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/操作系统总结/" data-id="cj3cf9dqk00274swrxby96fuf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/操作系统/" data-id="cj3eeph2w0022cswrkwdzd8g4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -429,7 +429,7 @@ a.x=0x11223344;//16 进制，则a.y[3]=0x11
 
             
     
-        <a href="https://hepsilion.github.io/2017/05/28/操作系统总结/#comments" id="sourceId::2017/05/28/操作系统总结/" class="article-comment-link cy_cmt_count">评论</a>
+        <a href="https://hepsilion.github.io/2017/05/28/操作系统/#comments" id="sourceId::2017/05/28/操作系统/" class="article-comment-link cy_cmt_count">评论</a>
     
 
         </footer>
@@ -464,7 +464,7 @@ a.x=0x11223344;//16 进制，则a.y[3]=0x11
     <section id="comments">
     
         
-    <div id="SOHUCS" sid="2017/05/28/操作系统总结/"></div>
+    <div id="SOHUCS" sid="2017/05/28/操作系统/"></div>
 
     
     </section>
