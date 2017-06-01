@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>08-Service | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                39
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                21
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-08-Service" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            08-Service
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/06/01/08-Service/">
+            <time datetime="2017-06-01T12:45:55.000Z" itemprop="datePublished">2017-06-01</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/Android/">Android</a>, <a class="tag-link" href="/blog/tags/Java/">Java</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>#第八章 服务</p>
+<a id="more"></a>
+<p>服务(Service)和Activity一样，是Android中的四大组件之一，不同的是服务没有界面，是一个长期运行在后台的组件，即使启动服务的应用程序被切换掉，服务仍可以在后台正常运行。因此服务经常被用来处理一些耗时的程序，例如进行网络传输或者播放音乐等。</p>
+<p>##一、服务的创建</p>
+<p><strong>1. 创建服务</strong></p>
+<p>服务的创建方式与创建Activity类似，只需要继承Service类即可。</p>
+<p><strong>示例代码：</strong></p>
+<pre><code>public class MyService extends Service{
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+}
+</code></pre><p><strong>2. 在清单文件中配置</strong></p>
+<p>由于服务是Android四大组件中的一个，因此需要在Androidmanifest.xml文件中进行注册，否则服务是不生效的。</p>
+<p><strong>示例代码：</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;learning.android.it.org.demo0801&quot;&gt;
+
+    &lt;application
+        android:allowBackup=&quot;true&quot;
+        android:icon=&quot;@mipmap/ic_launcher&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:supportsRtl=&quot;true&quot;
+        android:theme=&quot;@style/AppTheme&quot;&gt;
+        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+        &lt;!--注册服务--&gt;
+        &lt;service android:name=&quot;.MyService&quot;/&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre><p>##二、服务的生命周期</p>
+<p>与其他组件不同，Service不能自己主动运行，需要调用相应的方法来启动。启动服务的方法有两种，分别是Context.startService()和Context.bindService()。如图8-1所示，使用不同的方法启动服务，服务的生命周期也会不同。</p>
+<center><br><img src="/blog/2017/06/01/08-Service/Pic8-1.jpg" width="45%">图 8-1<br></center>
+
+<p><strong>1. startService方式开启服务的生命周期</strong></p>
+<p>当其他组件调用startService()方法时，服务会先执行onCreate()方法，接着执行onStartCommand()方法，此时服务处于运行状态，直到自身调用stopSelf()方法或者其他组件调用stopService()方法时服务停止，最终被系统销毁。</p>
+<p>这种方式开启的服务会长期在后台运行，并且服务的状态与开启者的状态无关。</p>
+<p><strong>2. bindService方式开启服务的生命周期</strong></p>
+<p>当其他组件调用bindService()方法时，服务被创建，接着客户端通过Ibinder接口与服务通信。客户端通过unbindService()方法关闭连接，多个客户端能绑定到同一个服务上，并且当它们都解绑时，系统将直接销毁服务(服务不需要被停止)。</p>
+<p>这种方法开启的服务于开启者的状态有关，当调用者销毁了，服务也会被销毁。</p>
+<p><strong>3. 服务声明周期中的重要方法</strong></p>
+<ul>
+<li>onCreate() 服务被创建时执行的方法。</li>
+<li>onDestroy() 服务被销毁时执行的方法。</li>
+<li>onStartCommand() 客户端通过startService()显示启动服务时执行该方法。</li>
+<li>onBind() 客户端通过调用bindService()方法启动服务时执行该方法。</li>
+<li>onUnbind() 客户端调用unBindService()方法断开服务绑定时执行该方法。</li>
+</ul>
+<p>##三、服务的启动方式<br>前面讲过，启动服务有两种方式，分别是通过startService()方法启动服务和bindService()方法启动服务。</p>
+<p><strong>1. start方式启动服务</strong></p>
+<p><strong>案例：Demo0801，start方式启动服务</strong></p>
+<pre><code>Intent intent=new Intent(this, MyService.class);
+startService(intent); //开启服务
+stopService(intent);  //关闭服务
+</code></pre><p><strong>需要注意的是，如果不调用stopService()或stopSelf()方法，这种方式开启的服务会长期运行在后台，除非用户强制停止服务。</strong></p>
+<p><strong>2. bind方式启动服务</strong></p>
+<p>当程序使用startService()和stopService()启动、关闭服务时，服务与调用者之间基本不存在太多的关联，也无法与访问者进行通信、数据交互等。</p>
+<p>如果服务需要与调用者进行方法调用和数据交互时，应该使用bindService()和unbindService()方法启动、关闭服务。</p>
+<p>bindService()方法的完整方法名为public boolean bindService(Intent service, ServiceConnection conn, int flags)，该方法的参数解释如下：</p>
+<blockquote>
+<p>Intent对象用于指定要启动的Service</p>
+<p>ServiceConnection对象用于监听调用者与Service之间的连接状态。</p>
+<p>当调用者与Service连接成功时，将回调该对象的public void onServiceConnected(ComponentName name, IBinder service)方法；</p>
+<p>当调用者与Service断开连接时，将回调该对象的public void onServiceDisconnected(ComponentName name)方法。</p>
+<p>flags指定绑定时是否自动创建Service(如果Service还未创建)。该参数可指定为0即不自动创建，也可指定为_BIND_AUTO_CREATE_即自动创建。</p>
+</blockquote>
+<p><strong>案例：Demo0802，bind方式启动服务</strong></p>
+<pre><code>// 1. 创建MyConn类，用于实现连接服务
+private class MyConn implements ServiceConnection{
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        myBinder= (MyService.MyBinder) service;
+        Log.i(&quot;MainActivity&quot;, &quot;服务成功绑定，内存地址为&quot;+myBinder.toString());
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+}
+MyConn myConn;
+
+// 2. 绑定服务
+Intent intent=new Intent(this, MyService.class);
+bindService(intent, myConn, BIND_AUTO_CREATE);
+
+// 3. 解绑服务
+unbindService(myConn);
+
+// 4. 利用myBinder调用服务中的方法
+</code></pre><p>##四、服务通信</p>
+<p>在Android系统中，服务的通信方式有两种：一种是本地服务通信，另一种是远程服务通信。本地服务通信是指应用程序内部的通信，而远程服务通信是指两个应用程序之间的通信。使用这两种方式进行通信时必须满足一个前提，就是服务必须以绑定方式开启。</p>
+<p><strong>1. 本地服务通信</strong></p>
+<p>在使用服务进行本地通信时，首先需要开发一个Service类，该类会提供一个IBinder onBind(Intent intent)方法，onBind()方法返回的IBinder对象会作为参数传递给ServiceConnection类中onServiceConnected(ComponentName name, IBinder service)方法，这样访问者就可以通过IBinder对象与Service进行通信。</p>
+<p>使用Ibinder对象进行本地服务通信：</p>
+<center><br><img src="/blog/2017/06/01/08-Service/Pic8-2.jpg" width="75%">图 8-2<br></center>
+
+<p>如图8-1所示，服务在进行通信时实际上使用的就是IBinder对象，在ServiceConnection类中得到IBinder对象，通过该对象就可以获取到服务中定义的方法，执行具体的操作。</p>
+<p><strong>案例：Demo0803，音乐播放器，演示如何使用服务进行通信</strong></p>
+<p><strong>(1) MediaPlayer</strong></p>
+<p>在Android中，播放音频文件一般都是使用MediaPlayer类来实现的。</p>
+<ul>
+<li><strong>setAudioStreamType()</strong> 指定音频文件的类型必须在<strong>prepare()</strong>方法之前调用</li>
+<li><strong>setDataSource()</strong> 设置要播放的音频文件的位置</li>
+<li><strong>prepare()</strong> 在开始播放之前调用这个方法完成准备工作</li>
+<li><strong>start()</strong> 开始或继续播放音频</li>
+<li><strong>pause()</strong> 暂停播放音频</li>
+<li><strong>reset()</strong> 将MediaPlayer对象重置到刚刚创建的状态</li>
+<li><strong>seekTo()</strong> 从指定的位置开始播放音频</li>
+<li><strong>stop()</strong> 停止播放音频，调用该方法后MediaPlayer对象就无法再播放音频</li>
+<li><strong>release()</strong> 释放掉与MediaPlayer对象相关的资源</li>
+<li><strong>isPlaying()</strong> 判断当前MediaPlayer是否正在播放音频</li>
+<li><strong>getDuration()</strong> 获取载入音频文件的时长</li>
+<li><strong>getCurrentPosition()</strong> 获取当前播放音频文件的位置</li>
+</ul>
+<p><strong>(2) SeekBar</strong></p>
+<p>SeekBar与ProgressBar十分类似，它是通过滑块的位置来表示数值的。SeekBar允许用户拖动滑块改变SeekBar的值，例如手机的音量调节，同时SeekBar还允许用户改变滑块外观。</p>
+<p>SeekBar的常用方法属性：</p>
+<ul>
+<li><strong>属性 android:thumb</strong> 指定一个Drawable对象，该对象将作为自定义滑块</li>
+<li><strong>监听器OnSeekBarChangeListener</strong> 监听滑块位置的改变</li>
+<li><strong>方法setProgress()</strong> 用来设置SeekBar的当前值</li>
+<li><strong>方法setMax()</strong> 设置SeekBar的最大值</li>
+</ul>
+<p><strong>2. 远程通信服务</strong></p>
+<p>在Android系统中，各个应用程序都运行在自己的进程中，进程之间一般无法直接进行通信，如果想要完成不同进程之间的通信，就需要使用远程服务通信。</p>
+<p>远程服务通信是通过AIDL(Android Interface Definition Language)实现的，它是一种接口定义语言，其语法格式简单，与Java中定义类似，但存在几点差异：</p>
+<ul>
+<li>AIDL定义接口的源代码文件必须以.aidl结尾</li>
+<li>AIDL接口中用到的数据类型，除了基本数据类型、String、List、Map、CharSequence<br>之外，其他类型全部都需要导入包，即使它们在同一个包中。</li>
+</ul>
+<p>开发人员定义的AIDL接口只是定义了进程之间的通信接口，服务端、客户端都需要使用Android SDK安装目录下的platform-tools子目录下的aidl.exe工具为该接口提供实现。</p>
+<p>定义AIDL接口的<strong>示例代码</strong>：</p>
+<pre><code>interface IService {
+    void callAlipayService();
+}
+</code></pre><p>需要注意的是，AIDL没有类型修饰符，在编写ADIL文件时，不能加上类型修饰符，因为它本身就是共有的，例如写为public interface IService是不正确的，正确的写法应该为interface IService。</p>
+<p>定义好AIDL接口之后，接着需要在应用程序中创建Service的子类，该Service的onBind()方法所返回的IBinder对象应该是aidl.exe所生成的IService.Stub的子类对象。</p>
+<pre><code>public class AlipayService extends Service {
+    private class MyBinder extends IService.Stub {
+        @Override
+        public void callAlipayService() throws RemoteException {
+            methodInService();
+        }
+    }
+
+    private void methodInService() {
+        Log.v(TAG, &quot;开始付费，购买装备&quot;);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.v(TAG, &quot;绑定支付宝，准备付费&quot;);
+        return new MyBinder();
+    }
+}
+</code></pre><p><strong>案例：Demo0804与Demo0805，模拟小游戏Demo0805远程调用支付宝Demo0804，演示如何绑定并使用远程服务</strong></p>
+<p><strong>注意：两个应用程序中的ADIL文件所在的包名要一致。</strong></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj3ef1ss4001c68wrjsuv5kn3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/06/01/08-Service/#comments" id="sourceId::2017/06/01/08-Service/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/06/01/07-广播接收者/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    07-广播接收者
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/06/01/09-网络编程/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">09-网络编程</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="SOHUCS" sid="2017/06/01/08-Service/"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/01/09-网络编程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="09-网络编程" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/09-网络编程/" class="title">09-网络编程</a></p>
+                            <p class="item-date"><time datetime="2017-06-01T12:46:32.000Z" itemprop="datePublished">2017-06-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/01/08-Service/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="08-Service" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/08-Service/" class="title">08-Service</a></p>
+                            <p class="item-date"><time datetime="2017-06-01T12:45:55.000Z" itemprop="datePublished">2017-06-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/01/07-广播接收者/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-广播接收者" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/07-广播接收者/" class="title">07-广播接收者</a></p>
+                            <p class="item-date"><time datetime="2017-06-01T12:44:40.000Z" itemprop="datePublished">2017-06-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/01/06-ContentProvider/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-ContentProvider" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/06-ContentProvider/" class="title">06-ContentProvider</a></p>
+                            <p class="item-date"><time datetime="2017-06-01T12:43:55.000Z" itemprop="datePublished">2017-06-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/01/05-SQLite/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SQLite" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/05-SQLite/" class="title">05-SQLite</a></p>
+                            <p class="item-date"><time datetime="2017-06-01T12:43:19.000Z" itemprop="datePublished">2017-06-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt2dNhVw"></script>
+    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+    window.changyan.api.config({
+    appid: 'cyt2dNhVw',
+    conf: 'prod_8acceb4b82a359a3e4f200f748824a83'
+    });
+    </script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
