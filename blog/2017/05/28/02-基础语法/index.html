@@ -319,7 +319,7 @@ a-b=a+(-b)
  1000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0001=
 10111 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0001(最高位溢出，舍去，结果变成了正数)
 则结果为0111 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0001=2^62+2^61+2^60+1
-</code></pre><p><br><br><a href="https://www.nowcoder.com/profile/7404313/test/7977669/55201" title="Title" target="_blank" rel="external">例2：</a></p>
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/7977669/55201" title="Title" target="_blank" rel="external">例2：</a></p>
 <pre><code>变量a是一个64位有符号的整数，初始值用16进制表示为：0x7FFFFFFFFFFFFFFF;
 变量b是一个64位有符号的整数，初始值用16进制表示为：0x8000000000000000。
 则a+b的结果用10进制表示为多少？
@@ -328,7 +328,7 @@ a-b=a+(-b)
 0x7FFFFFFFFFFFFFFF+0x8000000000000000=0xFFFFFFFFFFFFFFFF
 结果最高位符号位为1，说明结果为负数，现在求结果的原码值。
 保持符号位不变，补码减1，得到结果的反码；保持符号位不变，反码取反，得到结果的原码：-1
-</code></pre><p><br><br><a href="https://www.nowcoder.com/profile/7404313/test/8100292/3459?onlyWrong=0" title="Title" target="_blank" rel="external">例3：</a></p>
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8100292/3459?onlyWrong=0" title="Title" target="_blank" rel="external">例3：</a></p>
 <pre><code>short a=128；
 byte b=(byte)a;
 此时，变量a，b的值分别为128和-128
@@ -348,6 +348,8 @@ Java中byte占1个字节，8位。将short变量强制类型转换时会截断�
 }
 </code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/7958772/56865?onlyWrong=0" title="Title" target="_blank" rel="external">例2：</a></p>
 <pre><code>若有定义语句：int a=10; double b=3.14;则表达式&apos;A&apos;+a+b 值的类型是double
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8073949/56289?onlyWrong=0" title="Title" target="_blank" rel="external">例3：</a></p>
+<pre><code>假定x和y为double型，则表达式x=2，y=x+3/2的输出为3.000000
 </code></pre><ul>
 <li><p>%：取模运算符，要求操作数为整型。</p>
 </li>
@@ -369,18 +371,58 @@ Java中byte占1个字节，8位。将short变量强制类型转换时会截断�
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7964595/36740?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>boolean b=true?false:true==true?false:true;
 System.out.println(b);  //false
-</code></pre><ul>
+</code></pre><p>例2：下列代码输出是什么？</p>
+<pre><code>public static void main(String[] args){
+    boolean result1=true1()?true2():true3()==true4()?false1():true5();
+    System.out.println(result1);
+    boolean result2=false1()?true2():true3()==true4()?false2():true5();
+    System.out.println(result2);
+}
+public static boolean true1(){
+    System.out.print(&quot;true1  &quot;);
+    return true;
+}
+public static boolean true2(){
+    System.out.print(&quot;true2  &quot;);
+    return true;
+}
+public static boolean true3(){
+    System.out.print(&quot;true3  &quot;);
+    return true;
+}
+public static boolean true4(){
+    System.out.print(&quot;true4  &quot;);
+    return true;
+}
+public static boolean true5(){
+    System.out.print(&quot;true5  &quot;);
+    return true;
+}
+public static boolean false1(){
+    System.out.print(&quot;false1 &quot;);
+    return false;
+}
+public static boolean false2(){
+    System.out.print(&quot;false2 &quot;);
+    return false;
+}
+
+输出如下：
+true1  true2  true
+false1 true3  true4  false2 false
+
+从输出结果可以看出例1中b=true?false:true...，true成立使得结果b为false，表达式返回，后面的表达式不再执行。
+</code></pre><p>结论：(1) ==优先级大于三目运算符 (2) 写复杂表达式时，请记得加括号，便于阅读</p>
+<ul>
 <li>++</li>
 </ul>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8073949/56289?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
-<pre><code>假定x和y为double型，则表达式x=2，y=x+3/2的输出为3.000000
-</code></pre><p><strong>i=i++问题</strong></p>
+<p><strong>i=i++问题</strong></p>
 <p>Java使用了中间缓存变量机制，JVM运行这条语句时过程如下：</p>
 <p>步骤1 JVM把i值拷贝到临时变量区；</p>
 <p>步骤2　i值加1；</p>
 <p>步骤3　返回临时变量区的值，注意这个值步骤1中没修改过的i值。 </p>
 <p>步骤4　返回值赋值给i，此时count值被重置成原来的值。</p>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8049404/14765?onlyWrong=0" title="Title" target="_blank" rel="external">例2：</a></p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8049404/14765?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>package algorithms.com.guan.javajicu; 
 public class Inc { 
     public static void main(String[] args) { 
@@ -425,10 +467,22 @@ public class Inc {
 </blockquote>
 </li>
 </ul>
-<p>>&gt; 表示带符号右移</p>
-<p>>&gt;&gt; 表示无符号右移，左边空出的位以0填充</p>
-<pre><code>int x=5&gt;&gt;2;  // &gt;&gt;表示带符号右移，5&gt;&gt;2相当于5除于2的平方，等于1
-int y=1&gt;&gt;&gt;2; // &gt;&gt;&gt;表示无符号右移，高位用0填充，0001右移两位为0000，等于0
+<p>>&gt; 表示带符号右移，正数结果为正，高位补0；负数结果为负，高位补1</p>
+<pre><code>int x1=5&gt;&gt;2;
+int x2=-5&gt;&gt;2;
+
+5在计算机中补码表示为：  0 0000000 00000000 00000000 00000101
+5为正数，5&gt;&gt;2，高位补0： 0 0000000 00000000 00000000 00000001，5为正数，符号位保留为0，结果x1=1
+-5在计算机中补码表示为：  1 1111111 11111111 11111111 11111011
+-5为正数，-5&gt;&gt;2，高位补1：1 1111111 11111111 11111111 11111110，-5为负数，符号位保留位1，结果x2=-2
+</code></pre><p>>&gt;&gt; 表示无符号右移，左边空出的位以0填充</p>
+<pre><code>int y1=5&gt;&gt;&gt;2;
+int y2=-5&gt;&gt;&gt;2;
+
+5在计算机中补码表示为：  00000000 00000000 00000000 00000101
+5&gt;&gt;&gt;2，左边空出的位补0： 00000000 00000000 00000000 00000001，结果y1=1
+-5在计算机中补码表示为： 11111111 11111111 11111111 11111011
+-5&gt;&gt;&gt;2，左边空出的位补0：00111111 11111111 11111111 11111110，结果为y2=1073741822
 </code></pre><h3 id="问：switch"><a href="#问：switch" class="headerlink" title="问：switch"></a>问：switch</h3><p>switch(expr)中，expr是一个整数表达式，因此传递给switch和case语句的参数应该是int、short、char、byte或者其对应的封装类以及Enum类型，long、String(<strong>在Java7中，也支持了String类型</strong>)都不能用于swtich表达式。</p>
 <p>在switch语句中，表达式的值不能是null，否则会在运行时抛出NullPointerException。在case子句中也不能使用null，否则会出现编译错误。</p>
 <h3 id="问：switch与break"><a href="#问：switch与break" class="headerlink" title="问：switch与break"></a>问：switch与break</h3><p>switch结构中匹配的case子句中如果没有break跳出执行，那么程序执行完case子句后不会跳出，将会继续执行后续的case子句，直到遇到break跳出switch；如果一直没有遇到break，程序将一直执行到整个结构结束。</p>
@@ -467,18 +521,18 @@ int y=1&gt;&gt;&gt;2; // &gt;&gt;&gt;表示无符号右移，高位用0填充，
 调用getValue(2)将返回10
 </code></pre><h4 id="问：值传递和引用传递？"><a href="#问：值传递和引用传递？" class="headerlink" title="问：值传递和引用传递？"></a>问：值传递和引用传递？</h4><p>java内的传递都是值传递。</p>
 <p>(1) 对基本型变量而言的，传递的是该变量的一个副本，改变副本不影响原变量。</p>
-<p>(2) 对引用型变量而言的，传递的是该对象地址的一个副本，并不是原对象本身，所以对引用对象进行操作会同时改变原对象。</p>
+<p>(2) 对引用型变量而言的，传递的是该对象地址的一个副本，所以对引用型变量进行操作会同时改变原对象。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7977669/5119?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>public class Tester{
-public static void main(String[] args){
-   Integer var1=new Integer(1);
-   Integer var2=var1;
-   doSomething(var2);
-   System.out.println(var1.intValue());
-   System.out.println(var1==var2);
-}
-public static void doSomething(Integer integer){
-    integer=new Integer(2);
+    public static void main(String[] args){
+       Integer var1=new Integer(1);
+       Integer var2=var1;
+       doSomething(var2);
+       System.out.println(var1.intValue());
+       System.out.println(var1==var2);
+    }
+    public static void doSomething(Integer integer){
+        integer=new Integer(2);
     }
 }
 
@@ -496,7 +550,7 @@ true
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/02-基础语法/" data-id="cj3ef1sr1000768wr4t6fxe2s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/02-基础语法/" data-id="cj3ftahkh0002iswr6l8q41lp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
