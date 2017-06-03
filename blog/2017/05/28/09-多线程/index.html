@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                39
+                38
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -418,17 +418,17 @@ public class NewScheduledThreadPool2 {
 答：其它线程可以进入该对象的非synchronized方法，不可以进入该对象的synchronized方法。
 </code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/16017?onlyWrong=0" title="Title" target="_blank" rel="external">例3：</a>看评论</p>
 <pre><code>public class HelloSogou{
-     public static synchronized void main(String[] a){
+    public static synchronized void main(String[] a){
         Thread t=new Thread(){
             public void run(){
                 Sogou();
             }
-         };
-         t.run();
-         System.out.print(&quot;Hello&quot;);
-     }
-     static synchronized void Sogou(){
-         System.out.print(&quot;Sogou&quot;);
+        };
+        t.run();
+        System.out.print(&quot;Hello&quot;);
+    }
+    static synchronized void Sogou(){
+        System.out.print(&quot;Sogou&quot;);
     }
 }
 
@@ -659,7 +659,7 @@ Thread06 run1 i=2
 Thread05 run1 i=0
 Thread05 run1 i=1
 Thread05 run1 i=2
-</code></pre><h3 id="Java支持并发编程的同步机制"><a href="#Java支持并发编程的同步机制" class="headerlink" title="Java支持并发编程的同步机制"></a>Java支持并发编程的同步机制</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/7977669/7696?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+</code></pre><h3 id="问：Java支持并发编程的同步机制"><a href="#问：Java支持并发编程的同步机制" class="headerlink" title="问：Java支持并发编程的同步机制"></a>问：Java支持并发编程的同步机制</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/7977669/7696?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>JDK提供的用于并发编程的同步器有：Semaphore、CyclicBarrier、CountDownLatch
 </code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8109636/56073?onlyWrong=0" title="Title" target="_blank" rel="external">例2：</a></p>
 <pre><code>CyclicBarrier让一组线程等待其他线程；CountDownLatch让一组线程等待某个事件发生
@@ -736,7 +736,7 @@ Condition.await/signal/signalAll
 <p>wait()：该方法用来让当前线程进入休眠状态，直到被唤醒或被中断为止。</p>
 <p>(1) sleep()是Thread类的方法，wait()是Object类的方法</p>
 <p>(2) wait()，notify()和notifyAll()只能在同步方法或同步代码块中使用，而sleep()可以在任何地方使用</p>
-<p>(3) 调用sleep()方法后，线程进入睡眠状态，但不会释放对象锁，休眠时间结束后会自动进入就绪状态；调用wait()方法后，线程会释放对象锁，进入此对象的等待池(wait pool)中，直到其他线程调用对象的notify()方法(或notifyAll()方法)时才能唤醒等待池中的线程进入等锁池(lock pool)，如果线程重新获得对象的锁就可以进入就绪状态。</p>
+<p>(3) 调用sleep()方法后，线程进入睡眠状态，但不会释放对象锁，休眠时间结束后会自动进入就绪状态；调用wait()方法后，线程会释放对象锁，进入此对象的等待池(wait pool)中，直到其他线程调用对象的notify()方法(或notifyAll()方法)时才能唤醒等待池中的线程进入等锁池(lock pool)，<strong>如果线程重新获得对象的锁就可以进入就绪状态</strong>。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8073294/15267?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>sleep()和wait()的对比</p>
 <h3 id="问：sleep-方法和yield-方法的区别"><a href="#问：sleep-方法和yield-方法的区别" class="headerlink" title="问：sleep()方法和yield()方法的区别"></a>问：sleep()方法和yield()方法的区别</h3><p>调用线程yield方法会让当前线程交出CPU权限，让CPU去执行其他的线程。它跟sleep方法类似，同样不会释放锁。但是yield不能控制交出CPU的具体时间，另外，yield方法只能让拥有相同优先级的线程有获取CPU执行时间的机会。</p>
 <p>注意，调用yield方法并不会让线程进入阻塞状态，而是让线程重回就绪状态，它只需要等待重新获取CPU执行时间，这一点是和sleep方法不一样的。</p>
@@ -766,7 +766,7 @@ Condition.await/signal/signalAll
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/09-多线程/" data-id="cj3ftahna001liswrwo077iac" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/09-多线程/" data-id="cj3h0kwph001hvswrxf42tqhn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1025,7 +1025,7 @@ Condition.await/signal/signalAll
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1034,7 +1034,7 @@ Condition.await/signal/signalAll
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">31</span></li></ul>
         </div>
     </div>
 
@@ -1043,7 +1043,7 @@ Condition.await/signal/signalAll
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
