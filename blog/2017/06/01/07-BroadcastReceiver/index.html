@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>07-广播接收者 | Hepsilion</title>
+    <title>第七章 广播接收者 | Hepsilion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="author" content="Hepsilion">
     <meta name="email" content="2428091608@qq.com">
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main"><article id="post-07-广播接收者" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-07-BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -189,7 +189,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 class="article-title" itemprop="name">
-            07-广播接收者
+            第七章 广播接收者
         </h1>
     
 
@@ -198,7 +198,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/06/01/07-广播接收者/">
+        <a href="/blog/2017/06/01/07-BroadcastReceiver/">
             <time datetime="2017-06-01T12:44:40.000Z" itemprop="datePublished">2017-06-01</time>
         </a>
     </div>
@@ -207,13 +207,13 @@ var _hmt = _hmt || [];
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Android/">Android</a>
+        <a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/Android/">Android</a>, <a class="tag-link" href="/blog/tags/Java/">Java</a>
+        <a class="tag-link" href="/blog/tags/Android/">Android</a>
     </div>
 
                     </div>
@@ -224,12 +224,12 @@ var _hmt = _hmt || [];
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>#第七章 广播接收者</p>
+            <p>广播接收者</p>
 <a id="more"></a>
-<p>在Android系统中，广播(Broadcast)是一种运用在应用程序之间传递消息的机制，广播接收者(BroadcaseReceiver)是用来过滤、接收并响应广播的一类组件。通过广播接收者可以监听系统中的广播消息，在不同组件之间进行通信。</p>
-<p>##一、广播接收者入门<br>在Android系统中内置了很多系统级别的广播，例如，手机开机完成后会发送一条广播，电池电量不足时也会发送一条广播等。为了监听这些广播事件，Android提供了一个BroadcastReceiver组件，该组件可以监听来自系统或者应用程序的广播。</p>
+<p>在Android系统中，广播(Broadcast)是一种在应用程序之间传递消息的机制，广播接收者(BroadcaseReceiver)是用来接收、过滤并响应广播的一类组件。通过广播接收者可以监听系统中的广播消息，在不同组件之间进行通信。</p>
+<h2 id="一、广播接收者入门"><a href="#一、广播接收者入门" class="headerlink" title="一、广播接收者入门"></a>一、广播接收者入门</h2><p>在Android系统中内置了很多系统级别的广播，例如，手机开机完成后会发送一条广播，电池电量不足时也会发送一条广播等。为了监听这些广播事件，Android提供了一个BroadcastReceiver组件，该组件可以监听来自系统或者应用程序的广播。</p>
 <p>当Android系统产生一个广播事件时，可以有多个对应的BroadcastReceiver接收并进行处理。</p>
-<p>###1. 广播接收者创建于注册<br>要使用广播接收者接收其他应用程序发出的广播，先要在本应用中创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。</p>
+<h3 id="1-广播接收者创建与注册"><a href="#1-广播接收者创建与注册" class="headerlink" title="1. 广播接收者创建与注册"></a>1. 广播接收者创建与注册</h3><p>要使用广播接收者接收其他应用程序发出的广播，先要在本应用中创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。</p>
 <p>注册广播接收者有两种方式，常驻型广播和非常驻型广播。</p>
 <p><strong>(1) 创建广播接收者</strong></p>
 <p>要对监听到的广播事件进行处理，需要创建一个类继承自BroadcastReceiver，然后重写onReceive()方法。</p>
@@ -239,8 +239,8 @@ var _hmt = _hmt || [];
     }
 }
 </code></pre><p>当监听到有广播发出时，就会调用onReceive()方法，在onReceive()方法中可以对事件进行处理。</p>
-<p><strong>(2) 注册常驻型广播</strong></p>
-<p>常驻型广播是当应用程序关闭后，如果接收到其他应用程序发出的广播，那么该程序会自动重新启动。常驻型广播需要在清单文件中注册。</p>
+<p><strong>(2) 注册常驻型广播接收者</strong></p>
+<p>常驻型广播接收者是当应用程序关闭后，如果接收到其他应用程序发出的广播，那么该程序会自动重新启动。常驻型广播接收者需要在清单文件中进行注册。</p>
 <p><strong>示例代码</strong></p>
 <pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0701.OutCallReceiver&quot; &gt;
     &lt;intent-filter android:priority=&quot;20&quot;&gt;
@@ -248,14 +248,14 @@ var _hmt = _hmt || [];
     &lt;/intent-filter&gt;
 &lt;/receiver&gt;
 </code></pre><p>上述代码是在清单文件中注册的监听系统拨打电话的广播。</p>
-<blockquote>
-<p>android:name=”learning.android.it.org.demo0701.OutCallReceiver”是创建的广播接收者的全路径名；</p>
-<p>与定义隐式意图一样，广播接收者也需要注册一个<intent-filter>，在过滤器中指定要接收的广播事件；</intent-filter></p>
-<p>android:name=”android.intent.action.NEW_OUTGOING_CALL”是系统内部定义的拨打电话的广播事件；</p>
-<p>android:priority=”20”是该广播的优先级，这个值越大代表接收的优先级越高。</p>
-</blockquote>
-<p><strong>(3) 注册非常驻型广播</strong></p>
-<p>非常常驻型广播依赖于注册广播的组件的生命周期，例如在Activity中注册广播接收者，当Activity销毁后，广播也随之被移除。这种广播事件在代码中注册。</p>
+<ul>
+<li>android:name=”learning.android.it.org.demo0701.OutCallReceiver”是创建的广播接收者的全路径名；</li>
+<li>与定义隐式意图一样，广播接收者也需要注册一个<intent-filter>，在过滤器中指定要接收的广播事件；</intent-filter></li>
+<li>android:name=”android.intent.action.NEW_OUTGOING_CALL”是系统内部定义的拨打电话的广播事件；</li>
+<li>android:priority=”20”是该广播的优先级，这个值越大代表接收的优先级越高。</li>
+</ul>
+<p><strong>(3) 注册非常驻型广播接收者</strong></p>
+<p>非常驻型广播接收者依赖于注册广播的组件的生命周期，例如在Activity中注册广播接收者，当Activity销毁后，广播也随之被移除。这种广播接收者需要在代码中注册。</p>
 <p><strong>示例代码</strong></p>
 <pre><code>MyBroadcastReceiver receiver=new MyBroadcastReceiver();
 // 实例化过滤器并设置要过滤的广播
@@ -269,26 +269,24 @@ registerReceiver(receiver, intentFilter);
 </code></pre><p><strong>需要注意的是，常驻型广播接收者在应用程序关闭后，接收到广播会重新自动创建。非常驻型广播接收者则依赖于注册广播组件的生命周期和调用unregisterReceiver()方法手动移除。</strong></p>
 <p><strong>(4) 案例：Demo0701，IP拨号器，当拨打长途电话时，广播接收者就会监听到这个广播事件，自动在电话号码前加上几个数字，如17911、17951等。</strong></p>
 <p>注意：在Android4.0一下的系统中，当进程不存在时，只要有响应广播发出，进程就会自动创建并接收广播进行处理。Google工程师认为这样不安全，为了保护用户隐私，在Android4.0以上系统中，当在任务管理器界面强行停止进程后，再有广播发出也不会打开进程进行接收了。</p>
-<p>##二、自定义广播</p>
-<p>Android系统中自带了很多广播，如果需要监听某个广播，只需要创建对应的广播接收者即可。在实际开发中，当这些系统级广播事件不能满足实际需求时，还可以自定义广播。需要注意的是，自定义广播需要由对应的广播接收者去接收，否则这个广播是无意义的。</p>
+<h2 id="二、自定义广播"><a href="#二、自定义广播" class="headerlink" title="二、自定义广播"></a>二、自定义广播</h2><p>Android系统中自带了很多广播，如果需要监听某个广播，只需要创建对应的广播接收者即可。在实际开发中，当这些系统级广播事件不能满足实际需求时，还可以自定义广播。需要注意的是，自定义广播需要由对应的广播接收者去接收，否则这个广播是无意义的。</p>
 <p><strong>案例：Demo0702，电台与收音机</strong></p>
 <p>创建广播：创建一个Intent对象，然后通过Intent.setAction()语句指定广播事件，最后通过sendBroadcast(intent)发送广<br>播。</p>
 <p>接收广播：和接收系统广播事件一样，创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。<strong>需要注意的是，自定义广播的事件与广播接收者在清单文件中注册的事件要一致，否则无法接收广播</strong></p>
-<p>##三、广播的类型<br>在Android系统中，根据广播被接收顺序不同，可以将其分为有序广播和无序广播。</p>
+<h2 id="三、广播的类型"><a href="#三、广播的类型" class="headerlink" title="三、广播的类型"></a>三、广播的类型</h2><p>在Android系统中，根据广播被接收顺序的不同，可以将其分为有序广播和无序广播。</p>
 <p><strong>1. 无序广播</strong></p>
 <p>无序广播是一种完全异步被接收的广播，在广播发出去之后，所有监听了这个广播事件的广播接收者都会在同一时刻接收到这个广播，它们之间没有任何先后顺序可言，这种广播的效率会比较高，但同时意味着它是无法被截断的。</p>
-<center><br><img src="/blog/2017/06/01/07-广播接收者/Pic7-1.jpg" width="35%">图7-1<br></center>
+<center><br><img src="/blog/2017/06/01/07-BroadcastReceiver/Pic7-1.JPG" width="35%">图7-1<br></center>
 
 <p>无序广播的工作流程如图7-1所示，当无序广播发送一条广播消息时，所有的广播接收者都可以接收到，不会被拦截。</p>
 <p><strong>2. 有序广播</strong></p>
 <p>有序广播是一种同步接收的广播，在广播发出之后，同一时刻只会有一个广播接收者能够接收到这条消息，当这个广播接收者中的逻辑执行完后，广播才会继续传递。所以，此时的广播接收者是有先后顺序的，并且可以被拦截。</p>
-<center><br><img src="/blog/2017/06/01/07-广播接收者/Pic7-2.jpg" width="60%">图7-2<br></center>
+<center><br><img src="/blog/2017/06/01/07-BroadcastReceiver/Pic7-2.JPG" width="60%">图7-2<br></center>
 
 <p>有序广播的工作流程如图7-2所示，当有序广播发送一条消息后，高优先级的广播接收者先接收到广播，低优先级的广播接收者后接收到广播。如果高优先级的广播接收者将广播终止，则后面的广播接收者无法接收到广播。想要拦截一条广播不往下发送，可以使用abortBroadcast()方法。</p>
-<p>优先级实在清单文件中注册广播接收者时定义的android:priority=””参数，优先级的范围是-1000~1000之间。如果两个广播接收者的优先级相同，则先注册的组件优先接收到广播。如果两个应用程序监听了同一个广播事件并设置了优先级，则先安装的应用优先接收到广播。</p>
+<p>优先级是在清单文件中注册广播接收者时定义的android:priority=””参数，优先级的范围是-1000~1000之间。如果两个广播接收者的优先级相同，则先注册的组件优先接收到广播。如果两个应用程序监听了同一个广播事件并设置了优先级，则优先级高的应用优先接收到广播。</p>
 <p><strong>案例：Demo0704，拦截有序广播</strong></p>
-<p>##四、常用的广播接收者</p>
-<p><strong>案例：Demo0704，杀毒软件，监听短信接收的广播事件</strong>（好像没起作用）</p>
+<h2 id="四、常用的广播接收者"><a href="#四、常用的广播接收者" class="headerlink" title="四、常用的广播接收者"></a>四、常用的广播接收者</h2><p><strong>案例：Demo0704，杀毒软件，监听短信接收的广播事件</strong>（好像没起作用）</p>
 <p>在Windows系统中，有些软件一开机就自动启动，同样在Android系统中也可以实现这种功能，例如杀毒软件程序，每次手机开机便会自动启动，这种功能就是通过广播接收者监听开机启动的广播事件实现的。</p>
 <p><strong>案例：Demo0705，杀毒软件，监听开机启动的广播事件</strong></p>
 <p><strong>需要注意的是，在Android3.0以后出现了一个安全机制，如果用户没有启动过这个程序，那么就算该程序注册了开机启动的广播接收者也无法接收到开机启动的广播事件。</strong></p>
@@ -302,7 +300,7 @@ registerReceiver(receiver, intentFilter);
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/07-广播接收者/" data-id="cj3h0kwpc0018vswrq5lwiv8g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/" data-id="cj3ihja6g0015a4wra8bai5x7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -370,7 +368,7 @@ registerReceiver(receiver, intentFilter);
 
             
     
-        <a href="https://hepsilion.github.io/2017/06/01/07-广播接收者/#comments" id="sourceId::2017/06/01/07-广播接收者/" class="article-comment-link cy_cmt_count">评论</a>
+        <a href="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/">评论</a>
     
 
         </footer>
@@ -383,7 +381,7 @@ registerReceiver(receiver, intentFilter);
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    06-ContentProvider
+                    第六章 ContentProvider
                 
             </div>
         </a>
@@ -391,7 +389,7 @@ registerReceiver(receiver, intentFilter);
     
         <a href="/blog/2017/06/01/08-Service/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">08-Service</div>
+            <div class="article-nav-title">第八章 服务</div>
         </a>
     
 </nav>
@@ -405,7 +403,9 @@ registerReceiver(receiver, intentFilter);
     <section id="comments">
     
         
-    <div id="SOHUCS" sid="2017/06/01/07-广播接收者/"></div>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
 
     
     </section>
@@ -463,15 +463,15 @@ registerReceiver(receiver, intentFilter);
                             <a href="/blog/2017/06/01/09-网络编程/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="09-网络编程" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第九章 网络编程" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/09-网络编程/" class="title">09-网络编程</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/09-网络编程/" class="title">第九章 网络编程</a></p>
                             <p class="item-date"><time datetime="2017-06-01T12:46:32.000Z" itemprop="datePublished">2017-06-01</time></p>
                         </div>
                     </li>
@@ -482,15 +482,15 @@ registerReceiver(receiver, intentFilter);
                             <a href="/blog/2017/06/01/08-Service/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="08-Service" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第八章 服务" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/08-Service/" class="title">08-Service</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/08-Service/" class="title">第八章 服务</a></p>
                             <p class="item-date"><time datetime="2017-06-01T12:45:55.000Z" itemprop="datePublished">2017-06-01</time></p>
                         </div>
                     </li>
@@ -498,18 +498,18 @@ registerReceiver(receiver, intentFilter);
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/07-广播接收者/" class="thumbnail">
+                            <a href="/blog/2017/06/01/07-BroadcastReceiver/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-广播接收者" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第七章 广播接收者" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/07-广播接收者/" class="title">07-广播接收者</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/07-BroadcastReceiver/" class="title">第七章 广播接收者</a></p>
                             <p class="item-date"><time datetime="2017-06-01T12:44:40.000Z" itemprop="datePublished">2017-06-01</time></p>
                         </div>
                     </li>
@@ -520,15 +520,15 @@ registerReceiver(receiver, intentFilter);
                             <a href="/blog/2017/06/01/06-ContentProvider/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-ContentProvider" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第六章 ContentProvider" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/06-ContentProvider/" class="title">06-ContentProvider</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/06-ContentProvider/" class="title">第六章 ContentProvider</a></p>
                             <p class="item-date"><time datetime="2017-06-01T12:43:55.000Z" itemprop="datePublished">2017-06-01</time></p>
                         </div>
                     </li>
@@ -539,15 +539,15 @@ registerReceiver(receiver, intentFilter);
                             <a href="/blog/2017/06/01/05-SQLite/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SQLite" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/05-SQLite/" class="title">05-SQLite</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/06/01/05-SQLite/" class="title">第五章 SQLite数据库</a></p>
                             <p class="item-date"><time datetime="2017-06-01T12:43:19.000Z" itemprop="datePublished">2017-06-01</time></p>
                         </div>
                     </li>
@@ -561,7 +561,7 @@ registerReceiver(receiver, intentFilter);
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -579,7 +579,7 @@ registerReceiver(receiver, intentFilter);
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -620,14 +620,20 @@ registerReceiver(receiver, intentFilter);
 </footer>
         
     
-    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt2dNhVw"></script>
-    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
-    <script type="text/javascript">
-    window.changyan.api.config({
-    appid: 'cyt2dNhVw',
-    conf: 'prod_8acceb4b82a359a3e4f200f748824a83'
-    });
-    </script>
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/';
+        
+        this.page.identifier = '07-BroadcastReceiver';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
 
 
