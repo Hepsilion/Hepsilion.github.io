@@ -245,7 +245,7 @@ var _hmt = _hmt || [];
 <p>(4) Looper</p>
 <p>Looper是每个线程中的MessageQueue的管家。调用Looper的loop()方法后，就会进入一个无限循环中。然后，每当发现MessageQueue中存在一条消息，就会将它取出，并传递到Handler的handlerMessage()方法中。</p>
 <p>此外，<strong>每个线程也只有一个Looper对象</strong>。在主线程中创建Handler对象时，系统已经创建了Looper对象，所以不用手动创建Looper对象，而在子线程中的Handler对象，需要调用Looper.loop()方法开启消息循环。</p>
-<center><br><img src="/blog/2017/06/01/09-网络编程/Pic9-1.jpg" width="60%">图 9-1<br></center>
+<center><br><img src="/blog/2017/06/01/09-网络编程/Pic9-1.JPG" width="60%">图 9-1<br></center>
 
 <p><strong>Handler消息机制处理流程</strong>如图9-1所示：</p>
 <ul>
@@ -280,7 +280,7 @@ var _hmt = _hmt || [];
 <p><strong>案例：Demo0901，网络图片浏览器，演示手机端使用HttpURLConnection和客户端进行通信的过程</strong></p>
 <h3 id="2-使用HttpClient访问网络"><a href="#2-使用HttpClient访问网络" class="headerlink" title="2. 使用HttpClient访问网络"></a>2. 使用HttpClient访问网络</h3><p>HttpClient是Apache的一个开源项目，从一开始就被引入到Android的API中。HttpClient可以完成和HttpURLConnection一样的效果，但使用起来更简单。简单来说，HttpClient是HttpURLConnection的增强版。</p>
 <p>图9-2是使用HttpClient访问网络时所需要用到的几个常用类的介绍。</p>
-<center><br><img src="/blog/2017/06/01/09-网络编程/Pic9-2.jpg" width="55%">图 9-2<br></center>
+<center><br><img src="/blog/2017/06/01/09-网络编程/Pic9-2.JPG" width="55%">图 9-2<br></center>
 
 <p>使用HttpClient访问网络与HttpURLConnection的过程大致相同，具体步骤如下：</p>
 <ul>
@@ -371,7 +371,7 @@ if(responseCode==200){                    //访问成功
 <p><strong>案例：Demo0904，新闻客户端，演示AsyncHttpClient和SmartImageView的综合使用，该案例实现获取服务器的XML文件并将其解析出来捆绑显示到ListView上</strong></p>
 <h2 id="四、多线程下载"><a href="#四、多线程下载" class="headerlink" title="四、多线程下载"></a>四、多线程下载</h2><p>下载一个文件时，通常使用多线程下载速度比使用单线程下载速度快。</p>
 <p>使用多线程下载资源时，先要获取到服务器资源文件的大小，然后在本地创建一个与服务器资源一样大的文件，接着在客户端开启若干个线程去下载服务器资源。<strong>需要注意的是，每个线程必须要下载对应的模块，然后将每个线程下载的模块按顺序组装成资源文件。</strong></p>
-<center><br><img src="/blog/2017/06/01/09-网络编程/Pic9-3.jpg" width="60%">图 9-3<br></center>
+<center><br><img src="/blog/2017/06/01/09-网络编程/Pic9-3.JPG" width="60%">图 9-3<br></center>
 
 <p>图9-3展示了多线程下载的原理：从图中可以看出，每个线程下载的区域就是总大小/线程个数，但不能保证每个文件都可以完全平均分配资源，因此最后一个线程需要下载到文件的末尾。</p>
 <p><strong>需要注意的是，使用多线程下载时，需要在请求头中设置Range字段获取到指定位置的数据，例如Range:byte=100-200</strong></p>
@@ -386,7 +386,7 @@ if(responseCode==200){                    //访问成功
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/09-网络编程/" data-id="cj3ihja6t001oa4wrmsbwy9sx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/09-网络编程/" data-id="cj3jj9xlq0030y4wrftephb14" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -544,7 +544,7 @@ if(responseCode==200){                    //访问成功
                             <a href="/blog/2017/06/01/09-网络编程/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第九章 网络编程" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第九章 网络编程" class="thumbnail-image"></span>
     
 </a>
 
@@ -563,7 +563,7 @@ if(responseCode==200){                    //访问成功
                             <a href="/blog/2017/06/01/08-Service/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第八章 服务" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第八章 服务" class="thumbnail-image"></span>
     
 </a>
 
@@ -582,7 +582,7 @@ if(responseCode==200){                    //访问成功
                             <a href="/blog/2017/06/01/07-BroadcastReceiver/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第七章 广播接收者" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第七章 广播接收者" class="thumbnail-image"></span>
     
 </a>
 
@@ -601,7 +601,7 @@ if(responseCode==200){                    //访问成功
                             <a href="/blog/2017/06/01/06-ContentProvider/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第六章 ContentProvider" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第六章 ContentProvider" class="thumbnail-image"></span>
     
 </a>
 
@@ -620,7 +620,7 @@ if(responseCode==200){                    //访问成功
                             <a href="/blog/2017/06/01/05-SQLite/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
     
 </a>
 

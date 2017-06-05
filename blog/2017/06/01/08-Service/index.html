@@ -226,7 +226,7 @@ var _hmt = _hmt || [];
             
             <p>Service</p>
 <a id="more"></a>
-<p>服务(Service)和Activity一样，是Android中的四大组件之一，不同的是服务没有界面，是一个长期运行在后台的组件，即使启动服务的应用程序被切换掉，服务仍可以在后台正常运行。因此服务经常被用来处理一些耗时的程序，例如进行网络传输或者播放音乐等。</p>
+<p>服务(Service)和Activity一样，是Android中的四大组件之一，不同的是服务没有界面，是一个长期运行在后台的组件，即使启动服务的应用程序被切换掉，服务仍可以在后台正常运行。因此服务经常被用来处理一些耗时的任务，例如进行网络传输或者播放音乐等。</p>
 <h2 id="一、服务的创建"><a href="#一、服务的创建" class="headerlink" title="一、服务的创建"></a>一、服务的创建</h2><p><strong>1. 创建服务</strong></p>
 <p>服务的创建方式与创建Activity类似，只需要继承Service类即可。</p>
 <p><strong>示例代码：</strong></p>
@@ -262,7 +262,7 @@ var _hmt = _hmt || [];
     &lt;/application&gt;
 &lt;/manifest&gt;
 </code></pre><h2 id="二、服务的生命周期"><a href="#二、服务的生命周期" class="headerlink" title="二、服务的生命周期"></a>二、服务的生命周期</h2><p>与其他组件不同，Service不能自己主动运行，需要调用相应的方法来启动。启动服务的方法有两种，分别是Context.startService()和Context.bindService()。如图8-1所示，使用不同的方法启动服务，服务的生命周期也会不同。</p>
-<center><br><img src="/blog/2017/06/01/08-Service/Pic8-1.jpg" width="45%">图 8-1<br></center>
+<center><br><img src="/blog/2017/06/01/08-Service/Pic8-1.JPG" width="45%">图 8-1<br></center>
 
 <p><strong>1. startService方式开启服务的生命周期</strong></p>
 <p>当其他组件调用startService()方法时，服务会先执行onCreate()方法，接着执行onStartCommand()方法，此时服务处于运行状态，直到自身调用stopSelf()方法或者其他组件调用stopService()方法时服务停止，最终被系统销毁。</p>
@@ -296,7 +296,7 @@ stopService(intent);  //关闭服务
 <li>当调用者与Service断开连接时，将回调该对象的public void onServiceDisconnected(ComponentName name)方法。</li>
 </ul>
 </li>
-<li>flags指定绑定时是否自动创建Service(如果Service还未创建)。该参数可指定为0即不自动创建，也可指定为_BIND_AUTO_CREATE_即自动创建。</li>
+<li>flags指定绑定时是否自动创建Service(如果Service还未创建)。该参数可指定为0即不自动创建，也可指定为BIND_AUTO_CREATE_即自动创建。</li>
 </ul>
 <p><strong>案例：Demo0802，bind方式启动服务</strong></p>
 <pre><code>// 1. 创建MyConn类，用于实现连接服务
@@ -318,15 +318,15 @@ MyConn myConn;
 Intent intent=new Intent(this, MyService.class);
 bindService(intent, myConn, BIND_AUTO_CREATE);
 
-// 3. 解绑服务
-unbindService(myConn);
+// 3. 利用myBinder调用服务中的方法
 
-// 4. 利用myBinder调用服务中的方法
+// 4. 解绑服务
+unbindService(myConn);
 </code></pre><h2 id="四、服务通信"><a href="#四、服务通信" class="headerlink" title="四、服务通信"></a>四、服务通信</h2><p>在Android系统中，服务的通信方式有两种：一种是本地服务通信，另一种是远程服务通信。本地服务通信是指应用程序内部的通信，而远程服务通信是指两个应用程序之间的通信。使用这两种方式进行通信时必须满足一个前提，就是服务必须以绑定方式开启。</p>
 <p><strong>1. 本地服务通信</strong></p>
 <p>在使用服务进行本地通信时，首先需要开发一个Service类，该类会提供一个IBinder onBind(Intent intent)方法，onBind()方法返回的IBinder对象会作为参数传递给ServiceConnection类中onServiceConnected(ComponentName name, IBinder service)方法，这样访问者就可以通过IBinder对象与Service进行通信。</p>
 <p>使用Ibinder对象进行本地服务通信：</p>
-<center><br><img src="/blog/2017/06/01/08-Service/Pic8-2.jpg" width="75%">图 8-2<br></center>
+<center><br><img src="/blog/2017/06/01/08-Service/Pic8-2.JPG" width="75%">图 8-2<br></center>
 
 <p>如图8-2所示，服务在进行通信时实际上使用的就是IBinder对象，在ServiceConnection类中得到IBinder对象，通过该对象就可以获取到服务中定义的方法，执行具体的操作。</p>
 <p><strong>案例：Demo0803，音乐播放器，演示如何使用服务进行通信</strong></p>
@@ -357,7 +357,7 @@ unbindService(myConn);
 </ul>
 <p><strong>2. 远程通信服务</strong></p>
 <p>在Android系统中，各个应用程序都运行在自己的进程中，进程之间一般无法直接进行通信，如果想要完成不同进程之间的通信，就需要使用远程服务通信。</p>
-<p>远程服务通信是通过AIDL(Android Interface Definition Language)实现的，它是一种接口定义语言，其语法格式简单，与Java中定义类似，但存在几点差异：</p>
+<p>远程服务通信是通过AIDL(Android Interface Definition Language)实现的，它是一种接口定义语言，其语法格式简单，与Java中接口定义类似，但存在几点差异：</p>
 <ul>
 <li>AIDL定义接口的源代码文件必须以.aidl结尾</li>
 <li>AIDL接口中用到的数据类型，除了基本数据类型、String、List、Map、CharSequence<br>之外，其他类型全部都需要导入包，即使它们在同一个包中。</li>
@@ -400,7 +400,7 @@ unbindService(myConn);
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj3ihja6n001fa4wrzz45ntqn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj3jj9xk10012y4wrigxi5ccj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -563,7 +563,7 @@ unbindService(myConn);
                             <a href="/blog/2017/06/01/09-网络编程/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第九章 网络编程" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第九章 网络编程" class="thumbnail-image"></span>
     
 </a>
 
@@ -582,7 +582,7 @@ unbindService(myConn);
                             <a href="/blog/2017/06/01/08-Service/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第八章 服务" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第八章 服务" class="thumbnail-image"></span>
     
 </a>
 
@@ -601,7 +601,7 @@ unbindService(myConn);
                             <a href="/blog/2017/06/01/07-BroadcastReceiver/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第七章 广播接收者" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第七章 广播接收者" class="thumbnail-image"></span>
     
 </a>
 
@@ -620,7 +620,7 @@ unbindService(myConn);
                             <a href="/blog/2017/06/01/06-ContentProvider/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第六章 ContentProvider" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第六章 ContentProvider" class="thumbnail-image"></span>
     
 </a>
 
@@ -639,7 +639,7 @@ unbindService(myConn);
                             <a href="/blog/2017/06/01/05-SQLite/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
+        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
     
 </a>
 
