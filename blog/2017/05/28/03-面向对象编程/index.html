@@ -675,20 +675,6 @@ D.    public class InnerClass{
 答案：ABCD
 </code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8073294/4332?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a></p>
 <h3 id="问：Static-Nested-Class和Inner-Class的不同？"><a href="#问：Static-Nested-Class和Inner-Class的不同？" class="headerlink" title="问：Static Nested Class和Inner Class的不同？"></a>问：Static Nested Class和Inner Class的不同？</h3><p>Static Nested Class是被声明为静态（static）的内部类，它可以不依赖于外部类实例被实例化，而通常的内部类需要在外部类实例化后才能实例化。 </p>
-<h3 id="问：类加载器"><a href="#问：类加载器" class="headerlink" title="问：类加载器"></a>问：类加载器</h3><p>Java中类的加载是由类加载器完成的，类加载器包括：引导类加载器(BootStrap ClassLoader)、扩展类加载器(Extension ClassLoader)、应用类加载器(Application ClassLoader)和用户自定义类加载器(java.lang.ClassLoader的子类)。</p>
-<ul>
-<li>Bootstrap ClassLoader：它负责加载放在<java_home\>\jre\lib/目录中的，或者-Xbootclasspath参数所指定路径中的Java核心库(如rt.jar)，是用原生代码来实现的；</java_home\></li>
-<li>Extension ClassLoader：它负责加载<java_home\>\jre\lib\ext目录中，或系统变量java.ext.dirs所指定路径中的所有类库；</java_home\></li>
-<li>Application ClassLoader：它负责加载Java应用的CLASSPATH所指定的类库。由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值，所以一般也称它为系统类加载器。它是应用最广泛的类加载器。开发者可以直接使用这个类加载器，如果应用程序中没有自定义自己的类加载器，一般情况下这个就是程序中默认的类加载器；</li>
-<li>Custom ClassLoader：应用程序根据自身需要自定义的ClassLoader，是java.lang.ClassLoader的子类，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader。</li>
-</ul>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8004321/36456?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
-<h3 id="问：JVM的类加载机制-还不怎么懂，暂时保留"><a href="#问：JVM的类加载机制-还不怎么懂，暂时保留" class="headerlink" title="问：JVM的类加载机制 (还不怎么懂，暂时保留)"></a>问：JVM的类加载机制 (还不怎么懂，暂时保留)</h3><p><a href="http://www.importnew.com/18548.html" title="Title" target="_blank" rel="external">推荐阅读</a></p>
-<p>Java类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载（Loading）、验证（Verification）、准备(Preparation)、解析(Resolution)、初始化(Initialization)、使用(Using)和卸载(Unloading)7个阶段。其中准备、验证、解析3个部分统称为连接（Linking）。</p>
-<center><br><img src="/blog/2017/05/28/03-面向对象编程/ClassLoad.jpg" width="55%">图 1<br></center>
-
-<p>加载、验证、准备、初始化和卸载这5个阶段的顺序是确定的，类的加载过程必须按照这种顺序按部就班地开始，而解析阶段则不一定：它在某些情况下可以在初始化阶段之后再开始，这是为了支持Java语言的运行时绑定（也称为动态绑定或晚期绑定）</p>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/7977669/26108?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
 <h3 id="问：Java类加载时的初始化顺序"><a href="#问：Java类加载时的初始化顺序" class="headerlink" title="问：Java类加载时的初始化顺序"></a>问：Java类加载时的初始化顺序</h3><p>(1) 初始化父类中的静态成员变量和静态代码块(按照在程序中出现的顺序初始化)</p>
 <p>(2) 初始化子类中的静态成员变量和静态代码块(按照在程序中出现的顺序初始化)</p>
 <p>(3) 初始化父类中的普通成员变量和构造代码块(按照在程序中出现的顺序初始化)，然后再执行父类中的构造方法</p>
@@ -825,7 +811,7 @@ Java构造方法可以有任何访问的修饰：public，protected，private或
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/03-面向对象编程/" data-id="cj3jj9xjn000vy4wrxgm6flbw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/03-面向对象编程/" data-id="cj3lla5pi000abkwrxbd8woec" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
