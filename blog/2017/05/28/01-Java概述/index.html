@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                38
+                40
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -226,6 +226,7 @@ var _hmt = _hmt || [];
             
             <p>Java概述</p>
 <a id="more"></a>
+<p>推荐阅读：<a href="http://www.codeceo.com/article/133-java-interview-5-years.html" target="_blank" rel="external">近5年133个Java面试问题列表</a></p>
 <h3 id="问：什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？"><a href="#问：什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？" class="headerlink" title="问：什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？"></a>问：什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？</h3><p>Java源文件被javac编译成能被Java虚拟机执行的.class字节码文件，Java虚拟机是一个可以执行Java字节码的虚拟机进程，它拥有自己完善的硬件架构，如堆栈、寄存器，还具有相应的指令系统。</p>
 <p>Java虚拟机对开发者屏蔽了与具体操作系统平台相关的信息，使得Java源文件只需要被编译成可以在JVM上运行的字节码文件，就可以由<strong>相应平台的虚拟机</strong>在具体平台上解释运行，从而实现一次编译，处处执行。这样，Java被设计成允许应用程序可以运行在任意的平台上，而不需要程序员为每一个平台单独重写或者是重新编译。</p>
 <h3 id="问：动态语言和静态语言"><a href="#问：动态语言和静态语言" class="headerlink" title="问：动态语言和静态语言"></a>问：动态语言和静态语言</h3><p>动态语言：运行时执行类型检查，如PHP、Ruby、Python等。</p>
@@ -329,6 +330,7 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
 <p>(2) 各种连接。如数据库连接，网络连接，IO连接，不再使用时如果连接不释放容易造成内存泄露。</p>
 <p>(3) 监听器。释放对象时往往没有相应的删除监听器，可能会导致内存泄露。</p>
 <p>内存溢出（OOM）是指程序在申请内存时没有足够的内存供使用，进而导致程序崩溃。内存泄露（Memory Leak）最终会导致内存溢出。</p>
+<p>推荐阅读：<a href="http://www.linuxeden.com/html/develop/20131223/146757.html?comefrom=http://blogread.cn/news/" target="_blank" rel="external">动手探究Java内存泄露问题</a></p>
 
         
         </div>
@@ -339,7 +341,7 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj3lla5om0002bkwr9fzi7bw3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj587xtz6000828wrvth24or8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -416,6 +418,15 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
         
 <nav id="article-nav">
     
+        <a href="/blog/2017/05/27/如何使用Markdown/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    如何使用Markdown
+                
+            </div>
+        </a>
+    
     
         <a href="/blog/2017/05/28/02-基础语法/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -486,6 +497,25 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
         <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
+                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -563,25 +593,6 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/05-SQLite/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/05-SQLite/" class="title">第五章 SQLite数据库</a></p>
-                            <p class="item-date"><time datetime="2017-06-01T12:43:19.000Z" itemprop="datePublished">2017-06-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -600,7 +611,7 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">31</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li></ul>
         </div>
     </div>
 

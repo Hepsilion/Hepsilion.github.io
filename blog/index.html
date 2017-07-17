@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                38
+                40
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -182,6 +182,128 @@ var _hmt = _hmt || [];
 
             
             <section id="main">
+    <article id="post-MapReduce" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/06/06/MapReduce/">MapReduce</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/06/06/MapReduce/">
+            <time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/06/06/MapReduce/" data-id="cj587xu41002o28wrs5veuom4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/06/06/MapReduce/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/06/06/MapReduce/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-09-网络编程" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -237,7 +359,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/09-网络编程/" data-id="cj3lla5r4001wbkwr1t6m2sqe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/09-网络编程/" data-id="cj587xu2m002528wrywhzypp1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -370,7 +492,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj3lla5qs001kbkwrzqb7y5x9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj587xu1v001t28wrawcb7p4m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -503,7 +625,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/" data-id="cj3lla5qm001bbkwrd0iacdg4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/" data-id="cj587xu0x001h28wrxtgq0fi6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -636,7 +758,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/06-ContentProvider/" data-id="cj3lla5qh0014bkwredka59r8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/06-ContentProvider/" data-id="cj587xu17001k28wry6yrlkq5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -756,7 +878,11 @@ var _hmt = _hmt || [];
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>SQLite数据库</p></p>
+            <p><ul>
+<li>SQLite数据库的基本操作</li>
+<li>使用sqlite3工具操作数据库</li>
+<li>使用ListView控件展示数据</li>
+</ul></p>
             <p class="article-more-link">
                 <a href="/blog/2017/06/01/05-SQLite/#more">查看更多</a>
             </p>
@@ -769,7 +895,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/05-SQLite/" data-id="cj3lla5qe0010bkwrxyuswqwj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/05-SQLite/" data-id="cj587xtzj000f28wrptljwqhn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -889,7 +1015,12 @@ var _hmt = _hmt || [];
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>数据存储</p></p>
+            <p><ul>
+<li>5种数据存储方式的特点</li>
+<li>使用文件存储数据</li>
+<li>使用SharedPreferences存储数据</li>
+<li>XML文件的序列化与解析</li>
+</ul></p>
             <p class="article-more-link">
                 <a href="/blog/2017/06/01/04-数据存储/#more">查看更多</a>
             </p>
@@ -902,7 +1033,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/04-数据存储/" data-id="cj3lla5q5000tbkwr5z4qe3fl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/04-数据存储/" data-id="cj587xtzy000r28wrhq76szes" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1022,7 +1153,12 @@ var _hmt = _hmt || [];
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>Activity</p></p>
+            <p><ul>
+<li>Activity的生命周期</li>
+<li>Activity的4种启动模式</li>
+<li>隐式意图和显式意图的使用</li>
+<li>使用Intent传递数据</li>
+</ul></p>
             <p class="article-more-link">
                 <a href="/blog/2017/06/01/03-Activity/#more">查看更多</a>
             </p>
@@ -1035,7 +1171,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/03-Activity/" data-id="cj3lla5pv000lbkwr0wi9mur8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/03-Activity/" data-id="cj587xtzv000n28wrgsiv5k1y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1168,7 +1304,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Docker-Hadoop-Helloworld/" data-id="cj3lla5ri002ibkwrmktphgm7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Docker-Hadoop-Helloworld/" data-id="cj587xu4j002v28wrvvsfimnf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1301,7 +1437,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/C-plus-plus/" data-id="cj3lla5rf002dbkwru6qltpl7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/C-plus-plus/" data-id="cj587xu3x002j28wrnme284hd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1434,7 +1570,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Probability-Theory/" data-id="cj3lla5rj002lbkwr64gfk1z2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Probability-Theory/" data-id="cj587xu43002r28wrcbauu08d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1512,7 +1648,7 @@ var _hmt = _hmt || [];
 
 
 
-    <article id="post-信息安全总结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-信息安全" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -1520,7 +1656,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/05/28/信息安全总结/">信息安全总结</a>
+            <a class="article-title" href="/blog/2017/05/28/信息安全/">信息安全总结</a>
         </h1>
     
 
@@ -1529,7 +1665,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/05/28/信息安全总结/">
+        <a href="/blog/2017/05/28/信息安全/">
             <time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
@@ -1556,7 +1692,7 @@ var _hmt = _hmt || [];
         
             <p><p>信息安全</p></p>
             <p class="article-more-link">
-                <a href="/blog/2017/05/28/信息安全总结/#more">查看更多</a>
+                <a href="/blog/2017/05/28/信息安全/#more">查看更多</a>
             </p>
         
         </div>
@@ -1567,7 +1703,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/信息安全总结/" data-id="cj3lla5rp002ybkwrtbg3c7hg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/信息安全/" data-id="cj587xu4m003128wrcgqrc7jn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1635,7 +1771,7 @@ var _hmt = _hmt || [];
 
             
     
-        <a href="https://hepsilion.github.io/2017/05/28/信息安全总结/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/信息安全总结/">评论</a>
+        <a href="https://hepsilion.github.io/2017/05/28/信息安全/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/信息安全/">评论</a>
     
 
         </footer>
@@ -1645,7 +1781,7 @@ var _hmt = _hmt || [];
 
 
 
-    <article id="post-软件测试总结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-软件测试" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -1653,7 +1789,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/05/28/软件测试总结/">软件测试总结</a>
+            <a class="article-title" href="/blog/2017/05/28/软件测试/">软件测试总结</a>
         </h1>
     
 
@@ -1662,7 +1798,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/05/28/软件测试总结/">
+        <a href="/blog/2017/05/28/软件测试/">
             <time datetime="2017-05-28T11:00:19.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
@@ -1689,7 +1825,7 @@ var _hmt = _hmt || [];
         
             <p><p>软件测试</p></p>
             <p class="article-more-link">
-                <a href="/blog/2017/05/28/软件测试总结/#more">查看更多</a>
+                <a href="/blog/2017/05/28/软件测试/#more">查看更多</a>
             </p>
         
         </div>
@@ -1700,7 +1836,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/软件测试总结/" data-id="cj3lla5ry003cbkwrze6epq60" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/软件测试/" data-id="cj587xu4y003j28wrq0fxze7c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1768,7 +1904,7 @@ var _hmt = _hmt || [];
 
             
     
-        <a href="https://hepsilion.github.io/2017/05/28/软件测试总结/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/软件测试总结/">评论</a>
+        <a href="https://hepsilion.github.io/2017/05/28/软件测试/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/软件测试/">评论</a>
     
 
         </footer>
@@ -1833,7 +1969,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Concurrency/" data-id="cj3lla5ra0027bkwrvgyll162" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Concurrency/" data-id="cj587xu2z002b28wrfw0iwx2d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1966,7 +2102,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Design-Pattern/" data-id="cj3lla5rc002abkwrhtzxyjyd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Design-Pattern/" data-id="cj587xu3w002i28wrjmkqc6j2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2044,7 +2180,7 @@ var _hmt = _hmt || [];
 
 
 
-    <article id="post-软件工程总结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-软件工程" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -2052,7 +2188,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/05/28/软件工程总结/">软件工程总结</a>
+            <a class="article-title" href="/blog/2017/05/28/软件工程/">软件工程总结</a>
         </h1>
     
 
@@ -2061,7 +2197,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/05/28/软件工程总结/">
+        <a href="/blog/2017/05/28/软件工程/">
             <time datetime="2017-05-28T10:57:43.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
@@ -2088,7 +2224,7 @@ var _hmt = _hmt || [];
         
             <p><p>软件工程</p></p>
             <p class="article-more-link">
-                <a href="/blog/2017/05/28/软件工程总结/#more">查看更多</a>
+                <a href="/blog/2017/05/28/软件工程/#more">查看更多</a>
             </p>
         
         </div>
@@ -2099,7 +2235,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/软件工程总结/" data-id="cj3lla5rx003abkwrk11a42qf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/软件工程/" data-id="cj587xu70004r28wrlbhehznr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2167,7 +2303,7 @@ var _hmt = _hmt || [];
 
             
     
-        <a href="https://hepsilion.github.io/2017/05/28/软件工程总结/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/软件工程总结/">评论</a>
+        <a href="https://hepsilion.github.io/2017/05/28/软件工程/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/软件工程/">评论</a>
     
 
         </footer>
@@ -2177,7 +2313,7 @@ var _hmt = _hmt || [];
 
 
 
-    <article id="post-Linux总结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linux" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -2185,7 +2321,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/05/28/Linux总结/">Linux总结</a>
+            <a class="article-title" href="/blog/2017/05/28/Linux/">Linux总结</a>
         </h1>
     
 
@@ -2194,7 +2330,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/05/28/Linux总结/">
+        <a href="/blog/2017/05/28/Linux/">
             <time datetime="2017-05-28T10:56:37.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
@@ -2221,7 +2357,7 @@ var _hmt = _hmt || [];
         
             <p><p>Linux</p></p>
             <p class="article-more-link">
-                <a href="/blog/2017/05/28/Linux总结/#more">查看更多</a>
+                <a href="/blog/2017/05/28/Linux/#more">查看更多</a>
             </p>
         
         </div>
@@ -2232,7 +2368,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Linux总结/" data-id="cj3lla5rm002rbkwrfwtr7css" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Linux/" data-id="cj587xu4w003g28wrd9qc5834" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2300,7 +2436,7 @@ var _hmt = _hmt || [];
 
             
     
-        <a href="https://hepsilion.github.io/2017/05/28/Linux总结/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/Linux总结/">评论</a>
+        <a href="https://hepsilion.github.io/2017/05/28/Linux/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/Linux/">评论</a>
     
 
         </footer>
@@ -2365,7 +2501,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Advanced-Algorithms/" data-id="cj3lla5r7001zbkwrkbcm5f1s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Advanced-Algorithms/" data-id="cj587xu3n002e28wr9rxgwxge" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2443,7 +2579,7 @@ var _hmt = _hmt || [];
 
 
 
-    <article id="post-计算机组成原理总结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-计算机组成原理" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -2451,7 +2587,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/05/28/计算机组成原理总结/">计算机组成原理总结</a>
+            <a class="article-title" href="/blog/2017/05/28/计算机组成原理/">计算机组成原理总结</a>
         </h1>
     
 
@@ -2460,7 +2596,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/05/28/计算机组成原理总结/">
+        <a href="/blog/2017/05/28/计算机组成原理/">
             <time datetime="2017-05-28T10:54:33.000Z" itemprop="datePublished">2017-05-28</time>
         </a>
     </div>
@@ -2487,7 +2623,7 @@ var _hmt = _hmt || [];
         
             <p><p>计算机组成原理</p></p>
             <p class="article-more-link">
-                <a href="/blog/2017/05/28/计算机组成原理总结/#more">查看更多</a>
+                <a href="/blog/2017/05/28/计算机组成原理/#more">查看更多</a>
             </p>
         
         </div>
@@ -2498,7 +2634,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/计算机组成原理总结/" data-id="cj3lla5ru0037bkwr3t6ahc7r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/计算机组成原理/" data-id="cj587xu4q003928wrh18frgnm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2566,7 +2702,7 @@ var _hmt = _hmt || [];
 
             
     
-        <a href="https://hepsilion.github.io/2017/05/28/计算机组成原理总结/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/计算机组成原理总结/">评论</a>
+        <a href="https://hepsilion.github.io/2017/05/28/计算机组成原理/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/计算机组成原理/">评论</a>
     
 
         </footer>
@@ -2631,7 +2767,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/操作系统/" data-id="cj3lla5rk002pbkwr88xl3r77" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/操作系统/" data-id="cj587xu4n003328wrz2mi6p6t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2764,7 +2900,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/04-JSP/" data-id="cj3lla5pn000dbkwrfjti0891" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/04-JSP/" data-id="cj587xtz9000928wrq463wzyk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2897,7 +3033,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/03-Servlet/" data-id="cj3lla5pd0008bkwr3wfohb21" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/03-Servlet/" data-id="cj587xtyh000728wrqt7w01nr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3019,7 +3155,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/02-HTTP协议/" data-id="cj3lla5p80006bkwrb173fjrh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/02-HTTP协议/" data-id="cj587xtxy000328wraam0qu8d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3152,7 +3288,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/01-XML/" data-id="cj3lla5oe0000bkwrpgd96zz3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/01-XML/" data-id="cj587xtxk000128wrc6h9dpeu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3285,7 +3421,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/数据库系统概念/" data-id="cj3lla5ro002wbkwr52bzl6jk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/数据库系统概念/" data-id="cj587xu4r003b28wr6g8bxoyg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3418,7 +3554,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/计算机网络/" data-id="cj3lla5rq0033bkwroq6snk0h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/计算机网络/" data-id="cj587xu4u003e28wrzx0bh7u6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3551,7 +3687,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/数据结构/" data-id="cj3lla5rs0035bkwr5j4bhgsi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/数据结构/" data-id="cj587xu4p003728wrbc8wpoo2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3684,7 +3820,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/12-JDBC/" data-id="cj3lla5r80022bkwrzxoktgb3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/12-JDBC/" data-id="cj587xu3y002k28wrlxfz4qdm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3817,7 +3953,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/11-反射/" data-id="cj3lla5qv001nbkwrrf4jz3a6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/11-反射/" data-id="cj587xu2f002228wrq5qyxy6y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3950,7 +4086,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/10-网络编程/" data-id="cj3lla5qx001qbkwr2dkzif3c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/10-网络编程/" data-id="cj587xu28001z28wr6nrcgau8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4083,7 +4219,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/09-多线程/" data-id="cj3lla5qy001tbkwr7u1b61b4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/09-多线程/" data-id="cj587xu2s002828wrkbl0iwrt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4216,7 +4352,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/08-流/" data-id="cj3lla5qp001ebkwrfvy47sgo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/08-流/" data-id="cj587xu22001w28wrmcqtm4qr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4349,7 +4485,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/07-容器/" data-id="cj3lla5qr001hbkwr684e7e1f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/07-容器/" data-id="cj587xu1c001n28wr90824sw3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4482,7 +4618,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/06-常用类/" data-id="cj3lla5qj0018bkwr42xnb4op" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/06-常用类/" data-id="cj587xu1i001q28wr8ml71kiu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4615,7 +4751,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/05-数组/" data-id="cj3lla5pz000obkwrsm5x8def" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/05-数组/" data-id="cj587xu0t001d28wrnuxyhci7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4748,7 +4884,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/04-异常处理/" data-id="cj3lla5q9000wbkwry38a3p7r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/04-异常处理/" data-id="cj587xu0v001f28wr750y353y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4881,7 +5017,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/03-面向对象编程/" data-id="cj3lla5pi000abkwrxbd8woec" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/03-面向对象编程/" data-id="cj587xtzs000k28wrsvi8pnf9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5014,7 +5150,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/02-基础语法/" data-id="cj3lla5pq000gbkwryoy31olc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/02-基础语法/" data-id="cj587xtzg000d28wrno29znb9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5147,7 +5283,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj3lla5om0002bkwr9fzi7bw3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj587xtz6000828wrvth24or8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5224,6 +5360,128 @@ var _hmt = _hmt || [];
 </article>
 
 
+
+    <article id="post-如何使用Markdown" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/05/27/如何使用Markdown/">如何使用Markdown</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/05/27/如何使用Markdown/">
+            <time datetime="2017-05-27T14:07:46.000Z" itemprop="datePublished">2017-05-27</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/05/27/如何使用Markdown/" data-id="cj587xu4k002x28wrkp6tzy9l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/05/27/如何使用Markdown/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/27/如何使用Markdown/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
 </section>
             
                 <aside id="sidebar">
@@ -5270,6 +5528,25 @@ var _hmt = _hmt || [];
         <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
+                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -5347,25 +5624,6 @@ var _hmt = _hmt || [];
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/05-SQLite/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第五章 SQLite数据库" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/05-SQLite/" class="title">第五章 SQLite数据库</a></p>
-                            <p class="item-date"><time datetime="2017-06-01T12:43:19.000Z" itemprop="datePublished">2017-06-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -5384,7 +5642,7 @@ var _hmt = _hmt || [];
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">31</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li></ul>
         </div>
     </div>
 
