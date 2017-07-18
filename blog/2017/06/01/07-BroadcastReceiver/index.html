@@ -224,7 +224,12 @@ var _hmt = _hmt || [];
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>广播接收者</p>
+            <ul>
+<li>创建广播接收者</li>
+<li>自定义广播</li>
+<li>有序广播和无序广播</li>
+<li>常用广播接收者(如开机启动、短信接收)的使用</li>
+</ul>
 <a id="more"></a>
 <p>在Android系统中，广播(Broadcast)是一种在应用程序之间传递消息的机制，广播接收者(BroadcaseReceiver)是用来接收、过滤并响应广播的一类组件。通过广播接收者可以监听系统中的广播消息，在不同组件之间进行通信。</p>
 <h2 id="一、广播接收者入门"><a href="#一、广播接收者入门" class="headerlink" title="一、广播接收者入门"></a>一、广播接收者入门</h2><p>在Android系统中内置了很多系统级别的广播，例如，手机开机完成后会发送一条广播，电池电量不足时也会发送一条广播等。为了监听这些广播事件，Android提供了一个BroadcastReceiver组件，该组件可以监听来自系统或者应用程序的广播。</p>
@@ -271,9 +276,19 @@ registerReceiver(receiver, intentFilter);
 <p>注意：在Android4.0一下的系统中，当进程不存在时，只要有响应广播发出，进程就会自动创建并接收广播进行处理。Google工程师认为这样不安全，为了保护用户隐私，在Android4.0以上系统中，当在任务管理器界面强行停止进程后，再有广播发出也不会打开进程进行接收了。</p>
 <h2 id="二、自定义广播"><a href="#二、自定义广播" class="headerlink" title="二、自定义广播"></a>二、自定义广播</h2><p>Android系统中自带了很多广播，如果需要监听某个广播，只需要创建对应的广播接收者即可。在实际开发中，当这些系统级广播事件不能满足实际需求时，还可以自定义广播。需要注意的是，自定义广播需要由对应的广播接收者去接收，否则这个广播是无意义的。</p>
 <p><strong>案例：Demo0702，电台与收音机</strong></p>
-<p>创建广播：创建一个Intent对象，然后通过Intent.setAction()语句指定广播事件，最后通过sendBroadcast(intent)发送广<br>播。</p>
-<p>接收广播：和接收系统广播事件一样，创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。<strong>需要注意的是，自定义的广播事件与广播接收者在清单文件中注册的事件要一致，否则无法接收广播</strong></p>
-<h2 id="三、广播的类型"><a href="#三、广播的类型" class="headerlink" title="三、广播的类型"></a>三、广播的类型</h2><p>在Android系统中，根据广播被接收顺序的不同，可以将其分为有序广播和无序广播。</p>
+<p>创建广播：创建一个Intent对象，然后通过Intent.setAction()语句指定广播事件，最后通过sendBroadcast(intent)发送广播。</p>
+<pre><code>Intent intent = new Intent();
+// 定义广播的事件类型
+intent.setAction(&quot;www.baidu.com&quot;);
+// 发送广播
+sendBroadcast(intent);
+</code></pre><p>接收广播：和接收系统广播事件一样，创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。<strong>需要注意的是，自定义的广播事件与广播接收者在清单文件中注册的事件要一致，否则无法接收广播</strong></p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0702.MyBroadcastReceiver&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><h2 id="三、广播的类型"><a href="#三、广播的类型" class="headerlink" title="三、广播的类型"></a>三、广播的类型</h2><p>在Android系统中，根据广播被接收顺序的不同，可以将其分为有序广播和无序广播。</p>
 <p><strong>1. 无序广播</strong></p>
 <p>无序广播是一种完全异步被接收的广播，在广播发出去之后，所有监听了这个广播事件的广播接收者都会在同一时刻接收到这个广播，它们之间没有任何先后顺序可言，这种广播的效率会比较高，但同时意味着它是无法被截断的。</p>
 <center><br><img src="/blog/2017/06/01/07-BroadcastReceiver/Pic7-1.JPG" width="35%">图7-1<br></center>
@@ -283,12 +298,68 @@ registerReceiver(receiver, intentFilter);
 <p>有序广播是一种同步接收的广播，在广播发出之后，同一时刻只会有一个广播接收者能够接收到这条消息，当这个广播接收者中的逻辑执行完后，广播才会继续传递。所以，此时的广播接收者是有先后顺序的，并且可以被拦截。</p>
 <center><br><img src="/blog/2017/06/01/07-BroadcastReceiver/Pic7-2.JPG" width="60%">图7-2<br></center>
 
-<p>有序广播的工作流程如图7-2所示，当有序广播发送一条消息后，高优先级的广播接收者先接收到广播，低优先级的广播接收者后接收到广播。如果高优先级的广播接收者将广播终止，则后面的广播接收者无法接收到广播。想要拦截一条广播不往下发送，可以使用abortBroadcast()方法。</p>
-<p>优先级是在清单文件中注册广播接收者时定义的android:priority=””参数，优先级的范围是-1000~1000之间。如果两个广播接收者的优先级相同，则先注册的组件优先接收到广播。如果两个应用程序监听了同一个广播事件并设置了优先级，则优先级高的应用优先接收到广播。</p>
-<p><strong>案例：Demo0704，拦截有序广播</strong></p>
-<h2 id="四、常用的广播接收者"><a href="#四、常用的广播接收者" class="headerlink" title="四、常用的广播接收者"></a>四、常用的广播接收者</h2><p><strong>案例：Demo0704，杀毒软件，监听短信接收的广播事件</strong>（好像没起作用）</p>
+<p>有序广播的工作流程如图7-2所示，当有序广播发送一条消息后，高优先级的广播接收者先接收到广播，低优先级的广播接收者后接收到广播。</p>
+<pre><code>Intent intent = new Intent();
+// 定义广播的事件类型
+intent.setAction(&quot;www.baidu.com&quot;);
+// 发送有序广播
+//第一个参数是指定的意图，设置要发送的广播事件；第二个参数指定接收者的权限，如果不想让所有的接收到看到，可以显示地指定接收者的权限，目前不关心，可以将其设置为null
+sendOrderedBroadcast(intent, null);
+</code></pre><p>优先级是在清单文件中注册广播接收者时定义的android:priority=””参数，优先级的范围是-1000~1000之间。如果两个广播接收者的优先级相同，则先注册的组件优先接收到广播。如果两个应用程序监听了同一个广播事件并设置了优先级，则优先级高的应用优先接收到广播。</p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver02&quot; &gt;
+    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver01&quot; &gt;
+    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver03&quot; &gt;
+    &lt;intent-filter android:priority=&quot;600&quot; &gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>如果高优先级的广播接收者将广播终止，则后面的广播接收者无法接收到广播。想要拦截一条广播不往下发送，可以使用abortBroadcast()方法。</p>
+<pre><code>public class MyBroadcastReceiver02 extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;自定义的广播接收者02,接收到了自定义的广播事件&quot;);
+        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;自定义的广播接收者02，接收到了广播事件&quot;);
+        abortBroadcast(); // 拦截有序广播，这句代码执行完后，广播事件将会被终止。
+        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;我是广播接收者02，广播被我终结了&quot;);
+    }
+}
+</code></pre><p>在实际开发中，还可能遇到这样的情况，当发出了一个有序广播，然后定义多个广播接收者接收这条广播。这些广播接收者的优先级有高有低，需要其中一个广播接收者无论如何都要接收到广播事件，哪怕它的优先级是最低的或者广播被优先级高的接收者强行终止。这时，就可以用一下sendOrderedBroadcast的重载方法，在第三个参数指定要接收的广播接收者。</p>
+<pre><code>MyBroadcastReceiver03 receiver03 = new MyBroadcastReceiver03();
+sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
+</code></pre><p><strong>案例：Demo0704，拦截有序广播</strong></p>
+<h2 id="四、常用的广播接收者"><a href="#四、常用的广播接收者" class="headerlink" title="四、常用的广播接收者"></a>四、常用的广播接收者</h2><p><strong>案例：Demo0704，短信拦截器，监听短信接收的广播事件</strong>（拦截没起作用）</p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0704.MessageReceiver&quot; &gt;
+    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
+        &lt;action android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>设置action为android.provider.Telephony.SMS_RECEIVED，接收短信的广播事件</p>
 <p>在Windows系统中，有些软件一开机就自动启动，同样在Android系统中也可以实现这种功能，例如杀毒软件程序，每次手机开机便会自动启动，这种功能就是通过广播接收者监听开机启动的广播事件实现的。</p>
 <p><strong>案例：Demo0705，杀毒软件，监听开机启动的广播事件</strong></p>
+<pre><code>public class BootReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Intent i = new Intent(context, MainActivity.class);
+        // 由于Activity都是运行在任务栈中的，当开机启动时，任务栈还未创建成功，所以需要设置flag，显示地指定Activity在新的任务栈中运行
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+}
+
+&lt;receiver android:name=&quot;learning.android.it.org.demo0705.BootReceiver&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>设置action为android.intent.action.BOOT_COMPLETED，接收开机启动的广播事件</p>
 <p><strong>需要注意的是，在Android3.0以后出现了一个安全机制，如果用户没有启动过这个程序，那么就算该程序注册了开机启动的广播接收者也无法接收到开机启动的广播事件。</strong></p>
 
         
@@ -300,7 +371,7 @@ registerReceiver(receiver, intentFilter);
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/" data-id="cj587xu0x001h28wrxtgq0fi6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/" data-id="cj59o3wsz0011dgwr3q90y8ti" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

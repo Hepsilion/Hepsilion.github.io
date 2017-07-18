@@ -224,7 +224,12 @@ var _hmt = _hmt || [];
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>Service</p>
+            <ul>
+<li>服务的生命周期</li>
+<li>服务的两种启动方式</li>
+<li>本地服务通信</li>
+<li>远程服务通信(调用其它应用的服务)</li>
+</ul>
 <a id="more"></a>
 <p>服务(Service)和Activity一样，是Android中的四大组件之一，不同的是服务没有界面，是一个长期运行在后台的组件，即使启动服务的应用程序被切换掉，服务仍可以在后台正常运行。因此服务经常被用来处理一些耗时的任务，例如进行网络传输或者播放音乐等。</p>
 <h2 id="一、服务的创建"><a href="#一、服务的创建" class="headerlink" title="一、服务的创建"></a>一、服务的创建</h2><p><strong>1. 创建服务</strong></p>
@@ -280,26 +285,19 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="三、服务的启动方式"><a href="#三、服务的启动方式" class="headerlink" title="三、服务的启动方式"></a>三、服务的启动方式</h2><p>前面讲过，启动服务有两种方式，分别是通过startService()方法启动服务和bindService()方法启动服务。</p>
 <p><strong>1. start方式启动服务</strong></p>
-<p><strong>案例：Demo0801，start方式启动服务</strong></p>
+<p>使用Context的startService()和stopService()方法来启动、关闭服务，Intent对象用于指定要启动或关闭的服务。</p>
 <pre><code>Intent intent=new Intent(this, MyService.class);
 startService(intent); //开启服务
 stopService(intent);  //关闭服务
-</code></pre><p><strong>需要注意的是，如果不调用stopService()或stopSelf()方法，这种方式开启的服务会长期运行在后台，除非用户强制停止服务。</strong></p>
+</code></pre><p>onCreate()方法只有在服务创建时执行，而onStartCommand()方法则是在每次启动服务时调用。</p>
+<p><strong>需要注意的是，如果不调用stopService()或stopSelf()方法，这种方式开启的服务会长期运行在后台，除非用户强制停止服务。</strong></p>
+<p><strong>案例：Demo0801，start方式启动服务</strong></p>
 <p><strong>2. bind方式启动服务</strong></p>
 <p>当程序使用startService()和stopService()启动、关闭服务时，服务与调用者之间基本不存在太多的关联，也无法与访问者进行通信、数据交互等。</p>
 <p>如果服务需要与调用者进行方法调用和数据交互时，应该使用bindService()和unbindService()方法启动、关闭服务。</p>
-<p>bindService()方法的完整方法名为public boolean bindService(Intent service, ServiceConnection conn, int flags)，该方法的参数解释如下：</p>
-<ul>
-<li>Intent对象用于指定要启动的Service</li>
-<li>ServiceConnection对象用于监听调用者与Service之间的连接状态。<ul>
-<li>当调用者与Service连接成功时，将回调该对象的public void onServiceConnected(ComponentName name, IBinder service)方法；</li>
-<li>当调用者与Service断开连接时，将回调该对象的public void onServiceDisconnected(ComponentName name)方法。</li>
-</ul>
-</li>
-<li>flags指定绑定时是否自动创建Service(如果Service还未创建)。该参数可指定为0即不自动创建，也可指定为BIND_AUTO_CREATE_即自动创建。</li>
-</ul>
-<p><strong>案例：Demo0802，bind方式启动服务</strong></p>
+<p>使用bindService()方式启动服务的标准步骤：</p>
 <pre><code>// 1. 创建MyConn类，用于实现连接服务
+private MyService.MyBinder myBinder;
 private class MyConn implements ServiceConnection{
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
@@ -319,10 +317,54 @@ Intent intent=new Intent(this, MyService.class);
 bindService(intent, myConn, BIND_AUTO_CREATE);
 
 // 3. 利用myBinder调用服务中的方法
+myBinder.callMethodInService();
 
 // 4. 解绑服务
 unbindService(myConn);
-</code></pre><h2 id="四、服务通信"><a href="#四、服务通信" class="headerlink" title="四、服务通信"></a>四、服务通信</h2><p>在Android系统中，服务的通信方式有两种：一种是本地服务通信，另一种是远程服务通信。本地服务通信是指应用程序内部的通信，而远程服务通信是指两个应用程序之间的通信。使用这两种方式进行通信时必须满足一个前提，就是服务必须以绑定方式开启。</p>
+</code></pre><p>bindService()方法的完整方法名为public boolean bindService(Intent service, ServiceConnection conn, int flags)，该方法的参数解释如下：</p>
+<ul>
+<li>Intent对象用于指定要启动的Service</li>
+<li>ServiceConnection对象用于监听调用者与Service之间的连接状态。<ul>
+<li>当调用者与Service连接成功时，将回调该对象的public void onServiceConnected(ComponentName name, IBinder service)方法；</li>
+<li>当调用者与Service断开连接时，将回调该对象的public void onServiceDisconnected(ComponentName name)方法。</li>
+</ul>
+</li>
+<li>flags指定绑定时是否自动创建Service(如果Service还未创建)。该参数可指定为0即不自动创建，也可指定为BIND_AUTO_CREATE_即自动创建。</li>
+</ul>
+<p>注意：ServiceConnection中的onServiceConnected()方法有一个参数IBinder service，这个参数是在服务的onBind()方法中返回的。</p>
+<pre><code>public class MyService extends Service{
+    // 创建服务的代理，调用服务中的方法
+    class MyBinder extends Binder{
+        public void callMethodInService(){
+            methodInService();
+        }
+    }
+
+    public void methodInService(){
+        Log.i(&quot;BindService&quot;, &quot;自定义方法methodInService&quot;);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.i(&quot;BindService&quot;, &quot;onBind&quot;);
+        return new MyBinder();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.i(&quot;BindService&quot;, &quot;onUnbind&quot;);
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.i(&quot;BindService&quot;, &quot;onCreate&quot;);
+    }
+}
+</code></pre><p><strong>案例：Demo0802，bind方式启动服务</strong></p>
+<h2 id="四、服务通信"><a href="#四、服务通信" class="headerlink" title="四、服务通信"></a>四、服务通信</h2><p>在Android系统中，服务的通信方式有两种：一种是本地服务通信，另一种是远程服务通信。本地服务通信是指应用程序内部的通信，而远程服务通信是指两个应用程序之间的通信。使用这两种方式进行通信时必须满足一个前提，就是服务必须以绑定方式开启。</p>
 <p><strong>1. 本地服务通信</strong></p>
 <p>在使用服务进行本地通信时，首先需要开发一个Service类，该类会提供一个IBinder onBind(Intent intent)方法，onBind()方法返回的IBinder对象会作为参数传递给ServiceConnection类中onServiceConnected(ComponentName name, IBinder service)方法，这样访问者就可以通过IBinder对象与Service进行通信。</p>
 <p>使用Ibinder对象进行本地服务通信：</p>
@@ -363,12 +405,17 @@ unbindService(myConn);
 <li>AIDL接口中用到的数据类型，除了基本数据类型、String、List、Map、CharSequence<br>之外，其他类型全部都需要导入包，即使它们在同一个包中。</li>
 </ul>
 <p>开发人员定义的AIDL接口只是定义了进程之间的通信接口，服务端、客户端都需要使用Android SDK安装目录下的platform-tools子目录下的aidl.exe工具为该接口提供实现。</p>
-<p>定义AIDL接口的<strong>示例代码</strong>：</p>
-<pre><code>interface IService {
+<p>远程服务调用的实例：</p>
+<p><strong>应用A</strong></p>
+<p>(1) 定义AIDL接口</p>
+<pre><code>package learning.android.it.org.demo0804;
+
+interface IService {
     void callAlipayService();
 }
-</code></pre><p>需要注意的是，AIDL没有类型修饰符，在编写ADIL文件时，不能加上类型修饰符，因为它本身就是共有的，例如写为public interface IService是不正确的，正确的写法应该为interface IService。</p>
-<p>定义好AIDL接口之后，接着需要在应用程序中创建Service的子类，该Service的onBind()方法所返回的IBinder对象应该是aidl.exe所生成的IService.Stub的子类对象。</p>
+</code></pre><p>AIDL接口定义的方式与Java接口的定义方式类似，都需要包名、接口名以及自定义的方法。不同的是，AIDL没有类型修饰符，在编写ADIL文件时，不能加上类型修饰符，因为它本身就是公有的，例如写为public interface IService是不正确的，正确的写法应该为interface IService。定义好AIDL接口之后，aidl.exe会为IService自动生成实现类IService.Stub。</p>
+<p>(2) 创建Service</p>
+<p>接着需要在应用程序中创建Service的子类，该Service的onBind()方法所返回的IBinder对象应该是aidl.exe所生成的IService.Stub的子类对象。</p>
 <pre><code>public class AlipayService extends Service {
     private class MyBinder extends IService.Stub {
         @Override
@@ -388,7 +435,57 @@ unbindService(myConn);
         return new MyBinder();
     }
 }
-</code></pre><p><strong>案例：Demo0804与Demo0805，模拟小游戏Demo0805远程调用支付宝Demo0804，演示如何绑定并使用远程服务</strong></p>
+</code></pre><p>(3) 注册Service</p>
+<p>由于该Service需要被其他应用调用，因此需要在注册服务时设置一个action，当其他应用使用隐式Intent调用该服务时，就可以通过这个action匹配上该服务。</p>
+<pre><code>&lt;service android:name=&quot;.AlipayService&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre><p><strong>应用B</strong></p>
+<p>(1) 复制应用A的AIDL接口文件</p>
+<p>(2) 绑定Service</p>
+<p>现在在另一个应用绑定上面应用的服务。注意在调用bindService()方法绑定服务时，使用的Intent设置的action需要和上面应用中服务注册的action一致。</p>
+<pre><code>private MyConn conn;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    //这里Action需要与Demo04在清单文件中服务注册的Action要一致
+    service = new Intent();
+    service.setAction(&quot;www.baidu.com&quot;);
+}
+
+public void bind(View view) {
+    conn = new MyConn();
+    bindService(service, conn, BIND_AUTO_CREATE);
+}
+
+private class MyConn implements ServiceConnection {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        iService = IService.Stub.asInterface(service);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+    }
+}
+</code></pre><p>(3) 调用应用A的服务</p>
+<p>最后在应用B中调用第一个应用的服务提供的方法</p>
+<pre><code>public void call(View view) {
+    try {
+        if (iService != null) {
+            iService.callAlipayService();
+        }
+    } catch (RemoteException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>注意：在调用本地方法时，在onServiceConnected()方法中是通过强制转换将service转换为MyBinder的；但在远程服务调用中，需要通过IService.Stub.asInterface(service)方法转换。IService就是应用A中定义的AIDL接口，需要将这个接口文件复制到应用B相同目录下。</p>
+<p><strong>案例：Demo0804与Demo0805，模拟小游戏Demo0805远程调用支付宝Demo0804，演示如何绑定并使用远程服务</strong></p>
 <p><strong>注意：两个应用程序中的ADIL文件所在的包名要一致。</strong></p>
 
         
@@ -400,7 +497,7 @@ unbindService(myConn);
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj587xu1v001t28wrawcb7p4m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/01/08-Service/" data-id="cj59o3wtf0018dgwrhi8v166h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
