@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>第七章 广播接收者 | Hepsilion</title>
+    <title>第八章 服务 | Hepsilion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="author" content="Hepsilion">
     <meta name="email" content="2428091608@qq.com">
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main"><article id="post-07-BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-08-Service" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -189,7 +189,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 class="article-title" itemprop="name">
-            第七章 广播接收者
+            第八章 服务
         </h1>
     
 
@@ -198,8 +198,8 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/06/01/07-BroadcastReceiver/">
-            <time datetime="2017-06-01T12:44:40.000Z" itemprop="datePublished">2017-06-01</time>
+        <a href="/blog/2017/02/08/08-Service/">
+            <time datetime="2017-02-08T12:45:55.000Z" itemprop="datePublished">2017-02-08</time>
         </a>
     </div>
 
@@ -225,142 +225,268 @@ var _hmt = _hmt || [];
         
             
             <ul>
-<li>创建广播接收者</li>
-<li>自定义广播</li>
-<li>有序广播和无序广播</li>
-<li>常用广播接收者(如开机启动、短信接收)的使用</li>
+<li>服务的生命周期</li>
+<li>服务的两种启动方式</li>
+<li>本地服务通信</li>
+<li>远程服务通信(调用其它应用的服务)</li>
 </ul>
 <a id="more"></a>
-<p>在Android系统中，广播(Broadcast)是一种在应用程序之间传递消息的机制，广播接收者(BroadcaseReceiver)是用来接收、过滤并响应广播的一类组件。通过广播接收者可以监听系统中的广播消息，在不同组件之间进行通信。</p>
-<h2 id="一、广播接收者入门"><a href="#一、广播接收者入门" class="headerlink" title="一、广播接收者入门"></a>一、广播接收者入门</h2><p>在Android系统中内置了很多系统级别的广播，例如，手机开机完成后会发送一条广播，电池电量不足时也会发送一条广播等。为了监听这些广播事件，Android提供了一个BroadcastReceiver组件，该组件可以监听来自系统或者应用程序的广播。</p>
-<p>当Android系统产生一个广播事件时，可以有多个对应的BroadcastReceiver接收并进行处理。</p>
-<h3 id="1-广播接收者创建与注册"><a href="#1-广播接收者创建与注册" class="headerlink" title="1. 广播接收者创建与注册"></a>1. 广播接收者创建与注册</h3><p>要使用广播接收者接收其他应用程序发出的广播，先要在本应用中创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。</p>
-<p>注册广播接收者有两种方式，常驻型广播和非常驻型广播。</p>
-<p><strong>(1) 创建广播接收者</strong></p>
-<p>要对监听到的广播事件进行处理，需要创建一个类继承自BroadcastReceiver，然后重写onReceive()方法。</p>
-<pre><code>public class OutCallReceiver extends BroadcastReceiver {
+<p>服务(Service)和Activity一样，是Android中的四大组件之一，不同的是服务没有界面，是一个长期运行在后台的组件，即使启动服务的应用程序被切换掉，服务仍可以在后台正常运行。因此服务经常被用来处理一些耗时的任务，例如进行网络传输或者播放音乐等。</p>
+<h2 id="一、服务的创建"><a href="#一、服务的创建" class="headerlink" title="一、服务的创建"></a>一、服务的创建</h2><p><strong>1. 创建服务</strong></p>
+<p>服务的创建方式与创建Activity类似，只需要继承Service类即可。</p>
+<p><strong>示例代码：</strong></p>
+<pre><code>public class MyService extends Service{
+    @Nullable
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
-</code></pre><p>当监听到有广播发出时，就会调用onReceive()方法，在onReceive()方法中可以对事件进行处理。</p>
-<p><strong>(2) 注册常驻型广播接收者</strong></p>
-<p>常驻型广播接收者是当应用程序关闭后，如果接收到其他应用程序发出的广播，那么该程序会自动重新启动。常驻型广播接收者需要在清单文件中进行注册。</p>
-<p><strong>示例代码</strong></p>
-<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0701.OutCallReceiver&quot; &gt;
-    &lt;intent-filter android:priority=&quot;20&quot;&gt;
-        &lt;action android:name=&quot;android.intent.action.NEW_OUTGOING_CALL&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><p>上述代码是在清单文件中注册的监听系统拨打电话的广播。</p>
+</code></pre><p><strong>2. 在清单文件中配置</strong></p>
+<p>由于服务是Android四大组件中的一个，因此需要在Androidmanifest.xml文件中进行注册，否则服务是不生效的。</p>
+<p><strong>示例代码：</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;learning.android.it.org.demo0801&quot;&gt;
+
+    &lt;application
+        android:allowBackup=&quot;true&quot;
+        android:icon=&quot;@mipmap/ic_launcher&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:supportsRtl=&quot;true&quot;
+        android:theme=&quot;@style/AppTheme&quot;&gt;
+        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+        &lt;!--注册服务--&gt;
+        &lt;service android:name=&quot;.MyService&quot;/&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre><h2 id="二、服务的生命周期"><a href="#二、服务的生命周期" class="headerlink" title="二、服务的生命周期"></a>二、服务的生命周期</h2><p>与其他组件不同，Service不能自己主动运行，需要调用相应的方法来启动。启动服务的方法有两种，分别是Context.startService()和Context.bindService()。如图8-1所示，使用不同的方法启动服务，服务的生命周期也会不同。</p>
+<center><br><img src="/blog/2017/02/08/08-Service/Pic8-1.JPG" width="45%">图 8-1<br></center>
+
+<p><strong>1. startService方式开启服务的生命周期</strong></p>
+<p>当其他组件调用startService()方法时，服务会先执行onCreate()方法，接着执行onStartCommand()方法，此时服务处于运行状态，直到自身调用stopSelf()方法或者其他组件调用stopService()方法时服务停止，最终被系统销毁。</p>
+<p>这种方式开启的服务会长期在后台运行，并且服务的状态与开启者的状态无关。</p>
+<p><strong>2. bindService方式开启服务的生命周期</strong></p>
+<p>当其他组件调用bindService()方法时，服务被创建，接着客户端通过Ibinder接口与服务通信。客户端通过unbindService()方法关闭连接，多个客户端能绑定到同一个服务上，并且当它们都解绑时，系统将直接销毁服务(服务不需要被停止)。</p>
+<p>这种方法开启的服务与开启者的状态有关，当调用者销毁了，服务也会被销毁。</p>
+<p><strong>3. 服务声明周期中的重要方法</strong></p>
 <ul>
-<li>android:name=”learning.android.it.org.demo0701.OutCallReceiver”是创建的广播接收者的全路径名；</li>
-<li>与定义隐式意图一样，广播接收者也需要注册一个<code>&lt;intent-filter&gt;</code>，在过滤器中指定要接收的广播事件；</li>
-<li>android:name=”android.intent.action.NEW_OUTGOING_CALL”是系统内部定义的拨打电话的广播事件；</li>
-<li>android:priority=”20”是该广播的优先级，这个值越大代表接收的优先级越高。</li>
+<li>onCreate() 服务被创建时执行的方法。</li>
+<li>onDestroy() 服务被销毁时执行的方法。</li>
+<li>onStartCommand() 客户端通过startService()显式启动服务时执行该方法。</li>
+<li>onBind() 客户端通过调用bindService()方法启动服务时执行该方法。</li>
+<li>onUnbind() 客户端调用unBindService()方法断开服务绑定时执行该方法。</li>
 </ul>
-<p><strong>(3) 注册非常驻型广播接收者</strong></p>
-<p>非常驻型广播接收者依赖于注册广播的组件的生命周期，例如在Activity中注册广播接收者，当Activity销毁后，广播也随之被移除。这种广播接收者需要在代码中注册。</p>
-<p><strong>示例代码</strong></p>
-<pre><code>MyBroadcastReceiver receiver=new MyBroadcastReceiver();
-// 实例化过滤器并设置要过滤的广播
-String action=&quot;android.intent.action.NEW_OUTGOING_CALL&quot;;
-IntentFilter intentFilter=new IntentFilter(action);
-// 注册广播接收者
-registerReceiver(receiver, intentFilter);
-</code></pre><p>与清单文件中注册一样，代码注册广播接收者同样需要进行过滤，IntentFilter接收的是监听的广播事件，最后用registerReceiver方法进行注册。</p>
-<p>与清单文件注册不同的是，代码有注册也有移除，比如在Activity的onCreate()中注册广播接收者，就要在onDestroy()方法中进行解除广播。</p>
-<pre><code>unregisterReceiver(receiver);
-</code></pre><p><strong>需要注意的是，常驻型广播接收者在应用程序关闭后，接收到广播会重新自动创建。非常驻型广播接收者则依赖于注册广播组件的生命周期和调用unregisterReceiver()方法手动移除。</strong></p>
-<p><strong>(4) 案例：Demo0701，IP拨号器，当拨打长途电话时，广播接收者就会监听到这个广播事件，自动在电话号码前加上几个数字，如17911、17951等。</strong></p>
-<p>注意：在Android4.0一下的系统中，当进程不存在时，只要有响应广播发出，进程就会自动创建并接收广播进行处理。Google工程师认为这样不安全，为了保护用户隐私，在Android4.0以上系统中，当在任务管理器界面强行停止进程后，再有广播发出也不会打开进程进行接收了。</p>
-<h2 id="二、自定义广播"><a href="#二、自定义广播" class="headerlink" title="二、自定义广播"></a>二、自定义广播</h2><p>Android系统中自带了很多广播，如果需要监听某个广播，只需要创建对应的广播接收者即可。在实际开发中，当这些系统级广播事件不能满足实际需求时，还可以自定义广播。需要注意的是，自定义广播需要由对应的广播接收者去接收，否则这个广播是无意义的。</p>
-<p><strong>案例：Demo0702，电台与收音机</strong></p>
-<p>创建广播：创建一个Intent对象，然后通过Intent.setAction()语句指定广播事件，最后通过sendBroadcast(intent)发送广播。</p>
-<pre><code>Intent intent = new Intent();
-// 定义广播的事件类型
-intent.setAction(&quot;www.baidu.com&quot;);
-// 发送广播
-sendBroadcast(intent);
-</code></pre><p>接收广播：和接收系统广播事件一样，创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。<strong>需要注意的是，自定义的广播事件与广播接收者在清单文件中注册的事件要一致，否则无法接收广播</strong></p>
-<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0702.MyBroadcastReceiver&quot; &gt;
+<h2 id="三、服务的启动方式"><a href="#三、服务的启动方式" class="headerlink" title="三、服务的启动方式"></a>三、服务的启动方式</h2><p>前面讲过，启动服务有两种方式，分别是通过startService()方法启动服务和bindService()方法启动服务。</p>
+<p><strong>1. start方式启动服务</strong></p>
+<p>使用Context的startService()和stopService()方法来启动、关闭服务，Intent对象用于指定要启动或关闭的服务。</p>
+<pre><code>Intent intent=new Intent(this, MyService.class);
+startService(intent); //开启服务
+stopService(intent);  //关闭服务
+</code></pre><p>onCreate()方法只有在服务创建时执行，而onStartCommand()方法则是在每次启动服务时调用。</p>
+<p><strong>需要注意的是，如果不调用stopService()或stopSelf()方法，这种方式开启的服务会长期运行在后台，除非用户强制停止服务。</strong></p>
+<p><strong>案例：Demo0801，start方式启动服务</strong></p>
+<p><strong>2. bind方式启动服务</strong></p>
+<p>当程序使用startService()和stopService()启动、关闭服务时，服务与调用者之间基本不存在太多的关联，也无法与访问者进行通信、数据交互等。</p>
+<p>如果服务需要与调用者进行方法调用和数据交互时，应该使用bindService()和unbindService()方法启动、关闭服务。</p>
+<p>使用bindService()方式启动服务的标准步骤：</p>
+<pre><code>// 1. 创建MyConn类，用于实现连接服务
+private MyService.MyBinder myBinder;
+private class MyConn implements ServiceConnection{
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        myBinder= (MyService.MyBinder) service;
+        Log.i(&quot;MainActivity&quot;, &quot;服务成功绑定，内存地址为&quot;+myBinder.toString());
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+}
+MyConn myConn;
+
+// 2. 绑定服务
+Intent intent=new Intent(this, MyService.class);
+bindService(intent, myConn, BIND_AUTO_CREATE);
+
+// 3. 利用myBinder调用服务中的方法
+myBinder.callMethodInService();
+
+// 4. 解绑服务
+unbindService(myConn);
+</code></pre><p>bindService()方法的完整方法名为public boolean bindService(Intent service, ServiceConnection conn, int flags)，该方法的参数解释如下：</p>
+<ul>
+<li>Intent对象用于指定要启动的Service</li>
+<li>ServiceConnection对象用于监听调用者与Service之间的连接状态。<ul>
+<li>当调用者与Service连接成功时，将回调该对象的public void onServiceConnected(ComponentName name, IBinder service)方法；</li>
+<li>当调用者与Service断开连接时，将回调该对象的public void onServiceDisconnected(ComponentName name)方法。</li>
+</ul>
+</li>
+<li>flags指定绑定时是否自动创建Service(如果Service还未创建)。该参数可指定为0即不自动创建，也可指定为BIND_AUTO_CREATE_即自动创建。</li>
+</ul>
+<p>注意：ServiceConnection中的onServiceConnected()方法有一个参数IBinder service，这个参数是在服务的onBind()方法中返回的。</p>
+<pre><code>public class MyService extends Service{
+    // 创建服务的代理，调用服务中的方法
+    class MyBinder extends Binder{
+        public void callMethodInService(){
+            methodInService();
+        }
+    }
+
+    public void methodInService(){
+        Log.i(&quot;BindService&quot;, &quot;自定义方法methodInService&quot;);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.i(&quot;BindService&quot;, &quot;onBind&quot;);
+        return new MyBinder();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.i(&quot;BindService&quot;, &quot;onUnbind&quot;);
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.i(&quot;BindService&quot;, &quot;onCreate&quot;);
+    }
+}
+</code></pre><p><strong>案例：Demo0802，bind方式启动服务</strong></p>
+<h2 id="四、服务通信"><a href="#四、服务通信" class="headerlink" title="四、服务通信"></a>四、服务通信</h2><p>在Android系统中，服务的通信方式有两种：一种是本地服务通信，另一种是远程服务通信。本地服务通信是指应用程序内部的通信，而远程服务通信是指两个应用程序之间的通信。使用这两种方式进行通信时必须满足一个前提，就是服务必须以绑定方式开启。</p>
+<p><strong>1. 本地服务通信</strong></p>
+<p>在使用服务进行本地通信时，首先需要开发一个Service类，该类会提供一个IBinder onBind(Intent intent)方法，onBind()方法返回的IBinder对象会作为参数传递给ServiceConnection类中onServiceConnected(ComponentName name, IBinder service)方法，这样访问者就可以通过IBinder对象与Service进行通信。</p>
+<p>使用Ibinder对象进行本地服务通信：</p>
+<center><br><img src="/blog/2017/02/08/08-Service/Pic8-2.JPG" width="75%">图 8-2<br></center>
+
+<p>如图8-2所示，服务在进行通信时实际上使用的就是IBinder对象，在ServiceConnection类中得到IBinder对象，通过该对象就可以获取到服务中定义的方法，执行具体的操作。</p>
+<p><strong>案例：Demo0803，音乐播放器，演示如何使用服务进行通信</strong></p>
+<p><strong>(1) MediaPlayer</strong></p>
+<p>在Android中，播放音频文件一般都是使用MediaPlayer类来实现的。</p>
+<ul>
+<li><strong>setAudioStreamType()</strong> 指定音频文件的类型必须在<strong>prepare()</strong>方法之前调用</li>
+<li><strong>setDataSource()</strong> 设置要播放的音频文件的位置</li>
+<li><strong>prepare()</strong> 在开始播放之前调用这个方法完成准备工作</li>
+<li><strong>start()</strong> 开始或继续播放音频</li>
+<li><strong>pause()</strong> 暂停播放音频</li>
+<li><strong>reset()</strong> 将MediaPlayer对象重置到刚刚创建的状态</li>
+<li><strong>seekTo()</strong> 从指定的位置开始播放音频</li>
+<li><strong>stop()</strong> 停止播放音频，调用该方法后MediaPlayer对象就无法再播放音频</li>
+<li><strong>release()</strong> 释放掉与MediaPlayer对象相关的资源</li>
+<li><strong>isPlaying()</strong> 判断当前MediaPlayer是否正在播放音频</li>
+<li><strong>getDuration()</strong> 获取载入音频文件的时长</li>
+<li><strong>getCurrentPosition()</strong> 获取当前播放音频文件的位置</li>
+</ul>
+<p><strong>(2) SeekBar</strong></p>
+<p>SeekBar与ProgressBar十分类似，它是通过滑块的位置来表示数值的。SeekBar允许用户拖动滑块改变SeekBar的值，例如手机的音量调节，同时SeekBar还允许用户改变滑块外观。</p>
+<p>SeekBar的常用方法属性：</p>
+<ul>
+<li><strong>属性 android:thumb</strong> 指定一个Drawable对象，该对象将作为自定义滑块</li>
+<li><strong>监听器OnSeekBarChangeListener</strong> 监听滑块位置的改变</li>
+<li><strong>方法setProgress()</strong> 用来设置SeekBar的当前值</li>
+<li><strong>方法setMax()</strong> 设置SeekBar的最大值</li>
+</ul>
+<p><strong>2. 远程通信服务</strong></p>
+<p>在Android系统中，各个应用程序都运行在自己的进程中，进程之间一般无法直接进行通信，如果想要完成不同进程之间的通信，就需要使用远程服务通信。</p>
+<p>远程服务通信是通过AIDL(Android Interface Definition Language)实现的，它是一种接口定义语言，其语法格式简单，与Java中接口定义类似，但存在几点差异：</p>
+<ul>
+<li>AIDL定义接口的源代码文件必须以.aidl结尾</li>
+<li>AIDL接口中用到的数据类型，除了基本数据类型、String、List、Map、CharSequence<br>之外，其他类型全部都需要导入包，即使它们在同一个包中。</li>
+</ul>
+<p>开发人员定义的AIDL接口只是定义了进程之间的通信接口，服务端、客户端都需要使用Android SDK安装目录下的platform-tools子目录下的aidl.exe工具为该接口提供实现。</p>
+<p>远程服务调用的实例：</p>
+<p><strong>应用A</strong></p>
+<p>(1) 定义AIDL接口</p>
+<pre><code>package learning.android.it.org.demo0804;
+
+interface IService {
+    void callAlipayService();
+}
+</code></pre><p>AIDL接口定义的方式与Java接口的定义方式类似，都需要包名、接口名以及自定义的方法。不同的是，AIDL没有类型修饰符，在编写ADIL文件时，不能加上类型修饰符，因为它本身就是公有的，例如写为public interface IService是不正确的，正确的写法应该为interface IService。定义好AIDL接口之后，aidl.exe会为IService自动生成实现类IService.Stub。</p>
+<p>(2) 创建Service</p>
+<p>接着需要在应用程序中创建Service的子类，该Service的onBind()方法所返回的IBinder对象应该是aidl.exe所生成的IService.Stub的子类对象。</p>
+<pre><code>public class AlipayService extends Service {
+    private class MyBinder extends IService.Stub {
+        @Override
+        public void callAlipayService() throws RemoteException {
+            methodInService();
+        }
+    }
+
+    private void methodInService() {
+        Log.v(TAG, &quot;开始付费，购买装备&quot;);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.v(TAG, &quot;绑定支付宝，准备付费&quot;);
+        return new MyBinder();
+    }
+}
+</code></pre><p>(3) 注册Service</p>
+<p>由于该Service需要被其他应用调用，因此需要在注册服务时设置一个action，当其他应用使用隐式Intent调用该服务时，就可以通过这个action匹配上该服务。</p>
+<pre><code>&lt;service android:name=&quot;.AlipayService&quot; &gt;
     &lt;intent-filter&gt;
         &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
     &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><h2 id="三、广播的类型"><a href="#三、广播的类型" class="headerlink" title="三、广播的类型"></a>三、广播的类型</h2><p>在Android系统中，根据广播被接收顺序的不同，可以将其分为有序广播和无序广播。</p>
-<p><strong>1. 无序广播</strong></p>
-<p>无序广播是一种完全异步被接收的广播，在广播发出去之后，所有监听了这个广播事件的广播接收者都会在同一时刻接收到这个广播，它们之间没有任何先后顺序可言，这种广播的效率会比较高，但同时意味着它是无法被截断的。</p>
-<center><br><img src="/blog/2017/06/01/07-BroadcastReceiver/Pic7-1.JPG" width="35%">图7-1<br></center>
+&lt;/service&gt;
+</code></pre><p><strong>应用B</strong></p>
+<p>(1) 复制应用A的AIDL接口文件</p>
+<p>(2) 绑定Service</p>
+<p>现在在另一个应用绑定上面应用的服务。注意在调用bindService()方法绑定服务时，使用的Intent设置的action需要和上面应用中服务注册的action一致。</p>
+<pre><code>private MyConn conn;
 
-<p>无序广播的工作流程如图7-1所示，当无序广播发送一条广播消息时，所有的广播接收者都可以接收到，不会被拦截。</p>
-<p><strong>2. 有序广播</strong></p>
-<p>有序广播是一种同步接收的广播，在广播发出之后，同一时刻只会有一个广播接收者能够接收到这条消息，当这个广播接收者中的逻辑执行完后，广播才会继续传递。所以，此时的广播接收者是有先后顺序的，并且可以被拦截。</p>
-<center><br><img src="/blog/2017/06/01/07-BroadcastReceiver/Pic7-2.JPG" width="60%">图7-2<br></center>
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-<p>有序广播的工作流程如图7-2所示，当有序广播发送一条消息后，高优先级的广播接收者先接收到广播，低优先级的广播接收者后接收到广播。</p>
-<pre><code>Intent intent = new Intent();
-// 定义广播的事件类型
-intent.setAction(&quot;www.baidu.com&quot;);
-// 发送有序广播
-//第一个参数是指定的意图，设置要发送的广播事件；第二个参数指定接收者的权限，如果不想让所有的接收到看到，可以显示地指定接收者的权限，目前不关心，可以将其设置为null
-sendOrderedBroadcast(intent, null);
-</code></pre><p>优先级是在清单文件中注册广播接收者时定义的android:priority=””参数，优先级的范围是-1000~1000之间。如果两个广播接收者的优先级相同，则先注册的组件优先接收到广播。如果两个应用程序监听了同一个广播事件并设置了优先级，则优先级高的应用优先接收到广播。</p>
-<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver02&quot; &gt;
-    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
-        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver01&quot; &gt;
-    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
-        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver03&quot; &gt;
-    &lt;intent-filter android:priority=&quot;600&quot; &gt;
-        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><p>如果高优先级的广播接收者将广播终止，则后面的广播接收者无法接收到广播。想要拦截一条广播不往下发送，可以使用abortBroadcast()方法。</p>
-<pre><code>public class MyBroadcastReceiver02 extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;自定义的广播接收者02,接收到了自定义的广播事件&quot;);
-        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;自定义的广播接收者02，接收到了广播事件&quot;);
-        abortBroadcast(); // 拦截有序广播，这句代码执行完后，广播事件将会被终止。
-        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;我是广播接收者02，广播被我终结了&quot;);
-    }
-}
-</code></pre><p>在实际开发中，还可能遇到这样的情况，当发出了一个有序广播，然后定义多个广播接收者接收这条广播。这些广播接收者的优先级有高有低，需要其中一个广播接收者无论如何都要接收到广播事件，哪怕它的优先级是最低的或者广播被优先级高的接收者强行终止。这时，就可以用一下sendOrderedBroadcast的重载方法，在第三个参数指定要接收的广播接收者。</p>
-<pre><code>MyBroadcastReceiver03 receiver03 = new MyBroadcastReceiver03();
-sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
-</code></pre><p><strong>案例：Demo0704，拦截有序广播</strong></p>
-<h2 id="四、常用的广播接收者"><a href="#四、常用的广播接收者" class="headerlink" title="四、常用的广播接收者"></a>四、常用的广播接收者</h2><p><strong>案例：Demo0704，短信拦截器，监听短信接收的广播事件</strong>（拦截没起作用）</p>
-<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0704.MessageReceiver&quot; &gt;
-    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
-        &lt;action android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><p>设置action为android.provider.Telephony.SMS_RECEIVED，接收短信的广播事件</p>
-<p>在Windows系统中，有些软件一开机就自动启动，同样在Android系统中也可以实现这种功能，例如杀毒软件程序，每次手机开机便会自动启动，这种功能就是通过广播接收者监听开机启动的广播事件实现的。</p>
-<p><strong>案例：Demo0705，杀毒软件，监听开机启动的广播事件</strong></p>
-<pre><code>public class BootReceiver extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Intent i = new Intent(context, MainActivity.class);
-        // 由于Activity都是运行在任务栈中的，当开机启动时，任务栈还未创建成功，所以需要设置flag，显示地指定Activity在新的任务栈中运行
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
-    }
+    //这里Action需要与Demo04在清单文件中服务注册的Action要一致
+    service = new Intent();
+    service.setAction(&quot;www.baidu.com&quot;);
 }
 
-&lt;receiver android:name=&quot;learning.android.it.org.demo0705.BootReceiver&quot; &gt;
-    &lt;intent-filter&gt;
-        &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</code></pre><p>设置action为android.intent.action.BOOT_COMPLETED，接收开机启动的广播事件</p>
-<p><strong>需要注意的是，在Android3.0以后出现了一个安全机制，如果用户没有启动过这个程序，那么就算该程序注册了开机启动的广播接收者也无法接收到开机启动的广播事件。</strong></p>
+public void bind(View view) {
+    conn = new MyConn();
+    bindService(service, conn, BIND_AUTO_CREATE);
+}
+
+private class MyConn implements ServiceConnection {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        iService = IService.Stub.asInterface(service);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+    }
+}
+</code></pre><p>(3) 调用应用A的服务</p>
+<p>最后在应用B中调用第一个应用的服务提供的方法</p>
+<pre><code>public void call(View view) {
+    try {
+        if (iService != null) {
+            iService.callAlipayService();
+        }
+    } catch (RemoteException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>注意：在调用本地方法时，在onServiceConnected()方法中是通过强制转换将service转换为MyBinder的；但在远程服务调用中，需要通过IService.Stub.asInterface(service)方法转换。IService就是应用A中定义的AIDL接口，需要将这个接口文件复制到应用B相同目录下。</p>
+<p><strong>案例：Demo0804与Demo0805，模拟小游戏Demo0805远程调用支付宝Demo0804，演示如何绑定并使用远程服务</strong></p>
+<p><strong>注意：两个应用程序中的ADIL文件所在的包名要一致。</strong></p>
 
         
         </div>
@@ -371,7 +497,7 @@ sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/" data-id="cj5b1ht7c0013pswr7usnookk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/08/08-Service/" data-id="cj5b1r7d800174wwro82g9cmh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -439,7 +565,7 @@ sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
 
             
     
-        <a href="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/">评论</a>
+        <a href="https://hepsilion.github.io/2017/02/08/08-Service/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/02/08/08-Service/">评论</a>
     
 
         </footer>
@@ -448,19 +574,19 @@ sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
         
 <nav id="article-nav">
     
-        <a href="/blog/2017/06/01/06-ContentProvider/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/blog/2017/02/07/07-BroadcastReceiver/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    第六章 ContentProvider
+                    第七章 广播接收者
                 
             </div>
         </a>
     
     
-        <a href="/blog/2017/06/01/08-Service/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/blog/2017/02/09/09-网络编程/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">第八章 服务</div>
+            <div class="article-nav-title">第九章 网络编程</div>
         </a>
     
 </nav>
@@ -550,76 +676,76 @@ sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/09-网络编程/" class="thumbnail">
+                            <a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="thumbnail">
     
     
-        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第九章 网络编程" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Docker-Hadoop-Helloworld" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/09-网络编程/" class="title">第九章 网络编程</a></p>
-                            <p class="item-date"><time datetime="2017-06-01T12:46:32.000Z" itemprop="datePublished">2017-06-01</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/环境配置/">环境配置</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="title">Docker-Hadoop-Helloworld</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T14:48:12.000Z" itemprop="datePublished">2017-05-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/08-Service/" class="thumbnail">
+                            <a href="/blog/2017/05/28/C-plus-plus/" class="thumbnail">
     
     
-        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第八章 服务" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="C plus plus" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/08-Service/" class="title">第八章 服务</a></p>
-                            <p class="item-date"><time datetime="2017-06-01T12:45:55.000Z" itemprop="datePublished">2017-06-01</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/C-C/">C/C++</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/C-plus-plus/" class="title">C plus plus</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:03:50.000Z" itemprop="datePublished">2017-05-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/07-BroadcastReceiver/" class="thumbnail">
+                            <a href="/blog/2017/05/28/Probability-Theory/" class="thumbnail">
     
     
-        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第七章 广播接收者" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Probability Theory" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/07-BroadcastReceiver/" class="title">第七章 广播接收者</a></p>
-                            <p class="item-date"><time datetime="2017-06-01T12:44:40.000Z" itemprop="datePublished">2017-06-01</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Probability-Theory/" class="title">Probability Theory</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:02:06.000Z" itemprop="datePublished">2017-05-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/01/06-ContentProvider/" class="thumbnail">
+                            <a href="/blog/2017/05/28/信息安全/" class="thumbnail">
     
     
-        <span style="background-image:url(https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128__340.png)" alt="第六章 ContentProvider" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="信息安全总结" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/06/01/06-ContentProvider/" class="title">第六章 ContentProvider</a></p>
-                            <p class="item-date"><time datetime="2017-06-01T12:43:55.000Z" itemprop="datePublished">2017-06-01</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/计算机基础/">计算机基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/信息安全/" class="title">信息安全总结</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time></p>
                         </div>
                     </li>
                 
@@ -641,7 +767,7 @@ sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li></ul>
         </div>
     </div>
 
@@ -694,9 +820,9 @@ sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'https://hepsilion.github.io/2017/06/01/07-BroadcastReceiver/';
+            this.page.url = 'https://hepsilion.github.io/2017/02/08/08-Service/';
         
-        this.page.identifier = '07-BroadcastReceiver';
+        this.page.identifier = '08-Service';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
