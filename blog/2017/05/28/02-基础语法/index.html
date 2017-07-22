@@ -240,10 +240,13 @@ protected, public, return, short, static, strictfp, super, switch, synchronized,
 <pre><code>float f=3.4;  //错误，3.4默认为double型。
 float f=3.4F; //正确
 float f=3;    //正确
-</code></pre><p>(2) Java中在定义类的成员变量时可以对其初始化，如果不对其初始化，Java使用默认值对其初始化；而局部变量在使用前则必须进行初始化，JVM不会进行默认值初始化。<br>(3) Java中基本数据类型变量默认初始化值如表所示，对象引用默认初始化值为null。</p>
+</code></pre><p>(2) Java中在定义类的成员变量时可以对其初始化，如果不对其初始化，Java使用默认值对其初始化；而局部变量在使用前则必须进行初始化，JVM不会进行默认值初始化。 </p>
+<p>(3) Java中基本数据类型变量默认初始化值如表所示，引用变量默认初始化值为null。</p>
 <center><br><img src="/blog/2017/05/28/02-基础语法/PrimitiveType.JPG" width="70%">图 2<br></center>
 
-<h3 id="问：Java中的中文字符"><a href="#问：Java中的中文字符" class="headerlink" title="问：Java中的中文字符"></a>问：Java中的中文字符</h3><p>Java语言中，中文字符所占的字节数取决于字符的编码方式，默认使用GBK编码方式。</p>
+<p>例1：</p>
+<pre><code>int类型变量的默认值为0；Integer类型变量的默认值为null。
+</code></pre><h3 id="问：Java中的中文字符"><a href="#问：Java中的中文字符" class="headerlink" title="问：Java中的中文字符"></a>问：Java中的中文字符</h3><p>Java语言中，中文字符所占的字节数取决于字符的编码方式，默认使用GBK编码方式。</p>
 <pre><code>当采用ISO8859-1编码方式时，一个中文字符占1个字节；
 
 当采用GB2312或GBK编码方式时，一个中文字符占2个字节；
@@ -264,6 +267,7 @@ float f=3;    //正确
 这个题目解答没看懂
 </code></pre><h3 id="问：类型转换"><a href="#问：类型转换" class="headerlink" title="问：类型转换"></a>问：类型转换</h3><p>(1) byte\char\short -&gt; int -&gt; long -&gt; float -&gt; double</p>
 <p>(2) Java中如果碰到char、byte和short参与运算时，会自动将这些值转换为int类型值然后再进行运算。</p>
+<p>例1：</p>
 <pre><code>short s1 = 1; 
 s1 = s1 + 1; //错误，s1+1运算结果是int型，需要强制转换类型
 
@@ -272,6 +276,14 @@ s1 += 1;    //正确
 
 short s = 16;
 byte a2 = s; //错误
+</code></pre><p>例2:</p>
+<pre><code>short s=1;
+s=s+1;
+编译错误：由于s+1运算结果为int型，再赋值给short类型s，编译器会报告需要强制类型转换的错误。
+
+short s=1;
+s+=1;
+编译正确：Java编译器会对+=特殊处理
 </code></pre><p>(3) 低级向高级是隐式类型转换，高级向低级必须强制类型转换</p>
 <p>(4) 两个数值进行二元操作时，会有如下的转换操作：</p>
 <ul>
@@ -457,9 +469,16 @@ public class Inc {
 </code></pre><ul>
 <li>&amp;&amp;和&amp;</li>
 </ul>
-<p>&amp;&amp;:短路与，若该运算符左边为false，运算符右边表达式不执行。</p>
-<p>&amp;: 按位与，若该运算符左边为false，运算符右边表达式还会继续执行。</p>
+<p>两者都可以用作逻辑与运算符。当运算符两边的表达式都为true时，整个运算结果才为true；否则只要有一边表达式为false，则运算结果为false。</p>
+<p>两者的区别如下：</p>
+<p>(1) &amp;&amp;具有短路的功能，若该运算符左边为false，运算符右边表达式不执行；而&amp;作为逻辑与运算符时不具备短路功能，若该运算符左边为false，运算符右边表达式还会继续执行。</p>
+<p>(2) &amp;还可以作为按位与运算符，当&amp;运算符两边的表达式都不是boolean类型时，&amp;表示按位与操作。例如 0x31 &amp; 0x0f = 0x01。</p>
 <ul>
+<li>&lt;&lt; </li>
+</ul>
+<p>将一个数左移n位，相当于这个数乘以2的n次方</p>
+<pre><code>2 &lt;&lt; 3 = 16
+</code></pre><ul>
 <li>>>和&gt;&gt;&gt;</li>
 </ul>
 <p>>&gt; 表示带符号右移，正数结果为正，高位补0；负数结果为负，高位补1</p>
@@ -478,7 +497,7 @@ int y2=-5&gt;&gt;&gt;2;
 5&gt;&gt;&gt;2，左边空出的位补0： 00000000 00000000 00000000 00000001，结果y1=1
 -5在计算机中补码表示为： 11111111 11111111 11111111 11111011
 -5&gt;&gt;&gt;2，左边空出的位补0：00111111 11111111 11111111 11111110，结果为y2=1073741822
-</code></pre><h3 id="问：switch"><a href="#问：switch" class="headerlink" title="问：switch"></a>问：switch</h3><p>switch(expr)中，expr是一个整数表达式，因此传递给switch和case语句的参数应该是int、short、char、byte或者其对应的封装类以及Enum类型，long、String(<strong>在Java7中，也支持了String类型</strong>)都不能用于swtich表达式。</p>
+</code></pre><h3 id="问：switch"><a href="#问：switch" class="headerlink" title="问：switch"></a>问：switch</h3><p>switch(expr)中，expr是一个整数表达式，因此传递给switch和case语句的参数应该是int、short、char、byte或者其对应的封装类以及Enum类型(byte，short，char都可以隐式转换为int，因此也可以作为expr)，long、String(<strong>在Java7中，也支持了String类型</strong>)都不能用于swtich表达式。</p>
 <p>在switch语句中，表达式的值不能是null，否则会在运行时抛出NullPointerException。在case子句中也不能使用null，否则会出现编译错误。</p>
 <h3 id="问：switch与break"><a href="#问：switch与break" class="headerlink" title="问：switch与break"></a>问：switch与break</h3><p>switch结构中匹配的case子句中如果没有break跳出执行，那么程序执行完case子句后不会跳出，将会继续执行后续的case子句，直到遇到break跳出switch；如果一直没有遇到break，程序将一直执行到整个结构结束。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8100292/26058?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
@@ -545,7 +564,7 @@ true
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/02-基础语法/" data-id="cj5b1r7bn00054wwraqw1syfd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/02-基础语法/" data-id="cj5f031m6000ei0wriyf4wm00" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

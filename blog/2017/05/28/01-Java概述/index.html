@@ -236,8 +236,18 @@ var _hmt = _hmt || [];
 <p>Java开发工具包(JDK)是完整的Java软件开发包，包含了JRE，编译器和其他的工具(比如：JavaDoc，Java调试器)，可以让开发者开发、编译、执行Java应用程序。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/56325?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>JRE判断程序是否执行结束的标准是：所有的前台线程执行完毕
-</code></pre><h3 id="问：一个”-java”源文件中是否可以包括多个类-不是内部类-？有什么限制？"><a href="#问：一个”-java”源文件中是否可以包括多个类-不是内部类-？有什么限制？" class="headerlink" title="问：一个”.java”源文件中是否可以包括多个类(不是内部类)？有什么限制？"></a>问：一个”.java”源文件中是否可以包括多个类(不是内部类)？有什么限制？</h3><p>一个”.java”源文件中可以包括多个类。如果这个类的修饰符是public，其类名与文件名必须相同。</p>
-<h3 id="问：javac"><a href="#问：javac" class="headerlink" title="问：javac"></a>问：javac</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/973?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>下列说法正确的有哪些？</p>
+</code></pre><h3 id="问：一个”-java”源文件中是否可以包含多个类-不是内部类-？有什么限制？"><a href="#问：一个”-java”源文件中是否可以包含多个类-不是内部类-？有什么限制？" class="headerlink" title="问：一个”.java”源文件中是否可以包含多个类(不是内部类)？有什么限制？"></a>问：一个”.java”源文件中是否可以包含多个类(不是内部类)？有什么限制？</h3><p>一个”.java”源文件中可以包含多个类，但最多只能有一个public类。如果某一个类的修饰符是public，其类名与文件名必须相同。</p>
+<p>例1：Java代码查错</p>
+<pre><code>Something类的文件名叫OtherThing.java，其中定义的代码如下：
+class Something {
+    public static void main(String[] args) {
+        System.out.println(&quot;Do something ...&quot;);
+    }
+}
+
+正确。Java中Class名字不一定要和其文件名相同，但public class的名字必须和文件名相同。
+但是这里的main方法不是程序的入口，只能被Something对象调用。
+</code></pre><h3 id="问：javac"><a href="#问：javac" class="headerlink" title="问：javac"></a>问：javac</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/973?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>下列说法正确的有哪些？</p>
 <pre><code>A. 环境变量可在编译source code时指定
 B. 在编译程序时，所能指定的环境变量不包括class path
 C. javac一次可同时编译数个Java源文件
@@ -262,8 +272,12 @@ D. javac.exe能指定编译结果要置于哪个目录（directory）
 </li>
 </ul>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8045843/14817?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
-<h3 id="问：堆和栈的区别"><a href="#问：堆和栈的区别" class="headerlink" title="问：堆和栈的区别"></a>问：堆和栈的区别</h3><p>栈内存由操作系统来分配，只要栈剩余空间大于所申请空间，系统将为程序提供内存，否则将报异常提示栈溢出</p>
-<p>堆内存由程序员自己来申请分配</p>
+<h3 id="问：堆和栈的区别"><a href="#问：堆和栈的区别" class="headerlink" title="问：堆和栈的区别"></a>问：堆和栈的区别</h3><p>Java的内存分为两类，一类是栈内存，一类是堆内存。</p>
+<ul>
+<li>栈内存是指程序进入一个方法时，会为这个方法单独分配一块私属存储空间，用于存储这个方法内部的局部变量，当这个方法结束时，分配给这个方法的栈会释放，这个栈中的变量也将随之释放。栈内存由操作系统来分配，只要栈剩余空间大于所申请空间，系统将为程序提供内存，否则将报异常提示栈溢出。</li>
+<li>堆是与栈作用不同的内存，一般用于存放不放在当前方法栈中的那些数据，例如，使用new创建的对象都放在堆里，所以，它不会随方法的结束而消失。堆内存由程序员自己来申请分配。</li>
+</ul>
+<p><strong>方法中的局部变量使用final修饰后，放在堆中，而不是栈中。</strong></p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8045843/23410?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>class A {
     private String a = &quot;aa&quot;;
@@ -306,8 +320,10 @@ D. 不断创建对象
 -Xms初始堆大小即最小内存值，即最小内存值为10240m
 JVM一般根据对象的生存周期将堆内存分为若干不同的区域，一般情况将新生代分为Eden，两块Survivor；
 由-XXSurvivorRatio=3可知Eden:Survivor=3，年轻带总大小为5120m，那么Survivor区总大小为2048m
-</code></pre><h3 id="问：Java中垃圾回收-GC-有什么目的？什么时候进行垃圾回收？"><a href="#问：Java中垃圾回收-GC-有什么目的？什么时候进行垃圾回收？" class="headerlink" title="问：Java中垃圾回收(GC)有什么目的？什么时候进行垃圾回收？"></a>问：Java中垃圾回收(GC)有什么目的？什么时候进行垃圾回收？</h3><p>GC是垃圾收集的意思(Gabage Collection)，内存处理是编程人员容易出现问题的地方，忘记或者错误地内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的。</p>
+</code></pre><h3 id="问：Java中垃圾回收-GC-有什么目的？什么时候进行垃圾回收？"><a href="#问：Java中垃圾回收-GC-有什么目的？什么时候进行垃圾回收？" class="headerlink" title="问：Java中垃圾回收(GC)有什么目的？什么时候进行垃圾回收？"></a>问：Java中垃圾回收(GC)有什么目的？什么时候进行垃圾回收？</h3><p>GC是垃圾收集的意思(Gabage Collection)，内存处理是编程人员容易出现问题的地方，忘记或者错误地内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的。Java语言没有提供显示地释放已分配内存的操作方法。</p>
+<p>垃圾回收器通常是作为一个单独的低级别的线程运行，在不可预知的情况下对内存堆中已经死亡的或者长时间没有使用的对象进行清除和回收，程序员不能实时的调用垃圾回收器对某个对象或所有对象进行垃圾回收。</p>
 <p>垃圾回收的目的是<strong>识别并回收堆内存</strong>中不再使用的对象所占的内存，释放资源。而栈区的内存是随着线程结束而释放的。</p>
+<p>对于GC来说，当程序员创建对象时，GC就开始监控这个对象的地址、大小以及使用情况。通常，<strong>GC采用有向图的方式记录和管理堆(heap)中的所有对象</strong>。通过这种方式确定哪些对象是”可达的”，哪些对象是”不可达的”。当GC确定一些对象为”不可达”时，GC就有责任回收这些内存空间。</p>
 <p>触发主GC(Garbage Collector，垃圾回收)的条件：</p>
 <p>(1) 当应用程序空闲时，即没有应用线程在运行时，GC会被调用。</p>
 <p>(2) Java堆内存不足时，GC会被调用。</p>
@@ -320,18 +336,84 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
 <h3 id="问：在Java中，对象什么时候可以被垃圾回收？"><a href="#问：在Java中，对象什么时候可以被垃圾回收？" class="headerlink" title="问：在Java中，对象什么时候可以被垃圾回收？"></a>问：在Java中，对象什么时候可以被垃圾回收？</h3><p>当对象对当前使用这个对象的应用程序变得不可触及的时候，这个对象就可以被回收了。</p>
 <h3 id="问：JVM的永久代中会发生垃圾回收么？-没看懂"><a href="#问：JVM的永久代中会发生垃圾回收么？-没看懂" class="headerlink" title="问：JVM的永久代中会发生垃圾回收么？(没看懂)"></a>问：JVM的永久代中会发生垃圾回收么？(没看懂)</h3><p>垃圾回收不会发生在永久代，如果永久代满了或者是超过了临界值，会触发完全垃圾回收(Full GC)。如果你仔细查看垃圾收集器的输出信息，就会发现永久代也是被回收的。这就是为什么正确的永久代大小对避免Full GC是非常重要的原因。</p>
 <p>请参考下Java8：从永久代到元数据区(注：Java8中已经移除了永久代，新加了一个叫做元数据区的native内存区)</p>
-<h3 id="问：内存泄漏"><a href="#问：内存泄漏" class="headerlink" title="问：内存泄漏"></a>问：内存泄漏</h3><p>内存泄露(Memory Leak)是指一个不再被使用的对象或者变量还在内存中占有存储空间。在C/C++语言中，内存泄露出现在开发人员忘记释放已分配的内存就会造成内存泄露。在java语言中引入垃圾回收机制，有GC负责进行回收不再使用的对象，释放内存。但是还是会存在内存泄露的问题。</p>
-<p><strong>内存泄露主要有两种情况</strong></p>
-<p>(1) 在堆中申请的空间没有释放。</p>
+<h3 id="问：内存泄漏"><a href="#问：内存泄漏" class="headerlink" title="问：内存泄漏"></a>问：内存泄漏</h3><p>内存泄露(Memory Leak)是指一个<strong>不再被使用的对象或者变量还在内存中占有存储空间</strong>。在C/C++语言中，内存泄露出现在开发人员忘记释放已分配的内存就会造成内存泄露。在java语言中引入垃圾回收机制，有GC负责进行回收不再使用的对象，释放内存。<strong>但是还是会存在内存泄露的问题。</strong></p>
+<p>检查Java中的内存泄露，一定要让程序将各种分支都完整执行到程序结束，然后看某个对象是否被使用过，如果没有，则才能判定这个对象属于内存泄露。</p>
+<p><strong>Java中内存泄露的情况：</strong></p>
+<p><strong>长生命周期的对象持有短生命周期对象的引用就很可能发生内存泄露</strong>，尽管短生命周期对象已经不再需要，但是因为长生命周期对象持有它的引用而导致它不能被回收，这就是java中内存泄露的发生场景。通俗地说，就是程序员可能创建了一个对象，以后一直不再使用这个对象，但是这个对象却一直被引用，即这个对象无用但是却无法被垃圾回收器回收的，这就是java中可能出现内存泄露的情况。例如，在缓存系统中，我们加载了一个对象放在缓存中(例如放在一个全局map对象中)，然后一直不再使用它，这个对象一直被缓存引用。</p>
+<p>(1) 在堆中申请的空间没有释放；</p>
 <p>(2) 对象已不再被使用(注意：这里的不再被使用是指对程序来说没有用处，如数据库连接使用后没有关，但是还是存在着引用)，但是仍然在内存中保留着。</p>
-<p>GC机制的引入只能解决第一种情况，对于第2种情况无法保证不再使用的对象会被释放。java语言中的内存泄露主要指第2种情况。</p>
-<p><strong>内存泄露的原因</strong></p>
+<p>GC机制的引入只能解决第一种情况，对于第2种情况无法保证不再使用的对象会被释放。Java语言中的内存泄露主要指第2种情况。</p>
+<p><strong>内存泄露的主要场景：</strong></p>
 <p>(1) 静态集合类。如HashMap和Vector。这些容器是静态的，生命周期和程序的生命周期一致，那么在容器中对象的生命周期也和其一样，对象在程序结束之前将不能被释放，从而会造成内存泄露。</p>
 <p>(2) 各种连接。如数据库连接，网络连接，IO连接，不再使用时如果连接不释放容易造成内存泄露。</p>
 <p>(3) 监听器。释放对象时往往没有相应的删除监听器，可能会导致内存泄露。</p>
-<p>内存溢出（OOM）是指程序在申请内存时没有足够的内存供使用，进而导致程序崩溃。内存泄露（Memory Leak）最终会导致内存溢出。</p>
-<p>推荐阅读：<a href="http://www.linuxeden.com/html/develop/20131223/146757.html?comefrom=http://blogread.cn/news/" target="_blank" rel="external">动手探究Java内存泄露问题</a></p>
+<p>例1：内存泄露举例</p>
+<pre><code>class Stack {
+    private Object[] elements = new Object[10];
+    private int size = 0;
 
+    public void push(Object e) {
+        ensureCapacity();
+        elements[size++] = e;
+    }
+
+    public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+        return elements[--size];
+    }
+
+    private void ensureCapacity() {
+        if (elements.length == size) {
+            Object[] oldElements = elements;
+            elements = new Object[2 * elements.length + 1];
+            System.arraycopy(oldElements, 0, elements, 0, size);
+        }
+    }
+}
+
+这个类主要特点就是清空堆栈中的某个元素，并不是彻底把它从数组中拿掉，而是把存储的总数减少。
+假如堆栈放了10个元素，然后全部弹出来，虽然堆栈是空的，没有我们要的东西，但是这是个对象是无法回收的，这种情况符合内存泄露的两个条件：无用且无法回收。
+正确的做法：在弹出某个元素时，将那个元素所在的位置的值设置为null，让它从数组中消失。
+</code></pre><p>例2：内存泄露举例</p>
+<pre><code>public class Test {
+    public static Stack&lt;Object&gt; s= new Stack&lt;Object&gt;(); 
+    static{ 
+        s.push(new Object()); 
+        s.pop();              //这里有一个对象发生内存泄露 
+        s.push(new Object()); //上面的对象可以被回收了，等于是自愈了 
+    }
+}
+
+因为s是static的，会一直存在直到程序退出，因此其中存储的对象在程序结束之前都不会被释放，存在内存泄漏。
+但是我们也可以看到它有自愈功能，例如：如果你的Stack最多有100个对象，那么最多也就只有100个对象无法被回收，Stack内部持有100个引用，最坏的情况就是他们都是无用的。
+但是如果我们一旦放新的对象进去，那么对之前对象的引用就会自然消失！
+</code></pre><p>例3：内存泄露举例</p>
+<pre><code>当一个对象被存储进HashSet集合中后，就不能再修改这个对象中的参与计算哈希值的那些字段了。
+否则，修改后的对象的哈希值与最初存储进HashSet集合中时的哈希值就不同了。
+在这种情况下，即使在contains()方法使用该对象的当前引用作为参数去HashSet集合中检索对象，也将返回找不到对象的结果，
+这也会导致无法从HashSet集合中单独删除当前对象，造成内存泄露。
+</code></pre><p>内存溢出（OOM）是指程序在申请内存时没有足够的内存供使用，进而导致程序崩溃。内存泄露（Memory Leak）最终会导致内存溢出。</p>
+<p>推荐阅读：<a href="http://www.linuxeden.com/html/develop/20131223/146757.html?comefrom=http://blogread.cn/news/" target="_blank" rel="external">动手探究Java内存泄露问题</a></p>
+<h3 id="问：assertion-断言"><a href="#问：assertion-断言" class="headerlink" title="问：assertion(断言)"></a>问：assertion(断言)</h3><p>assertion(断言)是软件开发中常用的一种调试方式，很多开发语言都支持这种机制。</p>
+<p>在实现中，assertion就是在程序中的一条语句，它对一个boolean表达式进行检查，一个正确程序必须保证这个boolean表达式的值为true；如果该值为false，说明程序已经处于不正确的状态下，assert将给出警告或退出。</p>
+<p>一般来说，assertion用于保证程序最基本、关键的正确性。assertion检查通常在开发和测试时开启；为了提高性能，在软件发布后，assertion检查通常是关闭的。</p>
+<p>例1：</p>
+<pre><code>public class Test {
+    public static void main(String[] args) throws Exception {
+        int i = 0;
+        for (i = 0; i &lt; 5; i++) {
+            System.out.println(i);
+        }
+        // 假设程序不小心多了一句--i;
+        --i;
+        assert i == 5;
+    }
+}
+
+运行：Run --&gt; Run Configurations... --&gt; 选择Arguments选项卡 --&gt; 在VM arguments文本框中输入：-ea 
+注意：中间没有空格，如果输入 -da 表示禁止断言。
+</code></pre>
         
         </div>
         <footer class="article-footer">
@@ -341,7 +423,7 @@ JVM一般根据对象的生存周期将堆内存分为若干不同的区域，�
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj5b1r7b900004wwrz7l7t2av" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/01-Java概述/" data-id="cj5f031l70000i0wr30dxdk7w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

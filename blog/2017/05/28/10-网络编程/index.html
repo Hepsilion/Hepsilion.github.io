@@ -230,11 +230,7 @@ var _hmt = _hmt || [];
 getLocalAddress()     Gets the local address to which the socket is bound.      
 getReuseAddress()     Tests if SO_RESUSADDR is enabled.      
 getRemotePort()        Returns the remote port number to which this socket is connected.
-</code></pre><h3 id="问：序列化"><a href="#问：序列化" class="headerlink" title="问：序列化"></a>问：序列化</h3><p>序列化:将一个对象保存到一个文件，可以通过流的方式在网络上传输；也可以将文件的内容读取，转化为一个对象。</p>
-<p>处理对象流的机制：所谓对象流也就是将对象的内容进行流化。可以对流化后的对象进行读写操作，也可将流化后的对象传输于网络之间。</p>
-<p>序列化是为了解决在对对象流进行读写操作时所引发的问题。</p>
-<p>序列化的实现：将需要被序列化的类实现java.io.Serializable接口，该接口没有需要实现的方法，implements Serializable只是为了标注该对象是可被序列化的，然后使用一个输出流(如：FileOutputStream)来构造一个ObjectOutputStream(对象流)对象，接着，使用ObjectOutputStream对象的writeObject(Object obj)方法就可以将参数为obj的对象写出(即保存其状态)，要写入的话则用输入流。</p>
-
+</code></pre>
         
         </div>
         <footer class="article-footer">
@@ -244,7 +240,7 @@ getRemotePort()        Returns the remote port number to which this socket is co
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/10-网络编程/" data-id="cj5b1r7dl001m4wwrah11c94w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/10-网络编程/" data-id="cj5f031o0001pi0wr28qn2smp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

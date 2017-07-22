@@ -226,7 +226,8 @@ var _hmt = _hmt || [];
             
             <p>反射</p>
 <a id="more"></a>
-<h3 id="问：Classloader"><a href="#问：Classloader" class="headerlink" title="问：Classloader"></a>问：Classloader</h3><p>Java中类的加载是由类加载器完成的，类加载器包括：引导类加载器(BootStrap ClassLoader)、扩展类加载器(Extension ClassLoader)、应用类加载器(Application ClassLoader)和用户自定义类加载器(java.lang.ClassLoader的子类)。</p>
+<h3 id="问：Classloader"><a href="#问：Classloader" class="headerlink" title="问：Classloader"></a>问：Classloader</h3><p>Java中类的加载是由ClassLoader和它的子类来实现的，它负责在运行时查找和装入类文件中的类。</p>
+<p>ClassLoader是一个重要的Java运行时系统组件，它主要包括：引导类加载器(BootStrap ClassLoader)、扩展类加载器(Extension ClassLoader)、应用类加载器(Application ClassLoader)和用户自定义类加载器(java.lang.ClassLoader的子类)。</p>
 <ul>
 <li>Bootstrap ClassLoader：它负责加载放在<java_home\>\jre\lib/目录中的，或者-Xbootclasspath参数所指定路径中的Java核心库(如rt.jar)，是用原生代码来实现的；</java_home\></li>
 <li>Extension ClassLoader：它负责加载<java_home\>\jre\lib\ext目录中，或系统变量java.ext.dirs所指定路径中的所有类库；</java_home\></li>
@@ -234,7 +235,12 @@ var _hmt = _hmt || [];
 <li>Custom ClassLoader：应用程序根据自身需要自定义的ClassLoader，是java.lang.ClassLoader的子类，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader。</li>
 </ul>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8004321/36456?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a>，<br><a href="https://www.nowcoder.com/profile/7404313/test/7993658/14508?onlyWrong=0" target="_blank" rel="external">例2</a></p>
-<h3 id="问：JVM的类加载机制-还不怎么懂，暂时保留"><a href="#问：JVM的类加载机制-还不怎么懂，暂时保留" class="headerlink" title="问：JVM的类加载机制 (还不怎么懂，暂时保留)"></a>问：JVM的类加载机制 (还不怎么懂，暂时保留)</h3><p><a href="http://www.importnew.com/18548.html" title="Title" target="_blank" rel="external">推荐阅读</a></p>
+<p>例3：能不能自己写个类，也叫java.lang.String？</p>
+<pre><code>可以，但在应用的时候，需要用自己的类加载器去加载，否则，系统的类加载器永远只是去加载rt.jar包中的那个java.lang.String。
+由于在tomcat的web应用程序中，都是由webapp自己的类加载器先自己加载WEB-INF/classess目录中的类，然后才委托上级的类加载器加载。
+如果我们在tomcat的web应用程序中写一个java.lang.String，这时候Servlet程序加载的就是我们自己写的java.lang.String，
+但是这么干就会出很多潜在的问题，原来所有用了java.lang.String类的都将出现问题。
+</code></pre><h3 id="问：JVM的类加载机制-还不怎么懂，暂时保留"><a href="#问：JVM的类加载机制-还不怎么懂，暂时保留" class="headerlink" title="问：JVM的类加载机制 (还不怎么懂，暂时保留)"></a>问：JVM的类加载机制 (还不怎么懂，暂时保留)</h3><p><a href="http://www.importnew.com/18548.html" title="Title" target="_blank" rel="external">推荐阅读</a></p>
 <p>Java类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载（Loading）、验证（Verification）、准备(Preparation)、解析(Resolution)、初始化(Initialization)、使用(Using)和卸载(Unloading)7个阶段。其中准备、验证、解析3个部分统称为连接（Linking）。</p>
 <center><br><img src="/blog/2017/05/28/11-反射/ClassLoad.jpg" width="55%">图 1<br></center>
 
@@ -336,7 +342,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/11-反射/" data-id="cj5b1r7dn001p4wwrasluak0q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/11-反射/" data-id="cj5f031o2001si0wrnkec9vlv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
