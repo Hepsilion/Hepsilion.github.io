@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第五章 SQLite数据库 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                40
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                21
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-05-SQLite" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            第五章 SQLite数据库
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/03/05/05-SQLite/">
+            <time datetime="2017-03-05T12:43:19.000Z" itemprop="datePublished">2017-03-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/Android/">Android</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <ul>
+<li>SQLite数据库的基本操作</li>
+<li>使用sqlite3工具操作数据库</li>
+<li>使用ListView控件展示数据</li>
+</ul>
+<a id="more"></a>
+<h2 id="一、SQLite数据库简介"><a href="#一、SQLite数据库简介" class="headerlink" title="一、SQLite数据库简介"></a>一、SQLite数据库简介</h2><p>SQLite是一个轻量级数据库，占用资源少，遵守ACID事务属性，同时还支持SQL语言、事务处理等功能。</p>
+<p>SQLite没有服务器进程，它通过文件保存数据，该文件是跨平台的，可以放在其他平台中使用。</p>
+<p>在保存数据时，支持NULL、Integer、Real(浮点型数字)、Text(字符串文本)和Blob(二进制对象)5种数据类型。但实际上SQLite也接收varchar(n)、char(n)、decimal(p, s)等数据类型，只不过在运算或保存时会转换成对应的5种数据类型。因此，可以将各种类型的数据保存到任何字段中，而不用关心字段声明的数据类型。这也是SQLite数据库的最大特点。</p>
+<h2 id="二、SQLite数据库的使用"><a href="#二、SQLite数据库的使用" class="headerlink" title="二、SQLite数据库的使用"></a>二、SQLite数据库的使用</h2><h3 id="1-SQLite操作API"><a href="#1-SQLite操作API" class="headerlink" title="1. SQLite操作API"></a>1. SQLite操作API</h3><p>为了方便使用SQLite数据库，Android SDK提供了一系列对数据库进行操作的类和接口。</p>
+<p>(1) SQLiteOpenHelper类</p>
+<p>SQLiteOpenHelper是一个抽象类，该类用于创建数据库和数据库版本更新。该类常用方法如图5-1所示</p>
+<center><br><img src="/blog/2017/03/05/05-SQLite/Pic5-1.JPG" width="90%">图 5-1<br></center>
+
+<p>(2) SQLiteDatabase类</p>
+<p>SQLiteDatabase是一个数据库访问类，该类封装了一系列数据库操作的API，可以对数据库进行增、删、改、查操作。该类的常用方法如图5-2所示。</p>
+<center><br><img src="/blog/2017/03/05/05-SQLite/Pic5-2.JPG" width="90%">图 5-2<br></center>
+
+<p>(3) Cursor接口</p>
+<p>Cursor是一个游标接口，在数据库操作中作为返回值，相当于结果集ResultSet。该类的常用方法如图5-3所示。</p>
+<center><br><img src="/blog/2017/03/05/05-SQLite/Pic5-3.JPG" width="70%">图 5-3<br></center>
+
+<h3 id="2-SQLite常用操作"><a href="#2-SQLite常用操作" class="headerlink" title="2. SQLite常用操作"></a>2. SQLite常用操作</h3><p><strong>(1) 创建SQLite数据库</strong></p>
+<p>Android系统推荐使用SQLiteOpenHelper的子类创建SQLite数据库，因此需要创建一个类继承自SQLiteOpenHelper，重写onCreate()方法，并在该方法中执行创建数据库的命令。</p>
+<p><strong>示例代码</strong></p>
+<pre><code>public class PersonSQLiteOpenHelper extends SQLiteOpenHelper{
+    // 构造方法，用来定义数据库的名称，数据库查询的结果集，数据库的版本
+    public PersonSQLiteOpenHelper(Context context){
+        super(context, &quot;person.db&quot;, null, 5);
+    }
+
+    // 数据库第一次被创建时调用该方法
+    public void onCreate(){
+        // 初始化数据库的表结构，执行一条建表的SQL语句
+        db.execSQL(&quot;create table person (id integer primary key autoincrement, name varchar(20), number varchar(20))&quot;);
+    }
+
+    // 当数据库的版本号增加时调用，如果数据库的版本号不增加，该方法则不会调用
+    public void onUpgrade(){
+        db.execSQL(&quot;alter table person add account varchar(20)&quot;);
+    }
+}
+</code></pre><p><strong>值得注意的是，创建的数据库被放置在/data/data/packagename/databases目录下。</strong></p>
+<p><strong>(2) 增</strong></p>
+<p><strong>示例代码</strong>：使用SQLiteDatabase对象向person表中插入一条数据</p>
+<pre><code>public void add(String name, String number){
+    // 获取一个可读写的SQLiteDatabase对象
+    SQLiteDatabase db=helper.getWritableDatabase();
+
+    // 创建一个ContentValues对象，将参数以key，value的形式添加进去
+    ContentValues values=new ContentValues();
+    values.put(&quot;name&quot;, name);
+    values.put(&quot;number&quot;, number);
+
+    // 插入一条数据到person表中
+    long id=db.insert(&quot;person&quot;, null, values);
+
+    // 关闭数据库
+    db.close();
+    return id;
+}
+</code></pre><p>除了上述介绍的方法之外，还有一个方法可以实现该功能：</p>
+<pre><code>db.execSQL(&quot;insert into person(name, number) values (?, ?)&quot;, new Object[]{name, number});
+</code></pre><p><strong>需要注意的是，使用完SQLiteDatabase对象后一定要关闭，否则数据库连接会一直存在，不断消耗内存，并且会报出数据库未关闭异常，当系统内存不足时将获取不到SQLiteDatabase对象。</strong></p>
+<p><strong>(3) 删</strong></p>
+<p><strong>示例代码</strong>：使用SQLiteDatabase对象的delete()方法删除person表中的数据</p>
+<pre><code>public int delete(String name){
+    // 获取一个可读写的SQLiteDatabase对象
+    SQLiteDatabase db=helper.getWritableDatabase();
+
+    // 删除数据
+    int number=db.delete(&quot;person&quot;, &quot;name=?&quot;, new String[]{name});
+
+    // 关闭数据库
+    db.close();
+    return number;
+}
+</code></pre><p><strong>(4) 改</strong></p>
+<p><strong>示例代码</strong>：使用SQLiteDatabase对象的update()方法修改person表中的数据</p>
+<pre><code>public int update(String name, String newNumber) {
+    // 获取一个可读写的SQLiteDatabase对象
+    SQLiteDatabase db=helper.getWritableDatabase();
+
+    // 创建一个ContentValues对象，将参数以key，value的形式添加进去
+    ContentValues values=new ContentValues();
+    values.put(&quot;number&quot;, newNumber);
+
+    //执行修改
+    int number=db.update(&quot;person&quot;, values, &quot;name=?&quot;, new String[]{name});
+
+    // 关闭数据库
+    db.close();
+    return number;
+}
+</code></pre><p><strong>(5) 查</strong></p>
+<p>SQLiteDatabase提供两个用于查询数据的方法，一个是rawQuery()方法，另一个是query()方法。</p>
+<p><strong>示例代码</strong>：使用SQLiteDatabase对象的query()方法查询person表中的数据</p>
+<pre><code>public boolean find(String name){
+    // 获取一个可读的SQLiteDatabase对象
+    SQLiteDatabase db=helper.getReadableDatabase();
+
+    // 查询数据库的操作
+    // 参数1：表名；  参数2：查询的列名；  参数3：查询条件；
+    // 参数4：查询参数值；  参数5：分组条件；  参数6：having条件；  参数7：排列方式
+    Cursor cursor=db.query(&quot;&quot;, null, &quot;&quot;, new String[]{name}, null, null, null);
+    // 是否有下一个值
+    boolean result=cursor.moveToNext();
+    // 关闭游标
+    cursor.close();
+
+    // 关闭数据库
+    db.close();
+    return result;
+}
+</code></pre><p>使用SQLiteDatabase对象的rawQuery()方法查询person表中的数据</p>
+<pre><code>Cursor cursor=db.rawQuery(&quot;select * from person where name=?&quot;, new String[]{name});
+</code></pre><p><strong>增、删、改操作都可以用execSQL()方法执行SQL语句，而查询却使用rawQuery()，这是因为查询数据库会返回一个结果集Cursor，而execSQL()方法没有返回值。</strong></p>
+<p><strong>需要注意的是，在使用完Cursor对象时，一定要及时关闭，否则会造成内存泄露。</strong></p>
+<h3 id="3-SQLite事务操作"><a href="#3-SQLite事务操作" class="headerlink" title="3. SQLite事务操作"></a>3. SQLite事务操作</h3><p>所谓的事务就是针对数据库的一组操作，它可以由一条或多条SQL语句组成，由于事务的操作具备原子性的特点，如果其中有一条语句无法执行，那么所有的语句都不会执行，也就是说，事务中的语句要么都执行，要么都不执行。</p>
+<p><strong>示例代码</strong>：使用SQLite的事务来模拟转账功能</p>
+<p>首先得到一个SQLiteDatabase对象，然后开启事务执行事务操作，最后关闭事务。</p>
+<pre><code>PersonSQLiteOpenHelper helper=new PersonSQLiteOpenHelper(getContext());
+// 获取一个可读写的SQLiteDatabase对象
+SQLiteDatabase db=helper.getWritableDatabase();
+// 开始数据库的事务
+db.beginTransaction();
+try{    
+    //执行转出操作
+    db.execSQL(&quot;update person set account=account-100 where name=?&quot;, new Object[]{&quot;zhangsan&quot;}); 
+    //执行转入操作
+    db.execSQL(&quot;update person set account=account+100 where name=?&quot;, new Object[]{&quot;wangwu&quot;}); 
+    //标记数据库事物执行成功
+    db.setTransactionSuccessful();
+}catch(Exception e){
+    Log.i(&quot;事务处理失败&quot;, e.toString());
+}finally{
+    db.endTransaction();  //关闭事务
+    db.close();           //关闭数据库
+}
+</code></pre><p><strong>需要注意的是，事务操作完成后，一定要使用endTransaction()方法关闭事务，当执行到endTransaction()方法时，首先会检查是否有事务执行成功的标记，有则提交数据，无则回滚数据。最后会关闭事务，如果不关闭事务，事务只有到超时才自动结束，会降低数据库并发效率。因此，通常情况下，该方法放在finally中执行。</strong></p>
+<h3 id="4-sqlite3工具"><a href="#4-sqlite3工具" class="headerlink" title="4. sqlite3工具"></a>4. sqlite3工具</h3><p>在Android开发中，使用真机进行测试无法进入data目录(只有获得root权限的手机可以进入data目录)，因此也无法直接操作应用程序下的数据库。<br>为了解决这个问题，SQLite数据库为开发者提供了一个sqlite3.exe工具，通过这个工具可以直接操作数据库。</p>
+<p>sqlite3.exe是一个简单的SQLite数据库管理工具，位于Android sdk/tools目录下。由于Android在运行时集成了sqlite3.exe，因此在使用sqlite3.exe工具前必须要开启模拟器或者连接真实设备。</p>
+<p>使用该工具时，需要在命令行，一次输入如下命令：</p>
+<ul>
+<li>adb shell (挂载到Linux的目录空间)</li>
+<li>cd data/data (进入data/data目录)</li>
+<li>cd packagename (进入应用程序包目录中)</li>
+<li>ls (列出当前文件夹下的文件)</li>
+<li>cd databases (进入databases文件夹)</li>
+<li>ls -l (列出当前文件夹所有文件的详细格式)</li>
+<li>sqlite3 person.db (使用sqlite3操作应用程序下的数据库)</li>
+<li>select * from person; (使用SQL语句查询person表中的信息)</li>
+</ul>
+<h2 id="三、ListView"><a href="#三、ListView" class="headerlink" title="三、ListView"></a>三、ListView</h2><p>在Android开发中，ListView是一个比较常用的控件。它以列表的形式展示具体数据内容，并且能够根据数据的长度自适应屏幕显示。</p>
+<p><strong>1. ListView控件的使用</strong></p>
+<p>ListView的常见属性如图5-4所示。</p>
+<center><br><img src="/blog/2017/03/05/05-SQLite/Pic5-4.JPG" width="60%">图 5-4<br></center>
+
+<p>使用ListView的<strong>示例代码</strong>：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/ll_root&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+    &lt;ListView
+        android:id=&quot;@+id/lv&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;/&gt;
+&lt;/LinearLayout&gt;
+</code></pre><center><br><img src="/blog/2017/03/05/05-SQLite/Pic5_5.png" width="30%">图5-5<br></center>
+
+<p>图形化界面如图5-5所示，ListView是一个列表视图，由很多Item组成，每一个Item的布局都是一样的。需要注意的是，在布局文件中指定了ListView的id之后，ListView才会在图形化视图中显示出来。同时如果不对ListView进行数据适配，那么就无法在界面上看到布局文件中创建的ListView。</p>
+<p><strong>2. 常用数据适配器</strong></p>
+<p>在使用ListView时，需要对其进行数据适配。为了实现这个功能，Android系统提供了一系列的适配器(Adapter)对ListView进行数据适配。可以将适配器理解为界面数据绑定，适配器就像显示器，把复杂的数据按人们易于接受的方式来展示。</p>
+<p><strong>(1) BaseAdapter</strong></p>
+<p>它是一个抽象类，该类拥有4个抽象方法。在Android开发中，开发者在适配数据到ListView时，需要创建一个类继承BaseAdapter并重写这4个抽象方法，Android系统再根据这几个抽象方法对ListView进行数据适配。</p>
+<ul>
+<li>public int getCount(); 得到ListView中Item的总数</li>
+<li>public Object getItem(int position); 根据position得到某个Item对象</li>
+<li>public long getItemId(int position); 根据position得到某个Item对象的id</li>
+<li>public View getView(int position, View convertView, ViewGroup parent); 得到position位置对应的Item视图</li>
+</ul>
+<p><strong>(2) SimpleAdapter</strong></p>
+<p>SimpleAdapter继承自BaseAdapter，实现了BaseAdapter的4个抽象方法。因此，开发者只需在创建SimpleAdapter实例时，在构造方法中传入相应的参数即可。</p>
+<p>SimpleAdapter的构造方法：</p>
+<pre><code>public SimpleAdapter(Context context, List&lt;? extends Map&lt;String, ?&gt; data, int resource, String[] from, int[] to);
+</code></pre><p>构造方法的参数介绍如下：</p>
+<ul>
+<li>Context context：Context对象，getView()方法中需要用到Context将布局转换成View对象</li>
+<li>List&lt;? extends Map<string, ?="">&gt; data：数据集合，SimpleAdapter已经在getCount()放啊中实现了将数据集合大小返回。</string,></li>
+<li>int resource：Item布局的资源id</li>
+<li>String[] from：Map集合里面的key</li>
+<li>int[] to：Item布局对应的空间id</li>
+</ul>
+<p>需要注意的是，SimpleAdapter只能适配Checkable、TextView、ImageView，其中Checkable是一个接口，CheckBox控件就实现了该接口，TextView是显示文本的控件，ImageView是显示图片的空间。<strong>如果int[] to所代表的控件不是这三种类型则会报IllegalStateException。</strong></p>
+<p><strong>(3) ArrayAdapter</strong></p>
+<p>ArrayAdapter也是BaseAdapter的子类，与SimpleAdapter类似，开发者只需要在构造方法里面传入相应的参数即可适配数据。</p>
+<pre><code>// 需要适配的数据
+private String[] names = { &quot;京东商城&quot;, &quot;QQ&quot;, &quot;QQ斗地主&quot;, &quot;新浪微博&quot;, &quot;天猫&quot;, &quot;UC浏览器&quot;, &quot;微信&quot; };
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    // 初始化ListView控件
+    mListView = (ListView) findViewById(R.id.lv);
+
+    // ArrayAdapter
+    mListView.setAdapter(new ArrayAdapter&lt;String&gt;(this, R.layout.list_item, R.id.tv_list, names));
+}
+</code></pre><p>ArrayAdapter通常用于适配TextView控件，例如Android系统中的Setting。</p>
+<p>ArrayAdapter的构造方法如下所示：<strong>public ArrayAdapter(Context context, int resource, int textViewResourceId, T[] objects);</strong></p>
+<p>构造方法的参数介绍如下：</p>
+<ul>
+<li>Context context：Context对象</li>
+<li>int resource：Item布局资源的id</li>
+<li>int textViewResourceId：Item布局相应的TextView控件的id</li>
+<li>T[] objects：需要适配的数据数组</li>
+</ul>
+<p><strong>案例</strong>：Demo0501，Android应用市场，演示如何使用ListView以及如何对其进行数据适配。本案例要实现的是将一个字符数组和一组图片资源绑定到ListView上显示。</p>
+<p><strong>案例</strong>：Demo0502，商品展示，结合ListView和SQLite来实现在界面上操作数据库。</p>
+<p>ListView的几个方法：</p>
+<ul>
+<li>setOnItemClickListener()方法：该方法用于监听Item的点击事件，在使用该方法时需要传入一个OnItemClickListener的实现类对象，并且需要实现onItemClick方法。当点击ListView的Item时就会触发Item的点击事件然后回调onItemClick()方法。</li>
+<li>setSelection()方法：该方法用于设置当前选中的条目。</li>
+<li>notifyDataSetChange()方法：当数据适配器中的内容发生变化时会调用该方法，重新执行Adapter的getView()方法。</li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/03/05/05-SQLite/" data-id="cj5fc7dnu000onkwrvw2k3e69" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/03/05/05-SQLite/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/03/05/05-SQLite/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/03/04/04-数据存储/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    第四章 数据存储
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/03/06/06-ContentProvider/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">第六章 ContentProvider</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
+                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Docker-Hadoop-Helloworld" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/环境配置/">环境配置</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="title">Docker-Hadoop-Helloworld</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T14:48:12.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/C-plus-plus/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="C plus plus" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/C-C/">C/C++</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/C-plus-plus/" class="title">C plus plus</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:03:50.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Probability-Theory/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Probability Theory" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Probability-Theory/" class="title">Probability Theory</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:02:06.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/信息安全/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="信息安全总结" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/计算机基础/">计算机基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/信息安全/" class="title">信息安全总结</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/03/05/05-SQLite/';
+        
+        this.page.identifier = '05-SQLite';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

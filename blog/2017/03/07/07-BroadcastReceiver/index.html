@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第七章 广播接收者 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                40
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                21
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-07-BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            第七章 广播接收者
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/03/07/07-BroadcastReceiver/">
+            <time datetime="2017-03-07T12:44:40.000Z" itemprop="datePublished">2017-03-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Android基础/">Android基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/Android/">Android</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <ul>
+<li>创建广播接收者</li>
+<li>自定义广播</li>
+<li>有序广播和无序广播</li>
+<li>常用广播接收者(如开机启动、短信接收)的使用</li>
+</ul>
+<a id="more"></a>
+<p>在Android系统中，广播(Broadcast)是一种在应用程序之间传递消息的机制，广播接收者(BroadcaseReceiver)是用来接收、过滤并响应广播的一类组件。通过广播接收者可以监听系统中的广播消息，在不同组件之间进行通信。</p>
+<h2 id="一、广播接收者入门"><a href="#一、广播接收者入门" class="headerlink" title="一、广播接收者入门"></a>一、广播接收者入门</h2><p>在Android系统中内置了很多系统级别的广播，例如，手机开机完成后会发送一条广播，电池电量不足时也会发送一条广播等。为了监听这些广播事件，Android提供了一个BroadcastReceiver组件，该组件可以监听来自系统或者应用程序的广播。</p>
+<p>当Android系统产生一个广播事件时，可以有多个对应的BroadcastReceiver接收并进行处理。</p>
+<h3 id="1-广播接收者创建与注册"><a href="#1-广播接收者创建与注册" class="headerlink" title="1. 广播接收者创建与注册"></a>1. 广播接收者创建与注册</h3><p>要使用广播接收者接收其他应用程序发出的广播，先要在本应用中创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。</p>
+<p>注册广播接收者有两种方式，常驻型广播和非常驻型广播。</p>
+<p><strong>(1) 创建广播接收者</strong></p>
+<p>要对监听到的广播事件进行处理，需要创建一个类继承自BroadcastReceiver，然后重写onReceive()方法。</p>
+<pre><code>public class OutCallReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+    }
+}
+</code></pre><p>当监听到有广播发出时，就会调用onReceive()方法，在onReceive()方法中可以对事件进行处理。</p>
+<p><strong>(2) 注册常驻型广播接收者</strong></p>
+<p>常驻型广播接收者是当应用程序关闭后，如果接收到其他应用程序发出的广播，那么该程序会自动重新启动。常驻型广播接收者需要在清单文件中进行注册。</p>
+<p><strong>示例代码</strong></p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0701.OutCallReceiver&quot; &gt;
+    &lt;intent-filter android:priority=&quot;20&quot;&gt;
+        &lt;action android:name=&quot;android.intent.action.NEW_OUTGOING_CALL&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>上述代码是在清单文件中注册的监听系统拨打电话的广播。</p>
+<ul>
+<li>android:name=”learning.android.it.org.demo0701.OutCallReceiver”是创建的广播接收者的全路径名；</li>
+<li>与定义隐式意图一样，广播接收者也需要注册一个<code>&lt;intent-filter&gt;</code>，在过滤器中指定要接收的广播事件；</li>
+<li>android:name=”android.intent.action.NEW_OUTGOING_CALL”是系统内部定义的拨打电话的广播事件；</li>
+<li>android:priority=”20”是该广播的优先级，这个值越大代表接收的优先级越高。</li>
+</ul>
+<p><strong>(3) 注册非常驻型广播接收者</strong></p>
+<p>非常驻型广播接收者依赖于注册广播的组件的生命周期，例如在Activity中注册广播接收者，当Activity销毁后，广播也随之被移除。这种广播接收者需要在代码中注册。</p>
+<p><strong>示例代码</strong></p>
+<pre><code>MyBroadcastReceiver receiver=new MyBroadcastReceiver();
+// 实例化过滤器并设置要过滤的广播
+String action=&quot;android.intent.action.NEW_OUTGOING_CALL&quot;;
+IntentFilter intentFilter=new IntentFilter(action);
+// 注册广播接收者
+registerReceiver(receiver, intentFilter);
+</code></pre><p>与清单文件中注册一样，代码注册广播接收者同样需要进行过滤，IntentFilter接收的是监听的广播事件，最后用registerReceiver方法进行注册。</p>
+<p>与清单文件注册不同的是，代码有注册也有移除，比如在Activity的onCreate()中注册广播接收者，就要在onDestroy()方法中进行解除广播。</p>
+<pre><code>unregisterReceiver(receiver);
+</code></pre><p><strong>需要注意的是，常驻型广播接收者在应用程序关闭后，接收到广播会重新自动创建。非常驻型广播接收者则依赖于注册广播组件的生命周期和调用unregisterReceiver()方法手动移除。</strong></p>
+<p><strong>(4) 案例：Demo0701，IP拨号器，当拨打长途电话时，广播接收者就会监听到这个广播事件，自动在电话号码前加上几个数字，如17911、17951等。</strong></p>
+<p>注意：在Android4.0一下的系统中，当进程不存在时，只要有响应广播发出，进程就会自动创建并接收广播进行处理。Google工程师认为这样不安全，为了保护用户隐私，在Android4.0以上系统中，当在任务管理器界面强行停止进程后，再有广播发出也不会打开进程进行接收了。</p>
+<h2 id="二、自定义广播"><a href="#二、自定义广播" class="headerlink" title="二、自定义广播"></a>二、自定义广播</h2><p>Android系统中自带了很多广播，如果需要监听某个广播，只需要创建对应的广播接收者即可。在实际开发中，当这些系统级广播事件不能满足实际需求时，还可以自定义广播。需要注意的是，自定义广播需要由对应的广播接收者去接收，否则这个广播是无意义的。</p>
+<p><strong>案例：Demo0702，电台与收音机</strong></p>
+<p>创建广播：创建一个Intent对象，然后通过Intent.setAction()语句指定广播事件，最后通过sendBroadcast(intent)发送广播。</p>
+<pre><code>Intent intent = new Intent();
+// 定义广播的事件类型
+intent.setAction(&quot;www.baidu.com&quot;);
+// 发送广播
+sendBroadcast(intent);
+</code></pre><p>接收广播：和接收系统广播事件一样，创建一个广播接收者类继承自BroadcastReceiver类，然后在清单文件中或者代码中进行注册并指定要接收的广播事件，最后重写广播接收者类的onReceive()方法，在方法中进行处理广播事件即可。<strong>需要注意的是，自定义的广播事件与广播接收者在清单文件中注册的事件要一致，否则无法接收广播</strong></p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0702.MyBroadcastReceiver&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><h2 id="三、广播的类型"><a href="#三、广播的类型" class="headerlink" title="三、广播的类型"></a>三、广播的类型</h2><p>在Android系统中，根据广播被接收顺序的不同，可以将其分为有序广播和无序广播。</p>
+<p><strong>1. 无序广播</strong></p>
+<p>无序广播是一种完全异步被接收的广播，在广播发出去之后，所有监听了这个广播事件的广播接收者都会在同一时刻接收到这个广播，它们之间没有任何先后顺序可言，这种广播的效率会比较高，但同时意味着它是无法被截断的。</p>
+<center><br><img src="/blog/2017/03/07/07-BroadcastReceiver/Pic7-1.JPG" width="35%">图7-1<br></center>
+
+<p>无序广播的工作流程如图7-1所示，当无序广播发送一条广播消息时，所有的广播接收者都可以接收到，不会被拦截。</p>
+<p><strong>2. 有序广播</strong></p>
+<p>有序广播是一种同步接收的广播，在广播发出之后，同一时刻只会有一个广播接收者能够接收到这条消息，当这个广播接收者中的逻辑执行完后，广播才会继续传递。所以，此时的广播接收者是有先后顺序的，并且可以被拦截。</p>
+<center><br><img src="/blog/2017/03/07/07-BroadcastReceiver/Pic7-2.JPG" width="60%">图7-2<br></center>
+
+<p>有序广播的工作流程如图7-2所示，当有序广播发送一条消息后，高优先级的广播接收者先接收到广播，低优先级的广播接收者后接收到广播。</p>
+<pre><code>Intent intent = new Intent();
+// 定义广播的事件类型
+intent.setAction(&quot;www.baidu.com&quot;);
+// 发送有序广播
+//第一个参数是指定的意图，设置要发送的广播事件；第二个参数指定接收者的权限，如果不想让所有的接收到看到，可以显示地指定接收者的权限，目前不关心，可以将其设置为null
+sendOrderedBroadcast(intent, null);
+</code></pre><p>优先级是在清单文件中注册广播接收者时定义的android:priority=””参数，优先级的范围是-1000~1000之间。如果两个广播接收者的优先级相同，则先注册的组件优先接收到广播。如果两个应用程序监听了同一个广播事件并设置了优先级，则优先级高的应用优先接收到广播。</p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver02&quot; &gt;
+    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver01&quot; &gt;
+    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+&lt;receiver android:name=&quot;learning.android.it.org.demo0703.MyBroadcastReceiver03&quot; &gt;
+    &lt;intent-filter android:priority=&quot;600&quot; &gt;
+        &lt;action android:name=&quot;www.baidu.com&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>如果高优先级的广播接收者将广播终止，则后面的广播接收者无法接收到广播。想要拦截一条广播不往下发送，可以使用abortBroadcast()方法。</p>
+<pre><code>public class MyBroadcastReceiver02 extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;自定义的广播接收者02,接收到了自定义的广播事件&quot;);
+        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;自定义的广播接收者02，接收到了广播事件&quot;);
+        abortBroadcast(); // 拦截有序广播，这句代码执行完后，广播事件将会被终止。
+        Log.i(&quot;MyBroadcastReceiver02&quot;, &quot;我是广播接收者02，广播被我终结了&quot;);
+    }
+}
+</code></pre><p>在实际开发中，还可能遇到这样的情况，当发出了一个有序广播，然后定义多个广播接收者接收这条广播。这些广播接收者的优先级有高有低，需要其中一个广播接收者无论如何都要接收到广播事件，哪怕它的优先级是最低的或者广播被优先级高的接收者强行终止。这时，就可以用一下sendOrderedBroadcast的重载方法，在第三个参数指定要接收的广播接收者。</p>
+<pre><code>MyBroadcastReceiver03 receiver03 = new MyBroadcastReceiver03();
+sendOrderedBroadcast(intent, null, receiver03, null, 0, null, null);
+</code></pre><p><strong>案例：Demo0704，拦截有序广播</strong></p>
+<h2 id="四、常用的广播接收者"><a href="#四、常用的广播接收者" class="headerlink" title="四、常用的广播接收者"></a>四、常用的广播接收者</h2><p><strong>案例：Demo0704，短信拦截器，监听短信接收的广播事件</strong>（拦截没起作用）</p>
+<pre><code>&lt;receiver android:name=&quot;learning.android.it.org.demo0704.MessageReceiver&quot; &gt;
+    &lt;intent-filter android:priority=&quot;1000&quot; &gt;
+        &lt;action android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>设置action为android.provider.Telephony.SMS_RECEIVED，接收短信的广播事件</p>
+<p>在Windows系统中，有些软件一开机就自动启动，同样在Android系统中也可以实现这种功能，例如杀毒软件程序，每次手机开机便会自动启动，这种功能就是通过广播接收者监听开机启动的广播事件实现的。</p>
+<p><strong>案例：Demo0705，杀毒软件，监听开机启动的广播事件</strong></p>
+<pre><code>public class BootReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Intent i = new Intent(context, MainActivity.class);
+        // 由于Activity都是运行在任务栈中的，当开机启动时，任务栈还未创建成功，所以需要设置flag，显示地指定Activity在新的任务栈中运行
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+}
+
+&lt;receiver android:name=&quot;learning.android.it.org.demo0705.BootReceiver&quot; &gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.BOOT_COMPLETED&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;
+</code></pre><p>设置action为android.intent.action.BOOT_COMPLETED，接收开机启动的广播事件</p>
+<p><strong>需要注意的是，在Android3.0以后出现了一个安全机制，如果用户没有启动过这个程序，那么就算该程序注册了开机启动的广播接收者也无法接收到开机启动的广播事件。</strong></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/03/07/07-BroadcastReceiver/" data-id="cj5fc7dol0014nkwrgsy9r0uj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/03/07/07-BroadcastReceiver/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/03/07/07-BroadcastReceiver/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/03/06/06-ContentProvider/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    第六章 ContentProvider
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/03/08/08-Service/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">第八章 服务</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
+                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Docker-Hadoop-Helloworld" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/环境配置/">环境配置</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Docker-Hadoop-Helloworld/" class="title">Docker-Hadoop-Helloworld</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T14:48:12.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/C-plus-plus/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="C plus plus" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/C-C/">C/C++</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/C-plus-plus/" class="title">C plus plus</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:03:50.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/Probability-Theory/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="Probability Theory" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/Probability-Theory/" class="title">Probability Theory</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:02:06.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/05/28/信息安全/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="信息安全总结" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/计算机基础/">计算机基础</a></p>
+                            <p class="item-title"><a href="/blog/2017/05/28/信息安全/" class="title">信息安全总结</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/03/07/07-BroadcastReceiver/';
+        
+        this.page.identifier = '07-BroadcastReceiver';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
