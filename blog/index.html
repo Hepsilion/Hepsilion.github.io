@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                40
+                41
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -182,6 +182,188 @@ var _hmt = _hmt || [];
 
             
             <section id="main">
+    <article id="post-IT校招全国统一模拟笔试-秋招备战专场二模-编程题" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/">
+            <time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/算法/">算法</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+<h1 id="随机的机器人"><a href="#随机的机器人" class="headerlink" title="随机的机器人"></a>随机的机器人</h1><p>有一条无限长的纸带,分割成一系列的格子,最开始所有格子初始是白色。现在在一个格子上放上一个萌萌的机器人(放上的这个格子也会被染红),机器人一旦走到某个格子上,就会把这个格子涂成红色。现在给出一个整数n,机器人现在会在纸带上走n步。每一步,机器人都会向左或者向右走一个格子,两种情况概率相等。机器人做出的所有随机选择都是独立的。现在需要计算出最后纸带上红色格子的期望值。</p>
+<p>输入描述：输入包括一个整数n(0 ≤ n ≤ 500)，即机器人行走的步数。</p>
+<p>输出描述：输出一个实数，表示红色格子的期望个数，保留一位小数。</p>
+<p>示例1</p>
+<p>输入: 4</p>
+<p>输出: 3.4</p>
+<pre><code>import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+        int n=scanner.nextInt();
+
+        double[][][] dp=new double[2][n+3][n+3];
+        dp[0][1][0]=1;
+        for(int i=1; i&lt;=n; i++){
+            int cur=i%2, prev=1-cur;
+
+            for(int j=1; j&lt;=i+1; j++){
+                for(int k=0; k&lt;j; k++){
+                    dp[cur][j][k]=0;
+                }
+            }
+
+            for(int j=1; j&lt;=i; j++){
+                for(int k=0; k&lt;j; k++){
+                    //left
+                    if(k==0)
+                        dp[cur][j+1][k]+=dp[prev][j][k]/2;
+                    else
+                        dp[cur][j][k-1]+=dp[prev][j][k]/2;
+                    //right
+                    if(k==j-1)
+                        dp[cur][j+1][k+1]+=dp[prev][j][k]/2;
+                    else
+                        dp[cur][j][k+1]+=dp[prev][j][k]/2;
+                }
+            }
+        }
+        double ans=0;
+        for(int j=1; j&lt;=n+1; j++){
+            for(int k=0; k&lt;j; k++){
+                ans+=j*dp[n%2][j][k];
+            }
+        }
+        DecimalFormat df=new DecimalFormat(&quot;0.0&quot;);
+        System.out.println(df.format(ans));
+    }
+}
+</code></pre>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" data-id="cj5jojvne002r1wwr4o3xbj8y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-MapReduce" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -226,7 +408,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/06/06/MapReduce/" data-id="cj5fc7dpn002gnkwrd80j3cgq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/06/06/MapReduce/" data-id="cj5jojvoe002y1wwrv2trm3mt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -359,7 +541,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Docker-Hadoop-Helloworld/" data-id="cj5fc7dpk0029nkwrhmq2vavd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Docker-Hadoop-Helloworld/" data-id="cj5jojvn3002q1wwrxehup38l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -492,7 +674,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/C-plus-plus/" data-id="cj5fc7dpe001ynkwrr0e5iwvv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/C-plus-plus/" data-id="cj5jojvmf002g1wwr7tlgsydz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -625,7 +807,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Probability-Theory/" data-id="cj5fc7dpp002knkwr4498yy09" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Probability-Theory/" data-id="cj5jojvo3002v1wwrj5njled4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -758,7 +940,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/信息安全/" data-id="cj5fc7dpq002mnkwrpbgcinbh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/信息安全/" data-id="cj5jojvoz00371wwrx25ja6lv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -891,7 +1073,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/软件测试/" data-id="cj5fc7dq30039nkwrdo6q391w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/软件测试/" data-id="cj5jojvpl003n1wwrdqqb7us1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1024,7 +1206,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Concurrency/" data-id="cj5fc7dpg0023nkwryscyxtat" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Concurrency/" data-id="cj5jojvmn002k1wwrjdq7l5f6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1157,7 +1339,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Design-Pattern/" data-id="cj5fc7dpi0026nkwr6zv5ln2p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Design-Pattern/" data-id="cj5jojvmw002p1wwr6xa7w0jc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1290,7 +1472,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/软件工程/" data-id="cj5fc7dq10036nkwr2mm31mif" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/软件工程/" data-id="cj5jojvpk003k1wwrluzgb9c2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1423,7 +1605,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Linux/" data-id="cj5fc7dpm002dnkwrq32dz786" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Linux/" data-id="cj5jojvos00331wwrv5zqqsrt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1556,7 +1738,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/Advanced-Algorithms/" data-id="cj5fc7dpd001vnkwrdvgmxdhz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/Advanced-Algorithms/" data-id="cj5jojvl9001t1wwrucdi85tc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1689,7 +1871,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/计算机组成原理/" data-id="cj5fc7dpy0031nkwriv7lza77" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/计算机组成原理/" data-id="cj5jojvpi003g1wwrk9iqa8xa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1822,7 +2004,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/04-JSP/" data-id="cj5fc7dnl000hnkwrhzejwvmp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/04-JSP/" data-id="cj5jojvj700061wwrxq5a4o5p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1955,7 +2137,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/03-Servlet/" data-id="cj5fc7dnd000ankwr6k0e0dl4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/03-Servlet/" data-id="cj5jojviw00041wwr85q820x0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2077,7 +2259,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/02-HTTP协议/" data-id="cj5fc7dmv0004nkwrx5x8t301" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/02-HTTP协议/" data-id="cj5jojvip00011wwre4ydstpi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2210,7 +2392,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/28/01-XML/" data-id="cj5fc7dmp0001nkwrdlsimq9c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/28/01-XML/" data-id="cj5jojvij00001wwrvpljival" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2332,7 +2514,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/05/27/如何使用Markdown/" data-id="cj5fc7dpt002rnkwrtld6q3iw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/05/27/如何使用Markdown/" data-id="cj5jojvom00311wwrh2yrj45a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2465,7 +2647,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/18/数据库系统概念/" data-id="cj5fc7dpw002xnkwrdo8uwthg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/18/数据库系统概念/" data-id="cj5jojvp600391wwrpp480cmc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2598,7 +2780,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/17/计算机网络/" data-id="cj5fc7dpz0034nkwrulf5j8ta" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/17/计算机网络/" data-id="cj5jojvpo003q1wwrwenjodzz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2731,7 +2913,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/16/操作系统/" data-id="cj5fc7dpu002tnkwrqfxjtjmm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/16/操作系统/" data-id="cj5jojvpg003e1wwr5hy9y47m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -2864,7 +3046,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/15/数据结构/" data-id="cj5fc7dpx002znkwrmh8kfyq6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/15/数据结构/" data-id="cj5jojvp9003d1wwreilqfp0o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3004,7 +3186,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/09/09-网络编程/" data-id="cj5fc7dp7001mnkwr7uuc7nmd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/09/09-网络编程/" data-id="cj5jojvl8001q1wwrub9eii9e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3142,7 +3324,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/08/08-Service/" data-id="cj5fc7dox001ankwrqwxt5o12" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/08/08-Service/" data-id="cj5jojvkh00191wwrg07244k6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3280,7 +3462,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/07/07-BroadcastReceiver/" data-id="cj5fc7dol0014nkwrgsy9r0uj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/07/07-BroadcastReceiver/" data-id="cj5jojvki001c1wwrvj9vbsxy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3418,7 +3600,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/06/06-ContentProvider/" data-id="cj5fc7doc000ynkwrgwwo3cuc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/06/06-ContentProvider/" data-id="cj5jojvk5000y1wwr2u8e065l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3555,7 +3737,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/05/05-SQLite/" data-id="cj5fc7dnu000onkwrvw2k3e69" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/05/05-SQLite/" data-id="cj5jojvjz000q1wwriseoavvz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3693,7 +3875,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/04/04-数据存储/" data-id="cj5fc7do1000rnkwr7yyyntmh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/04/04-数据存储/" data-id="cj5jojvk4000v1wwrxht7l4nz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3831,7 +4013,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/03/03/03-Activity/" data-id="cj5fc7dn70006nkwrz87k3zyr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/03/03/03-Activity/" data-id="cj5jojvje000a1wwr7hrs2vml" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -3964,7 +4146,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/24/12-JDBC/" data-id="cj5fc7dp9001pnkwr6k14f3n2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/24/12-JDBC/" data-id="cj5jojvm9002b1wwr9bm93m1c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4097,7 +4279,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/23/11-反射/" data-id="cj5fc7dpa001snkwrkaukfdcy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/23/11-反射/" data-id="cj5jojvl3001n1wwrrunz91ct" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4230,7 +4412,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/22/10-网络编程/" data-id="cj5fc7dp6001jnkwrbttiuxwr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/22/10-网络编程/" data-id="cj5jojvl1001j1wwrbyyfhjs2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4363,7 +4545,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/21/09-多线程/" data-id="cj5fc7dp4001gnkwrc6be261s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/21/09-多线程/" data-id="cj5jojvmb002d1wwrbpbij3vz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4496,7 +4678,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/20/08-流/" data-id="cj5fc7dp2001dnkwrm38ow16m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/20/08-流/" data-id="cj5jojvkx001g1wwr3zuhstuq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4629,7 +4811,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/19/07-集合类/" data-id="cj5fc7dos0017nkwrbekxebm3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/19/07-集合类/" data-id="cj5jojvk900151wwrtbqcrtd6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4762,7 +4944,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/18/06-常用类/" data-id="cj5fc7doh0011nkwruve6cpde" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/18/06-常用类/" data-id="cj5jojvk700121wwr6sqmg68e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -4895,7 +5077,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/17/05-数组/" data-id="cj5fc7do6000vnkwr2lj2va1h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/17/05-数组/" data-id="cj5jojvjt000n1wwresmn7w7m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5028,7 +5210,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/16/04-异常处理/" data-id="cj5fc7dnp000knkwr0t6r185h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/16/04-异常处理/" data-id="cj5jojvjh000c1wwrgchhzh3o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5161,7 +5343,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/15/03-面向对象编程/" data-id="cj5fc7dnh000dnkwra4pxooe4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/15/03-面向对象编程/" data-id="cj5jojvjp000j1wwrq0wurj1x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5294,7 +5476,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/14/02-基础语法/" data-id="cj5fc7dn00005nkwrauvdefil" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/14/02-基础语法/" data-id="cj5jojviz00051wwrjcrzcl1t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5427,7 +5609,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/13/01-Java概述/" data-id="cj5fc7dmj0000nkwrtbk061z0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/13/01-Java概述/" data-id="cj5jojvjm000g1wwr2rloes7i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -5554,6 +5736,25 @@ var _hmt = _hmt || [];
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IT校招全国统一模拟笔试(秋招备战专场二模)编程题" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a></p>
+                            <p class="item-title"><a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="title">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a></p>
+                            <p class="item-date"><time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
     
     
@@ -5627,25 +5828,6 @@ var _hmt = _hmt || [];
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/blog/2017/05/28/信息安全/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="信息安全总结" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/计算机基础/">计算机基础</a></p>
-                            <p class="item-title"><a href="/blog/2017/05/28/信息安全/" class="title">信息安全总结</a></p>
-                            <p class="item-date"><time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -5655,7 +5837,7 @@ var _hmt = _hmt || [];
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -5664,7 +5846,7 @@ var _hmt = _hmt || [];
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -5673,7 +5855,7 @@ var _hmt = _hmt || [];
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 

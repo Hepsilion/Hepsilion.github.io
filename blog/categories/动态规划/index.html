@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>12-JDBC | Hepsilion</title>
+    <title>分类: 动态规划 | Hepsilion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="author" content="Hepsilion">
     <meta name="email" content="2428091608@qq.com">
@@ -181,262 +181,50 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main"><article id="post-12-JDBC" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+            <section id="main">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-folder"></i></span>
+        <h1 class="title">动态规划</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            12-JDBC
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/02/24/12-JDBC/">
-            <time datetime="2017-02-24T10:27:20.000Z" itemprop="datePublished">2017-02-24</time>
+        <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/">
+            <time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time>
         </a>
     </div>
 
 
-                        
+                    
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Java基础/">Java基础</a>
+        <a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a>
     </div>
 
-                        
+                    
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/Java/">Java</a>
+        <a class="tag-link" href="/blog/tags/算法/">算法</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>JDBC</p>
-<a id="more"></a>
-<h3 id="问：什么是JDBC？"><a href="#问：什么是JDBC？" class="headerlink" title="问：什么是JDBC？"></a>问：什么是JDBC？</h3><p>JDBC是一套面向对象的应用程序接口(API)，制定了访问各类关系数据库的统一标准接口，为访问各个数据库厂商的关系数据库提供了标准的实现，它由一组用Java语言编写的类和接口组成。JDBC允许开发者用Java编写访问数据库的应用程序，而不需要关心底层特定数据库的细节。</p>
-<h3 id="问：JDBC访问数据库的步骤"><a href="#问：JDBC访问数据库的步骤" class="headerlink" title="问：JDBC访问数据库的步骤"></a>问：JDBC访问数据库的步骤</h3><pre><code>//1. 加载JDBC驱动
-Class.forName(&quot;oracle.jdbc.driver.OracleDriver&quot;);
-//Class.forName(&quot;com.mysql.jdbc.driver&quot;); //Mysql
-
-//2. 连接Oracle数据库
-String url=&quot;jdbc:oracle:thin:@localhost:1521:DataBaseName&quot;;
-//String url=&quot;jdbc:mysql://localhost:1521/DataBaseName&quot;; // Mysql
-String username=&quot;admin&quot;;
-String password=&quot;root&quot;;
-Connection conn=DriverManager.openConnection(url, username, password);
-
-//3. 利用JDBC检索出表中的数据
-PreparedStatment ps=conn.preparedStatment(&quot;select * from users;&quot;);
-ResultSet rs=ps.executeQuery();
-while(rs.next){
-    rs.getString(1); //或rs.getString(&quot;name&quot;)
-}
-
-//4. 关闭数据库连接
-conn.close();
-</code></pre><h4 id="问：Class-forName-方法有什么作用？"><a href="#问：Class-forName-方法有什么作用？" class="headerlink" title="问：Class.forName()方法有什么作用？"></a>问：Class.forName()方法有什么作用？</h4><p>通过反射机制初始化参数指定的类，并且返回此类对应的Class对象。这个方法可以用来载入并注册跟数据库建立连接的驱动。</p>
-<h4 id="问：解释下驱动-Driver-在JDBC中的角色。"><a href="#问：解释下驱动-Driver-在JDBC中的角色。" class="headerlink" title="问：解释下驱动(Driver)在JDBC中的角色。"></a>问：解释下驱动(Driver)在JDBC中的角色。</h4><p>JDBC驱动提供了特定厂商对JDBC API接口类的实现，驱动必须要提供java.sql包下面这些类的实现：Connection, Statement, PreparedStatement,CallableStatement, ResultSet和Driver。</p>
-<p>加载驱动的几种方法：</p>
-<blockquote>
-<p>(1) 调用Class.forName()方法注册：Class.forName(“com.microsoft.sqlserver.jdbc.SQLServerDriver”);</p>
-<p>(2) 通过添加jdbc.drivers系统属性注册：System.setProperty(“jdbc.drivers”, “com.mysql.jdbc.Driver”);</p>
-<p>(3) 通过registerDriver方法注册：DriverManager.registerDriver(new com.mysql.jdbc.Driver());</p>
-</blockquote>
-<h3 id="问：Statement、PreparedSatement和CallableStatement"><a href="#问：Statement、PreparedSatement和CallableStatement" class="headerlink" title="问：Statement、PreparedSatement和CallableStatement"></a>问：Statement、PreparedSatement和CallableStatement</h3><center><br><img src="/blog/2017/02/24/12-JDBC/JDBC-Statement.JPG" width="46%"><br></center>
-
-<h3 id="问：PreparedStatement比Statement有什么优势？"><a href="#问：PreparedStatement比Statement有什么优势？" class="headerlink" title="问：PreparedStatement比Statement有什么优势？"></a>问：PreparedStatement比Statement有什么优势？</h3><p>PreparedStatement接口继承自Statement</p>
-<p>(1) 使用Statement的方式：</p>
-<pre><code>Statement stmt=conn.createStatement();
-ResultSet rs=stmt.executeQuery(&quot;select * from book;&quot;);
-</code></pre><p>(2) 使用PreparedStatement的方式：</p>
-<pre><code>PreparedStatement pstmt=conn.prepareStatement(&quot;select * from book;&quot;);
-ResultSet rs=pstmt.executeQuery();
-</code></pre><p>(3) PreparedStatement比Statement的对比</p>
-<ul>
-<li>PreparedStatement实例包含预编译的SQL语句，执行速度要快于Statement对象，因此，性能会更好。</li>
-<li>PreparedStatements是预编译的，可以避免不良用户直接敲sql语句产生sql注入攻击，安全性更强。</li>
-<li>对于不同的查询参数值，PreparedStatement可以重用。</li>
-</ul>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8004321/25808?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8088719/22471?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a></p>
-<h4 id="问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？"><a href="#问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？" class="headerlink" title="问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？"></a>问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？</h4><p>CallableStatement接口继承自PreparedStatement</p>
-<p>CallableStatement用来执行存储过程。存储过程是由数据库存储和提供的。存储过程可以接受输入参数，也可以有返回结果。如果有输出参数要注册说明是输出参数。非常鼓励使用存储过程，因为它提供了安全性和模块化。</p>
-<p>准备一个CallableStatement的方法是：Connection.prepareCall()，实例代码如下：</p>
-<pre><code>CallableStatement cs=conn.prepareCall(&quot;{call getCustomerName(?,?)}&quot;);
-cs.setString(1, &quot;1&quot;);
-cs.registerOutParameter(2, java.sql.Types.VARCHAR);
-cs.execute();
-cs.getString(2);
-</code></pre><h4 id="问：数据库连接池是什么意思？"><a href="#问：数据库连接池是什么意思？" class="headerlink" title="问：数据库连接池是什么意思？"></a>问：数据库连接池是什么意思？</h4><p>像打开、关闭数据库连接这种和数据库的交互是很费时间的，尤其是当客户端数量增加的时候，会消耗大量的资源，成本非常高。</p>
-<p>可以在应用服务器启动的时候建立很多个数据库连接并维护在一个池中。连接请求由池中的连接提供服务。在连接使用完毕以后，把连接归还到池中，以用于满足将来更多的请求。</p>
-<h3 id="问：ResultSet"><a href="#问：ResultSet" class="headerlink" title="问：ResultSet"></a>问：ResultSet</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/3223?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
-<h3 id="问：JDBC如何做事务处理？"><a href="#问：JDBC如何做事务处理？" class="headerlink" title="问：JDBC如何做事务处理？"></a>问：JDBC如何做事务处理？</h3><pre><code>conn.setAutoCommit(false)
-conn.commit();
-conn.rollback();
-conn.setAutoCommit(true)
-</code></pre><h3 id="问：Jdo是什么？-没用过"><a href="#问：Jdo是什么？-没用过" class="headerlink" title="问：Jdo是什么？(没用过)"></a>问：Jdo是什么？(没用过)</h3><p>JDO是Java对象持久化的新的规范，为java data object的简称，也是一个用于存取某种数据仓库中的对象的标准化API。JDO提供了透明的对象存储，因此对开发人员来说，存储数据对象完全不需要额外的代码（如JDBC API的使用）。这些繁琐的例行工作已经转移到JDO产品提供商身上，使开发人员解脱出来，从而集中时间和精力在业务逻辑上。另外，JDO很灵活，因为它可以在任何数据底层上运行。JDBC只是面向关系数据库（RDBMS)JDO更通用，提供到任何数据底层的存储功能，比如关系数据库、文件、XML以及对象数据库（ODBMS）等等，使得应用可移植性更强。(o/rMapping工具集合处理)</p>
-<h3 id="问：在ORACLE大数据量下的分页解决方法。-没用过"><a href="#问：在ORACLE大数据量下的分页解决方法。-没用过" class="headerlink" title="问：在ORACLE大数据量下的分页解决方法。(没用过)"></a>问：在ORACLE大数据量下的分页解决方法。(没用过)</h3><pre><code>create or replace package myPack
-is
-    type c_type is ref cursor;
-    procedure getPage(v_sql varchar2,pageSize number,pageIndex number,c out c_type);
-end;
-
-create or replace  package  body myPack
-is
-    procedure getPage(v_sql varchar2,pageSize number,pageIndex number,c out c_type)
-  is
-    pageTotal int:=0;
-    pageFirstRow int:=0;
-    pageLastRow int:=0;
-    rowTotal int:=0;
-  begin
-    execute immediate &apos;select count(*)  from (&apos;||v_sql||&apos;)&apos; into rowTotal;
-    pageTotal:=ceil(rowTotal/pageSize);
-    if(pageIndex&lt;1) then
-           raise_application_error(-20001,&apos;页数不能小于1&apos;);
-    end if;
-    if(pageIndex&gt;pageTotal) then
-           raise_application_error(-20001,&apos;页数太大，不能读取&apos;);
-    end if;
-    pageFirstRow:=(pageIndex-1)*pageIndex+1;
-    pageLastRow:=pageFirstRow+pageSize;
-    open c for &apos; select * from &apos;||v_sql||&apos; where rownum&lt;&apos;||
-         pageLastRow||&apos;minus select * from &apos;||v_sql
-         ||&apos; where rownum&lt;&apos;||pageFirstRow;    
-  end;
-end;
-</code></pre>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hepsilion.github.io/2017/02/24/12-JDBC/" data-id="cj5jojvm9002b1wwr9bm93m1c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://hepsilion.github.io/2017/02/24/12-JDBC/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/02/24/12-JDBC/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/blog/2017/02/23/11-反射/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    11-反射
-                
+                </div>
             </div>
-        </a>
+        </div>
     
-    
-        <a href="/blog/2017/03/03/03-Activity/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">第三章 Activity</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    <section id="comments">
-    
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
-    
-    </section>
-
+</div>
 </section>
             
                 <aside id="sidebar">
@@ -650,13 +438,11 @@ end;
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'https://hepsilion.github.io/2017/02/24/12-JDBC/';
-        
-        this.page.identifier = '12-JDBC';
+        this.page.identifier = 'undefined';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/count.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
