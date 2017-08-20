@@ -26,8 +26,8 @@
 \geometry{
 	body={7.0in, 8.5in},
 	top=0.5in,   %1.5
-	left=0.64in, %1.0
-	right=0.64in,
+	left=0.55in, %1.0
+	right=0.55in,
 	bottom=0.5in
 }
 
@@ -54,10 +54,10 @@
 % Make lists without bullets
 %\renewenvironment{itemize}{
 %	\begin{list}{}{
-%			\setlength{\leftmargin}{1.5em}
+%			\setlength{\leftmargin}{0pt}
 %			\setlength{\itemsep}{0pt}
-%			%\setlength{\parsep}{0pt}
-%			%\setlength{\parskip}{0pt}
+%			\setlength{\parsep}{0pt}
+%			\setlength{\parskip}{0pt}
 %		}
 %	}{
 %\end{list}
@@ -95,43 +95,45 @@
 	
 	\section*{\textbf{专业技能}}\vspace{-0.15in}
 	\begin{itemize}
-		\item 良好的英语读写能力 (英语6级：508分)
-		\item Java、Android、C/C++、Linux%、SpringMVC、HTML/CSS/JavaScript、Maven
+		%\item 良好的英语读写能力 (英语6级：508分)
+		\item Java、Android、SpringMVC、Python、HTML/CSS/JavaScript、C/C++、Linux
 	\end{itemize}
-	\vspace{-0.3in}
+	\vspace{-0.32in}
 	
 	\section*{\textbf{教育经历}}\vspace{-0.15in}
 	\begin{itemize}
 		\item \textbf{硕士}，2015/09 - 2018/07 ~~~~~~~~华东师范大学，软件工程  ~~~~~~~~~排名：15/70
 		\item \textbf{本科}，2011/09 - 2015/07 ~~~~~~~~华东师范大学，软件工程  ~~~~~~~~~绩点：3.43/4.0
 	\end{itemize}
-	\vspace{-0.3in}
+	\vspace{-0.32in}
 	
 	\section*{\textbf{荣誉}}\vspace{-0.15in}
 	\begin{itemize}
-		\item \textbf{第三届全国高校云计算应用创新大赛华东赛区总决赛三等奖}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2017/03}
-		\item \textbf{华东师范大学优秀学生}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2014/11}
+		\item \textbf{2017年全国大学生物联网设计竞赛华东赛区特等奖}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2017/08}
+		\item \textbf{第三届全国高校云计算应用创新大赛华东赛区总决赛三等奖}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2017/03}
+		\item \textbf{华东师范大学优秀学生}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2014/11}
 	\end{itemize}
-	\vspace{-0.3in}
+	\vspace{-0.32in}
 	
 	\section*{\textbf{工作经历}}\vspace{-0.15in}
 	\begin{itemize}
-		\item \textbf{Intel}, \emph{实习}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2017/07 $\sim$ 至今}
+		\item \textbf{Intel}， \emph{实习，WebRTC开发组，软件开发与测试}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2017/07 $\sim$ 至今}
 		
-		开发基于webRTC的Android SDK，为用户提供p2p和conference两种方式的实时通信服务。
-		\item \textbf{惠普}, \emph{实习}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2014/08 $\sim$ 2014/11}
+		1. 基于WebRTC开发端到端的实时通信解决方案，为用户提供P2P和Conference两种音视频服务模式\\
+		2. 参与Android版本的客户端SDK的部分特征开发实现、bug修复\\
+		3. 编写Python脚本，实现WebRTC源码、SDK源码的自动化编译、打包、发布与下载
+		\item \textbf{惠普}， \emph{实习，软件开发与服务部门，软件开发}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2014/08 $\sim$ 2014/11}
 		
-		使用SpringMVC参与公司内部项目管理工具的开发，负责客户端和服务端部分业务逻辑的实现。
+		1. 参与公司项目管理工具的开发，使用SpringMVC实现客户端和服务端部分业务逻辑。
 	\end{itemize}
-	\vspace{-0.3in}
+	\vspace{-0.32in}
 	
 	\section*{\textbf{项目经历}}\vspace{-0.15in}
 	\begin{itemize}	
-		\item \textbf{虚拟现实自行车}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2016/12 $\sim$ 2017/01}
+		\item \textbf{虚拟现实自行车：}{使用Unity3D、Android和Arduino实现的虚拟自行车骑行系统。}~\textbf{2016/12 $\sim$ 2017/01}
 		
-		1. 本项目是使用Unity3D、Android和Arduino实现的虚拟自行车骑行系统。\\
-		2. 我担任项目组长，主要负责项目的\textbf{整体方案设计、客户端及通讯过程的开发}。\\
-		3. \textbf{Android}客户端与Unity服务程序通过Socket使用自定义的通信协议进行数据交互。
+		1. 主要负责项目的\textbf{方案设计、通信协议制定、客户端及其与服务端通讯过程的实现}；\\
+		2. 使用Socket实现\textbf{Android}客户端与Unity服务程序之间的VR数据交互，能够支持多人在线的场景。
 		%(1) Arduino单片机将真实自行车的实时把手转角和速度发送给Unity服务程序，Unity服务程序根据转角和速度控制虚拟场景中自行车的运动，并渲染出对应的场景。\\
 		%(2) Android客户端将手机实时方向发送给Unity服务程序，Unity服务程序根据方向数据返回对应视角的图像，Android客户端对图像流进行显示。\\
 		%(3) 自行车的转角检测：将滑动变阻器固定在自行车龙头的转动轴上，把手转动带动滑动变阻器滑片的移动(电阻也发生变化)，Arduino单片机实时检测滑动变阻器的电压，并根据电压值和转角值之间的线性关系计算出把手转角。\\
@@ -140,7 +142,7 @@
 		% 1. 转角检测过程中电压不稳定(电压值发生微小变化)带来的抖动：在每一次虚拟自行车转角更新时，记录新转角对应的电压值(简称为记录值)。如果当前测得的电压值与记录值差距小于很小的固定阈值，则忽略此次电压变化；否则计算新转角并更新记录值为当前电压值。\\
 		% 2. 速度检测过程中优化Arduino单片机发送的数据量：类似于1的解决方法，当相邻两次测得的速度值变化小于很小的固定阈值时，忽略此次速度变化；仅在速度变化较大时，才向Unity服务程序发送真实自行车的速度。
 		% 3. 图像数据延迟、数据压缩问题。
-		\vspace{0.01in}
+		\vspace{0.03in}
 		
 		%\item \textbf{\href{https://github.com/Hepsilion/SecurityGuard}{手机安全卫士}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2016/10 $\sim$ 2016/12}
 		
@@ -149,22 +151,20 @@
 		%3. 使用\textbf{AIDL接口}调用Android底层方法实现上述功能
 		%\vspace{0.01in}
 		
-		\item \textbf{\href{https://github.com/Hepsilion/cloudsim}{CloudSim}}  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \textbf{2015/09 $\sim$ 2017/05}
+		\item \textbf{\href{https://github.com/Hepsilion/MapProject}{位置共享应用：}}{提供位置共享服务的App，类似于微信中的位置共享。}~~~~~~~~~~~~~~~~~\textbf{2013/02 $\sim$ 2013/06}
 		
-		1. 本项目是使用Java编写的云计算仿真工具，是墨尔本大学的开源项目。\\
-		%2. 我通过\textbf{阅读源码，拓展CloudSim的功能、纠正部分源码错误}。
-		2. 我利用CloudSim仿真云计算集群做一些资源节能调度方面的科研。
-		\vspace{0.01in}	
+		1. 主要负责项目的\textbf{方案设计，客户端与服务器程序的实现}；\\
+		2. 利用\textbf{多线程}实现多并发场景，每个用户通过\textbf{Socket}与服务器程序进行通信；\\
+		3. 客户端利用\textbf{Service}运行在后台实时获取用户的位置数据，通过服务器和其他客户端之间接共享位置。
+		\vspace{0.03in}	
 		
-		\item \textbf{\href{https://github.com/Hepsilion/MapProject}{位置共享应用}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2013/02 $\sim$ 2013/06}
+		\item \textbf{\href{https://github.com/Hepsilion/cloudsim}{CloudSim：}{云计算资源调度仿真工具}} ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \textbf{2015/09 $\sim$ 2017/05}
 		
-		1. 本项目是提供位置共享服务的App，类似于微信中的位置共享。\\
-		2. 我担任项目组长，主要负责项目的\textbf{整体方案设计，客户端与服务器程序的实现}。\\
-		3. 利用\textbf{多线程}实现多用户，每个用户通过\textbf{Socket}与服务器程序进行通信。\\
-		4. 客户端利用\textbf{Service}获取用户的实时位置数据，通过服务器和其他客户端间接共享位置。
-		\vspace{0.01in}	
+		1. 参与项目的开发、修复部分bug、实现涉及软错误节能调度的主要功能；\\
+		2. 利用CloudSim仿真云计算集群做一些资源节能调度方面的科研，完成论文、专利、软件著作权若干篇。
+		\vspace{0.03in}	
 	\end{itemize}
-	\vspace{-0.3in}
+	\vspace{-0.32in}
 	
 	\section*{\textbf{科研经历}}\vspace{-0.15in}
 	\begin{itemize}	
