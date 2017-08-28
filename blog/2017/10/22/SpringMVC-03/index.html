@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>03-请求处理方法Action详解 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                51
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                22
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-SpringMVC-03" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            03-请求处理方法Action详解
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/10/22/SpringMVC-03/">
+            <time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/SpringMVC/">SpringMVC</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+<h1 id="SpringMVC-请求处理方法Action详解"><a href="#SpringMVC-请求处理方法Action详解" class="headerlink" title="SpringMVC 请求处理方法Action详解"></a>SpringMVC 请求处理方法Action详解</h1><p>在Spring MVC的每个控制器中可以定义多个请求处理方法，我们把这种请求处理方法称为Action，每个请求处理方法可以有多个不同类型的参数和一个某种类型的返回结果。</p>
+<h2 id="一、Action参数"><a href="#一、Action参数" class="headerlink" title="一、Action参数"></a>一、Action参数</h2><h3 id="1-自动参数映射"><a href="#1-自动参数映射" class="headerlink" title="1. 自动参数映射"></a>1. 自动参数映射</h3><h4 id="1-基本数据类型或包装类型"><a href="#1-基本数据类型或包装类型" class="headerlink" title="(1) 基本数据类型或包装类型"></a>(1) 基本数据类型或包装类型</h4><p>方法的参数可以是任意基本数据类型或包装类型。当方法的参数名与http请求的参数名相同时，参数会进行自动映射；但如果请求的参数中没有对应名称与类型的数据，则会产生异常。</p>
+<p>示例代码：基本数据类型</p>
+<pre><code>@RequestMapping(&quot;/action19&quot;)
+public String action19(Model model, int id, String name) {
+    model.addAttribute(&quot;message&quot;, &quot;name=&quot; + name + &quot;,id=&quot; + id);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action19?id=1234&amp;name=kevin" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action19?id=1234&amp;name=kevin</a>，运行结果如图1所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-01.png" width="100%">图 1<br></center>
+
+<p>示例代码：包装类型</p>
+<pre><code>@RequestMapping(&quot;/action20&quot;)
+public String action20(Model model, Integer id, Double price) {
+    model.addAttribute(&quot;message&quot;, &quot;price=&quot; + price + &quot;,id=&quot; + id);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action20?id=1234&amp;price=20.0" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action20?id=1234&amp;price=20.0</a>，运行结果如图2所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-02.png" width="100%">图 2<br></center>
+
+<h4 id="2-自定义数据类型"><a href="#2-自定义数据类型" class="headerlink" title="(2) 自定义数据类型"></a>(2) 自定义数据类型</h4><p>除了基本数据类型和其对应的包装类型，我们也可以自定义数据类型，如一个自定义的POJO对象，Spring MVC会通过反射把请求中的参数设置到对象的属性中并进行类型转换。</p>
+<p>自定义数据类型Product：</p>
+<pre><code>package org.spring.mvc.model;
+
+import java.io.Serializable;
+
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private int id;
+    private String name;
+    private double price;
+
+    public Product() {
+    }
+
+    public Product(String name, double price) {
+        super();
+        this.name = name;
+        this.price = price;
+    }
+
+    public Product(int id, String name, double price) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;编号(id)：&quot; + this.getId() + &quot;，名称(name)：&quot; + this.getName() + &quot;，价格(price)：&quot; + this.getPrice();
+    }
+}
+</code></pre><p>示例代码：自定义数据类型</p>
+<pre><code>@RequestMapping(&quot;/action21&quot;)
+public String action21(Model model, Product product) {
+    model.addAttribute(&quot;message&quot;, product);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action21?id=1234&amp;name=meat&amp;price=20.0" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action21?id=1234&amp;name=meat&amp;price=20.0</a>，运行结果如图3所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-03.png" width="100%">图 3<br></center>
+
+<p>示例中使用的是请求URL中的参数，其实也可以是客户端提交的任意参数，特别是表单中的数据。</p>
+<h4 id="3-复杂数据类型"><a href="#3-复杂数据类型" class="headerlink" title="(3) 复杂数据类型"></a>(3) 复杂数据类型</h4><p>复杂数据类型指的是一个自定义类型中还包含另外一个对象类型</p>
+<p>自定义数据类型User，其中包含Product成员：</p>
+<pre><code>package org.spring.mvc.model;
+
+public class User {
+    private String username;
+    private Product product;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+}
+</code></pre><p>示例代码：复杂数据类型</p>
+<pre><code>@RequestMapping(&quot;/action22&quot;)
+public String action22(Model model, User user) {
+    model.addAttribute(&quot;message&quot;, user.getUsername() + &quot;,&quot; + user.getProduct().getName());
+    return &quot;index&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action22?username=tom&amp;product.name=rice" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action22?username=tom&amp;product.name=rice</a>，运行结果如图4所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-04.png" width="100%">图 4<br></center>
+
+<p>使用表单提交数据，创建表单action22.jsp：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;action22&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form method=&quot;post&quot; action=&quot;action02&quot;&gt;
+             username:&lt;input name=&quot;username&quot; /&gt;&lt;br/&gt;
+             pdctname:&lt;input name=&quot;product.name&quot; /&gt;&lt;br/&gt;
+            &lt;button&gt;提交&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/action22.jsp" target="_blank" rel="external">http://localhost:8080/spring-mvc/action22.jsp</a>，运行结果如图5所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-05.png" width="75%">图 5<br></center>
+
+<p>提交之后，运行结果如图6所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-06.png" width="75%">图 6<br></center>
+
+<h4 id="4-List集合类型"><a href="#4-List集合类型" class="headerlink" title="(4) List集合类型"></a>(4) List集合类型</h4><p>不能直接在action的参数中指定List<t>类型。</t></p>
+<p>定义一个数据类型ProductList，其中包含一个List成员：</p>
+<pre><code>public class ProductList {
+    private List&lt;Product&gt; items;
+
+    public List&lt;Product&gt; getItems() {
+        return items;
+    }
+
+    public void setItems(List&lt;Product&gt; items) {
+        this.items = items;
+    }
+}
+</code></pre><p>示例代码：List集合类型</p>
+<pre><code>@RequestMapping(&quot;/action23&quot;)
+public String action23(Model model, ProductList products) {
+    model.addAttribute(&quot;message&quot;, products.getItems().get(0) + &quot;&lt;br/&gt;&quot; + products.getItems().get(1));
+    return &quot;index&quot;;
+}
+</code></pre><p>在URL中模拟表单数据，访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action23?items[0].name=phone&amp;items[1].name=book" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action23?items[0].name=phone&amp;items[1].name=book</a>，运行结果如图7所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-07.png" width="100%">图 7<br></center>
+
+<p>这里同样可以使用一个表单向服务器提交数据。</p>
+<h4 id="5-Map集合类型"><a href="#5-Map集合类型" class="headerlink" title="(5) Map集合类型"></a>(5) Map集合类型</h4><p>Map与List的实现方式基本一样。</p>
+<p>定义一个数据类型ProductMap，其中包含一个Map成员：</p>
+<pre><code>public class ProductMap {
+    private Map&lt;String, Product&gt; items;
+
+    public Map&lt;String, Product&gt; getItems() {
+        return items;
+    }
+
+    public void setItems(Map&lt;String, Product&gt; items) {
+        this.items = items;
+    }
+}
+</code></pre><p>示例代码：Map集合类型</p>
+<pre><code>@RequestMapping(&quot;/action24&quot;)
+public String action24(Model model, ProductMap map) {
+    model.addAttribute(&quot;message&quot;, map.getItems().get(&quot;p1&quot;) + &quot;&lt;br/&gt;&quot; + map.getItems().get(&quot;p2&quot;));
+    return &quot;index&quot;;
+}
+</code></pre><p>在URL中模拟表单数据，访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action24?items[p1].name=phone&amp;items[p2].name=book" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action24?items[p1].name=phone&amp;items[p2].name=book</a>，运行结果如图8所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-08.png" width="100%">图 8<br></center>
+
+<p>集合类型基本都一样，set也差不多，问题是如果为了获得一个集合需要刻意去包装会很麻烦，可以通过@RequestParam结合@RequestBody等注解完成。</p>
+<h3 id="2-RequestParam参数绑定"><a href="#2-RequestParam参数绑定" class="headerlink" title="2. @RequestParam参数绑定"></a>2. @RequestParam参数绑定</h3><p>简单的参数可以使用上一节中讲过的自动参数映射，虽然自动参数映射很方便，但有些细节是不能处理的，如参数是否为必须参数、参数名称没有办法指定、指定参数的默认值。复杂的参数映射可以使用@RequestParam完成，Spring MVC会自动查找请求中的参数，并进行参数绑定和类型转换。</p>
+<p>@RequestParam共有4个注解属性：</p>
+<ul>
+<li>required属性表示是否为必须，默认值为true，如果请求中没有指定的参数会报异常；</li>
+<li>defaultValue用于设置参数的默认值，如果不指定值则使用默认值，只能是String类型的。</li>
+<li>name与value互为别名关系用于指定参数名称。</li>
+</ul>
+<h4 id="1-基本数据类型"><a href="#1-基本数据类型" class="headerlink" title="(1) 基本数据类型"></a>(1) 基本数据类型</h4><p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action25&quot;)
+public String action25(Model model, @RequestParam(required = false, defaultValue = &quot;99&quot;) int id) {
+    model.addAttribute(&quot;message&quot;, id);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action25?id=98" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action25?id=98</a>，运行结果如图9所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-09.png" width="85%">图 9<br></center>
+
+<p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action25" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action25</a>，运行结果如图10所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-10.png" width="85%">图 10<br></center>
+
+<h4 id="2-List与数组直接绑定：基本数据类型"><a href="#2-List与数组直接绑定：基本数据类型" class="headerlink" title="(2) List与数组直接绑定：基本数据类型"></a>(2) List与数组直接绑定：基本数据类型</h4><p>在上一节中我们使用自动参数映射是不能直接完成List数组绑定的，结合@RequestParam可以轻松实现。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action26&quot;)
+public String action26(Model model, @RequestParam(&quot;id&quot;) List&lt;String&gt; ids) {
+    model.addAttribute(&quot;message&quot;, Arrays.deepToString(ids.toArray()));
+    return &quot;index&quot;;
+}
+</code></pre><p>在URL中模拟表单数据，访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action26?id=tom&amp;id=rose" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action26?id=tom&amp;id=rose</a>，运行结果如图11所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-11.png" width="85%">图 11<br></center>
+
+<p>使用表单提交数据，创建表单action26.jsp：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;action22&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form action=&quot;controller08/action26&quot; method=&quot;post&quot;&gt;
+            &lt;p&gt;
+                &lt;label&gt;爱好：&lt;/label&gt; 
+                &lt;input type=&quot;checkbox&quot; value=&quot;reading&quot; name=&quot;id&quot; /&gt;阅读
+                 &lt;input type=&quot;checkbox&quot; value=&quot;surfing&quot; name=&quot;id&quot; /&gt;上网
+                 &lt;input type=&quot;checkbox&quot; value=&quot;gaming&quot; name=&quot;id&quot; /&gt;电游
+            &lt;/p&gt;
+            &lt;button&gt;提交&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/action26.jsp" target="_blank" rel="external">http://localhost:8080/spring-mvc/action26.jsp</a>，运行结果如图12所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-12.png" width="85%">图 12<br></center>
+
+<p>提交之后，运行结果如图13所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-13.png" width="85%">图 13<br></center>
+
+<p>@RequestParam(“id”)表明参数是必须的。因为页面中的表单name的名称为id，所有服务器在收集数据时应该使用id页非ids。</p>
+<p>如果name属性和参数名称同名，则name属性可以省去。示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action27&quot;)
+public String action27(Model model, @RequestParam(&quot;id&quot;) List&lt;String&gt; id) {
+    model.addAttribute(&quot;message&quot;, Arrays.deepToString(id.toArray()));
+    return &quot;index&quot;;
+}
+</code></pre><h4 id="3-List与数组直接绑定：自定义数据类型"><a href="#3-List与数组直接绑定：自定义数据类型" class="headerlink" title="(3) List与数组直接绑定：自定义数据类型"></a>(3) List与数组直接绑定：自定义数据类型</h4><p>上一小节中我们绑定的集合中存放的是基本数据类型，如果需要直接绑定更加复杂的数据类型则需要使用@RequestBody与@ResponseBody注解。</p>
+<ul>
+<li>@RequestBody 将HTTP请求正文转换为适合的HttpMessageConverter对象。</li>
+<li>@ResponseBody 将内容或对象作为 HTTP 响应正文返回，并调用适合HttpMessageConverter的Adapter转换对象，写入输出流。</li>
+</ul>
+<p>@RequestBody注解修饰的参数默认接收的Content-Type是application/json，因此客户端在发送POST请求时需要设置请求报文头信息，否则Spring MVC在解析集合请求参数时不会自动将参数转换成JSON数据再解析成相应的集合。Spring默认的json协议解析由Jackson完成，要完成这个功能需要修改配置环境。</p>
+<p>(a) 修改Spring MVC配置文件，启用mvc注解驱动功能</p>
+<pre><code>&lt;mvc:annotation-driven /&gt;
+</code></pre><p>(b) 修改pom.xml，添加jackson依赖</p>
+<pre><code>&lt;!-- jackson --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
+    &lt;version&gt;2.5.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.5.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>(c) 使用Ajax发送请求时需要设置contentType属性为’application/json;charse=UTF-8’(请求的默认contentType属性并非是application/json，而是application/x-www-form-urlencoded)，服务器将把接收到的参数转换成JSON字符串，如果条件不满足有可能会出现415异常。</p>
+<p>前端示例代码：定义一个action28-29.jsp页面，在客户端发送请求时设置contentType为application/json</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;List与数组直接绑定：自定义数据类型&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;addPdts_click1();&quot;&gt;向服务器发送json&lt;/button&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;addPdts_click2();&quot;&gt;接收服务器返回的json&lt;/button&gt;
+        &lt;p id=&quot;msg&quot;&gt;&lt;/p&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;&lt;c:url value=&quot;/scripts/jQuery1.11.3/jquery-1.11.3.min.js&quot;/&gt;&quot;&gt;&lt;/script&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            var products = new Array();
+            products.push({
+                id : 1,
+                name : &quot;iPhone 6 Plus&quot;,
+                price : 4987.5
+            });
+            products.push({
+                id : 2,
+                name : &quot;iPhone 7 Plus&quot;,
+                price : 5987.5
+            });
+            products.push({
+                id : 3,
+                name : &quot;iPhone 8 Plus&quot;,
+                price : 6987.5
+            });
+            function addPdts_click1() {
+                $.ajax({
+                    type : &quot;POST&quot;, //请求谓词类型
+                    url : &quot;controller08/action28&quot;,
+                    data : JSON.stringify(products), //将products对象转换成json字符串
+                    contentType : &quot;application/json;charset=UTF-8&quot;, //发送信息至服务器时的内容编码类型，默认为application/x-www-form-urlencoded
+                    dataType : &quot;text&quot;, //期望服务器返回的数据类型
+                    success : function(result) {
+                        $(&quot;#msg&quot;).html(result);
+                    }
+                });
+            }
+            function addPdts_click2() {
+                $.ajax({
+                    type : &quot;POST&quot;, //请求谓词类型
+                    url : &quot;controller08/action29&quot;,
+                    data : JSON.stringify(products), //将products对象转换成json字符串
+                    contentType : &quot;application/json;charset=UTF-8&quot;, //发送信息至服务器时的内容编码类型，默认为application/x-www-form-urlencoded
+                    dataType : &quot;json&quot;, //期望服务器返回的数据类型
+                    success : function(result) {
+                        var str = &quot;&quot;;
+                        $.each(result, function(i, obj) {
+                            str += &quot;编号：&quot; + obj.id + &quot;,名称：&quot; + obj.name + &quot;,价格：&quot; + obj.price + &quot;&lt;br/&gt;&quot;;
+                        });
+                        $(&quot;#msg&quot;).html(str);
+                    }
+                });
+            }
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>页面中有两个请求方法，第一个方法将一个json集合发送到服务器并映射成一个List集合；第二个方法接收服务器返回的json对象。</p>
+<p>接收第一个请求的服务器示例代码:</p>
+<pre><code>@RequestMapping(&quot;/action28&quot;)
+public void action28(@RequestBody List&lt;Product&gt; products, HttpServletResponse response) throws IOException {
+    response.setCharacterEncoding(&quot;UTF-8&quot;);
+    System.out.println(Arrays.deepToString(products.toArray()));
+    response.getWriter().write(&quot;添加成功&quot;);
+}
+</code></pre><p>action28的参数List&lt; Product&gt; products是接收从客户端发送到服务器的产品集合，在参数前增加<strong>@RequestBody注解的作用是让Spring MVC在接收到客户端请求时选择合适的转换器将参数转换成相应的对象</strong>。</p>
+<p>接收第二个请求的服务器示例代码:</p>
+<pre><code>@RequestMapping(&quot;/action29&quot;)
+@ResponseBody
+public List&lt;Product&gt; action29(@RequestBody List&lt;Product&gt; products, HttpServletResponse response) throws IOException {
+    products.get(0).setPrice(999.99);
+    return products;
+}
+</code></pre><p>action29的返回值为List<product>，且在方法上有一个<strong>注解@ResponseBody，系统会使用jackson将该返回值对象自动序列化成json字符序列</strong>。</product></p>
+<p>访问路径：<a href="http://localhost:8080/spring-mvc/action28-29.jsp" target="_blank" rel="external">http://localhost:8080/spring-mvc/action28-29.jsp</a>，运行结果如图14所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-14.png" width="80%">图 14<br></center>
+
+<p>点击第一个按钮时的如图15所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-15.png" width="80%">图 15<br></center>
+
+<p>控制台输出：</p>
+<p>[编号(id)：1，名称(name)：iPhone 6 Plus，价格(price)：4987.5, 编号(id)：2，名称(name)：iPhone 7 Plus，价格(price)：5987.5, 编号(id)：3，名称(name)：iPhone 8 Plus，价格(price)：6987.5]</p>
+<p>点击第二个按钮时的如图16所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-16.png" width="80%">图 16<br></center>
+
+<h3 id="3-重定向与Flash属性"><a href="#3-重定向与Flash属性" class="headerlink" title="3. 重定向与Flash属性"></a>3. 重定向与Flash属性</h3><p>如果一个请求处理方法Action的返回结果为”index”字符串，则表示结果转发到index视图。但有时候我们需要重定向，将结果重定向到一个指定的页面或另一个action，则可以在返回的结果前加上一个”redirect:”前缀。</p>
+<p>示例代码:</p>
+<pre><code>@RequestMapping(&quot;/action30&quot;)
+public String action30(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;action30Message&quot;);
+    return &quot;redirect:action31&quot;;
+}
+
+@RequestMapping(&quot;/action31&quot;)
+public String action31(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;action31Message&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action30" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action30</a>，运行结果如图17所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-17.png" width="90%">图 17<br></center>
+
+<p>在action30中返回的结果为redirect:action31，表示重定向到action31这个请求处理方法，所有重定向都是以当前路径为起点的。action30向model中添加了名称message的数据，因为重定向到action31中会发起两次请求，为了保持action30中的数据，Spring MVC自动将数据重写到了url中。</p>
+<p><strong>为了实现重定向时传递复杂数据，可以使用Flash属性。</strong></p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action32&quot;)
+public String action32(Model model, RedirectAttributes redirectAttributes) {
+    Product product = new Product(2, &quot;iPhone7 Plus&quot;, 6989.5);
+    redirectAttributes.addFlashAttribute(&quot;product&quot;, product);
+    return &quot;redirect:action33&quot;;
+}
+
+@RequestMapping(&quot;/action33&quot;)
+public String action33(Model model, Product product) {
+    model.addAttribute(&quot;message&quot;, product);
+    System.out.println(model.containsAttribute(&quot;product&quot;)); // true
+    return &quot;index&quot;;
+} 
+</code></pre><p>当访问action32时，首先创建了一个Product对象，并将该对象添加到了Flash属性中，在重定向后取出该对象。</p>
+<p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action32" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action32</a>，运行结果如图18所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-18.png" width="90%">图 18<br></center>
+
+<p>此时URL地址已经发生了变化，product对象其实也已经被存入了model中，在action33的视图中可以直接拿到。</p>
+<h3 id="4-ModelAttribute注解"><a href="#4-ModelAttribute注解" class="headerlink" title="4. @ModelAttribute注解"></a>4. @ModelAttribute注解</h3><p>@ModelAttribute注解可以应用在方法参数上或方法上，其作用是：</p>
+<ul>
+<li>当注解在方法的参数上时，会将被注解的参数对象添加到Model中；</li>
+<li>当注解在请求处理方法Action上时，会将该方法变成一个非请求处理的方法，而是让其它Action被调用时先调用该方法。</li>
+</ul>
+<h4 id="1-注解在参数上"><a href="#1-注解在参数上" class="headerlink" title="(1) 注解在参数上"></a>(1) 注解在参数上</h4><p>当@ModelAttribute注解在参数上时，会将被注解的参数添加到Model中，并自动完成数据绑定。</p>
+<p>示例代码：</p>
+<p>访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action34?id=12&amp;name=apple&amp;price=6000" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action34?id=12&amp;name=apple&amp;price=6000</a>，运行结果如图19所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-19.png" width="100%">图 19<br></center>
+
+<p>其实不使用@ModelAttribute也样可以完成参数与对象间的自动映射，但使用注解可以设置更多详细内容，如名称、是否绑定等。</p>
+<h4 id="2-注解在方法上"><a href="#2-注解在方法上" class="headerlink" title="(2) 注解在方法上"></a>(2) 注解在方法上</h4><p>@ModelAttribute注解还可以用于标注一个非请求处理方法，通俗说就是一个非Action或普通方法。如果一个控制器类有多个请求处理方法，以及一个由@ModelAttribute注解的方法，则在调用其它Action之前会先调用由@ModelAttribute注解的方法。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action35&quot;)
+public String action35(Model model) {
+    Map&lt;String, Object&gt; map = model.asMap();
+    for (String key : map.keySet()) {
+        System.out.println(key + &quot;：&quot; + map.get(key));
+    }
+    return &quot;index&quot;;
+}
+
+@ModelAttribute
+public String noaction() {
+    System.out.println(&quot;noaction 方法被调用！&quot;);
+    String message = &quot;来自noaction方法的信息&quot;;
+    return message;
+}
+</code></pre><p>当访问路径：<a href="http://localhost:8080/spring-mvc/controller08/action35" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller08/action35</a>，控制台会输出：</p>
+<pre><code>noaction 方法被调用！
+string：来自noaction方法的信息
+</code></pre><p>非请求处理方法可以返回void，也可以返回一个任意对象，该对象会被自动添加到每一个要被访问的Action的Model中。从示例中可以看出key为类型名称。</p>
+<h2 id="二、Action返回值"><a href="#二、Action返回值" class="headerlink" title="二、Action返回值"></a>二、Action返回值</h2><p>Spring MVC的action返回值可以为String、void、ModelAndView、Map、Model和其它任意类型。</p>
+<h3 id="0-URL问题"><a href="#0-URL问题" class="headerlink" title="0. URL问题"></a>0. URL问题</h3><p>在/src/main/webapp/WEB-INF/image目录下添加图片3.jpg。</p>
+<p><strong>第一次尝试</strong></p>
+<p>在/src/main/webapp/WEB-INF/view/controller09目录下添加视图action36.jsp：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;action5的视图&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;img alt=&quot;风景&quot; src=&quot;../../image/3.jpg&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>目标结构如下：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-20.png" width="30%">图 19<br></center>
+
+<p>定义一个action访问该图片：</p>
+<pre><code>@RequestMapping(&quot;/action36&quot;)
+public String action36(Model model) {
+    return &quot;controller09/action36&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action36" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action36</a>，运行结果如图21所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-21.png" width="90%">图 21<br></center>
+
+<p>访问不到图片的原因是：</p>
+<ul>
+<li>此时action36.jsp视图并非以它所在的目录为实际路径，而是以当前action所在的控制器为起始目录的。当前控制器的url为：<a href="http://localhost:8080/spring-mvc/controller09/，而图片的src为：../../image/3.jpg，向上2级后变成：http://localhost:8087/image/3.jpg，但是此路径中并没有存放3.jpg这张图片。解决的办法是在视图中使用&quot;绝对&quot;路径；" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/，而图片的src为：../../image/3.jpg，向上2级后变成：http://localhost:8087/image/3.jpg，但是此路径中并没有存放3.jpg这张图片。解决的办法是在视图中使用&quot;绝对&quot;路径；</a></li>
+<li>另外一个问题是我们将静态资源存放到WEB-INF目录下不太合理，该目录是禁止客户端访问的。</li>
+</ul>
+<p><strong>修改</strong></p>
+<p>修改action36.jsp视图如下：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;action5的视图&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;img alt=&quot;风景&quot; src=&quot;../../image/3.jpg&quot;&gt;
+        &lt;img alt=&quot;风景&quot; src=&quot;&lt;c:url value=&quot;/image/3.jpg&quot;&gt;&lt;/c:url&gt;&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>修改后目标结构如下：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-22.png" width="30%">图 22<br></center>
+
+<p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action36" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action36</a>，运行结果如图23所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-23.png" width="90%">图 23<br></center>
+
+<p>小结：借助标签<c:url value="/image/3.jpg"></c:url>将路径转换成”绝对路径”；建议在引用外部资源如js、css、图片信息时都使用该标签解析路径。</p>
+<h3 id="1-返回值为String"><a href="#1-返回值为String" class="headerlink" title="1. 返回值为String"></a>1. 返回值为String</h3><h4 id="1-String作为视图名称"><a href="#1-String作为视图名称" class="headerlink" title="(1) String作为视图名称"></a>(1) String作为视图名称</h4><p>默认如果action返回String，此时String为视图名称，Spring MVC会去视图解析器设定的目录下查找，查找的规则是：URL= prefix前缀+视图名称+suffix后缀。</p>
+<p>在Spring MVC的配置文件中配置视图解析器：</p>
+<pre><code>&lt;!-- 视图解析器 --&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+    &lt;!-- 前缀 --&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/view/&quot; /&gt;
+    &lt;!-- 后缀 --&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action37&quot;)
+public String action37(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;action31&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>返回视图的路径为：/WEB-INF/view/index.jsp</p>
+<h4 id="2-String作为内容输出"><a href="#2-String作为内容输出" class="headerlink" title="(2) String作为内容输出"></a>(2) String作为内容输出</h4><p>如果方法声明了@ResponseBody注解，将内容或对象作为HTTP响应正文返回，并调用适合HttpMessageConverter的Adapter转换对象，写入输出流，此时的String不再是路径而是内容。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action38&quot;)
+@ResponseBody
+public String action38() {
+    return &quot;not &lt;b&gt;path&lt;/b&gt;,but &lt;b&gt;content&lt;/b&gt;&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action38" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action38</a>，运行结果如图24所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-24.png" width="80%">图 24<br></center>
+
+<h3 id="2-返回值为void"><a href="#2-返回值为void" class="headerlink" title="2. 返回值为void"></a>2. 返回值为void</h3><p>void在普通方法中是没有返回值的意思，但作为请求处理方法的返回值类型并非这样，存在如下两种情况：</p>
+<h4 id="1-方法名默认作为视图名"><a href="#1-方法名默认作为视图名" class="headerlink" title="(1) 方法名默认作为视图名"></a>(1) 方法名默认作为视图名</h4><p>当方法没有返回值时，方法中并未指定视图的名称，则默认视图的名称为方法名，查找的规则为：URL= prefix前缀+控制器路径+方法名称+suffix后缀组成。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action39&quot;)
+public void action39() {
+}
+</code></pre><p>返回视图的路径为：/WEB-INF/view/controller09/action39.jsp，controller09是当前控制器映射的路径，action39是方法名。</p>
+<p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action39" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action39</a>，运行结果如图25所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-25.png" width="80%">图 25<br></center>
+
+<p>上面的action代码等同于</p>
+<pre><code>@RequestMapping(&quot;/action39&quot;)
+public String action39() {
+    return &quot;controller09/action39&quot;;  //controller09是控制器的路径
+}
+</code></pre><h4 id="2-直接响应输出结果"><a href="#2-直接响应输出结果" class="headerlink" title="(2) 直接响应输出结果"></a>(2) 直接响应输出结果</h4><p>当方法的返回值为void，但输出流中存在输出内容时，则不会去查找视图，而是将输入流中的内容直接响应到客户端，响应的内容类型是纯文本。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action40&quot;)
+public void action40(HttpServletResponse response) throws IOException {
+    response.getWriter().write(&quot;&lt;h2&gt;void method&lt;/h2&gt;&quot;);
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action40" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action40</a>，运行结果如图26所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-03/SpringMVC-03-26.png" width="80%">图 26<br></center>
+
+<h3 id="3-返回值为ModelAndView"><a href="#3-返回值为ModelAndView" class="headerlink" title="3. 返回值为ModelAndView"></a>3. 返回值为ModelAndView</h3><p>在旧的Spring MVC中ModelAndView使用频率非常高，它可以同时指定返回的模型与视图名称。ModelAndView有个多构造方法重载，单独设置属性也很方便。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action41&quot;)
+public ModelAndView action41() {
+    //1. 只指定视图
+    //return new ModelAndView(&quot;index&quot;);
+
+    //2. 分别指定视图与模型
+    Map&lt;String, Object&gt; model=new HashMap&lt;String,Object&gt;();
+    model.put(&quot;message&quot;, &quot;ModelAndView action41&quot;);
+    return new ModelAndView(&quot;index&quot;, model);
+
+    //3. 同时指定视图与模型
+    //return new ModelAndView(&quot;index&quot;, &quot;message&quot;,&quot;action41 ModelAndView &quot;);
+
+    //4. 分开指定视图与模型
+    //ModelAndView modelAndView=new ModelAndView();
+    //指定视图名称
+    //modelAndView.setViewName(&quot;index&quot;);
+    //添加模型中的对象
+    //modelAndView.addObject(&quot;message&quot;, &quot;&lt;h2&gt;Hello ModelAndView&lt;/h2&gt;&quot;);
+    //return modelAndView;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action41" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action41</a></p>
+<h3 id="4-返回值为Map"><a href="#4-返回值为Map" class="headerlink" title="4. 返回值为Map"></a>4. 返回值为Map</h3><p>当返回结果为Map时，相当于只是返回了Model，并未指定具体的视图，返回视图的办法与void是一样的，即URL= prefix前缀+控制器路径+方法名称 +suffix后缀组成。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action42&quot;)
+public Map&lt;String, Object&gt; action42() {
+    Map&lt;String, Object&gt; model = new HashMap&lt;String, Object&gt;();
+    model.put(&quot;message&quot;, &quot;Hello Map&quot;);
+    model.put(&quot;other&quot;, &quot;more item&quot;);
+    return model;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action42" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action42</a></p>
+<p>实际访问的视图路径是：/WEB-INF/view/controller09/action42.jsp，返回给客户端的map相当于模型，在视图中可以取出。</p>
+<h3 id="5-返回值为任意类型"><a href="#5-返回值为任意类型" class="headerlink" title="5. 返回值为任意类型"></a>5. 返回值为任意类型</h3><h4 id="1-返回值为基本数据类型"><a href="#1-返回值为基本数据类型" class="headerlink" title="(1) 返回值为基本数据类型"></a>(1) 返回值为基本数据类型</h4><p>当返回结果直接为int,double,boolean等基本数据类型时，将会报exception is java.lang.IllegalArgumentException: Unknown return value type异常。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action43&quot;)
+public int action43() {
+    return 9527;
+}
+</code></pre><p>如果确实需要直接将基本数据类型返回，则可以使用注解@ReponseBody。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action44&quot;)
+@ResponseBody
+public int action44() {
+    return 9527;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action44" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action44</a></p>
+<h4 id="2-返回值为自定义类型"><a href="#2-返回值为自定义类型" class="headerlink" title="(2) 返回值为自定义类型"></a>(2) 返回值为自定义类型</h4><p>当返回值为自定义类型时，Spring会把方法认为是视图名称，与返回值为void类似的办法处理URL，但页面中获得数据比较麻烦。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action45&quot;)
+public Product action45() {
+    return new Product(1,&quot;iPhone&quot;,1980.5);
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action45" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action45</a></p>
+<p>如果存在action45对应的视图，页面可以正常显示，但无内容。</p>
+<p>如果在action上添加@ResponseBody注解，则返回的是Product本身，而非视图，Spring会选择一个合适的方式解析对象，默认是json。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action46&quot;)
+@ResponseBody
+public Product action46() {
+    return new Product(1,&quot;iPhone&quot;,1980.5);
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action46" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action46</a></p>
+<h3 id="6-返回值为Model类型"><a href="#6-返回值为Model类型" class="headerlink" title="6. 返回值为Model类型"></a>6. 返回值为Model类型</h3><p>Model接口定义在org.springframework.ui包下，model对象会用于页面渲染，视图路径使用方法名，与void类似。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action47&quot;)
+public Model action47(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;返回类型为org.springframework.ui.Model&quot;);
+    return model;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action47" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action47</a></p>
+<p>返回的类型还有许多如view等，通过view可指定一个具体的视图，如下载Excel、Pdf文档，其实它们也修改http的头部信息，手动同样可以实现。</p>
+<p>示例代码：</p>
+<pre><code>@RequestMapping(&quot;/action48&quot;)
+@ResponseBody
+public String action48(HttpServletResponse response) {
+    response.setHeader(&quot;Content-type&quot;,&quot;application/octet-stream&quot;);         
+    response.setHeader(&quot;Content-Disposition&quot;,&quot;attachment; filename=table.xls&quot;);
+    return &quot;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Hello&lt;/td&gt;&lt;td&gt;Excel&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;;
+}
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/controller09/action48" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller09/action48</a></p>
+<h3 id="7-小结"><a href="#7-小结" class="headerlink" title="7. 小结"></a>7. 小结</h3><ul>
+<li>使用String作为请求处理方法的返回值类型是比较通用的方法，这样返回的逻辑视图名不会和请求URL绑定，具有很高的灵活性，而模型数据又可以通过Model控制；</li>
+<li>使用void、map、Model作为请求处理方法的返回值类型时，这样返回对应的逻辑视图名称真实url为：prefix前缀+控制器路径+方法名+suffix后缀组成；</li>
+<li>使用String、ModelAndView返回视图名称可以不受请求的url绑定，ModelAndView可以设置返回的视图名称；</li>
+<li>另外在非MVC中使用的许多办法在Action也可以使用。</li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/10/22/SpringMVC-03/" data-id="cj92exaq8003ut4wrcrt2smse" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/10/22/SpringMVC-03/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/10/22/SpringMVC-03/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/10/22/SpringMVC-02/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    02-@RequestMapping详解
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/10/22/SpringMVC-04/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">04-SpringMVC表单标签库</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SpringMVC视图解析器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-05/" class="title">05-SpringMVC视图解析器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:51:31.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="04-SpringMVC表单标签库" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-04/" class="title">04-SpringMVC表单标签库</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:49:57.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="03-请求处理方法Action详解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-03/" class="title">03-请求处理方法Action详解</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/10/22/SpringMVC-03/';
+        
+        this.page.identifier = 'SpringMVC-03';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

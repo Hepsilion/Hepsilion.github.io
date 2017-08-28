@@ -129,11 +129,11 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                44
+                51
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                21
+                22
                 <span>标签</span>
             </div>
         </div>
@@ -238,27 +238,42 @@ var _hmt = _hmt || [];
 </li>
 <li><p>对String对象的任何改变都不影响到原对象，每次操作都会生成新的String对象，然后将引用指向新的String对象，因此不推荐频繁改变String内容，会增加内存压力。为了提高效率节省空间，我们应该用StringBuffer类</p>
 </li>
-<li><p>当多个字符串联合时会先转为StringBuffer，再联合，最后生成String对象，速度较慢。</p>
+<li><p>当多个String对象用+运算符联合时，其本质是先创建StringBuilder对象再进行append操作，然后将拼接后的StringBuilder对象用toString()方法转换成String对象，速度较慢。</p>
+<ul>
+<li>例如：String a = “abc”; String b = “def”; String c = a + b; 这种情况下是使用concatenation操作符(+)，内部是新创建StringBuffer或StringBuilder对象，利用其append方法进行字符串追加，然后利用toString方法返回String串。所以此时的效率也不高。</li>
+</ul>
 </li>
 </ul>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8004321/15331?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>Java中的字符串都是常量，字符串一旦被初始化，就不可以被改变，因为是常量，存放在方法区中的常量池中，可以实现共享。</p>
-<pre><code>// 双引号引起的数据都是字符串对象，存放在常量池中。s1指向的内存中只有一个对象，在常量池中。 
-String s1=&quot;abc&quot;;
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8004321/15331?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>定义String的两种方式</p>
+<p>方式1：双引号引起的数据都是字符串对象，存放在常量池中。str指向的内存中只有一个对象，在常量池中。 </p>
+<pre><code>String str=&quot;abc&quot;;
 
-// 在内存中生成两个对象，&quot;abc&quot;存放在常量池中，new String()存放在堆内存中。s2指向的内存中有两个对象，分别在常量池中和堆内存中。
+//这种方式创建的String对象&quot;abc&quot;是存放在字符串常量池中的
+//创建过程是：首先在字符串常量池中查找有没有&quot;abc&quot;对象，如果有则直接将str指向它；如果没有，就在字符串常量池中创建出&quot;abc&quot;，然后将str指向它。
+//通过这种方式创建的字符串在字符串常量池中是可共享的，同时也是不可更改的。
+</code></pre><p>方式2：str指向的内存中有两个对象，分别在常量池中和堆内存中。</p>
+<pre><code>String str=new String(&quot;abc&quot;);
+
+//这种方式在内存中生成两个对象，&quot;abc&quot;存放在常量池中，new String()存放在堆内存中。
+//创建过程是：这种方式首先在常量池中创建&quot;abc&quot;，然后在堆内存中new出一个String对象，将str指向该堆内存地址，新new出的String对象的内容是在字符串常量池中找到的&quot;abc&quot;对象。
+//通过这种方式创建对象，实际上创建了两个对象。
+</code></pre><p>例2：Java中的字符串都是常量，存放在方法区中的常量池中，可以实现共享。</p>
+<pre><code>String s1=&quot;abc&quot;;
 String s2=new String(&quot;abc&quot;);
-
-/*&quot;abc&quot;是字符串常量，被存在堆区的常量池中，当定义String s3=&quot;abc&quot;时，不会马上创建字符串&quot;abc&quot;对象，而是会先查找常量池中是否存在相同常量，
-如果有，则s3指向同一内存空间，否则创建新的字符串对象。*/
 String s3=&quot;abc&quot;;
+/*&quot;abc&quot;是字符串常量，被存在堆区的常量池中，当定义String s3=&quot;abc&quot;时，不会马上创建字符串&quot;abc&quot;对象，而是会先查找常量池中是否存在相同常量，如果有，则s3指向同一内存空间，否则创建新的字符串对象。*/
 
 System.out.println(s1==s2); //false
 System.out.println(s1==s3); //true
 
 //String类重写了Object类的equals()方法，使其由比较引用变为了比较引用所指向的字符串内容是否一样。
 System.out.println(s1.equals(s2)); //true
-</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/7964595/36520?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/22470?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8088719/14980?onlyWrong=0" title="Title" target="_blank" rel="external">例4</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/3731?onlyWrong=0" title="Title" target="_blank" rel="external">例5：</a>编译器优化</p>
-<p>例6：String s=”a”+”b”+”c”+”d”;这条语句一共创建了多少个对象？</p>
+</code></pre><p>例3：Java中的字符串都是常量，字符串一旦被初始化，就不可以被改变。</p>
+<pre><code>String str1 = &quot;abc&quot;;  
+String str2 = str1 + &quot;def&quot;;
+System.out.println(str1==str2); //false
+//此时，字符串常量池中存在了两个对象&quot;abc&quot;和&quot;abcdef&quot;。
+</code></pre><p>例4：String s=”a”+”b”+”c”+”d”;这条语句一共创建了多少个对象？</p>
 <pre><code>String s1 = &quot;a&quot;;
 String s2 = s1 + &quot;b&quot;;
 String s3 = &quot;a&quot; + &quot;b&quot;;
@@ -269,7 +284,8 @@ System.out.println(s3 == &quot;ab&quot;);
 这说明Java可以对字符串常量直接相加的表达式进行优化，不必要等到运行期去进行加法运算处理，而是在编译时去掉其中的加号，直接将其编译成一个这些常量相连的结果。
 
 因此String s=&quot;a&quot;+&quot;b&quot;+&quot;c&quot;+&quot;d&quot;;只创建了一个String对象
-</code></pre><p>(2) StringBuffer：线程安全的可变字符序列</p>
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/7964595/36520?onlyWrong=0" title="Title" target="_blank" rel="external">例5</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/22470?onlyWrong=0" title="Title" target="_blank" rel="external">例6</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8088719/14980?onlyWrong=0" title="Title" target="_blank" rel="external">例7</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/3731?onlyWrong=0" title="Title" target="_blank" rel="external">例8：</a>编译器优化</p>
+<p>(2) StringBuffer：线程安全的可变字符序列</p>
 <ul>
 <li>对StringBuffer对象进行操作都是对其本身的字符序列进行操作，而不是生成新的对象。因此StringBuffer对象内容可变、长度可变，可以将多个字符串值直接联合，效率高</li>
 <li>String覆盖了equals方法和hashCode方法，而StringBuffer没有覆盖equals方法和hashCode方法，所以，将StringBuffer对象存储进Java集合类中时会出现问题。</li>
@@ -277,6 +293,7 @@ System.out.println(s3 == &quot;ab&quot;);
 <p><a href="https://www.nowcoder.com/questionTerminal/f5f375fc6f1f466488daddbc2d224e4d" title="Title" target="_blank" rel="external">例1</a></p>
 <pre><code>定义有StringBuffer s1=new StringBuffer(10);s1.append(&quot;1234&quot;)则s1.length()和s1.capacity()分别是：4和10
 </code></pre><p>(3) StringBuilder：非线程安全的可变字符序列</p>
+<p>注意：StringBuffer和StringBuilder在功能上基本完全相同，它们都继承自AbstractStringBuilder，而AbstractStringBuilder是使用非final修饰的字符数组实现的，如：char[] value; 所以可以对StringBuffer和StringBuilder对象进行改变，每次改变都是在原来的对象上发生的，不会重新new出新的StringBuffer或StringBuilder对象。所以，当我们需要频繁修改字符串内容的时候，使用StringBuffer和StringBuilder是很好地选择。两者的核心操作都是append和insert，append是直接在字符串的末尾追加，而insert(int index,String str)是在指定位置出插入字符串。 StringBuffer和StringBuilder的最主要区别就是线程安全方面，由于在StringBuffer内大部分方法都添加了synchronized同步，所以StringBuffer是线程安全的，而StringBuilder不是线程安全的。因此，当我们处于多线程的环境下时，我们需要使用StringBuffer，如果我们的程序是线程安全的使用StringBuilder在性能上就会更优一点。</p>
 <h3 id="问：数组有没有length-方法-String有没有length-方法？"><a href="#问：数组有没有length-方法-String有没有length-方法？" class="headerlink" title="问：数组有没有length()方法? String有没有length()方法？"></a>问：数组有没有length()方法? String有没有length()方法？</h3><p>数组没有length()方法，但有length属性；String有length()方法。</p>
 <h3 id="问：String的几个方法"><a href="#问：String的几个方法" class="headerlink" title="问：String的几个方法"></a>问：String的几个方法</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8073294/3033?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>易错的题目：replaceAll()方法</p>
 <pre><code>public static void main (String[] args) { 
@@ -287,7 +304,21 @@ System.out.println(s3 == &quot;ab&quot;);
 输出为：/////////MyClass.class
 replaceAll方法的第一个参数是一个正则表达式，而&quot;.&quot;在正则表达式中表示任何字符，所以会把前面字符串的所有字符都替换成&quot;/&quot;。
 如果想替换的只是&quot;.&quot;的话，正则表达式那里就要写成&quot;\\.&quot;或者是&quot;[.]&quot;。前者将&quot;.&quot;转义为&quot;.&quot;这个具体字符，后者则匹配&quot;[]&quot;中的任意字符。
-</code></pre><p>例2：字符串分割，如何把一段逗号分割的字符串转换成一个数组？</p>
+</code></pre><p>例2：易错的题目：split()方法</p>
+<p>当直接以”.”为参数时，结果错误：</p>
+<pre><code>public static void main(String[] args) {
+    String str = &quot;12.03&quot;;  
+    String[] res = str.split(&quot;.&quot;);
+    for(int i=0; i&lt;res.length; i++){
+        System.out.println(res[i]);
+    }
+
+}
+
+输出为空
+String的split(String regex)是根据给定的正则表达式来拆分字符串的
+&quot;.&quot;是正则表达式中的关键字，没有经过转义split会把它当作一个正则表达式来处理的，需要写成str.split(&quot;\\.&quot;)进行转义处理。
+</code></pre><p>例3：字符串分割，如何把一段逗号分割的字符串转换成一个数组？</p>
 <pre><code>方法一：使用正则表达式
 
     String str=&quot;abc,edg,efd,adfa&quot;;
@@ -302,8 +333,17 @@ replaceAll方法的第一个参数是一个正则表达式，而&quot;.&quot;在
     for(int i=0; i&lt;length; i++){
         result[i]=tokener.nextToken();
     }
+</code></pre><p>例3：如何实现字符串的反转？</p>
+<pre><code>示例：递归实现字符串反转
+
+public String reverse(String originStr) {
+    if (originStr == null || originStr.length() &lt;= 1)
+        return originStr;
+    return reverse(originStr.substring(1)) + originStr.charAt(0);
+}
 </code></pre><h3 id="问：String的编码转换"><a href="#问：String的编码转换" class="headerlink" title="问：String的编码转换"></a>问：String的编码转换</h3><p>编码转换，实现将GB2312编码的字符串转换为ISO-8859-1编码的字符串：</p>
-<pre><code>String a=new String(&quot;中&quot;.getBytes(&quot;gb2312&quot;), &quot;iso-8859-1&quot;);
+<pre><code>String str=&quot;中&quot;
+String a=new String(str.getBytes(&quot;gb2312&quot;), &quot;iso-8859-1&quot;);
 </code></pre><p>编码转换，实现将GBK编码字节流转换为UTF-8编码字节流：</p>
 <pre><code>byte[] src, dst;
 dst=new String (src, &quot;GBK&quot;).getbytes(&quot;UTF-8&quot;);
@@ -344,8 +384,96 @@ Math.round(-6.5)=(long)floor(-6.5+0.5d)=(long)floor(-6.0)=-6
 Math.round(NaN)=0
 Math.round(Math.round(Double.NEGATIVE_INFINITY或&lt;=Long.MIN_VALUE))=Long.MIN_VALUE
 Math.round(Math.round(Double.POSITIVE_INFINITY或&gt;=Long.MAX_VALUE))=Long.MAX_VALUE
-</code></pre><h3 id="问：枚举类型"><a href="#问：枚举类型" class="headerlink" title="问：枚举类型"></a>问：枚举类型</h3><p>Java中创建枚举类型要使用enum关键字，所有的枚举值都默认为static，在初始化时会对所有的枚举值对象调用一次构造函数进行初始化。</p>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8016183/7688?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+</code></pre><h3 id="问：枚举类型"><a href="#问：枚举类型" class="headerlink" title="问：枚举类型"></a>问：枚举类型</h3><p>Java中定义枚举类型要使用enum关键字，所有的枚举值对象都默认为static</p>
+<p>(1) 枚举值对象可以用中文字符，枚举值组成可以由字母、下划线组成，但不能单独使用数字。</p>
+<p>例1：带中文枚举值对象的枚举类型</p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        System.out.println(Genders.男);
+        System.out.println(Genders.女);
+        System.out.println(Genders.MAN);
+        System.out.println(Genders.WOWAM);
+    }
+}
+
+enum Genders {
+    男, 女, MAN, WOWAM
+}
+
+输出：
+
+    男
+    WOWAM
+</code></pre><p>(2) 带有构造方法的枚举类型</p>
+<ul>
+<li>枚举类型的构造方法访问控制符只能为private(且默认为private)；</li>
+<li>在初始化时会对所有的枚举值对象调用一次构造函数进行初始化；</li>
+<li>含带参构造方法的枚举类型中的枚举值对象必须初始化；</li>
+<li>枚举类型中含有其他属性或方法时，枚举值对象必须定义在最前面，且需要在最后一个枚举值对象后面加分号”;”</li>
+</ul>
+<p>(3) 枚举类型都继承了Enum类，因为枚举类型都不能再继承其他类了，但是可以实现其他接口</p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        System.out.println(&quot;吉普信息：&quot;+Cars.JEEP.getName() + &quot;\t&quot; +Cars.JEEP.getPrice());
+
+        Car mini=Cars.MINI;
+        mini.setCarName(&quot;mini2&quot;);
+        System.out.println(&quot;Mini新名字\t&quot;+Cars.MINI.getName());
+
+        for(Cars car : Cars.values()){
+            System.out.println(car.getName() + &quot;\t&quot; + car.getPrice());
+        }
+    }
+}
+
+interface Car{
+    public void setCarName(String name);
+}
+
+enum Cars implements Car {
+    BMW(&quot;宝马&quot;, 1000000), JEEP(&quot;吉普&quot;, 800000), MINI(&quot;mini&quot;, 200000);
+
+    private String name;
+    /**
+     * 从这里可以看出虽然枚举值不能直接由数字组成，但是我们可以给该枚举类添加一个int类型的值，通过构造方法给其赋值，相当于间接的可以使用数值
+     */
+    private int price;
+
+    private Cars(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    @Override
+    public void setCarName(String name) {
+        this.name = name;
+    }
+}
+
+输出如下：
+
+    吉普信息：吉普    800000
+    宝马    1000000
+    吉普    800000
+    mini    200000
+    Mini新名字    mini2
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8016183/7688?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>enum AccountType{
     SAVING, FIXED, CURRENT;
     private AccountType(){
@@ -364,6 +492,11 @@ It is a account type
 It is a account type
 FIXED
 </code></pre><h3 id="问：基本数据类型的包装类"><a href="#问：基本数据类型的包装类" class="headerlink" title="问：基本数据类型的包装类"></a>问：基本数据类型的包装类</h3><p>Java语言是一个面向对象的语言，但Java中的基本数据类型却是不面向对象的，这在实际使用时存在很多的不便，为了解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，即包装类。</p>
+<p>Java为每个基本数据类型提供了包装类型：</p>
+<ul>
+<li>基本数据类型: byte，short，int，long，float，double，char，boolean</li>
+<li>包装数据类型：Byte，Short，Integer，Long，Float，Double，Character，Boolean</li>
+</ul>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7993658/13311?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>class Two{
     Byte x;
@@ -387,9 +520,169 @@ class PassO{
 
 上面代码的输出为：null 42 42
 基本数据类型的包装类型，属于引用类型。如果包装类成员变量没有显示初始化，那么Java默认初始化为null。
-</code></pre><h3 id="问：如何将数值型字符串转换为对应类型的数字？"><a href="#问：如何将数值型字符串转换为对应类型的数字？" class="headerlink" title="问：如何将数值型字符串转换为对应类型的数字？"></a>问：如何将数值型字符串转换为对应类型的数字？</h3><p>例1：</p>
+</code></pre><p>例2:下面哪些类可以被继承?</p>
+<pre><code>A、Thread    B、Number    C、Double    D、Math    E、ClassLoader
+
+正确答案：ABE
+
+(1) 我们可以通过继承Thread类来创建线程；
+(2) Byte、Short、Integer、Long、Float、Double这几个数字类型都继承自Number；
+(3) Byte、Short、Integer、Long、Float、Double、Boolean、Character这几个基本数据类型的包装类，以及String、Math等都被定义为public final class，因此这几个都不能被继承；
+(4) 我们可以自定义类加载器来实现加载功能，因此ClassLoader是可以被继承的。
+</code></pre><h3 id="问：装箱与拆箱"><a href="#问：装箱与拆箱" class="headerlink" title="问：装箱与拆箱"></a>问：装箱与拆箱</h3><p>从Java 5开始引入了自动装箱/拆箱机制，使得二者可以相互转换。自动装箱是Java编译器在基本数据类型和对应的包装类型之间做的一个转化，例如把int转化成Integer，double转化成Double，等等。反之就是自动拆箱。</p>
+<p>装箱的本质是什么呢？当我们给一个Integer对象赋一个int值的时候，会调用Integer类的静态方法valueOf()。</p>
+<pre><code>public static Integer valueOf(int i) {
+    if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
+        return IntegerCache.cache[i + (-IntegerCache.low)];
+    return new Integer(i);
+}
+
+/**
+ * Cache to support the object identity semantics of autoboxing for values between
+ * -128 and 127 (inclusive) as required by JLS.
+ *
+ * The cache is initialized on first usage.  The size of the cache
+ * may be controlled by the {@code -XX:AutoBoxCacheMax=&lt;size&gt;} option.
+ * During VM initialization, java.lang.Integer.IntegerCache.high property
+ * may be set and saved in the private system properties in the
+ * sun.misc.VM class.
+ */
+
+private static class IntegerCache {
+    static final int low = -128;
+    static final int high;
+    static final Integer cache[];
+
+    static {
+        // high value may be configured by property
+        int h = 127;
+        String integerCacheHighPropValue = sun.misc.VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);
+        if (integerCacheHighPropValue != null) {
+            try {
+                int i = parseInt(integerCacheHighPropValue);
+                i = Math.max(i, 127);
+                // Maximum array size is Integer.MAX_VALUE
+                h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
+            } catch( NumberFormatException nfe) {
+                // If the property cannot be parsed into an int, ignore it.
+            }
+        }
+        high = h;
+
+        cache = new Integer[(high - low) + 1];
+        int j = low;
+        for(int k = 0; k &lt; cache.length; k++)
+            cache[k] = new Integer(j++);
+
+        // range [-128, 127] must be interned (JLS7 5.1.7)
+        assert IntegerCache.high &gt;= 127;
+    }
+
+    private IntegerCache() {}
+}
+</code></pre><p>如果整型字面量的值在-128到127之间，那么不会new新的Integer对象，而是直接引用常量池中的Integer对象。</p>
+<h3 id="问：装箱与拆箱中的-和equals"><a href="#问：装箱与拆箱中的-和equals" class="headerlink" title="问：装箱与拆箱中的==和equals()"></a>问：装箱与拆箱中的==和equals()</h3><p><strong>下面的规则基本意思是对的，但语言尚不严格正确</strong></p>
+<p>(1) 基本数据类型变量和基本数据类型包装类对象进行”==”运算符的比较，基本数据类型封装类对象将会自动拆箱变为基本数据类型后再进行比较。例如Integer(0)和0比较时，Integer(0)会自动拆箱为int类型再进行比较。</p>
+<p>(2) 两个Integer类型变量进行”==”比较，如果这两个对象的值在-128至127且值相等，那么返回true，否则返回false，这跟Integer.valueOf()方法的缓冲对象有关。<a href="http://www.codeceo.com/article/why-java-1000-100.html#0-qzone-1-58658-d020d2d2a4e8d1a374a433f596ad1440" title="Title" target="_blank" rel="external">请看这篇文章</a></p>
+<p>(3) </p>
+<p>(4) 两个基本数据类型封装类变量进行equals()比较，equals()会首先比较对象的类型，如果类型相同，继续比较值，如果值也相同，返回true，否则返回false。</p>
+<p>(5) 基本数据类型封装类对象调用equals()，但是参数是基本数据类型变量，这时候，基本数据类型变量会先进行自动装箱转换为其封装类型对象，再进行4中的比较。</p>
+<p>例1：</p>
+<pre><code>int a=257;
+Integer b1=257; //Integer b1=257会先调用Integer.valueOf()方法将257转化为new Integer(257)对象
+Integer b2=57;  //Integer b2=57会先调用Integer.valueOf()方法返回缓存中的57
+Integer b3=257;
+Integer b4=57;
+Integer c=new Integer(257);
+Integer d=new Integer(257);
+Integer e1=Integer.valueOf(257); //Integer.valueOf()方法将257转化为new Integer(257)对象
+Integer e2=Integer.valueOf(57);  //Integer.valueOf()方法返回缓存中的57
+
+// int和Integer(无论new否)比，都为true
+System.out.println(a==b1); // true，规则(1)
+System.out.println(a==c); // true，规则(1)
+
+// 两个都是非new出来的Integer，如果数在-128到127之间，则是true，否则为false 
+System.out.println(b1==b3); // false，规则(2)
+System.out.println(b2==b4); // true，规则(2)
+System.out.println(b1==e1); // false，规则(3)
+System.out.println(b2==e2); // true，规则(3)
+
+// Integer与new Integer比较，结果为false；两个都是new出来的,都为false
+System.out.println(b1==c); // false，规则(3)
+System.out.println(c==d); // false，规则(3)
+
+//System.out.println(a.equals(b1));  编译出错，基本型不能调用equals()
+System.out.println(b1.equals(b3)); // true，规则(4)
+System.out.println(c.equals(d)); // true，规则(4)
+
+System.out.println(b1.equals(257.0)); // false，规则(5)，257.0先封装成Double对象再进行比较
+</code></pre><p>例2：</p>
+<pre><code>public static void main(String[] args){    
+    Boolean flag=false;//先调用Boolean.valueOf(boolean b)返回false对应的Boolean对象Boolean.FALSE，然后赋值给flag，flag值为Boolean.FALSE    
+    /* 先赋值，遇到if条件表达式自动拆箱     
+     * 1. 先调用Boolean.valueOf(boolean b)返回true对应的Boolean对象Boolean.TRUE，然后赋值给flag，flag值为Boolean.TRUE     
+     * 2. 调用booleanValue()返回flag值对应的基础数据类型值true     
+     * 3. 结果输出true     
+     */    
+    if (flag=true){        
+        System.out.println(&quot;true&quot;);    
+    }else{        
+        System.out.println(&quot;false&quot;);    
+    }
+}
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/7964595/25372?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/3794?onlyWrong=0" title="Title" target="_blank" rel="external">例4</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8049404/15318?onlyWrong=0" title="Title" target="_blank" rel="external">例5</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8049404/16022?onlyWrong=0" title="Title" target="_blank" rel="external">例6：</a>重要的题目</p>
+<h3 id="问：如何将数值型字符串转换为对应类型的数字？"><a href="#问：如何将数值型字符串转换为对应类型的数字？" class="headerlink" title="问：如何将数值型字符串转换为对应类型的数字？"></a>问：如何将数值型字符串转换为对应类型的数字？</h3><p>例1：</p>
 <pre><code>Integer.parseInt(&quot;1234&quot;);
 Double.parseDouble(&quot;123.2&quot;);
+</code></pre><h3 id="问：File类"><a href="#问：File类" class="headerlink" title="问：File类"></a>问：File类</h3><p>例1：编程列出一个目录下所有的文件</p>
+<p>(1) 如果只要求列出当前文件夹下的文件，代码如下所示</p>
+<pre><code>public static void main(String[] args) {
+    File file = new File(&quot;C:/Users/Hepsilion/Desktop&quot;);
+    for(File f : file.listFiles()) {
+        if(f.isFile()) {
+            System.out.println(f.getName());
+        }
+    }
+}
+</code></pre><p>(2) 如果需要对文件夹继续展开，代码如下所示</p>
+<pre><code>public static void main(String[] args) {
+    showDirectory(new File(&quot;C:/Users/Hepsilion/Desktop&quot;), 0);
+}
+
+private static void showDirectory(File file, int level) {
+    if (file.isDirectory()) {
+        for (File f : file.listFiles()) {
+            showDirectory(f, level + 1);
+        }
+    } else {
+        for (int i = 0; i &lt; level - 1; i++) {
+            System.out.print(&quot;\t&quot;);
+        }
+        System.out.println(file.getName());
+    }
+}
+</code></pre><p>在Java 7中可以使用NIO.2的API来做同样的事情</p>
+<pre><code>import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Path initPath = Paths.get(&quot;C:/Users/Hepsilion/Desktop&quot;);
+        Files.walkFileTree(initPath, new SimpleFileVisitor&lt;Path&gt;() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                System.out.println(file.getFileName().toString());
+                return FileVisitResult.CONTINUE;
+            }
+        });
+    }
+}
 </code></pre><h3 id="问：日期类"><a href="#问：日期类" class="headerlink" title="问：日期类"></a>问：日期类</h3><p>例1： 使用Java编程，打印昨天的当前时刻</p>
 <pre><code>public class YesterdayCurrent{
     public static void main(String[] args){
@@ -424,6 +717,22 @@ Double.parseDouble(&quot;123.2&quot;);
     String dateStr=sdf.format(date);//把日期按指定格式转化为字符串
     System.out.println(dateStr);
 }
+</code></pre><p>例5： Java 8中的Date API</p>
+<p>Java 8中在java.time包下包含了一组全新的时间日期API，新的日期API和开源的Joda-Time库差不多，但又不完全一样，这组新API里最重要的一些部分是Clock时钟，Clock类提供了访问当前日期和时间的方法，Clock是时区敏感的，可以用来取代System.currentTimeMillis()来获取当前的微秒数。某一个特定的时间点也可以使用Instant类来表示，Instant类也可以用来创建老的java.util.Date对象。</p>
+<pre><code>public static void main(String[] args) {
+    Clock clock = Clock.systemDefaultZone();
+    long millis = clock.millis();
+    Instant instant = clock.instant();
+    Date date = Date.from(instant);
+    System.out.println(millis);
+    System.out.println(instant);
+    System.out.println(date);
+}
+
+//输出：
+1504834478293
+2017-09-08T01:34:38.293Z
+Fri Sep 08 09:34:38 CST 2017
 </code></pre>
         
         </div>
@@ -434,7 +743,7 @@ Double.parseDouble(&quot;123.2&quot;);
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/18/06-常用类/" data-id="cj6k62j3b0012b4wrofyxxgaq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/18/06-常用类/" data-id="cj92exalk000zt4wrqgllkglm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -594,95 +903,95 @@ Double.parseDouble(&quot;123.2&quot;);
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/16-JVM类加载机制/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="16-JVM类加载机制" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/16-JVM类加载机制/" class="title">16-JVM类加载机制</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:46:17.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="15-垃圾收集器与内存分配策略" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="title">15-垃圾收集器与内存分配策略</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:58.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-05/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="14-Java内存区域" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SpringMVC视图解析器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="title">14-Java内存区域</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:14.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-05/" class="title">05-SpringMVC视图解析器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:51:31.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-04/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IT校招全国统一模拟笔试(秋招备战专场二模)编程题" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="04-SpringMVC表单标签库" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a></p>
-                            <p class="item-title"><a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="title">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a></p>
-                            <p class="item-date"><time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-04/" class="title">04-SpringMVC表单标签库</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:49:57.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-03/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="03-请求处理方法Action详解" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
-                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-03/" class="title">03-请求处理方法Action详解</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
@@ -695,7 +1004,7 @@ Double.parseDouble(&quot;123.2&quot;);
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -704,7 +1013,7 @@ Double.parseDouble(&quot;123.2&quot;);
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -713,7 +1022,7 @@ Double.parseDouble(&quot;123.2&quot;);
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 

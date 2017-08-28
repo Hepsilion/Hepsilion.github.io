@@ -129,11 +129,11 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                44
+                51
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                21
+                22
                 <span>标签</span>
             </div>
         </div>
@@ -235,7 +235,62 @@ var _hmt = _hmt || [];
 <center><br><img src="/blog/2017/02/15/03-面向对象编程/AccessSpecifiers.JPG" width="60%">图 1<br></center>
 
 <p>访问权限大小：public&gt;protected&gt;default&gt;private</p>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/56331?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a>：分析下面代码的运行结果</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>对于有继承关系的两个类，例如class B extends A，如果A和B在不同的包中，那么子类不能通过父类的实例访问父类的protected成员，但可以直接使用从父类继承的protected成员</li>
+</ul>
+<p>例1：</p>
+<p>父类：</p>
+<pre><code>package p1;
+
+public class Father{
+    public int field1=1;
+    protected int field2=2;
+    int field3=3;
+    private int field4=4;
+}
+</code></pre><p>子类：</p>
+<pre><code>package p2;
+
+import p1.Father;
+
+public class Child extends Father{ 
+    public void fun() {
+        System.out.println(field1);
+        System.out.println(field2);
+        System.out.println(field3); // 错误
+        System.out.println(field4); // 错误
+
+        Father f = new Father();
+        System.out.println(f.field1);
+        System.out.println(f.field2); // 错误：不同包下的子类不能通过父类实例访问protected成员
+        System.out.println(f.field3); // 错误
+        System.out.println(f.field4); // 错误
+    }
+}
+</code></pre><p>如果将Child类也放在p1包中，则：</p>
+<pre><code>package p1;
+
+import p1.Father;
+
+public class Child extends Father{ 
+    public void fun() {
+        System.out.println(field1);
+        System.out.println(field2);
+        System.out.println(field3);
+        System.out.println(field4); // 错误
+
+        Father f = new Father();
+        System.out.println(f.field1);
+        System.out.println(f.field2);
+        System.out.println(f.field3);
+        System.out.println(f.field4); // 错误
+    }
+}
+</code></pre><ul>
+<li>Java中，外部类的访问修饰符只能是public或default，类成员(包括内部类)的修饰符可以是以上四种。</li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/56331?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a>：分析下面代码的运行结果</p>
 <pre><code>class Person{
     private String name = &quot;Person&quot;;
     int age=0;
@@ -269,7 +324,7 @@ public class Child extends Person{
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8066549/25830?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <p>Java中构造方法重载和方法重载很相似，可以为一个类创建多个构造方法，每一个构造方法必须有它自己唯一的参数列表。</p>
 <p>Java不支持像C++中那样的复制构造方法，但是这并不代表Java中没有这种机制，Java中Object类的clone()方法就是这种机制的体现。</p>
-<h3 id="问：this关键字"><a href="#问：this关键字" class="headerlink" title="问：this关键字"></a>问：this关键字</h3><h3 id="问：static关键字"><a href="#问：static关键字" class="headerlink" title="问：static关键字"></a>问：static关键字</h3><p>“static”关键字可以用于修饰类的成员变量和成员方法，被其修饰的成员变量被称为类变量，被其修饰的成员方法称为类方法，它们随着类的加载而加载，使得这些变量和方法可以在类没有被实例化的情况下直接通过类名进行访问。</p>
+<h3 id="问：static关键字"><a href="#问：static关键字" class="headerlink" title="问：static关键字"></a>问：static关键字</h3><p>“static”关键字可以用于修饰类的成员变量和成员方法，被其修饰的成员变量被称为类变量，被其修饰的成员方法称为类方法，它们随着类的加载而加载，使得这些变量和方法可以在类没有被实例化的情况下直接通过类名进行访问。</p>
 <p>(1) 被static修饰的成员方法只能访问static成员，不可以访问非static成员</p>
 <p>Java中,非static成员是与对象关联在一起的，必须创建一个对象后，才可以访问该对象的方法或属性；而被static修饰的变量和方法是属于类的，它们随着类的加载而加载，同时对static变量进行初始化并执行static代码块。如果static环境中的代码尝试访问非static的变量，编译器会报错，因为<strong>类的加载先于变量的创建，类加载的时候这些变量还没有被创建出来</strong>，例如，在static方法中访问某对象的非static方法，此时尚不能保证对象已经被实例化。因此在static环境中不能访问非static变量。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7958772/56439?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
@@ -305,6 +360,36 @@ public class MyApplication {
 }
 
 答案：程序编译失败
+</code></pre><h3 id="问：局部变量、静态变量和实例变量"><a href="#问：局部变量、静态变量和实例变量" class="headerlink" title="问：局部变量、静态变量和实例变量"></a>问：局部变量、静态变量和实例变量</h3><p>Java中主要存在如下几种类型的变量：</p>
+<ul>
+<li>局部变量</li>
+<li>静态变量(类变量)：属于类，被static修饰符修饰的变量，也称为类变量，它属于类、而不属于类的任何一个对象。一个类不管创建多少个对象，静态变量在内存中有且仅有一个拷贝。静态变量可以让多个对象实现共享内存。</li>
+<li>实例变量(成员变量/非静态变量)：属于对象，必须依存于某一实例，即需要先创建对象然后才能通过对象访问到它。</li>
+</ul>
+<p>例1：分析下面代码的执行结果。</p>
+<pre><code>public class Main {
+    static {
+        int x = 5;
+    }
+    static int x, y;
+
+    public static void main(String args[]) {
+        x--;
+        myMethod();
+        System.out.println(x + y + ++x);
+    }
+
+    public static void myMethod() {
+        y = x++ + ++x;
+    }
+}
+
+A、compiletime error    B、prints:1    C、prints:2    D、prints:3    E、prints:7   F、prints:8
+
+答案：D
+
+注意静态代码块中的语句声明，重新定义了一个局部变量int x = 5，执行完静态代码块后，局部变量就被销毁。
+此时全局变量x 还是默认值0，执行到打印语句时，x=1，y=0，对于打印语句System.out.println(x+y+ ++x)中的x+y+ ++x由于+是左结合的，因此x+y+ ++x，即1+0+(++x)=3.
 </code></pre><h3 id="问：继承"><a href="#问：继承" class="headerlink" title="问：继承"></a>问：继承</h3><p>继承时类的实例化问题：在实例化一个类时，一定是先创建其父类对象，即先执行父类的构造函数，然后再创建当前类对象。如果子类没有显示地调用父类的构造函数，编译器会自动加入父类的无参的构造函数super()(这也要求父类要有无参数的构造函数，否咋将出现编译出错)。</p>
 <p><a href="" title="Title">例1：</a></p>
 <pre><code>package test; 
@@ -333,11 +418,40 @@ ChildClass Create
 <h3 id="问：super和this"><a href="#问：super和this" class="headerlink" title="问：super和this"></a>问：super和this</h3><p>this代表当前类对象，super代表当前类对象的父类对象。</p>
 <p>在子类构造方法中，使用super()调用的是其父类的构造方法，而使用this()调用的是同一个类中重载的构造方法</p>
 <p><strong>super关键字</strong></p>
+<p>在Java中super指代父类对象，通过它可以访问父类对象中非private修饰的成员变量和方法。</p>
 <p>(1) Java中子类不能继承父类的构造方法，只能调用父类构造方法；</p>
 <p>(2) 子类的构造方法可以显示地使用super调用父类构造方法；</p>
 <p>(3) 当子类构造方法中没有显示地使用super来调用父类构造方法时，系统会默认采用super()调用父类的无参构造方法，这时父类必须提供无参构造方法，否则编译出错。</p>
-<p><a href="https://www.nowcoder.com/profile/7404313/test/8066549/15538?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a>，<a href="https://www.nowcoder.com/profile/7404313/test/7958772/55361?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8049404/15324?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a>，<a href="https://www.nowcoder.com/profile/7404313/test/7977669/22482?onlyWrong=0" title="Title" target="_blank" rel="external">例4</a>    </p>
-<p>例5：下面程序的输出结果是多少？</p>
+<p>例1：下面程序的输出结果是多少？</p>
+<pre><code>class A {
+    public String name = &quot;llyA&quot;;
+
+    public void getName() {
+        System.out.println(&quot;父类getName-&gt;&quot; + name);
+    }
+}
+
+class B extends A {
+    public String name = &quot;llyB&quot;;
+
+    @Override
+    public void getName() {
+        System.out.println(&quot;子类getName-&gt;&quot; + name);
+        super.getName();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        B b = new B();
+        b.getName();
+    }
+}
+// 输出：
+子类getName-&gt;llyB
+父类getName-&gt;llyA
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8066549/15538?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a>，<a href="https://www.nowcoder.com/profile/7404313/test/7958772/55361?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8049404/15324?onlyWrong=0" title="Title" target="_blank" rel="external">例4</a>，<a href="https://www.nowcoder.com/profile/7404313/test/7977669/22482?onlyWrong=0" title="Title" target="_blank" rel="external">例5</a>    </p>
+<p>例6：下面程序的输出结果是多少？</p>
 <pre><code>import java.util.Date;
 
 public class Test extends Date{
@@ -364,6 +478,8 @@ public class Test extends Date{
 <li>函数参数列表必须不相同：可以是参数个数、参数类型或者参数顺序不同；</li>
 <li>函数的返回值类型、访问权限、异常类型可以相同，也可以不相同。即不能通过返回值类型、访问权限和异常类型对方法进行重载。</li>
 </ul>
+<p>例1：为什么不能通过返回值类型进行方法重载？</p>
+<p>因为我们有时候调用一个方法时可以不定义返回结果变量，即不要关心其返回结果，例如，我们调用map.remove(key)方法时，虽然remove方法有返回值，但是我们通常都不会定义接收返回结果的变量，这时候假设该类中有两个名称和参数列表完全相同的方法，仅仅是返回类型不同，java就无法确定编程者倒底是想调用哪个方法了，因为它无法通过返回结果类型来判断。所以，重载的方法是可以改变返回值的类型；只能通过不同的参数个数、不同的参数类型或不同的参数顺序来实现重载。</p>
 <p>(2) 方法重写是父类与子类之间多态性的一种表现，是说子类重新定义了父类的方法；方法的重写满足两同两小一大原则</p>
 <ul>
 <li>方法名相同，参数列表相同</li>
@@ -386,7 +502,9 @@ final StringBuffer sb=new StringBuffer(&quot;immutable&quot;);
 但是当执行sb=new StringBuffer(&quot;&quot;);时，将报告编译错误。
 </code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8070641/15311?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/22481?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8078128/14994?onlyWrong=0" title="Title" target="_blank" rel="external">例4</a></p>
 <p>(4) 形式参数只能用final修饰符，任何其它修饰符都会引起编译错误。但是用这个修饰符也有一定的限制，就是在方法中不能修改参数的值(但是从上面例1可以看出，参数引用的对象仍然是可以修改的)。不过在一般情况下，一个方法的形参不用final修饰。只有在特殊情况下：方法内部类，一个方法的内部类如果使用了这个方法的参数或局部变量，这个参数或局部变量应该是final。</p>
-<p>(5) final修饰的成员变量既可以在定义时显示地初始化，也可以先声明而不初始化，这种成员变量称为blank final，此时可以在构造代码块或构造函数中对其赋初值，(必须在constructor结束之前)，否则使用未赋初值的final变量时编译会报错。</p>
+<p>(5) final修饰的成员变量既可以在定义时显示地初始化，也可以先声明而不初始化，这种成员变量称为blank final，此时可以在构造代码块或构造函数中对其赋初值，(必须在constructor结束之前，如果类中有多个构造方法，则每个构造方法中都需要进行一次初始化)，否则使用未赋初值的final变量时编译会报错。</p>
+<p>注意：对于非final修饰的类的成员变量(包括static和非static)，如果开发者没有给其赋初值，在编译时，JVM自动会给非final修饰的成员变量赋初值，我们在类的成员方法中就可以直接使用、运算了。</p>
+<p>(6) 当方法中的局部变量用final修饰时，不一定要在定义的时候就初始化，只需要在使用前保证初始化就可以，但必须要在开始使用这个变量前初始化。</p>
 <p><a href="" title="Title">例1：</a></p>
 <pre><code>class Foo {
     final int i;
@@ -411,7 +529,7 @@ class Vehicle{
 }
 </code></pre><p>问题已解决：子类会继承父类的所有属性和方法，或者说子类拥有父类的所有属性和方法，但是子类无法直接访问父类的私有属性和私有方法。</p>
 <p>这里由于子类无法访问父类的run()方法，因此子类并没有重写父类的run()方法，而是自己重新定义了run()方法。</p>
-<p>(6) 被fianl修饰的变量参与运算时不会自动改变类型；当2个final修饰的变量相操作时，结果会根据左边变量的类型进行转化</p>
+<p>(6) 被fianl修饰的变量是常量，参与运算时在编译时就计算出结果，不会自动改变类型；当2个final修饰的变量相操作时，结果会根据左边变量的类型进行转化</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8109636/44646?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>byte b1=1,b2=2,b3,b6,b8;
 final byte b4=4,b5=6,b7;
@@ -423,7 +541,7 @@ System.out.println(b3+b6);
 
 代码片段中，存在编辑错误的语句是：语句1、语句3和语句4
 语句1错误：b3=(b1+b2);自动转为int，所以正确写法为b3=(byte)(b1+b2);或者将b3定义为int；
-语句2正确：b6=b4+b5;b4、b5为final类型，不会自动提升，计算结果任然是byte类型，然后结果的类型视左边变量类型而定，即b6可以是任意数值类型；
+语句2正确：b6=b4+b5;b4、b5为final类型，在编译时就已经变为b6=10，不会自动提升，计算结果任然是byte类型，然后结果的类型视左边变量类型而定，即b6可以是任意数值类型；
 语句3错误：b8=(b1+b4);虽然b4不会自动提升，但b1仍会自动提升，所以结果需要强转，b8=(byte)(b1+b4);
 语句4错误：b7=(b2+b5); 同上。同时注意b7是final修饰，即只可赋值一次，便不可再改变。
 </code></pre><h3 id="问：Object类"><a href="#问：Object类" class="headerlink" title="问：Object类"></a>问：Object类</h3><p>Java中Object是所有类的祖先类，Object类中包含如下方法：</p>
@@ -432,12 +550,139 @@ System.out.println(b3+b6);
 <p>例1：重写clone()方法时，通常都会有一行代码，是什么？</p>
 <pre><code>super.clone();
 重写clone()方法时，首先要把父类中成员复制到位，然后才是复制子类的成员。
+</code></pre><h3 id="问：如何实现对象克隆"><a href="#问：如何实现对象克隆" class="headerlink" title="问：如何实现对象克隆"></a>问：如何实现对象克隆</h3><p>有两种方式可以实现对象克隆：</p>
+<p>(1) 实现Cloneable接口并重写Object类中的clone()方法；</p>
+<p>(2) 实现Serializable接口，通过对象的序列化和反序列化实现克隆，可以实现真正的深度克隆</p>
+<pre><code>import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Person p1 = new Person(&quot;Bob&quot;, 33, new Car(&quot;Benz&quot;, 300));
+            ByteArrayOutputStream bout = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bout);
+            oos.writeObject(p1);
+
+            ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bin);
+            Person p2 = (Person) ois.readObject();
+            p2.getCar().setBrand(&quot;BYD&quot;);
+            System.out.println(&quot;Person 1---&gt;&quot; + p1);//Person 1---&gt;Person [name=Bob, age=33, car=Car [brand=Benz, maxSpeed=300]]
+            System.out.println(&quot;Person 1---&gt;&quot; + p2);//Person 1---&gt;Person [name=Bob, age=33, car=Car [brand=BYD, maxSpeed=300]]
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+class Person implements Serializable {
+    private static final long serialVersionUID = -9102017020286042305L;
+
+    private String name; // 姓名
+    private int age; // 年龄
+    private Car car; // 座驾
+
+    public Person(String name, int age, Car car) {
+        this.name = name;
+        this.age = age;
+        this.car = car;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;, car=&quot; + car + &quot;]&quot;;
+    }
+}
+
+class Car implements Serializable {
+    private static final long serialVersionUID = -5713945027627603702L;
+
+    private String brand; // 品牌
+    private int maxSpeed; // 最高时速
+
+    public Car(String brand, int maxSpeed) {
+        this.brand = brand;
+        this.maxSpeed = maxSpeed;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Car [brand=&quot; + brand + &quot;, maxSpeed=&quot; + maxSpeed + &quot;]&quot;;
+    }
+}
 </code></pre><h3 id="问：equals-方法和-的区别"><a href="#问：equals-方法和-的区别" class="headerlink" title="问：equals()方法和==的区别"></a>问：equals()方法和==的区别</h3><p>(1) ==运算符：比较两个变量的值是否相等，也就是两个变量所对应的内存中存储的数值是否相同，即栈中的内容是否相同。</p>
 <ul>
-<li>对于基本数据类型变量比较的是两个变量的值是否相等；</li>
+<li>对于基本数据类型变量比较的是两个变量的值是否相等；如果是不同的基本数据类型之间进行比较，则遵循基本数据类型间运算的转换原则:<ul>
+<li>如果两个操作数其中有一个是double类型，另一个操作数将会转换为double类型；</li>
+<li>否则，如果其中一个操作数是float类型，另一个操作数将会转换为float类型；</li>
+<li>否则，如果其中一个操作数是long类型，另一个操作数会转换为long类型；</li>
+<li>否则，两个操作数都转换为int类型。</li>
+</ul>
+</li>
 <li>对于引用型变量表示的是两个变量指向的对象在堆中存储的地址是否相同，即两个变量是否指向同一个对象</li>
 </ul>
-<p>(2) equals()方法：继承自Object类，默认调用==进行比较。通常比较两个对象的内容是否相同，判断两个对象是否相等需要覆盖equals()方法和hashcode()方法。</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/7993658/25900?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>public static void main(String[] args){
+    int i=42;
+    double d=42.0000;
+    long l=42;
+    float f=42.0f;
+    float f2=42.00f;
+    System.out.println(d==i);   //true
+    System.out.println(f==i);   //true
+    System.out.println(f==f2);  //true
+    System.out.println(l==i);   //true
+    System.out.println(l==f);   //true
+    System.out.println(d==f);   //true
+}
+</code></pre><p>(2) equals()方法：继承自Object类，默认调用==进行比较。通常比较两个对象的内容是否相同，判断两个对象是否相等需要覆盖equals()方法和hashcode()方法。</p>
+<p>注意：对于基本数据类型来说，使用equals方法时需要用该基本类型对应的包装类，因为equals()方法是针对对象来使用的！</p>
 <p>例1：</p>
 <pre><code>String a=new String(&quot;foo&quot;);
 String b=new String(&quot;foo&quot;);
@@ -450,8 +695,8 @@ System.out.println(a.equals(b)); //true
 username可能为null，此时编译器会报告空指针异常，因此需要改为&quot;zhangsan&quot;.equals(username)
 </code></pre><h3 id="问：finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？"><a href="#问：finalize-方法什么时候被调用？析构函数-finalization-的目的是什么？" class="headerlink" title="问：finalize()方法什么时候被调用？析构函数(finalization)的目的是什么？"></a>问：finalize()方法什么时候被调用？析构函数(finalization)的目的是什么？</h3><p>finalize()是Object类的一个方法，垃圾回收器(garbage colector)决定回收某对象时，就会运行该对象的finalize()方法。</p>
 <p>但是很不幸的是，在Java中，如果内存总是充足的，那么垃圾回收可能永远不会进行，也就是说finalize()可能永远不会被执行，显然指望它做收尾工作是靠不住的。 那么finalize()究竟是做什么的呢？它最主要的用途是回收特殊渠道申请的内存。Java程序有垃圾回收器，所以一般情况下内存问题不用程序员操心。但有一种JNI(Java Native Interface)调用non-Java程序（C或C++），finalize()的工作就是回收这部分的内存。</p>
-<h3 id="问：多态的实现方式"><a href="#问：多态的实现方式" class="headerlink" title="问：多态的实现方式"></a>问：多态的实现方式</h3><p>(1) 静态的多态：方法重载</p>
-<p>(2) 动态的多态：子类覆盖父类的方法，将子类的实例赋值给父类的引用，此时调用的是子类的方法；实现接口的实例赋值给接口的引用，此时调用的实现类的方法。</p>
+<h3 id="问：多态的实现方式"><a href="#问：多态的实现方式" class="headerlink" title="问：多态的实现方式"></a>问：多态的实现方式</h3><p>(1) 静态的多态/编译时的多态性：方法重载</p>
+<p>(2) 动态的多态/运行时的多态性：子类覆盖父类的方法，将子类的实例赋值给父类的引用，此时调用的是子类的方法；实现接口的实例赋值给接口的引用，此时调用的实现类的方法。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8049404/14992?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a>判断对错</p>
 <pre><code>在java的多态调用中，new的是哪一个类就是调用的哪个类的方法。
 
@@ -500,7 +745,7 @@ public class Child extends Father {
 <li>抽象类和接口中都可以包含静态成员变量。抽象类中静态成员变量的访问类型可以任意；而接口中声明的成员变量默认为public static final类型，且只能是public static final类型</li>
 <li>抽象类中的普通成员方法的访问类型可以为public、protected和private，抽象方法必须为public或protected；而接口中的成员方法的访问类型默认为public abstract类型，且只能是public abstract</li>
 <li>一个类最多只能继承一个类，但一个类可以实现多个接口</li>
-<li>抽象类可以implements接口；接口可以继承接口，并且接口可以实现多继承(一个接口可以继承多个接口)</li>
+<li>抽象类可以implements接口，抽象类可以继承具体类也可以继承抽象类；接口可以继承接口，并且接口可以实现多继承(一个接口可以继承多个接口)</li>
 </ul>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7906972/15179?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8073294/14303?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8100292/15000?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8078128/36678?onlyWrong=0" title="Title" target="_blank" rel="external">例4</a></p>
 <p>例5：Java代码查错</p>
@@ -549,6 +794,23 @@ class Ball implements Rollable {
 编译错误：任何在interface里声明的interface variable默认为public static final，不能被重新赋值。
 </code></pre><p>例8：</p>
 <pre><code>接口可以继承接口；抽象类可以实现接口；抽象类可以继承具体类；抽象类中可以有静态的main方法。
+</code></pre><p>例9：JDK1.8中允许接口定义默认非抽象的方法</p>
+<p>Java 8允许我们给接口添加一个非抽象的方法实现，只需要使用default关键字即可，这个特征又叫做扩展方法。</p>
+<pre><code>interface Formula {
+    double calculate(int a);
+    default double sqrt(int a) {
+        return Math.sqrt(a);
+    }
+}
+</code></pre><p>Formula接口在定义calculate方法的同时还定义了sqrt方法，实现Formula接口的子类只需要实现calculate方法，默认方法sqrt将在子类中可以直接使用。</p>
+<pre><code>Formula formula = new Formula() {  
+    @Override  
+    public double calculate(int a) {  
+        return sqrt(a * 100);  
+    }  
+};  
+formula.calculate(100);     // 100.0  
+formula.sqrt(16);           // 4.0 
 </code></pre><h3 id="问：instanceof关键字"><a href="#问：instanceof关键字" class="headerlink" title="问：instanceof关键字"></a>问：instanceof关键字</h3><p>instanceof前一个参数通常是一个引用类型变量，后一个操作数通常是一个类（也可以是一个接口）。它用于判断前面的变量引用的对象是否是后面的类(也可以是一个接口)或者其子类的实例。</p>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/7964595/3035?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
 <pre><code>public static void main(String args[]) {
@@ -758,7 +1020,27 @@ D.    public class InnerClass{
 
 答案：ABCD
 </code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8073294/4332?onlyWrong=0" title="Title" target="_blank" rel="external">例3</a></p>
-<h3 id="问：Static-Nested-Class和Inner-Class的不同？"><a href="#问：Static-Nested-Class和Inner-Class的不同？" class="headerlink" title="问：Static Nested Class和Inner Class的不同？"></a>问：Static Nested Class和Inner Class的不同？</h3><p>在方法外部定义的内部类前面加上static关键字，成为static Nested Class，它不再具备内部类的特性，侠义上讲，它不是内部类。它与普通类在运行时的行为和功能没有什么区别，只是编程引用时的语法有一些区别。</p>
+<p>例4：代码检查</p>
+<pre><code>class Outer {
+    class Inner {}
+
+    public static void foo() { 
+        new Inner(); 
+    }
+
+    public void bar() { 
+        new Inner(); 
+    }
+
+    public static void main(String[] args) {
+        new Inner();
+    }
+}
+
+编译错误：Java中非静态内部类对象的创建要依赖其外部类对象，
+上面的面试题中foo和main方法都是静态方法，静态方法中没有this，也就是说没有所谓的外部类对象，因此无法创建内部类对象。
+如果要在静态方法中创建内部类对象，可以这样做：new Outer().new Inner();
+</code></pre><h3 id="问：Static-Nested-Class和Inner-Class的不同？"><a href="#问：Static-Nested-Class和Inner-Class的不同？" class="headerlink" title="问：Static Nested Class和Inner Class的不同？"></a>问：Static Nested Class和Inner Class的不同？</h3><p>在方法外部定义的内部类前面加上static关键字，成为static Nested Class，它不再具备内部类的特性，侠义上讲，它不是内部类。它与普通类在运行时的行为和功能没有什么区别，只是编程引用时的语法有一些区别。</p>
 <pre><code>public class Outer{
     private static String name=&quot;Outer&quot;;
     private static String tag=&quot;tag&quot;;
@@ -793,7 +1075,24 @@ D.    public class InnerClass{
 </ul>
 <p>(3) 当在外部类中访问Static Nested Class时，可以直接使用Static Nested Class的名字，而不需要加上外部类的名字了，在Static Nested Class中也可以直接引用外部类的static的成员变量，不需要加上外部类的名字。</p>
 <p>(4) 在静态方法中定义的内部类也是Static Nested Class，这时候不能在类前面加static关键字，静态方法中的Static Nested Class与普通方法中的内部类的应用方式很相似，它除了可以直接访问外部类中的static的成员变量，还可以访问静态方法中的局部变量，但是，该局部变量前必须加final修饰符。</p>
-<h3 id="问：JNI-Java-Native-Interface-没怎么遇到过，暂时保留"><a href="#问：JNI-Java-Native-Interface-没怎么遇到过，暂时保留" class="headerlink" title="问：JNI(Java Native Interface) (没怎么遇到过，暂时保留)"></a>问：JNI(Java Native Interface) (没怎么遇到过，暂时保留)</h3><p>Java的不足除了体现在运行速度上要比传统的C++慢许多之外，还体现在Java无法直接访问底层操作系统（如系统硬件等)，为此Java使用native方法来扩展Java程序的功能。</p>
+<h3 id="问：Lambda表达式"><a href="#问：Lambda表达式" class="headerlink" title="问：Lambda表达式"></a>问：Lambda表达式</h3><p>在老版本的Java中，排列字符串一般按如下方式处理：</p>
+<pre><code>List&lt;String&gt; names = Arrays.asList(&quot;peter&quot;, &quot;anna&quot;, &quot;mike&quot;, &quot;xenia&quot;);  
+Collections.sort(names, new Comparator&lt;String&gt;() {  
+    @Override  
+    public int compare(String a, String b) {  
+        return b.compareTo(a);  
+    }  
+});
+</code></pre><p>我们需要给静态方法Collections.sort()传入一个List对象以及一个比较器来按指定顺序排列。通常做法都是创建一个匿名的比较器对象然后将其传递给sort方法。</p>
+<p>在Java 8中我们就没必要使用这种传统的匿名对象的方式了，Java 8提供了更简洁的语法：lambda表达式。使用lambda表达式的写法如下：</p>
+<pre><code>Collections.sort(names, (String a, String b) -&gt; {
+    return b.compareTo(a);
+});
+</code></pre><p>对于函数体只有一行代码的，你可以去掉大括号{}以及return关键字，因此上面代码可以重写成如下：</p>
+<pre><code>Collections.sort(names, (String a, String b) -&gt; b.compareTo(a));
+</code></pre><p>Java编译器可以自动推导出参数类型，代码可以进一步简写成如下：</p>
+<pre><code>Collections.sort(names, (a, b) -&gt; b.compareTo(a));
+</code></pre><h3 id="问：JNI-Java-Native-Interface-没怎么遇到过，暂时保留"><a href="#问：JNI-Java-Native-Interface-没怎么遇到过，暂时保留" class="headerlink" title="问：JNI(Java Native Interface) (没怎么遇到过，暂时保留)"></a>问：JNI(Java Native Interface) (没怎么遇到过，暂时保留)</h3><p>Java的不足除了体现在运行速度上要比传统的C++慢许多之外，还体现在Java无法直接访问底层操作系统（如系统硬件等)，为此Java使用native方法来扩展Java程序的功能。</p>
 <p>native是方法修饰符，native方法是由另外一种语言（如C/C++,汇编等）实现的本地方法，因为在外部实现了方法，所以在java代码中，就不需要声明了，有点类似于接口中的抽象方法。其实现步骤为：</p>
 <ul>
 <li>在Java中声明native()方法，然后编译；</li>
@@ -820,6 +1119,11 @@ abstract方法和native方法都是方法的声明，一个把方法实现移交
 
 Java构造方法可以有任何访问的修饰：public，protected，private或者没有修饰。
 但是不能有以下非访问性质的修饰：abstract，final，native，static，或者synchronized。
+</code></pre><p>例3：abstract方法是否可以同时是static的，是否可以同时是native方法，是否可以同时被synchronized修饰？ </p>
+<pre><code>都不能。
+抽象方法需要子类重写，而静态的方法是无法被重写的，因此二者是矛盾的。
+本地方法是由本地代码(如C代码)实现的方法，而抽象方法是没有实现的，也是矛盾的。
+synchronized和方法的实现细节有关，抽象方法不涉及实现细节，因此也是相互矛盾的。
 </code></pre>
         
         </div>
@@ -830,7 +1134,7 @@ Java构造方法可以有任何访问的修饰：public，protected，private或
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/15/03-面向对象编程/" data-id="cj6k62j2g000ib4wrsyzpu6ub" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/15/03-面向对象编程/" data-id="cj92exak6000bt4wrcxc5s8uw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -990,95 +1294,95 @@ Java构造方法可以有任何访问的修饰：public，protected，private或
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/16-JVM类加载机制/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="16-JVM类加载机制" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/16-JVM类加载机制/" class="title">16-JVM类加载机制</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:46:17.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="15-垃圾收集器与内存分配策略" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="title">15-垃圾收集器与内存分配策略</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:58.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-05/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="14-Java内存区域" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SpringMVC视图解析器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="title">14-Java内存区域</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:14.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-05/" class="title">05-SpringMVC视图解析器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:51:31.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-04/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IT校招全国统一模拟笔试(秋招备战专场二模)编程题" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="04-SpringMVC表单标签库" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a></p>
-                            <p class="item-title"><a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="title">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a></p>
-                            <p class="item-date"><time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-04/" class="title">04-SpringMVC表单标签库</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:49:57.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-03/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="03-请求处理方法Action详解" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
-                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-03/" class="title">03-请求处理方法Action详解</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
@@ -1091,7 +1395,7 @@ Java构造方法可以有任何访问的修饰：public，protected，private或
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1100,7 +1404,7 @@ Java构造方法可以有任何访问的修饰：public，protected，private或
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -1109,7 +1413,7 @@ Java构造方法可以有任何访问的修饰：public，protected，private或
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 

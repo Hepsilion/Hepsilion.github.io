@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>01-SpringMVC入门与环境配置 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                51
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                22
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-SpringMVC-01" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            01-SpringMVC入门与环境配置
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/10/22/SpringMVC-01/">
+            <time datetime="2017-10-22T06:41:29.000Z" itemprop="datePublished">2017-10-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/SpringMVC/">SpringMVC</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>本页内容来自：<a href="http://www.cnblogs.com/best/p/5653916.html，只是对其中部分内容重新组织，稍加修改。" target="_blank" rel="external">http://www.cnblogs.com/best/p/5653916.html，只是对其中部分内容重新组织，稍加修改。</a></p>
+<a id="more"></a>
+<h2 id="一、MVC概要"><a href="#一、MVC概要" class="headerlink" title="一、MVC概要"></a>一、MVC概要</h2><p>MVC是模型(Model)、视图(View)、控制器(Controller)的简写，是一种软件设计规范，用一种将业务逻辑、数据、显示分离的方式组织代码，MVC主要作用是降低了视图与业务逻辑间的双向偶合。MVC不是一种设计模式，而是一种架构模式。当然，不同的MVC之间存在差异。</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-01.png" width="30%">图 1<br></center>
+
+<p>在早期的web开发中，通常采用的都是Model1模式。如图2所示，在Model1模式中，项目主要分为两层：视图层和模型层。Model1模式的实现比较简单，适用于快速开发小规模项目。Model1模式中的JSP页面身兼View和Controller两种角色，将控制逻辑和表现逻辑混杂在一起，导致代码的重用性非常低，增加了应用扩展和维护的难度。</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-02.png" width="50%">图 2<br></center>
+
+<p>Model2模式消除了Model1模式的缺点。如图3所示，Model2模式把一个项目分成三部分：视图、控制、模型。这样不仅提高了代码的复用率与项目的扩展性，而且大大降低了项目的维护成本。</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-03.png" width="50%">图 3<br></center>
+
+<p>常见的服务器端MVC框架有Struts、Spring MVC、ASP.NET MVC、Zend Framework、JSF等；</p>
+<p>常见前端MVC框架有angularjs、reactjs、backbone等；</p>
+<p>由MVC模式还演化出了其他一些模式如：MVP、MVVM。</p>
+<h2 id="二、Spring-MVC简介"><a href="#二、Spring-MVC简介" class="headerlink" title="二、Spring MVC简介"></a>二、Spring MVC简介</h2><h2 id="三、Spring-MVC环境配置：第一个Spring-MVC项目"><a href="#三、Spring-MVC环境配置：第一个Spring-MVC项目" class="headerlink" title="三、Spring MVC环境配置：第一个Spring MVC项目"></a>三、Spring MVC环境配置：第一个Spring MVC项目</h2><h3 id="1-使用Maven新建一个Web项目"><a href="#1-使用Maven新建一个Web项目" class="headerlink" title="1. 使用Maven新建一个Web项目"></a>1. 使用Maven新建一个Web项目</h3><p>(1) 在Eclipse中新建Maven项目</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-04.png" width="55%">图 4<br></center>
+
+<p>(2) 选择”Create a simple project”，创建一个简单项目，不选择模板</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-05.png" width="65%">图 5<br></center>
+
+<p>(3) 填写Group Id，Artifact Id，Version和Packaging等信息</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-06.png" width="70%">图 6<br></center>
+
+<p>(4) 创建好的Maven项目目录结构如图7所示</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-07.png" width="30%">图 7<br></center>
+
+<p>(5) 修改层面信息，选择Dynamic Web Module版本为3.0，Java版本为1.8</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-08.png" width="100%">图 8<br></center>
+
+<p>(6) 在/src/main/webapp目录下创建WEB-INF文件夹，如图9所示在其中创建web.xml文件，填入如下内容</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+    xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+    xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
+    id=&quot;WebApp_ID&quot; version=&quot;3.0&quot;&gt;
+&lt;/web-app&gt;
+</code></pre><center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-09.png" width="30%">图 9<br></center>
+
+<h3 id="2-添加依赖的jar包"><a href="#2-添加依赖的jar包" class="headerlink" title="2. 添加依赖的jar包"></a>2. 添加依赖的jar包</h3><p>修改pom.xml文件，添加jar包的依赖，主要有：Spring框架核心库、Spring MVC、JSTL等</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;org.spring.mvc&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-mvc&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;spring.version&gt;4.3.0.RELEASE&lt;/spring.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--Spring框架核心库 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- Spring MVC --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- JSTL --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+            &lt;version&gt;1.2&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><p>当依赖添加成功后，项目会加载的jar包如图10所示</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-10.png" width="30%">图 10<br></center>
+
+<h3 id="3-注册中心控制器DispatcherServlet"><a href="#3-注册中心控制器DispatcherServlet" class="headerlink" title="3. 注册中心控制器DispatcherServlet"></a>3. 注册中心控制器DispatcherServlet</h3><p>和许多其他MVC框架一样，Spring MVC框架也是请求驱动的，使用一个中心控制器(DispatcherServlet，它继承自HttpServlet)分派请求及提供其他功能。</p>
+<p>如图11所示，当前端控制器拦截到用户发送的请求时，会根据请求参数生成代理请求，找到请求对应的实际控制器，由该控制器处理请求：创建数据模型、访问数据库、将模型响应给前端控制器，前端控制器使用模型与视图渲染视图结果，再将结果返回给请求者。</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-11.png" width="55%">图 11<br></center>
+
+<center><br><img src="/blog/2017/10/22/SpringMVC-01/SpringMVC-01-12.jpg" width="65%">图 12<br></center>
+
+<p>修改web.xml文件注册该Servlet，修改后的web.xml文件如下</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+    xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
+    xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;
+    id=&quot;WebApp_ID&quot; version=&quot;3.0&quot;&gt;
+    &lt;servlet&gt;
+        &lt;!--名称 --&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;!-- Servlet类 --&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;!--SpringMVC配置参数文件的位置 --&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;!--默认名称为ServletName-servlet.xml --&gt;
+            &lt;param-value&gt;classpath*:springmvc-servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;!-- 启动顺序，数字越小，启动越早 --&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+
+    &lt;!--所有请求都会被springmvc拦截 --&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><h3 id="4-添加Spring-MVC配置文件"><a href="#4-添加Spring-MVC配置文件" class="headerlink" title="4. 添加Spring MVC配置文件"></a>4. 添加Spring MVC配置文件</h3><p>在/src/main/resources目录下添加Spring MVC配置文件springmvc-servlet.xml，配置的形式与Spring容器配置基本类似，具体配置信息如下：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd&quot;&gt;
+
+    &lt;!-- 自动扫描包，实现支持注解的IOC --&gt;
+    &lt;context:component-scan base-package=&quot;org.spring.mvc&quot; /&gt;
+
+    &lt;!-- Spring MVC不处理静态资源 --&gt;
+    &lt;mvc:default-servlet-handler /&gt;
+
+    &lt;!-- 支持mvc注解驱动 --&gt;
+    &lt;mvc:annotation-driven /&gt;
+
+    &lt;!-- 视图解析器 --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+        &lt;!-- 前缀 --&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/view/&quot; /&gt;
+        &lt;!-- 后缀 --&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre><ul>
+<li>为了支持基于注解的IOC，设置了自动扫描包的功能；</li>
+<li>在视图解析中，我们把所有的视图都存放在<code>/WEB-INF</code>目录下，因为客户端不能直接访问这个目录，这样可以保证视图安全。在该项目中，我们把视图放在view目录下。</li>
+</ul>
+<h3 id="5-创建HelloWorld控制器"><a href="#5-创建HelloWorld控制器" class="headerlink" title="5. 创建HelloWorld控制器"></a>5. 创建HelloWorld控制器</h3><p>在src/main/java源代码目录下创建包org.spring.mvc.controller，在包中创建一个普通的类：HelloWorldController，具体代码如下：</p>
+<pre><code>package org.spring.mvc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(&quot;/HelloWorld&quot;)
+public class HelloWorldController {
+    @RequestMapping(&quot;/helloworld&quot;)
+    public String helloworld(Model model) {
+        model.addAttribute(&quot;message&quot;, &quot;Hello Spring MVC!&quot;);
+        return &quot;helloworld&quot;;
+    }
+}
+</code></pre><ul>
+<li>使用@Controller注解让Spring IOC容器在初始化时可以自动扫描到该控制器；</li>
+<li>使用@RequestMapping注解注册映射请求路径，因为这里的类与方法 (Action) 上都有@RequestMapping，所以访问路径应该是/HelloWorld/helloworld；</li>
+<li>方法中声明Model类型的参数是为了让控制器把Action中的数据带到视图中；</li>
+<li>方法返回的结果是视图的名称：helloworld。</li>
+</ul>
+<h3 id="6-创建视图"><a href="#6-创建视图" class="headerlink" title="6. 创建视图"></a>6. 创建视图</h3><p>在WEB-INF/view目录中创建视图helloworld.jsp，该视图将展示从Action中返回的信息，具体内容如下：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;Hello Spring MVC!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h2&gt;${message}&lt;/h2&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>需要为jsp添加Servlet核心包</p>
+<pre><code>&lt;!-- Servlet核心包 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;3.0.1&lt;/version&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="7-测试运行"><a href="#7-测试运行" class="headerlink" title="7. 测试运行"></a>7. 测试运行</h3><p>启动Tomcat运行项目，注意查看启动信息，如果有异常应该先解决异常信息。运行成功后的结果如下所示：</p>
+<center><br>&lt;img src=”SpringMVC-01/SpringMVC-01-13.png” width=80%”/&gt;图 13<br></center>
+
+<h2 id="三、控制器定义"><a href="#三、控制器定义" class="headerlink" title="三、控制器定义"></a>三、控制器定义</h2><p>控制器提供了访问应用程序的行为，解析用户的请求并将其转换为一个模型，通常通过接口定义或注解定义两种方法实现。在Spring MVC中一个控制器可以包含多个Action（动作、方法）。</p>
+<h3 id="1-实现Controller接口定义控制器"><a href="#1-实现Controller接口定义控制器" class="headerlink" title="1. 实现Controller接口定义控制器"></a>1. 实现Controller接口定义控制器</h3><p>Controller是一个接口，位于包org.springframework.web.servlet.mvc中，接口中只有一个未实现的方法，如下所示：</p>
+<pre><code>package org.springframework.web.servlet.mvc;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.ModelAndView;
+
+//实现该接口的类获得控制器功能与类型, 解析用户的请求并将其转换为一个模型
+public interface Controller {
+    //处理请求且返回一个模型与视图对象
+    ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception;
+}
+</code></pre><p>(1) 定义一个名为Controller01的类，实现Controller接口，重写handleRequest方法，代码如下：</p>
+<pre><code>package org.spring.mvc.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+
+/*
+ * 定义控制器
+ */
+public class Controller01 implements Controller{
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        //返回一个模型视图对象，指定路径，指定模型的名称为message，值为一段字符串
+        return new ModelAndView(&quot;index&quot;, &quot;message&quot;, &quot;Hello，我是通过实现接口定义的一个控制器&quot;);
+    }
+}
+</code></pre><p>(2) 在WEB-INF/view目录下创建一个名为index.jsp的视图，内容如下：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;index&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        ${message}
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>(3) 修改springmvc-servlet.xml配置文件，增加一个控制器bean的声明，基中name是访问路径，class是自定义的控制器的全名称。具体内容如下：</p>
+<pre><code>&lt;bean name=&quot;/controller01&quot; class=&quot;org.spring.mvc.controller.Controller01&quot;&gt;&lt;/bean&gt;
+</code></pre><p>(4) 运行结果如下：</p>
+<center><br>&lt;img src=”SpringMVC-01/SpringMVC-01-14.png” width=80%”/&gt;图 14<br></center>
+
+<p>(5) 小结</p>
+<p>实现Controller接口定义控制器是较老的办法，缺点是：一个控制器中只能有一个Action，如果要多个Action则需要定义多个Controller；定义的方式比较麻烦；Spring 2.5以后采用注解的方式定义解决这引起问题。</p>
+<h3 id="2-使用注解-Controller定义控制器"><a href="#2-使用注解-Controller定义控制器" class="headerlink" title="2. 使用注解@Controller定义控制器"></a>2. 使用注解@Controller定义控制器</h3><p>org.springframework.stereotype.Controller注解类型用于声明Spring类的实例是一个控制器（在讲IOC时还提到了另外3个注解），Spring可以使用扫描机制来找到应用程序中所有基于注解的控制器类。</p>
+<p>(1) 为了保证Spring能找到你的控制器，需要在配置文件中声明组件扫描，启用自动组件扫描功能，在beans中增加如下配置：</p>
+<pre><code>&lt;!-- 自动扫描包，实现支持注解的IOC --&gt;
+&lt;context:component-scan base-package=&quot;org.spring.mvc&quot; /&gt;
+</code></pre><p>base-package属性用于指定扫描的基础包，可以缩小扫描的范围。</p>
+<p>(2) 定义为一个控制器类，类的具体实现如下：</p>
+<pre><code>package org.spring.mvc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * 定义控制器
+ * 
+ * Controller02类的实例是一个控制器，会自动添加到Spring上下文中
+ */
+@Controller
+public class Controller02 {
+     //映射访问路径
+    @RequestMapping(&quot;controller02&quot;)
+    public String index(Model model){
+        //Spring MVC会自动实例化一个Model对象用于向视图中传值
+        model.addAttribute(&quot;message&quot;, &quot;Hello，我是通过注解定义的一个控制器&quot;);
+        //返回视图位置
+        return &quot;index&quot;;
+    }
+}
+</code></pre><p>(3) 运行结果如下：</p>
+<center><br>&lt;img src=”SpringMVC-01/SpringMVC-01-15.png” width=80%”/&gt;图 15<br></center>
+
+<p>(4) 小结</p>
+<p>从代码与运行结果可以看出Controller01与Controller02同时都指定了一个视图index.jsp，但是页面的结果是不一样的，从这里可以看出视图是被复用的，而控制器与视图之间是弱偶合关系。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/10/22/SpringMVC-01/" data-id="cj92exapt003st4wr8xb9r92c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/10/22/SpringMVC-01/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/10/22/SpringMVC-01/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/08/19/16-JVM类加载机制/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    16-JVM类加载机制
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/10/22/SpringMVC-02/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">02-@RequestMapping详解</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SpringMVC视图解析器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-05/" class="title">05-SpringMVC视图解析器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:51:31.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="04-SpringMVC表单标签库" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-04/" class="title">04-SpringMVC表单标签库</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:49:57.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="03-请求处理方法Action详解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-03/" class="title">03-请求处理方法Action详解</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/10/22/SpringMVC-01/';
+        
+        this.page.identifier = 'SpringMVC-01';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

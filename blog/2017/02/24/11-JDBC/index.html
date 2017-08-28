@@ -129,11 +129,11 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                44
+                51
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                21
+                22
                 <span>标签</span>
             </div>
         </div>
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main"><article id="post-12-JDBC" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-11-JDBC" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -198,7 +198,7 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/02/24/12-JDBC/">
+        <a href="/blog/2017/02/24/11-JDBC/">
             <time datetime="2017-02-24T10:27:20.000Z" itemprop="datePublished">2017-02-24</time>
         </a>
     </div>
@@ -227,26 +227,46 @@ var _hmt = _hmt || [];
             <p>JDBC</p>
 <a id="more"></a>
 <h3 id="问：什么是JDBC？"><a href="#问：什么是JDBC？" class="headerlink" title="问：什么是JDBC？"></a>问：什么是JDBC？</h3><p>JDBC是一套面向对象的应用程序接口(API)，制定了访问各类关系数据库的统一标准接口，为访问各个数据库厂商的关系数据库提供了标准的实现，它由一组用Java语言编写的类和接口组成。JDBC允许开发者用Java编写访问数据库的应用程序，而不需要关心底层特定数据库的细节。</p>
-<h3 id="问：JDBC访问数据库的步骤"><a href="#问：JDBC访问数据库的步骤" class="headerlink" title="问：JDBC访问数据库的步骤"></a>问：JDBC访问数据库的步骤</h3><pre><code>//1. 加载JDBC驱动
-Class.forName(&quot;oracle.jdbc.driver.OracleDriver&quot;);
-//Class.forName(&quot;com.mysql.jdbc.driver&quot;); //Mysql
-
-//2. 连接Oracle数据库
-String url=&quot;jdbc:oracle:thin:@localhost:1521:DataBaseName&quot;;
-//String url=&quot;jdbc:mysql://localhost:1521/DataBaseName&quot;; // Mysql
-String username=&quot;admin&quot;;
-String password=&quot;root&quot;;
-Connection conn=DriverManager.openConnection(url, username, password);
-
-//3. 利用JDBC检索出表中的数据
-PreparedStatment ps=conn.preparedStatment(&quot;select * from users;&quot;);
-ResultSet rs=ps.executeQuery();
-while(rs.next){
-    rs.getString(1); //或rs.getString(&quot;name&quot;)
+<h3 id="问：JDBC访问数据库的步骤"><a href="#问：JDBC访问数据库的步骤" class="headerlink" title="问：JDBC访问数据库的步骤"></a>问：JDBC访问数据库的步骤</h3><pre><code>// 1. 加载JDBC驱动
+try {
+    Class.forName(&quot;oracle.jdbc.driver.OracleDriver&quot;);
+    // Class.forName(&quot;com.mysql.jdbc.driver&quot;); //Mysql
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
 }
 
-//4. 关闭数据库连接
-conn.close();
+// 2. 连接Oracle数据库
+String url = &quot;jdbc:oracle:thin:@localhost:1521:DataBaseName&quot;;
+// String url=&quot;jdbc:mysql://localhost:1521/DataBaseName&quot;; // Mysql
+String username = &quot;admin&quot;;
+String password = &quot;root&quot;;
+Connection conn = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
+try {
+    conn = DriverManager.getConnection(url, username, password);
+
+    // 3. 利用JDBC检索出表中的数据
+    ps = conn.prepareStatement(&quot;select * from users;&quot;);
+    rs = ps.executeQuery();
+    while (rs.next()) {
+        rs.getString(1); // 或rs.getString(&quot;name&quot;)
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+} finally {
+    // 4. 关闭连接
+    try {
+        if (rs != null)
+            rs.close();
+        if (ps != null)
+            ps.close();
+        if (conn != null)
+            conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 </code></pre><h4 id="问：Class-forName-方法有什么作用？"><a href="#问：Class-forName-方法有什么作用？" class="headerlink" title="问：Class.forName()方法有什么作用？"></a>问：Class.forName()方法有什么作用？</h4><p>通过反射机制初始化参数指定的类，并且返回此类对应的Class对象。这个方法可以用来载入并注册跟数据库建立连接的驱动。</p>
 <h4 id="问：解释下驱动-Driver-在JDBC中的角色。"><a href="#问：解释下驱动-Driver-在JDBC中的角色。" class="headerlink" title="问：解释下驱动(Driver)在JDBC中的角色。"></a>问：解释下驱动(Driver)在JDBC中的角色。</h4><p>JDBC驱动提供了特定厂商对JDBC API接口类的实现，驱动必须要提供java.sql包下面这些类的实现：Connection, Statement, PreparedStatement,CallableStatement, ResultSet和Driver。</p>
 <p>加载驱动的几种方法：</p>
@@ -255,7 +275,7 @@ conn.close();
 <p>(2) 通过添加jdbc.drivers系统属性注册：System.setProperty(“jdbc.drivers”, “com.mysql.jdbc.Driver”);</p>
 <p>(3) 通过registerDriver方法注册：DriverManager.registerDriver(new com.mysql.jdbc.Driver());</p>
 </blockquote>
-<h3 id="问：Statement、PreparedSatement和CallableStatement"><a href="#问：Statement、PreparedSatement和CallableStatement" class="headerlink" title="问：Statement、PreparedSatement和CallableStatement"></a>问：Statement、PreparedSatement和CallableStatement</h3><center><br><img src="/blog/2017/02/24/12-JDBC/JDBC-Statement.JPG" width="46%"><br></center>
+<h3 id="问：Statement、PreparedSatement和CallableStatement"><a href="#问：Statement、PreparedSatement和CallableStatement" class="headerlink" title="问：Statement、PreparedSatement和CallableStatement"></a>问：Statement、PreparedSatement和CallableStatement</h3><center><br><img src="/blog/2017/02/24/11-JDBC/JDBC-Statement.JPG" width="46%"><br></center>
 
 <h3 id="问：PreparedStatement比Statement有什么优势？"><a href="#问：PreparedStatement比Statement有什么优势？" class="headerlink" title="问：PreparedStatement比Statement有什么优势？"></a>问：PreparedStatement比Statement有什么优势？</h3><p>PreparedStatement接口继承自Statement</p>
 <p>(1) 使用Statement的方式：</p>
@@ -266,9 +286,10 @@ ResultSet rs=stmt.executeQuery(&quot;select * from book;&quot;);
 ResultSet rs=pstmt.executeQuery();
 </code></pre><p>(3) PreparedStatement比Statement的对比</p>
 <ul>
-<li>PreparedStatement实例包含预编译的SQL语句，执行速度要快于Statement对象，因此，性能会更好。</li>
+<li>PreparedStatement实例包含预编译的SQL语句，可以减少SQL的编译错误，执行速度要快于Statement对象，因此，性能会更好。</li>
 <li>PreparedStatements是预编译的，可以避免不良用户直接敲sql语句产生sql注入攻击，安全性更强。</li>
-<li>对于不同的查询参数值，PreparedStatement可以重用。</li>
+<li>PreparedStatement中的SQL语句是可以带参数的，对于不同的查询参数值，PreparedStatement可以重用。</li>
+<li>当批量处理SQL或频繁执行相同的查询时，PreparedStatement有明显的性能上的优势，由于数据库可以将编译优化后的SQL语句缓存起来，下次执行相同结构的语句时就会很快（不用再次编译和生成执行计划）</li>
 </ul>
 <p><a href="https://www.nowcoder.com/profile/7404313/test/8004321/25808?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a>，<a href="https://www.nowcoder.com/profile/7404313/test/8088719/22471?onlyWrong=0" title="Title" target="_blank" rel="external">例2</a></p>
 <h4 id="问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？"><a href="#问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？" class="headerlink" title="问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？"></a>问：什么时候使用CallableStatement？用来准备CallableStatement的方法是什么？</h4><p>CallableStatement接口继承自PreparedStatement</p>
@@ -282,10 +303,67 @@ cs.getString(2);
 </code></pre><h4 id="问：数据库连接池是什么意思？"><a href="#问：数据库连接池是什么意思？" class="headerlink" title="问：数据库连接池是什么意思？"></a>问：数据库连接池是什么意思？</h4><p>像打开、关闭数据库连接这种和数据库的交互是很费时间的，尤其是当客户端数量增加的时候，会消耗大量的资源，成本非常高。</p>
 <p>可以在应用服务器启动的时候建立很多个数据库连接并维护在一个池中。连接请求由池中的连接提供服务。在连接使用完毕以后，把连接归还到池中，以用于满足将来更多的请求。</p>
 <h3 id="问：ResultSet"><a href="#问：ResultSet" class="headerlink" title="问：ResultSet"></a>问：ResultSet</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8078128/3223?onlyWrong=0" title="Title" target="_blank" rel="external">例1</a></p>
-<h3 id="问：JDBC如何做事务处理？"><a href="#问：JDBC如何做事务处理？" class="headerlink" title="问：JDBC如何做事务处理？"></a>问：JDBC如何做事务处理？</h3><pre><code>conn.setAutoCommit(false)
+<p>例2：使用JDBC操作数据库时，如何提升读取数据的性能？如何提升更新数据的性能？ </p>
+<p>要提升读取数据的性能，可以指定通过结果集(ResultSet)对象的setFetchSize()方法指定每次抓取的记录数(典型的空间换时间策略)；</p>
+<p>要提升更新数据的性能，可以使用PreparedStatement语句构建批处理，将若干SQL语句置于一个批处理中执行。</p>
+<h3 id="问：事务的ACID"><a href="#问：事务的ACID" class="headerlink" title="问：事务的ACID"></a>问：事务的ACID</h3><ul>
+<li>原子性(Atomic)：事务中各项操作，要么全做要么全不做，任何一项操作的失败都会导致整个事务的失败； </li>
+<li>一致性(Consistent)：事务结束后系统状态是一致的； </li>
+<li>隔离性(Isolated)：并发执行的事务彼此无法看到对方的中间状态； </li>
+<li>持久性(Durable)：事务完成后所做的改动都会被持久化，即使发生灾难性的失败。通过日志和同步备份可以在故障发生后重建数据。</li>
+</ul>
+<h3 id="事务处理的问题"><a href="#事务处理的问题" class="headerlink" title="事务处理的问题"></a>事务处理的问题</h3><p>在并发数据访问时需要做事务处理。当多个事务访问同一数据时，可能会存在5类问题，包括3类数据读取问题（脏读、不可重复读和幻读）和2类数据更新问题（第1类丢失更新和第2类丢失更新）。</p>
+<p>(1) 脏读（Dirty Read）：A事务读取B事务尚未提交的数据并在此基础上操作，而B事务执行回滚，那么A读取到的数据就是脏数据。</p>
+<p>(2) 不可重复读（Unrepeatable Read）：事务A重新读取前面读取过的数据，发现该数据已经被另一个已提交的事务B修改过了。</p>
+<p>(3) 幻读（Phantom Read）：事务A重新执行一个查询，返回一系列符合查询条件的行，发现其中插入了被事务B提交的行。</p>
+<p>(1) 第1类丢失更新：事务A撤销时，把已经提交的事务B的更新数据覆盖了。</p>
+<p>(2) 第2类丢失更新：事务A覆盖事务B已经提交的数据，造成事务B所做的操作丢失。</p>
+<h3 id="问：JDBC如何做事务处理？"><a href="#问：JDBC如何做事务处理？" class="headerlink" title="问：JDBC如何做事务处理？"></a>问：JDBC如何做事务处理？</h3><p>Connection提供了事务处理的方法，通过调用setAutoCommit(false)可以设置手动提交事务；当事务完成后用commit()显式提交事务；如果在事务处理过程中发生异常则通过rollback()进行事务回滚。除此之外，从JDBC 3.0中还引入了Savepoint（保存点）的概念，允许通过代码设置保存点并让事务回滚到指定的保存点。 </p>
+<center><br><img src="/blog/2017/02/24/11-JDBC/transaction.jpg" width="405"><br></center>
+
+<pre><code>conn.setAutoCommit(false)
 conn.commit();
 conn.rollback();
 conn.setAutoCommit(true)
+</code></pre><h3 id="问：数据库连接池"><a href="#问：数据库连接池" class="headerlink" title="问：数据库连接池"></a>问：数据库连接池</h3><p>由于创建连接和释放连接都有很大的开销（尤其是数据库服务器不在本地时，每次建立连接都需要进行TCP的三次握手，释放连接需要进行TCP四次握手，造成的开销是不可忽视的），为了提升系统访问数据库的性能，可以事先创建若干连接置于连接池中，需要时直接从连接池获取，使用结束时归还连接池而不必关闭连接，从而避免频繁创建和释放连接所造成的开销，这是典型的用空间换取时间的策略（浪费了空间存储连接，但节省了创建和释放连接的时间）。</p>
+<p>池化技术在Java开发中是很常见的，在使用线程时创建线程池的道理与此相同。</p>
+<p>基于Java的开源数据库连接池主要有：C3P0、Proxool、DBCP、BoneCP、Druid等。</p>
+<h3 id="问：什么是DAO模式"><a href="#问：什么是DAO模式" class="headerlink" title="问：什么是DAO模式"></a>问：什么是DAO模式</h3><p>DAO(Data Access Object)顾名思义是一个为数据库或其他持久化机制提供了抽象接口的对象，在不暴露底层持久化方案实现细节的前提下提供了各种数据访问操作。在实际的开发中，应该将所有对数据源的访问操作进行抽象化后封装在一个公共API中。用程序设计语言来说，就是建立一个接口，接口中定义了此应用程序中将会用到的所有事务方法。在这个应用程序中，当需要和数据源进行交互的时候则使用这个接口，并且编写一个单独的类来实现这个接口，在逻辑上该类对应一个特定的数据存储。DAO模式实际上包含了两个模式，一是Data Accessor（数据访问器），二是Data Object（数据对象），前者要解决如何访问数据的问题，而后者要解决的是如何用对象封装数据。</p>
+<h3 id="问：JDBC能否处理Blob和Clob"><a href="#问：JDBC能否处理Blob和Clob" class="headerlink" title="问：JDBC能否处理Blob和Clob"></a>问：JDBC能否处理Blob和Clob</h3><p>Blob是指二进制大对象（Binary Large Object），而Clob是指大字符对象（Character Large Objec），因此其中Blob是为存储大的二进制数据而设计的，而Clob是为存储大的文本数据而设计的。JDBC的PreparedStatement和ResultSet都提供了相应的方法来支持Blob和Clob操作。</p>
+<p>下面的代码展示了如何使用JDBC操作LOB：</p>
+<p>以MySQL数据库为例，创建一个张有三个字段的用户表，包括编号(id)、姓名(name)和照片(photo)，建表语句如下：</p>
+<pre><code>create table tb_user(
+    id int primary key auto_increment,
+    name varchar(20) unique not null,
+    photo longblob
+);
+</code></pre><p>编程向数据库中插入一条记录：</p>
+<pre><code>public static void main(String[] args) {
+    Connection conn = null;
+    try {
+        Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+        conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/test&quot;, &quot;root&quot;, &quot;123456&quot;);
+        PreparedStatement ps = conn.prepareStatement(&quot;insert into tb_user values (default, ?, ?)&quot;);
+        ps.setString(1, &quot;骆昊&quot;);
+        try (InputStream in = new FileInputStream(&quot;head.jpg&quot;)) {// Java 7的TWR
+            ps.setBinaryStream(2, in); // 将SQL语句中第二个占位符换成二进制流
+            System.out.println(ps.executeUpdate() == 1 ? &quot;插入成功&quot; : &quot;插入失败&quot;);
+        } catch (IOException e) {
+            System.out.println(&quot;读取照片失败!&quot;);
+        }
+    } catch (ClassNotFoundException | SQLException e) {// Java 7的多异常捕获
+        e.printStackTrace();
+    } finally {
+        try {
+            if (conn != null &amp;&amp; !conn.isClosed()) {
+                conn.close();
+                conn = null; // 指示垃圾回收器可以回收该对象
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
 </code></pre><h3 id="问：Jdo是什么？-没用过"><a href="#问：Jdo是什么？-没用过" class="headerlink" title="问：Jdo是什么？(没用过)"></a>问：Jdo是什么？(没用过)</h3><p>JDO是Java对象持久化的新的规范，为java data object的简称，也是一个用于存取某种数据仓库中的对象的标准化API。JDO提供了透明的对象存储，因此对开发人员来说，存储数据对象完全不需要额外的代码（如JDBC API的使用）。这些繁琐的例行工作已经转移到JDO产品提供商身上，使开发人员解脱出来，从而集中时间和精力在业务逻辑上。另外，JDO很灵活，因为它可以在任何数据底层上运行。JDBC只是面向关系数据库（RDBMS)JDO更通用，提供到任何数据底层的存储功能，比如关系数据库、文件、XML以及对象数据库（ODBMS）等等，使得应用可移植性更强。(o/rMapping工具集合处理)</p>
 <h3 id="问：在ORACLE大数据量下的分页解决方法。-没用过"><a href="#问：在ORACLE大数据量下的分页解决方法。-没用过" class="headerlink" title="问：在ORACLE大数据量下的分页解决方法。(没用过)"></a>问：在ORACLE大数据量下的分页解决方法。(没用过)</h3><pre><code>create or replace package myPack
 is
@@ -327,7 +405,7 @@ end;
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/24/12-JDBC/" data-id="cj6k62j42001tb4wrmi2mqq0p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/24/11-JDBC/" data-id="cj92exand001tt4wris9myl5p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -395,7 +473,7 @@ end;
 
             
     
-        <a href="https://hepsilion.github.io/2017/02/24/12-JDBC/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/02/24/12-JDBC/">评论</a>
+        <a href="https://hepsilion.github.io/2017/02/24/11-JDBC/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/02/24/11-JDBC/">评论</a>
     
 
         </footer>
@@ -404,7 +482,7 @@ end;
         
 <nav id="article-nav">
     
-        <a href="/blog/2017/02/23/11-反射/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/blog/2017/02/23/13-反射/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
@@ -487,95 +565,95 @@ end;
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/16-JVM类加载机制/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="16-JVM类加载机制" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/16-JVM类加载机制/" class="title">16-JVM类加载机制</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:46:17.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="15-垃圾收集器与内存分配策略" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="title">15-垃圾收集器与内存分配策略</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:58.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-05/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="14-Java内存区域" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SpringMVC视图解析器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="title">14-Java内存区域</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:14.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-05/" class="title">05-SpringMVC视图解析器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:51:31.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-04/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IT校招全国统一模拟笔试(秋招备战专场二模)编程题" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="04-SpringMVC表单标签库" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a></p>
-                            <p class="item-title"><a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="title">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a></p>
-                            <p class="item-date"><time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-04/" class="title">04-SpringMVC表单标签库</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:49:57.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-03/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="03-请求处理方法Action详解" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
-                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-03/" class="title">03-请求处理方法Action详解</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
@@ -588,7 +666,7 @@ end;
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -597,7 +675,7 @@ end;
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -606,7 +684,7 @@ end;
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -650,9 +728,9 @@ end;
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'https://hepsilion.github.io/2017/02/24/12-JDBC/';
+            this.page.url = 'https://hepsilion.github.io/2017/02/24/11-JDBC/';
         
-        this.page.identifier = '12-JDBC';
+        this.page.identifier = '11-JDBC';
     };
     (function() { 
         var d = document, s = d.createElement('script');  

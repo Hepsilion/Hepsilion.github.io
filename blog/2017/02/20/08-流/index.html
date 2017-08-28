@@ -129,11 +129,11 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                44
+                51
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                21
+                22
                 <span>标签</span>
             </div>
         </div>
@@ -226,6 +226,7 @@ var _hmt = _hmt || [];
             
             <p>流</p>
 <a id="more"></a>
+<p>部分内容来自<a href="http://blog.csdn.net/jackfrued/article/details/44921941" target="_blank" rel="external">这里</a></p>
 <h3 id="问：Java中有几种类型的流？"><a href="#问：Java中有几种类型的流？" class="headerlink" title="问：Java中有几种类型的流？"></a>问：Java中有几种类型的流？</h3><p>在Java使用流的机制进行数据的传送，从文件到内存是输入流，从内存到文件是输出流。</p>
 <p>Java中有字节流和字符流。字节流继承于InputStream/OutputStream，字符流继承于Reader/Writer。</p>
 <p>在java.io包中还有许多其他的流，低层流与高层流，高层流主要是为了提高性能和使用方便。</p>
@@ -261,6 +262,69 @@ char[] buf = new char[1024];
 int len =fr.read(buf);
 String myStr = new String(buf, 0, len);
 System.out.println(myStr);
+</code></pre><p>例2：编程实现文件拷贝</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+
+public class Main {
+    // 工具类中的方法都是静态方式访问的，因此将构造器设为私有不允许创建对象
+    private Main() {
+        throw new AssertionError();
+    }
+
+    public static void main(String[] args) {
+        fileCopy(&quot;file1.txt&quot;, &quot;file2.txt&quot;);
+        //fileCopyNIO(&quot;file1.txt&quot;, &quot;file2.txt&quot;);
+    }
+
+    public static void fileCopy(String source, String target) {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            in = new FileInputStream(source);
+            out = new FileOutputStream(target);
+            byte[] buffer = new byte[4096];
+            int bytesToRead;
+            while ((bytesToRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesToRead);
+            }
+        } catch (IOException e) {
+        } finally {
+            try {
+                if (in != null)
+                    in.close();
+                if (out != null)
+                    out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void fileCopyNIO(String source, String target) {
+        FileInputStream in = null;
+        FileOutputStream out = null;
+        try {
+            in = new FileInputStream(source);
+            out = new FileOutputStream(target);
+
+            FileChannel inChannel = in.getChannel();
+            FileChannel outChannel = out.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocate(4096);
+            while (inChannel.read(buffer) != -1) {
+                buffer.flip();
+                outChannel.write(buffer);
+                buffer.clear();
+            }
+        } catch (IOException e) {
+        } 
+    }
+}
 </code></pre><h3 id="问：节点流与处理流"><a href="#问：节点流与处理流" class="headerlink" title="问：节点流与处理流"></a>问：节点流与处理流</h3><p>流可以分为节点流和处理流：</p>
 <ul>
 <li>节点流可以从一个特定的数据源(如文件、内存等)读写数据；</li>
@@ -294,12 +358,46 @@ BufferedReader br =new BufferedReader(new InputStreamReader(new FileInputStream(
 String myStr =br.readLine();
 br.close();
 System.out.println(myStr);
-</code></pre><h3 id="问：序列化"><a href="#问：序列化" class="headerlink" title="问：序列化"></a>问：序列化</h3><p>序列化是为了解决在对对象流进行读写操作时所引发的问题。处理对象流的机制：所谓对象流也就是将对象的内容进行流化。可以对流化后的对象进行读写操作，也可将流化后的对象传输于网络之间。</p>
+</code></pre><p>例2：写一个方法，输入一个文件名和一个字符串，统计这个字符串在这个文件中出现的次数</p>
+<pre><code>/**
+ * 统计给定文件中给定字符串的出现次数
+ * 
+ * @param filename  文件名
+ * @param word 字符串
+ * @return 字符串在文件中出现的次数
+ */
+public static int countWordInFile(String filename, String word) {
+    BufferedReader br = null;
+    int counter = 0;
+    try {
+        br = new BufferedReader(new FileReader(filename));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            int index = -1;
+            while (line.length() &gt;= word.length() &amp;&amp; (index = line.indexOf(word)) &gt;= 0) {
+                counter++;
+                line = line.substring(index + word.length());
+            }
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            if(br!=null)
+                br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    return counter;
+}
+</code></pre><h3 id="问：IO与NIO"><a href="#问：IO与NIO" class="headerlink" title="问：IO与NIO"></a>问：IO与NIO</h3><p><a href="http://blog.csdn.net/shakespeare001/article/details/51388516" target="_blank" rel="external">推荐阅读：Java IO与NIO</a></p>
+<h3 id="问：序列化"><a href="#问：序列化" class="headerlink" title="问：序列化"></a>问：序列化</h3><p>序列化是为了解决在对对象流进行读写操作时所引发的问题(如果不进行序列化可能会存在数据乱序的问题)。序列化就是一种用来处理对象流的机制，所谓对象流就是将对象的内容进行流化。可以对流化后的对象进行读写操作，也可将流化后的对象传输于网络之间。</p>
 <p>Java序列化是指将对象转换为字节序列的过程，而反序列化则是将字节序列转换成目标对象的过程。</p>
 <p>我们都知道，在进行浏览器访问的时候，我们看到的文本、图片、音频、视频等都是通过二进制序列进行传输的，那么如果我们需要将Java对象进行传输的时候，是不是也应该先将对象进行序列化？答案是肯定的，我们需要先将Java对象进行序列化，然后通过网络、IO进行传输，当到达目的地之后，再进行反序列化获取到我们想要的对象，最后完成通信。</p>
 <h3 id="问：序列化的实现"><a href="#问：序列化的实现" class="headerlink" title="问：序列化的实现"></a>问：序列化的实现</h3><p><a href="http://www.codeceo.com/article/java-serialization-and-deserialization.html" target="_blank" rel="external">推荐阅读1</a>，<a href="https://www.ibm.com/developerworks/cn/java/j-lo-serial/" target="_blank" rel="external">推荐阅读2</a></p>
 <p><strong>方式一</strong></p>
-<p>(1) 定义类实现Seriable接口，并生成一个版本号</p>
+<p>(1) 定义类实现Serializable接口，并生成一个版本号</p>
 <pre><code>import java.io.Serializable;
 
 public class People implements Serializable{
@@ -372,7 +470,7 @@ public class People implements Serializable{
 }
 </code></pre><p>注意：</p>
 <ul>
-<li>Serializable接口中并没有提供任何方法，它只是标识这个类的对象需要被序列化，javac编译时会进行特殊处理；</li>
+<li>Serializable接口中并没有提供任何方法，它只是一个标识性接口，标识这个类的对象需要被序列化，javac编译时会进行特殊处理；然后使用一个输出流来构造一个对象输出流并通过writeObject(Object)方法就可以将实现对象写出(即保存其状态)；如果需要反序列化则可以用一个输入流建立对象输入流，然后通过readObject()方法从流中读取对象。</li>
 <li>序列化版本号serialVersionUID的作用是区分我们所编写的类的版本，用于判断反序列化时类的版本是否一致，如果不一致会出现版本不一致异常；</li>
 <li>关键字transient用来忽略我们不希望进行序列化的变量，在被反序列化后，transient变量的值被设为初始值，如int型的是0，引用型变量的值是null。</li>
 </ul>
@@ -469,7 +567,84 @@ public class People implements Externalizable{
         e.printStackTrace();
     }
 }
-</code></pre><h3 id="问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？"><a href="#问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？" class="headerlink" title="问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？"></a>问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？</h3><p>transient的作用是屏蔽我们不希望进行序列化的变量，即对象在进行序列化和反序列化的过程中忽略该变量。</p>
+</code></pre><h3 id="问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？"><a href="#问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？" class="headerlink" title="问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？"></a>问：transient关键字的作用？如何将transient修饰符修饰的变量序列化？</h3><p>当使用transient关键字修饰一个变量时，这个变量将不会参与序列化过程，也就是说它不会在网络操作时被传输，也不会在本地被存储下来，这对于保护一些敏感字段(如密码等)非常有帮助。</p>
+<ul>
+<li>变量被transient关键字修饰后，反序列化后不能获取到该变量的值；</li>
+<li>transient只能修饰变量，不能修饰方法。修饰我们自定义类的变量时，这个类一定要实现Serializable接口；</li>
+<li>由于static修饰的变量是属于类的，而序列化是针对对象的，因此static修饰的变量不能被序列化。</li>
+</ul>
+<p>例1：当一个类实现了Serializable接口，这个对象的所有字段就可以被自动序列化。在持久化对象时，我们可能不想让一些特殊字段随着网络传输过去，或者在本地被序列化缓存起来，这时我们就可以在这些字段前加上transient关键字修饰，被transient修饰的变量的值将不会包括在序列化的表示中，也就不会被保存下来。这个字段的生命周期仅存在于调用者的内存中。</p>
+<pre><code>import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+class UserBean implements Serializable {
+    private static final long serialVersionUID = 856780694939330811L;
+    private String userName;
+    private transient String password; // 此字段不需要被序列化
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // 序列化
+        try {
+            UserBean bean = new UserBean();
+            bean.setUserName(&quot;name&quot;);
+            bean.setPassword(&quot;password&quot;);
+            System.out.println(&quot;序列化前---&gt;userName:&quot; + bean.getUserName() + &quot;，password:&quot; + bean.getPassword());
+
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;E:/userbean.txt&quot;));
+            oos.writeObject(bean);// 将对象序列化缓存到本地
+            oos.flush();
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 反序列化
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;E:/userbean.txt&quot;));
+            UserBean bean = (UserBean) ois.readObject();
+            ois.close();
+
+            System.out.println(&quot;反序列化后获取出的数据---&gt;userName:&quot; + bean.getUserName() + &quot;，password:&quot; + bean.getPassword());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+//输出：
+
+序列化前---&gt;userName:name，password:password
+反序列化后获取出的数据---&gt;userName:name，password:null
+</code></pre><p>注意：如果给password加上static关键字修饰，反序列化后依然能够获取到值，但是这个时候的值是JVM内存中对应的static的值，因为static修饰后，它属于类不属于对象，存放在一块单独的区域，直接通过对象也是可以获取到这个值的。</p>
 <p>我们可以通过实现Externalizable接口，实现writeExternal()和readExternal()方法，然后再自定义序列化对象。</p>
 
         
@@ -481,7 +656,7 @@ public class People implements Externalizable{
 
 </div>
 
-    <a data-url="https://hepsilion.github.io/2017/02/20/08-流/" data-id="cj6k62j3v001eb4wrsj8u7bak" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hepsilion.github.io/2017/02/20/08-流/" data-id="cj92examg001bt4wrgljuv8l5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -641,95 +816,95 @@ public class People implements Externalizable{
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/16-JVM类加载机制/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="16-JVM类加载机制" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/16-JVM类加载机制/" class="title">16-JVM类加载机制</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:46:17.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="15-垃圾收集器与内存分配策略" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/15-垃圾收集器与内存分配策略/" class="title">15-垃圾收集器与内存分配策略</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:58.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-05/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="14-Java内存区域" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="05-SpringMVC视图解析器" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java高级/">Java高级</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/19/14-Java内存区域与内存溢出异常/" class="title">14-Java内存区域</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T02:45:14.000Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-05/" class="title">05-SpringMVC视图解析器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:51:31.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-04/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IT校招全国统一模拟笔试(秋招备战专场二模)编程题" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="04-SpringMVC表单标签库" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/动态规划/">动态规划</a></p>
-                            <p class="item-title"><a href="/blog/2017/07/23/IT校招全国统一模拟笔试-秋招备战专场二模-编程题/" class="title">IT校招全国统一模拟笔试(秋招备战专场二模)编程题</a></p>
-                            <p class="item-date"><time datetime="2017-07-23T13:11:16.000Z" itemprop="datePublished">2017-07-23</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-04/" class="title">04-SpringMVC表单标签库</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:49:57.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/blog/2017/06/06/MapReduce/" class="thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-03/" class="thumbnail">
     
     
-        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="MapReduce" class="thumbnail-image"></span>
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="03-请求处理方法Action详解" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/blog/2017/06/06/MapReduce/" class="title">MapReduce</a></p>
-                            <p class="item-date"><time datetime="2017-06-06T14:06:35.000Z" itemprop="datePublished">2017-06-06</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-03/" class="title">03-请求处理方法Action详解</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:47:25.000Z" itemprop="datePublished">2017-10-22</time></p>
                         </div>
                     </li>
                 
@@ -742,7 +917,7 @@ public class People implements Externalizable{
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -751,7 +926,7 @@ public class People implements Externalizable{
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -760,7 +935,7 @@ public class People implements Externalizable{
     <div class="widget-wrap">
         <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
