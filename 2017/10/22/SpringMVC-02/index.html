@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>02-@RequestMapping详解 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                54
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                23
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-SpringMVC-02" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            02-@RequestMapping详解
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/10/22/SpringMVC-02/">
+            <time datetime="2017-10-22T06:45:29.000Z" itemprop="datePublished">2017-10-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/SpringMVC/">SpringMVC</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+<h3 id="1-value-属性"><a href="#1-value-属性" class="headerlink" title="1. value 属性"></a>1. value 属性</h3><p>value属性用来指定请求的实际地址，指定的地址可以是URL模板、正则表达式或路径占位；该属性与path属性互为别名关系，即@RequestMapping(“/foo”)}与@RequestMapping(path=”/foo”)相同；该属性是使用最频繁、最重要的一个属性，当只指定该属性时可以把value略去。</p>
+<h4 id="1-指定具体路径字符串"><a href="#1-指定具体路径字符串" class="headerlink" title="(1) 指定具体路径字符串"></a>(1) 指定具体路径字符串</h4><p><strong>只注解方法</strong>，访问时直接指定方法的路径</p>
+<pre><code>@Controller
+public class Controller03 {
+    /**
+     * @url http://localhost:8080/spring-mvc/action01
+     * @return
+     */
+    @RequestMapping(&quot;/action01&quot;)
+    public String action01(){
+        return &quot;index&quot;;
+    }
+}
+</code></pre><p>访问路径:<a href="http://localhost:8080/spring-mvc/action01" target="_blank" rel="external">http://localhost:8080/spring-mvc/action01</a></p>
+<p><strong>同时注解类与方法</strong>，访问时需要先指定类的路径再指定方法的路径</p>
+<pre><code>@Controller
+@RequestMapping(&quot;/controller04&quot;)
+public class Controller04 {
+    /**
+     * @url http://localhost:8080/spring-mvc/controller04/action02
+     * @return
+     */
+    @RequestMapping(&quot;/action02&quot;)
+    public String action02(){
+        return &quot;index&quot;;
+    }
+}
+</code></pre><p>访问路径:<a href="http://localhost:8080/spring-mvc/controller04/action02" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller04/action02</a></p>
+<p><strong>value为空值</strong></p>
+<p>第一种情况：注解在方法上时，如果value为空则表示该方法为类下默认的Action。</p>
+<pre><code>@Controller
+@RequestMapping(&quot;/controller05&quot;)
+public class Controller05 {
+    /**
+     * @url http://localhost:8080/spring-mvc/controller05/action03
+     * @param model
+     * @return
+     */
+    @RequestMapping(&quot;/action03&quot;)
+    public String action03(Model model){
+        //在模型中添加属性message值为action03，渲染页面时使用
+        model.addAttribute(&quot;message&quot;, &quot;action03&quot;);
+        return &quot;index&quot;;
+    }
+
+    /**
+     * 该方法为类下默认的Action
+     * @url http://localhost:8080/spring-mvc/controller05
+     * @param model
+     * @return
+     */
+    @RequestMapping
+    public String action04(Model model){
+        //在模型中添加属性message值为action04，渲染页面时使用
+        model.addAttribute(&quot;message&quot;, &quot;action04&quot;);
+        return &quot;index&quot;;
+    }
+}
+</code></pre><p>访问action04的路径:<a href="http://localhost:8080/spring-mvc/controller05" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller05</a>，如果加上action02就会产生错误了。</p>
+<p>第二种情况：注解在类上时，当value为空值时，则该类为默认的控制器，可以用于设置项目的起始页。</p>
+<pre><code>@Controller
+@RequestMapping
+public class Controller06 {
+    /**
+     * @url http://localhost:8080/spring-mvc/action05
+     * @param model
+     * @return
+     */
+    @RequestMapping(&quot;/action05&quot;)
+    public String action05(Model model){
+        //在模型中添加属性message值为action05，渲染页面时使用
+        model.addAttribute(&quot;message&quot;, &quot;action05&quot;);
+        return &quot;index&quot;;
+    }
+
+    /**
+     * @url http://localhost:8080/spring-mvc/
+     * @param model
+     * @return
+     */
+    @RequestMapping
+    public String action06(Model model){
+        //在模型中添加属性message值为action06，渲染页面时使用
+        model.addAttribute(&quot;message&quot;, &quot;action06&quot;);
+        return &quot;index&quot;;
+    }
+}
+</code></pre><p>访问action06的路径:<a href="http://localhost:8080/spring-mvc/" target="_blank" rel="external">http://localhost:8080/spring-mvc/</a>，同时省去了控制器名与Action名称，可用于欢迎页。</p>
+<p>访问action05的路径:<a href="http://localhost:8080/spring-mvc/action05" target="_blank" rel="external">http://localhost:8080/spring-mvc/action05</a></p>
+<h4 id="2-路径变量占位，URI模板模式"><a href="#2-路径变量占位，URI模板模式" class="headerlink" title="(2) 路径变量占位，URI模板模式"></a>(2) 路径变量占位，URI模板模式</h4><p>在Spring MVC中可以使用@PathVariable 注释方法参数的值绑定到一个URI模板变量。</p>
+<pre><code>@RequestMapping(&quot;/action07/{p1}/{p2}&quot;)
+public String action07(@PathVariable int p1, @PathVariable int p2, Model model) {
+    model.addAttribute(&quot;message&quot;, p1 + p2);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action07的路径:<a href="http://localhost:8080/spring-mvc/controller07/action07/1/2" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action07/1/2</a>，运行结果：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-01.png" width="85%">图 1<br></center>
+
+<p>使用路径变量的好处：使路径变得更加简洁；框架会自动进行类型转换，获得参数更加方便，通过路径变量的类型可以约束访问参数，如果类型不一样，则访问不到action，如这里访问是的路径是/action07/1/a，则路径与方法不匹配，而不会是参数转换失败。</p>
+<h4 id="3-正则表达式模式的URI模板"><a href="#3-正则表达式模式的URI模板" class="headerlink" title="(3) 正则表达式模式的URI模板"></a>(3) 正则表达式模式的URI模板</h4><pre><code>@RequestMapping(value = &quot;/action08/{id:\\d{6}}-{name:[a-z]{3}}&quot;)
+public String action08(@PathVariable int id, @PathVariable String name, Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;id:&quot; + id + &quot; name:&quot; + name);
+    return &quot;index&quot;;
+}
+</code></pre><p>正则要求id必须为6位的数字，而name必须为3位小写字母。</p>
+<p>访问action08的路径:<a href="http://localhost:8080/spring-mvc/controller07/action08/123456-abc" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action08/123456-abc</a>，访问结果如下：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-02.png" width="85%">图 1<br></center>
+
+<h4 id="4-矩阵变量-MatrixVariable"><a href="#4-矩阵变量-MatrixVariable" class="headerlink" title="(4) 矩阵变量@MatrixVariable"></a>(4) 矩阵变量@MatrixVariable</h4><pre><code>/**
+ * @url http://localhost:8080/spring-mvc/controller07/action09/the book color;r=33;g=66
+ * @param model
+ * @param name
+ * @param r
+ * @param g
+ * @param b
+ * @return
+ */
+@RequestMapping(value = &quot;/action09/{name}&quot;)
+public String action09(Model model,
+        @PathVariable String name, // 路径变量，用于获得路径中的变量name的值
+        @MatrixVariable String r,
+        @MatrixVariable(required = true) String g, // 参数g是必须的
+        @MatrixVariable(defaultValue = &quot;99&quot;, required = false) String b) { // 参数b不是必须的，默认值是99
+    model.addAttribute(&quot;message&quot;, name + &quot; is #&quot; + r + g + b);
+    return &quot;index&quot;;
+}
+</code></pre><p>Spring MVC默认是不允许使用矩阵变量的，需要设置配置文件中的RequestMappingHandlerMapping的属性removeSemicolonContent为false；并且在annotation-driven中增加属性enable-matrix-variables=”true”。修改后的springmvc-servlet.xml文件如下：</p>
+<pre><code>&lt;!-- 支持mvc注解驱动 --&gt;
+&lt;mvc:annotation-driven enable-matrix-variables=&quot;true&quot; /&gt;
+
+&lt;!-- 配置映射媒体类型的策略 --&gt;
+&lt;bean
+    class=&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;&gt;
+    &lt;property name=&quot;removeSemicolonContent&quot; value=&quot;false&quot; /&gt;
+&lt;/bean&gt;
+</code></pre><p>访问action09的路径:<a href="http://localhost:8080/spring-mvc/controller07/action09/the%20book%20color;r=33;g=66" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action09/the book color;r=33;g=66</a>，访问结果如下：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-03.png" width="100%">图 1<br></center>
+
+<h4 id="5-Ant风格路径模式"><a href="#5-Ant风格路径模式" class="headerlink" title="(5) Ant风格路径模式"></a>(5) Ant风格路径模式</h4><p>@RequestMapping注解也支持ant风格的路径模式，如/myPath/*.do，/owners/*/pets/{petId}</p>
+<pre><code>/**
+ * Ant风格路径模式
+ * @url http://localhost:8080/spring-mvc/controller07/action10/ant.do
+ * @param model
+ * @return
+ */
+@RequestMapping(value = &quot;/action10/*.do&quot;)
+public String action10(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;Ant风格路径模式&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action10的路径:<a href="http://localhost:8080/spring-mvc/controller07/action10/ant.do" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action10/ant.do</a>，访问结果如下：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-04.png" width="80%">图 1<br></center>
+
+<h3 id="2-method属性"><a href="#2-method属性" class="headerlink" title="2. method属性"></a>2. method属性</h3><p>method属性可以指定请求谓词的类型，如GET、POST、HEAD、OPTIONS、PUT、PATCH、DELETE、TRACE等，约束请求范围。</p>
+<pre><code>@RequestMapping(value = &quot;/action11&quot;, method = { RequestMethod.POST, RequestMethod.DELETE })
+public String action11(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;请求谓词只能是POST与DELETE&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action11的路径:<a href="http://localhost:8080/spring-mvc/controller07/action11" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action11</a>。</p>
+<p>要访问action11的请求谓词类型必须是POST或者为DELETE，但当我们从浏览器的URL栏中直接请求时，发出的是一个GET请求，则结果显示405，访问结果如下：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-05.png" width="80%">图 1<br></center>
+
+<p>现将请求的谓词类型从POST修改为GET</p>
+<pre><code>@RequestMapping(value = &quot;/action12&quot;, method = RequestMethod.GET)
+public String action12(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;请求谓词只能是GET&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action12的路径:<a href="http://localhost:8080/spring-mvc/controller07/action12" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action12</a>，访问正常，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-06.png" width="75%">图 1<br></center>
+
+<h3 id="3-consumes属性"><a href="#3-consumes属性" class="headerlink" title="3. consumes属性"></a>3. consumes属性</h3><p>consumes属性指定提交的请求的内容类型（Content-Type），如application/json, text/html，约束请求范围。如果用户发送的请求内容类型和consumes属性不匹配，则方法不会响应请求。</p>
+<pre><code>@RequestMapping(value = &quot;/action13&quot;, consumes=&quot;text/html&quot;)
+public String action13(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;请求的提交内容类型（Content-Type）是text/html&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action13的路径:<a href="http://localhost:8080/spring-mvc/controller07/action13" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action13</a>。</p>
+<p>在action8的注解中约束发送到服务器的请求的Content-Type必须是text/html类型，如果类型不一致则会报错（415），结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-07.png" width="75%">图 1<br></center>
+
+<h3 id="4-produces属性"><a href="#4-produces属性" class="headerlink" title="4. produces属性"></a>4. produces属性</h3><h3 id="5-params属性"><a href="#5-params属性" class="headerlink" title="5. params属性"></a>5. params属性</h3><p>params属性可以限制客户端发送到服务器的请求中必须含有特定的参数与值(参数的值为某些特定值或不为某些特定值)。</p>
+<pre><code>@RequestMapping(value = &quot;/action15&quot;, params = { &quot;id=215&quot;, &quot;name!=abc&quot; })
+public String action15(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;请求的参数必须包含id=215与name不等于abc&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action15的路径:<a href="http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name=abc" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name=abc</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-09.png" width="90%">图 1<br></center>
+
+<p>访问action15的路径:<a href="http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name=def" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name=def</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-10.png" width="90%">图 1<br></center>
+
+<p><strong>name的值不指定或者使用不等于也是通过的</strong></p>
+<p>访问action15的路径:<a href="http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name=def" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name=def</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-11.png" width="90%">图 1<br></center>
+
+<p>访问action15的路径:<a href="http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name!=abc" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action15?id=215&amp;name!=abc</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-12.png" width="90%">图 1<br></center>
+
+<h3 id="6-headers属性"><a href="#6-headers属性" class="headerlink" title="6. headers属性"></a>6. headers属性</h3><p>headers属性可以限制客户端发送到服务器的请求头部信息中必须包含某个特定的值或不包含特定的值。</p>
+<pre><code>@RequestMapping(value = &quot;/action16&quot;,headers=&quot;Host=localhost:8088&quot;)
+public String action16(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;请求头部信息中必须包含Host=localhost:8088&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action16的路径:<a href="http://localhost:8080/spring-mvc/controller07/action16" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action16</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-13.png" width="75%">图 1<br></center>
+
+<pre><code>@RequestMapping(value = &quot;/action17&quot;,headers=&quot;Host=localhost:8080&quot;)
+public String action17(Model model) {
+    model.addAttribute(&quot;message&quot;, &quot;请求头部信息中必须包含Host=localhost:8080&quot;);
+    return &quot;index&quot;;
+}
+</code></pre><p>访问action17的路径:<a href="http://localhost:8080/spring-mvc/controller07/action17" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action17</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-14.png" width="75%">图 1<br></center>
+
+<p><strong>这里同样可以使用!号；可以使用通配符如：Content-Type=”application/*“</strong></p>
+<h3 id="7-name属性"><a href="#7-name属性" class="headerlink" title="7. name属性"></a>7. name属性</h3><p>为当前映射指定一个名称，不常用，一般不会使用。</p>
+<h3 id="8-path属性"><a href="#8-path属性" class="headerlink" title="8. path属性"></a>8. path属性</h3><p>从Spring 4.2开始引入了@AliasFor注解，可以实现属性的别名，如value本身并没有特定的含义，而path会更加具体，见名知义，通俗说可以认为两者在使用中是一样的,如：@RequestMapping(“/foo”)}与@RequestMapping(path=”/foo”)相同。</p>
+<p>示例代码:</p>
+<p>访问action18的路径:<a href="http://localhost:8080/spring-mvc/controller07/action18" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/action18</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-15.png" width="75%">图 1<br></center>
+
+<p>访问action18的路径:<a href="http://localhost:8080/spring-mvc/controller07/myaction" target="_blank" rel="external">http://localhost:8080/spring-mvc/controller07/myaction</a>，结果如下所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-02/SpringMVC-02-16.png" width="75%">图 1<br></center>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/10/22/SpringMVC-02/" data-id="cjhhg8yzm0036o4wrh4jabnuc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/10/22/SpringMVC-02/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/10/22/SpringMVC-02/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/10/22/SpringMVC-01/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    01-SpringMVC入门与环境配置
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/10/22/SpringMVC-03/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">03-请求处理方法Action详解</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IntelliJ IDEA使用技巧" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/工具使用/">工具使用</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="title">IntelliJ IDEA使用技巧</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:42.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/新一代构建工具Gradle/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="新一代构建工具Gradle" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/新一代构建工具Gradle/" class="title">新一代构建工具Gradle</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:28.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/全面解析Java注解/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="全面解析Java注解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java其他/">Java其他</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/全面解析Java注解/" class="title">全面解析Java注解</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:51:54.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java其他/">Java其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/工具使用/">工具使用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/慕课网/">慕课网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/10/22/SpringMVC-02/';
+        
+        this.page.identifier = 'SpringMVC-02';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

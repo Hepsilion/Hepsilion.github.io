@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>06-Spring MVC验证器 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                54
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                23
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-SpringMVC-06" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            06-Spring MVC验证器
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/10/22/SpringMVC-06/">
+            <time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/SpringMVC/">SpringMVC</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+<h1 id="Spring-MVC验证器"><a href="#Spring-MVC验证器" class="headerlink" title="Spring MVC验证器"></a>Spring MVC验证器</h1><p>在展示Spring MVC验证器之前，先在前面项目的基础上，通过一个相对综合的示例串联前面学习过的一些知识点，主要实现产品管理管理功能，包含产品的添加，删除，修改，查询，多删除功能。</p>
+<h2 id="一、综合示例"><a href="#一、综合示例" class="headerlink" title="一、综合示例"></a>一、综合示例</h2><h3 id="1-新建POJO实体（entity）"><a href="#1-新建POJO实体（entity）" class="headerlink" title="1. 新建POJO实体（entity）"></a>1. 新建POJO实体（entity）</h3><p>在包org.spring.mvc.model包中新增产品类型类ProductType：</p>
+<pre><code>package org.spring.mvc.model;
+
+import java.io.Serializable;
+
+/**
+ * 产品类型
+ */
+public class ProductType implements Serializable {
+    private static final long serialVersionUID = 2L;
+    // 编号
+    private int id;
+    // 名称
+    private String name;
+
+    public ProductType() {
+    }
+
+    public ProductType(int id, String name) {
+        super();
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;编号：&quot; + this.getId() + &quot;，名称：&quot; + this.getName();
+    }
+}
+</code></pre><p>修改产品POJO类Product：</p>
+<pre><code>package org.spring.mvc.model;
+
+import java.io.Serializable;
+
+/**
+ * 产品
+ */
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
+    // 编号
+    private int id;
+    // 名称
+    private String name;
+    // 价格
+    private double price;
+    // 产品类型
+    private ProductType productType;
+
+    public Product() {
+        productType = new ProductType();
+    }
+
+    public Product(String name, double price) {
+        super();
+        this.name = name;
+        this.price = price;
+    }
+
+    public Product(int id, String name, double price) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Product(int id, String name, double price, ProductType type) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.productType = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;编号(id)：&quot; + this.getId() + &quot;，名称(name)：&quot; + this.getName() + &quot;，价格(price)：&quot; + this.getPrice() + &quot;，类型(productType.Name)：&quot; + this.getProductType().getName();
+    }
+}
+</code></pre><h3 id="2-新建业务层（Service）"><a href="#2-新建业务层（Service）" class="headerlink" title="2. 新建业务层（Service）"></a>2. 新建业务层（Service）</h3><p>在包org.spring.mvc.service中创建产品类型服务接口ProductTypeService：</p>
+<pre><code>package org.spring.mvc.service;
+
+import java.util.List;
+import org.spring.mvc.model.ProductType;
+
+/**
+ * 产品类型服务
+ *
+ */
+public interface ProductTypeService {
+    /**
+     * 根据产品类型编号获得产品类型对象
+     */
+    public ProductType getProductTypeById(int id);
+
+    /**
+     * 获得所有的产品类型
+     */
+    public List&lt;ProductType&gt; getAllProductTypes();
+}
+</code></pre><p>创建产品类型服务接口ProductTypeService的实现类ProductTypeServiceImpl：</p>
+<pre><code>package org.spring.mvc.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.spring.mvc.model.ProductType;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProductTypeServiceImpl implements ProductTypeService {
+    private static List&lt;ProductType&gt; productTypes;
+
+    static {
+        productTypes = new ArrayList&lt;ProductType&gt;();
+        productTypes.add(new ProductType(11, &quot;数码电子&quot;));
+        productTypes.add(new ProductType(21, &quot;鞋帽服饰&quot;));
+        productTypes.add(new ProductType(31, &quot;图书音像&quot;));
+        productTypes.add(new ProductType(41, &quot;五金家电&quot;));
+        productTypes.add(new ProductType(51, &quot;生鲜水果&quot;));
+    }
+
+    @Override
+    public ProductType getProductTypeById(int id) {
+        for (ProductType productType : productTypes) {
+            if (productType.getId() == id) {
+                return productType;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List&lt;ProductType&gt; getAllProductTypes() {
+        return productTypes;
+    }
+}
+</code></pre><p>在包org.spring.mvc.service中创建产品服务接口ProductService：</p>
+<pre><code>package org.spring.mvc.service;
+
+import java.util.List;
+
+import org.spring.mvc.model.Product;
+
+public interface ProductService {
+    /**
+     * 获得所有的产品
+     */
+    List&lt;Product&gt; getAllProducts();
+
+    /**
+     * 通过编号获得产品
+     */
+    Product getProductById(int id);
+
+    /**
+     * 通过名称获得产品
+     */
+    List&lt;Product&gt; getProductsByName(String productName);
+
+    /**
+     * 新增产品对象
+     */
+    void addProduct(Product enttiy) throws Exception;
+
+    /**
+     * 更新产品对象
+     */
+    public void updateProduct(Product entity) throws Exception;
+
+    /**
+     * 删除产品对象
+     */
+    void deleteProduct(int id);
+
+    /**
+     * 多删除产品对象
+     */
+    void deletesProduct(int[] ids);
+}
+</code></pre><p>创建产品服务接口ProductService的实现类ProductServiceImpl：</p>
+<pre><code>package org.spring.mvc.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.spring.mvc.model.Product;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+    private static List&lt;Product&gt; products;
+
+    static {
+        ProductTypeService productTypeService = new ProductTypeServiceImpl();
+        products = new ArrayList&lt;Product&gt;();
+        products.add(new Product(198, &quot;Huwei P8&quot;, 4985.6, productTypeService.getProductTypeById(11)));
+        products.add(new Product(298, &quot;李宁运动鞋&quot;, 498.56, productTypeService.getProductTypeById(21)));
+        products.add(new Product(398, &quot;Spring MVC权威指南&quot;, 49.856,productTypeService.getProductTypeById(31)));
+        products.add(new Product(498, &quot;山东国光苹果&quot;, 4.9856, productTypeService.getProductTypeById(51)));
+        products.add(new Product(598, &quot;8开门超级大冰箱&quot;, 49856.1, productTypeService.getProductTypeById(41)));
+    }
+
+    /**
+     * 获得所有的产品
+     */
+    @Override
+    public List&lt;Product&gt; getAllProducts() {
+        return products;
+    }
+
+    /**
+     * 通过编号获得产品
+     */
+    @Override
+    public Product getProductById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 通过名称获得产品名称
+     */
+    @Override
+    public List&lt;Product&gt; getProductsByName(String productName) {
+        if (productName == null || productName.equals(&quot;&quot;)) {
+            return getAllProducts();
+        }
+        List&lt;Product&gt; result = new ArrayList&lt;Product&gt;();
+        for (Product product : products) {
+            if (product.getName().contains(productName)) {
+                result.add(product);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 新增
+     * 
+     * @throws Exception
+     */
+    @Override
+    public void addProduct(Product entity) throws Exception {
+        if (entity.getName() == null || entity.getName().equals(&quot;&quot;)) {
+            throw new Exception(&quot;产品名称必须填写&quot;);
+        }
+        if (products.size() &gt; 0) {
+            entity.setId(products.get(products.size() - 1).getId() + 1);
+        } else {
+            entity.setId(1);
+        }
+        products.add(entity);
+    }
+
+    /**
+     * 更新
+     */
+    public void updateProduct(Product entity) throws Exception {
+        if (entity.getPrice() &lt; 0) {
+            throw new Exception(&quot;价格必须大于0&quot;);
+        }
+        Product source = getProductById(entity.getId());
+        source.setName(entity.getName());
+        source.setPrice(entity.getPrice());
+        source.setProductType(entity.getProductType());
+    }
+
+    /**
+     * 删除
+     */
+    @Override
+    public void deleteProduct(int id) {
+        products.remove(getProductById(id));
+    }
+
+    /**
+     * 多删除
+     */
+    @Override
+    public void deletesProduct(int[] ids) {
+        for (int id : ids) {
+            deleteProduct(id);
+        }
+    }
+}
+</code></pre><h3 id="3-实现展示、查询、删除与多删除功能"><a href="#3-实现展示、查询、删除与多删除功能" class="headerlink" title="3. 实现展示、查询、删除与多删除功能"></a>3. 实现展示、查询、删除与多删除功能</h3><p>在org.spring.mvc.controller包中定义一个名为ProductController的控制器</p>
+<p>index请求处理方法在路径映射注解@RequestMapping中也并未指定value值是让该action为默认action，所有当我们访问系统时这个index就成了欢迎页。</p>
+<pre><code>package org.spring.mvc.controller;
+
+import org.spring.mvc.model.Product;
+import org.spring.mvc.service.ProductService;
+import org.spring.mvc.service.ProductTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+@RequestMapping(&quot;/product&quot;)
+public class ProductController {
+    @Autowired
+    ProductService productService;
+    @Autowired
+    ProductTypeService productTypeService;
+
+    /**
+     * 展示与搜索
+     */
+    @RequestMapping
+    public String index(Model model, String searchKey) {
+        model.addAttribute(&quot;products&quot;, productService.getProductsByName(searchKey));
+        model.addAttribute(&quot;searchKey&quot;, searchKey);
+        return &quot;product/index&quot;;
+    }
+
+    /**
+     * 删除，id为路径变量
+     */
+    @RequestMapping(&quot;/delete/{id}&quot;)
+    public String delete(@PathVariable int id) {
+        productService.deleteProduct(id);
+        return &quot;redirect:/product&quot;;
+    }
+
+    /**
+     * 多删除，ids的值为多个id参数组成
+     */
+    @RequestMapping(&quot;/deletes&quot;)
+    public String deletes(@RequestParam(&quot;id&quot;) int[] ids) {
+        productService.deletesProduct(ids);
+        return &quot;redirect:/product&quot;;
+    }
+}
+</code></pre><p>定义所有页面风格用的main.css样式：</p>
+<pre><code>@CHARSET &quot;UTF-8&quot;;
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: microsoft yahei;
+    font-size: 14px;
+}
+
+body {
+    padding-top: 20px;
+}
+
+.main {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #777;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.main .title {
+    font-size: 20px;
+    font-weight: normal;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    color: #006ac1;
+}
+
+.main .title span {
+    display: inline-block;
+    font-size: 20px;
+    color: #fff;
+    padding: 0 8px;
+    background: orangered;
+    border-radius: 5px;
+}
+
+a {
+    color: #006ac1;
+    text-decoration: none;
+}
+
+a:hover {
+    color: orangered;
+}
+
+.tab td, .tab, .tab th {
+    border: 1px solid #777;
+    border-collapse: collapse;
+}
+
+.tab td, .tab th {
+    line-height: 26px;
+    height: 26px;
+    padding-left: 5px;
+}
+
+.abtn {
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    background: #006ac1;
+    color: #fff;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+.btn {
+    height: 18px;
+    line-height: 18px;
+    background: #006ac1;
+    color: #fff;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.abtn:hover, .btn:hover {
+    background: orangered;
+    color: #fff;
+}
+
+p {
+    padding: 5px 0;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+}
+
+fieldset legend {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+a.out, input.out {
+    height: 23px;
+    line-height: 23px;
+}
+
+form {
+    margin: 10px 0;
+}
+</code></pre><p>在view目录下新建目录product，在product目录下新建一个视图index.jsp：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;link href=&quot;&lt;c:url value=&quot;/styles/main.css&quot;/&gt;&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; /&gt;
+        &lt;title&gt;产品管理&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;main&quot;&gt;
+            &lt;h2 class=&quot;title&quot;&gt;
+                &lt;span&gt;产品管理&lt;/span&gt;
+            &lt;/h2&gt;
+            &lt;form method=&quot;get&quot;&gt;
+                名称：&lt;input type=&quot;text&quot; name=&quot;searchKey&quot; value=&quot;${searchKey}&quot; /&gt; &lt;input type=&quot;submit&quot; value=&quot;搜索&quot; class=&quot;btn out&quot; /&gt;
+            &lt;/form&gt;
+            &lt;form action=&quot;product/deletes&quot; method=&quot;post&quot;&gt;
+                &lt;table border=&quot;1&quot; width=&quot;100%&quot; class=&quot;tab&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;&lt;input type=&quot;checkbox&quot; id=&quot;chbAll&quot;&gt;&lt;/th&gt;
+                        &lt;th&gt;编号&lt;/th&gt;
+                        &lt;th&gt;产品名&lt;/th&gt;
+                        &lt;th&gt;价格&lt;/th&gt;
+                        &lt;th&gt;类型&lt;/th&gt;
+                        &lt;th&gt;操作&lt;/th&gt;
+                    &lt;/tr&gt;
+                    &lt;c:forEach var=&quot;product&quot; items=&quot;${products}&quot;&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;&lt;input type=&quot;checkbox&quot; name=&quot;id&quot; value=&quot;${product.id}&quot;&gt;&lt;/th&gt;
+                            &lt;td&gt;${product.id}&lt;/td&gt;
+                            &lt;td&gt;${product.name}&lt;/td&gt;
+                            &lt;td&gt;${product.price}&lt;/td&gt;
+                            &lt;td&gt;${product.productType.name}&lt;/td&gt;
+                            &lt;td&gt;&lt;a href=&quot;product/delete/${product.id}&quot; class=&quot;abtn&quot;&gt;删除&lt;/a&gt; &lt;a href=&quot;product/edit/${product.id}&quot; class=&quot;abtn&quot;&gt;编辑&lt;/a&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/c:forEach&gt;
+                &lt;/table&gt;
+                &lt;p style=&quot;color: red&quot;&gt;${message}&lt;/p&gt;
+                &lt;p&gt;
+                    &lt;a href=&quot;product/add&quot; class=&quot;abtn out&quot;&gt;添加&lt;/a&gt; &lt;input type=&quot;submit&quot; value=&quot;删除选择项&quot; class=&quot;btn out&quot; /&gt;
+                &lt;/p&gt;
+                &lt;script type=&quot;text/javascript&quot; src=&quot;&lt;c:url value=&quot;/scripts/jQuery1.11.3/jquery-1.11.3.min.js&quot;/&gt;&quot;&gt;&lt;/script&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>访问路径：<a href="http://localhost:8080/spring-mvc/product" target="_blank" rel="external">http://localhost:8080/spring-mvc/product</a>，运行结果如图1所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-06/SpringMVC-06-01.png" width="80%">图 1<br></center>
+
+<h3 id="4-新增产品"><a href="#4-新增产品" class="headerlink" title="4. 新增产品"></a>4. 新增产品</h3><p>在ProductController控制器中添加两个Action，一个用于渲染添加页面，另一个用于响应保存功能：</p>
+<pre><code>/**
+ *  新增，渲染出新增界面
+ */
+@RequestMapping(&quot;/add&quot;)
+public String add(Model model) {
+    // 与form绑定的模型
+    model.addAttribute(&quot;product&quot;, new Product());
+    // 用于生成下拉列表
+    model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+    return &quot;product/add&quot;;
+}
+
+/**
+ * 新增保存，如果新增成功转回列表页，如果失败回新增页，保持页面数据
+ */
+@RequestMapping(&quot;/addSave&quot;)
+public String addSave(Model model, Product product) {
+    try {
+        // 根据类型的编号获得类型对象
+        product.setProductType(productTypeService.getProductTypeById(product.getProductType().getId()));
+        productService.addProduct(product);
+        return &quot;redirect:/product&quot;;
+    } catch (Exception exp) {
+        // 与form绑定的模型
+        model.addAttribute(&quot;product&quot;, product);
+        // 用于生成下拉列表
+        model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+        // 错误消息
+        model.addAttribute(&quot;message&quot;, exp.getMessage());
+        return &quot;product/add&quot;;
+    }
+}
+</code></pre><p>在view/product目录下新增视图add.jsp页面：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;&gt;
+        &lt;link href=&quot;&lt;c:url value=&quot;/styles/main.css&quot;/&gt;&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; /&gt;
+        &lt;title&gt;新增产品&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;main&quot;&gt;
+            &lt;h2 class=&quot;title&quot;&gt;
+                &lt;span&gt;新增产品&lt;/span&gt;
+            &lt;/h2&gt;
+            &lt;form:form action=&quot;addSave&quot; modelAttribute=&quot;product&quot;&gt;
+                &lt;fieldset&gt;
+                    &lt;legend&gt;产品&lt;/legend&gt;
+                    &lt;p&gt;
+                        &lt;label for=&quot;name&quot;&gt;产品名称：&lt;/label&gt;
+                        &lt;form:input path=&quot;name&quot; /&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        &lt;label for=&quot;title&quot;&gt;产品类型：&lt;/label&gt;
+                        &lt;form:select path=&quot;productType.id&quot; items=&quot;${productTypes}&quot; itemLabel=&quot;name&quot; itemValue=&quot;id&quot;&gt;
+                        &lt;/form:select&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        &lt;label for=&quot;price&quot;&gt;产品价格：&lt;/label&gt;
+                        &lt;form:input path=&quot;price&quot; /&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        &lt;input type=&quot;submit&quot; value=&quot;保存&quot; class=&quot;btn out&quot;&gt;
+                    &lt;/p&gt;
+                &lt;/fieldset&gt;
+            &lt;/form:form&gt;
+            &lt;p style=&quot;color: red&quot;&gt;${message}&lt;/p&gt;
+            &lt;p&gt;
+                &lt;a href=&quot;&lt;c:url value=&quot;/product&quot; /&gt;&quot; class=&quot;abtn out&quot;&gt;返回列表&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>点击添加按钮，运行结果如图2所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-06/SpringMVC-06-02.png" width="80%">图 2<br></center>
+
+<h3 id="5-编辑产品"><a href="#5-编辑产品" class="headerlink" title="5. 编辑产品"></a>5. 编辑产品</h3><p>在ProductController控制器中添加两个Action，一个用于渲染编辑页面，根据要编辑的产品编号获得产品对象，另一个用于响应保存功能。</p>
+<pre><code>/**
+ * 编辑，渲染出编辑界面，路径变量id是用户要编辑的产品编号
+ */
+@RequestMapping(&quot;/edit/{id}&quot;)
+public String edit(Model model, @PathVariable int id) {
+    // 与form绑定的模型
+    model.addAttribute(&quot;product&quot;, productService.getProductById(id));
+    // 用于生成下拉列表
+    model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+    return &quot;product/edit&quot;;
+}
+
+/**
+ *  编辑后保存，如果更新成功转回列表页，如果失败回编辑页，保持页面数据
+ */
+@RequestMapping(&quot;/editSave&quot;)
+public String editSave(Model model, Product product) {
+    try {
+        // 根据类型的编号获得类型对象
+        product.setProductType(productTypeService.getProductTypeById(product.getProductType().getId()));
+        productService.updateProduct(product);
+        return &quot;redirect:/product&quot;;
+    } catch (Exception exp) {
+        // 与form绑定的模型
+        model.addAttribute(&quot;product&quot;, product);
+        // 用于生成下拉列表
+        model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+        // 错误消息
+        model.addAttribute(&quot;message&quot;, exp.getMessage());
+        return &quot;product/edit&quot;;
+    }
+}
+</code></pre><p>在view/product目录下新增视图edit.jsp页面：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;&gt;
+        &lt;link href=&quot;&lt;c:url value=&quot;/styles/main.css&quot; /&gt;&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; /&gt;
+        &lt;title&gt;编辑产品&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;main&quot;&gt;
+            &lt;h2 class=&quot;title&quot;&gt;&lt;span&gt;编辑产品&lt;/span&gt;&lt;/h2&gt;
+            &lt;form:form action=&quot;../editSave&quot; modelAttribute=&quot;product&quot;&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;产品&lt;/legend&gt;
+                &lt;p&gt;
+                    &lt;label for=&quot;name&quot;&gt;产品名称：&lt;/label&gt;
+                    &lt;form:input path=&quot;name&quot;/&gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;label for=&quot;title&quot;&gt;产品类型：&lt;/label&gt;
+                    &lt;form:select path=&quot;productType.id&quot; items=&quot;${productTypes}&quot;  itemLabel=&quot;name&quot; itemValue=&quot;id&quot;&gt;
+                    &lt;/form:select&gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;label for=&quot;price&quot;&gt;产品价格：&lt;/label&gt;
+                    &lt;form:input path=&quot;price&quot;/&gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                  &lt;form:hidden path=&quot;id&quot;/&gt;
+                  &lt;input type=&quot;submit&quot; value=&quot;保存&quot; class=&quot;btn out&quot;&gt;
+                &lt;/p&gt;
+            &lt;/fieldset&gt;
+            &lt;/form:form&gt;
+            &lt;p style=&quot;color: red&quot;&gt;${message}&lt;/p&gt;
+            &lt;p&gt;
+                &lt;a href=&quot;&lt;c:url value=&quot;/product&quot; /&gt;&quot;  class=&quot;abtn out&quot;&gt;返回列表&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>点击编辑按钮，运行结果如图3所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-06/SpringMVC-06-03.png" width="90%">图 3<br></center>
+
+<h2 id="二、Spring-MVC验证器"><a href="#二、Spring-MVC验证器" class="headerlink" title="二、Spring MVC验证器"></a>二、Spring MVC验证器</h2><p>Spring MVC不仅是在架构上改变了项目，使代码变得可复用、可维护与可扩展，其实在功能上也加强了不少。验证与文件上传是许多项目中不可缺少的一部分。在项目中验证非常重要，首先是安全性考虑，如防止注入攻击，XSS等；其次还可以确保数据的完整性，如输入的格式，内容，长度，大小等。Spring MVC可以使用验证器Validator与JSR303完成后台验证功能。这里也会介绍方便的前端验证方法。</p>
+<h3 id="1-Validator验证器"><a href="#1-Validator验证器" class="headerlink" title="1. Validator验证器"></a>1. Validator验证器</h3><p>Spring MVC Validator验证器是一个接口，通过实现该接口可以定义对实体对象的验证。该接口如下所示：</p>
+<pre><code>package org.springframework.validation;
+
+/**
+ * Spring MVC内置的验证器接口
+ */
+public interface Validator {
+    /**
+     * 是否可以验证该类型
+     */
+    boolean supports(Class&lt;?&gt; clazz);
+
+    /**
+     * 执行验证 target表示要验证的对象 error表示错误信息
+     */
+    void validate(Object target, Errors errors);
+}
+</code></pre><h4 id="1-定义验证器"><a href="#1-定义验证器" class="headerlink" title="(1) 定义验证器"></a>(1) 定义验证器</h4><pre><code>package org.spring.mvc.model;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
+/**
+ * 产品验证器
+ *
+ */
+public class ProductValidator implements Validator {
+    /**
+     *  当前验证器可以验证的类型
+     */
+    @Override
+    public boolean supports(Class&lt;?&gt; clazz) {
+        return Product.class.isAssignableFrom(clazz);
+    }
+
+    /**
+     *  执行校验
+     */
+    @Override
+    public void validate(Object target, Errors errors) {
+        // 将要验证的对象转换成Product类型
+        Product entity = (Product) target;
+        // 如果产品名称为空或为空格，使用工具类
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, &quot;name&quot;, &quot;required&quot;, &quot;产品名称必须填写&quot;);
+        // 价格，手动判断
+        if (entity.getPrice() &lt; 0) {
+            errors.rejectValue(&quot;price&quot;, &quot;product.price.gtZero&quot;, &quot;产品价格必须大于等于0&quot;);
+        }
+        // 产品类型必须选择
+        if (entity.getProductType().getId() == 0) {
+            errors.rejectValue(&quot;productType.id&quot;, &quot;product.productType.id.required&quot;, &quot;请选择产品类型&quot;);
+        }
+    }
+}
+</code></pre><p>ValidationUtils是一个工具类，中间有一些方可以用于判断内容是否有误。</p>
+<h4 id="2-执行校验"><a href="#2-执行校验" class="headerlink" title="(2) 执行校验"></a>(2) 执行校验</h4><pre><code>/**
+ * 新增保存，如果新增成功转回列表页，如果失败回新增页，保持页面数据
+ *  
+ * @param model
+ * @param product
+ * @return
+ */
+@RequestMapping(&quot;/addSave&quot;)
+public String addSave(Model model, Product product, BindingResult bindingResult) {
+    // 创建一个产品验证器
+    ProductValidator validator = new ProductValidator();
+    // 执行验证，将验证的结果给bindingResult，该类型继承Errors
+    validator.validate(product, bindingResult);
+
+    // 获得所有的字段错误信息，非必要
+    for (FieldError fielderror : bindingResult.getFieldErrors()) {
+        System.out.println(fielderror.getField() + &quot;，&quot; + fielderror.getCode() + &quot;，&quot; + fielderror.getDefaultMessage());
+    }
+
+    try {
+        // 是否存在错误，如果没有，执行添加
+        if (!bindingResult.hasErrors()) {
+            // 根据类型的编号获得类型对象
+            product.setProductType(productTypeService.getProductTypeById(product.getProductType().getId()));
+            productService.addProduct(product);
+            return &quot;redirect:/product2&quot;;
+        } else {
+            // 与form绑定的模型
+            model.addAttribute(&quot;product&quot;, product);
+            // 用于生成下拉列表
+            model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+            return &quot;product2/add&quot;;
+        }
+    } catch (Exception exp) {
+        // 与form绑定的模型
+        model.addAttribute(&quot;product&quot;, product);
+        // 用于生成下拉列表
+        model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+        // 错误消息
+        model.addAttribute(&quot;message&quot;, exp.getMessage());
+        return &quot;product2/add&quot;;
+    }
+}
+</code></pre><p>注意在参数中增加了一个BindingResult类型的对象，该类型继承自Errors，获得绑定结果，承载错误信息，该对象中有一些方法可以获得完整的错误信息，可以使用hasErrors方法判断是否产生了错误。</p>
+<h4 id="4-在UI中添加错误标签"><a href="#4-在UI中添加错误标签" class="headerlink" title="(4) 在UI中添加错误标签"></a>(4) 在UI中添加错误标签</h4><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;&gt;
+        &lt;link href=&quot;&lt;c:url value=&quot;/styles/main.css&quot;/&gt;&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; /&gt;
+        &lt;title&gt;新增产品&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;main&quot;&gt;
+            &lt;h2 class=&quot;title&quot;&gt;&lt;span&gt;新增产品&lt;/span&gt;&lt;/h2&gt;
+            &lt;form:form action=&quot;addSave&quot; modelAttribute=&quot;product&quot;&gt;
+            &lt;fieldset&gt;
+                &lt;legend&gt;产品&lt;/legend&gt;
+                &lt;p&gt;
+                    &lt;label for=&quot;name&quot;&gt;产品名称：&lt;/label&gt;
+                    &lt;form:input path=&quot;name&quot;/&gt;
+                    &lt;form:errors path=&quot;name&quot; cssClass=&quot;error&quot;&gt;&lt;/form:errors&gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;label for=&quot;title&quot;&gt;产品类型：&lt;/label&gt;
+                    &lt;form:select path=&quot;productType.id&quot;&gt;
+                         &lt;form:option value=&quot;0&quot;&gt;--请选择--&lt;/form:option&gt;
+                         &lt;form:options items=&quot;${productTypes}&quot;  itemLabel=&quot;name&quot; itemValue=&quot;id&quot;/&gt;
+                    &lt;/form:select&gt;
+                    &lt;form:errors path=&quot;productType.id&quot; cssClass=&quot;error&quot;&gt;&lt;/form:errors&gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;label for=&quot;price&quot;&gt;产品价格：&lt;/label&gt;
+                    &lt;form:input path=&quot;price&quot;/&gt;
+                    &lt;form:errors path=&quot;price&quot; cssClass=&quot;error&quot;&gt;&lt;/form:errors&gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                  &lt;input type=&quot;submit&quot; value=&quot;保存&quot; class=&quot;btn out&quot;&gt;
+                &lt;/p&gt;
+            &lt;/fieldset&gt;
+            &lt;/form:form&gt;
+            &lt;p style=&quot;color: red&quot;&gt;${message}&lt;/p&gt;
+            &lt;p&gt;
+                &lt;a href=&quot;&lt;c:url value=&quot;/product2&quot; /&gt;&quot;  class=&quot;abtn out&quot;&gt;返回列表&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="5-测试运行"><a href="#5-测试运行" class="headerlink" title="(5) 测试运行"></a>(5) 测试运行</h4><p>访问路径：<a href="http://localhost:8080/spring-mvc/product2" target="_blank" rel="external">http://localhost:8080/spring-mvc/product2</a>，运行结果如图4所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-06/SpringMVC-06-04.png" width="80%">图 4<br></center>
+
+<p>控制台输出：</p>
+<pre><code>name，required，产品名称必须填写
+price，product.price.gtZero，产品价格必须大于等于0
+productType.id，product.productType.id.required，请选择产品类型
+</code></pre><h3 id="2-JSR303验证器"><a href="#2-JSR303验证器" class="headerlink" title="2. JSR303验证器"></a>2. JSR303验证器</h3><p>JSR是Java Specification Requests的缩写，意思是Java规范提案，是指向JCP(Java Community Process)提出新增一个标准化技术规范的正式请求。任何人都可以提交JSR，以向Java平台增添新的API和服务。JSR已成为Java界的一个重要标准。JSR303只是一个标准，是一个数据验证规范，对这个标准的实现有：hibernate-validator，Apache BVal等。这里我们使用hibernate-validator实现校验。</p>
+<h4 id="1-添加hibernate-validator依赖"><a href="#1-添加hibernate-validator依赖" class="headerlink" title="(1) 添加hibernate-validator依赖"></a>(1) 添加hibernate-validator依赖</h4><p>修改配置pom.xml配置文件，添加依赖。</p>
+<pre><code>&lt;!--JSR303 Bean校验--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;
+    &lt;version&gt;5.2.2.Final&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h4 id="2-注解实体类"><a href="#2-注解实体类" class="headerlink" title="(2) 注解实体类"></a>(2) 注解实体类</h4><p>为Bean的name和price属性设置验证规则：</p>
+<pre><code>// 名称
+@Size(min=1,max=50,message=&quot;名称长度必须介于{2}-{1}之间&quot;)
+@Pattern(regexp=&quot;^[\\w\\u4e00-\\u9fa5]{0,10}$&quot;,message=&quot;格式错误，必须是字母数字与中文&quot;)
+private String name;
+// 价格
+@Range(min=0,max=1000000,message=&quot;价格只允许在{2}-{1}之间&quot;)
+private double price;
+</code></pre><p>常用验证的注解如下所示：</p>
+<h5 id="空值检查"><a href="#空值检查" class="headerlink" title="空值检查"></a>空值检查</h5><ul>
+<li>@Null 验证对象是否为null</li>
+<li>@NotNull 验证对象是否不为null, 无法查检长度为0的字符串</li>
+<li>@NotBlank 检查约束字符串是不是Null还有被Trim的长度是否大于0,只对字符串,且会去掉前后空格.</li>
+<li>@NotEmpty 检查约束元素是否为NULL或者是EMPTY.</li>
+</ul>
+<h5 id="Booelan检查"><a href="#Booelan检查" class="headerlink" title="Booelan检查"></a>Booelan检查</h5><ul>
+<li>@AssertTrue 验证 Boolean 对象是否为 true </li>
+<li>@AssertFalse 验证 Boolean 对象是否为 false </li>
+</ul>
+<h5 id="长度检查"><a href="#长度检查" class="headerlink" title="长度检查"></a>长度检查</h5><ul>
+<li>@Size(min=, max=) 验证对象（Array,Collection,Map,String）长度是否在给定的范围之内 </li>
+<li>@Length(min=, max=) Validates that the annotated string is between min and max included.</li>
+</ul>
+<h5 id="日期检查"><a href="#日期检查" class="headerlink" title="日期检查"></a>日期检查</h5><ul>
+<li>@Past         验证 Date 和 Calendar 对象是否在当前时间之前 </li>
+<li>@Future     验证 Date 和 Calendar 对象是否在当前时间之后 </li>
+</ul>
+<h5 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h5><ul>
+<li>@Pattern    验证 String 对象是否符合正则表达式的规则</li>
+</ul>
+<h5 id="数值检查"><a href="#数值检查" class="headerlink" title="数值检查"></a>数值检查</h5><p>建议使用在Stirng,Integer类型，不建议使用在int类型上，因为表单值为“”时无法转换为int，但可以转换为String为””,Integer为null</p>
+<ul>
+<li>@Min            验证 Number 和 String 对象是否大等于指定的值 </li>
+<li>@Max            验证 Number 和 String 对象是否小等于指定的值 </li>
+<li>@DecimalMax 被标注的值必须不大于约束中指定的最大值. 这个约束的参数是一个通过BigDecimal定义的最大值的字符串表示.小数存在精度</li>
+<li>@DecimalMin 被标注的值必须不小于约束中指定的最小值. 这个约束的参数是一个通过BigDecimal定义的最小值的字符串表示.小数存在精度</li>
+<li>@Digits     验证 Number 和 String 的构成是否合法 </li>
+<li>@Digits(integer=,fraction=) 验证字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。</li>
+</ul>
+<h5 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h5><ul>
+<li>@Range(min=, max=) 检查被注解对象的值是否处于min与max之间，闭区间，包含min与max值</li>
+<li>@Range(min=10000,max=50000,message=”必须介于{2}-{1}之间”)</li>
+</ul>
+<h5 id="其它注解"><a href="#其它注解" class="headerlink" title="其它注解"></a>其它注解</h5><ul>
+<li>@Valid 递归的对关联对象进行校验, 如果关联对象是个集合或者数组,那么对其中的元素进行递归校验,如果是一个map,则对其中的值部分进行校验.(是否进行递归验证)，该注解使用在Action的参数上。</li>
+<li>@CreditCardNumber信用卡验证</li>
+<li>@Email  验证是否是邮件地址，如果为null,不进行验证，算通过验证。</li>
+<li>@ScriptAssert(lang= ,script=, alias=)</li>
+<li>@URL(protocol=,host=, port=,regexp=, flags=)</li>
+</ul>
+<h3 id="3-注解控制器参数"><a href="#3-注解控制器参数" class="headerlink" title="(3) 注解控制器参数"></a>(3) 注解控制器参数</h3><p>在需要使用Bean验证的参数对象上注解@Valid，触发验证</p>
+<pre><code>@RequestMapping(&quot;/addGoodsSave&quot;)
+public String addSave(Model model, @Valid Product product, BindingResult bindingResult) {
+    try {
+        // 是否存在错误，如果没有，执行添加
+        if (!bindingResult.hasErrors()) {
+            // 根据类型的编号获得类型对象
+            product.setProductType(productTypeService.getProductTypeById(product.getProductType().getId()));
+            productService.addProduct(product);
+            return &quot;redirect:/product3&quot;;
+        } else {
+            // 与form绑定的模型
+            model.addAttribute(&quot;product&quot;, product);
+            // 用于生成下拉列表
+            model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+            return &quot;product3/addGoods&quot;;
+        }
+    } catch (Exception exp) {
+        // 与form绑定的模型
+        model.addAttribute(&quot;product&quot;, product);
+        // 用于生成下拉列表
+        model.addAttribute(&quot;productTypes&quot;, productTypeService.getAllProductTypes());
+        return &quot;product3/addGoods&quot;;
+    }
+}
+</code></pre><h3 id="4-在UI中添加错误标签-1"><a href="#4-在UI中添加错误标签-1" class="headerlink" title="(4) 在UI中添加错误标签"></a>(4) 在UI中添加错误标签</h3><p>这里与Spring MVC Validator基本一致，在product3目录下新增一个名为addGoods.jsp的页面</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;
+&lt;%@taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;&gt;
+        &lt;link href=&quot;&lt;c:url value=&quot;/styles/main.css&quot; /&gt;&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; /&gt;
+        &lt;title&gt;新增产品&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;main&quot;&gt;
+            &lt;h2 class=&quot;title&quot;&gt;
+                &lt;span&gt;新增产品&lt;/span&gt;
+            &lt;/h2&gt;
+            &lt;form:form action=&quot;addGoodsSave&quot; modelAttribute=&quot;product&quot;&gt;
+                &lt;fieldset&gt;
+                    &lt;legend&gt;产品&lt;/legend&gt;
+                    &lt;p&gt;
+                        &lt;label for=&quot;name&quot;&gt;产品名称：&lt;/label&gt;
+                        &lt;form:input path=&quot;name&quot; /&gt;
+                        &lt;form:errors path=&quot;name&quot; cssClass=&quot;error&quot;&gt;&lt;/form:errors&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        &lt;label for=&quot;title&quot;&gt;产品类型：&lt;/label&gt;
+                        &lt;form:select path=&quot;productType.id&quot;&gt;
+                            &lt;form:option value=&quot;0&quot;&gt;--请选择--&lt;/form:option&gt;
+                            &lt;form:options items=&quot;${productTypes}&quot; itemLabel=&quot;name&quot; itemValue=&quot;id&quot; /&gt;
+                        &lt;/form:select&gt;
+                        &lt;form:errors path=&quot;productType.id&quot; cssClass=&quot;error&quot;&gt;&lt;/form:errors&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        &lt;label for=&quot;price&quot;&gt;产品价格：&lt;/label&gt;
+                        &lt;form:input path=&quot;price&quot; /&gt;
+                        &lt;form:errors path=&quot;price&quot; cssClass=&quot;error&quot;&gt;&lt;/form:errors&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        &lt;input type=&quot;submit&quot; value=&quot;保存&quot; class=&quot;btn out&quot;&gt;
+                    &lt;/p&gt;
+                &lt;/fieldset&gt;
+            &lt;/form:form&gt;
+            &lt;p style=&quot;color: red&quot;&gt;${message}&lt;/p&gt;
+            &lt;p&gt;
+                &lt;a href=&quot;&lt;c:url value=&quot;/product3&quot; /&gt;&quot; class=&quot;abtn out&quot;&gt;返回列表&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="5-测试运行-1"><a href="#5-测试运行-1" class="headerlink" title="(5) 测试运行"></a>(5) 测试运行</h4><p>访问路径：<a href="http://localhost:8080/spring-mvc/product3/addGoodsSave" target="_blank" rel="external">http://localhost:8080/spring-mvc/product3/addGoodsSave</a>，运行结果如图5所示：</p>
+<center><br><img src="/blog/2017/10/22/SpringMVC-06/SpringMVC-06-05.png" width="80%">图 5<br></center>
+
+<h4 id="6-小结"><a href="#6-小结" class="headerlink" title="(6) 小结"></a>(6) 小结</h4><p>从上面的示例可以看出这种验证更加方便直观，一次定义反复使用，验证在编辑、更新时同样可以使用；另外验证的具体信息可以存放在配置文件中，如message.properties，这样便于国际化与修改。</p>
+<h3 id="3-使用jQuery扩展插件Validate实现前端校验"><a href="#3-使用jQuery扩展插件Validate实现前端校验" class="headerlink" title="3. 使用jQuery扩展插件Validate实现前端校验"></a>3. 使用jQuery扩展插件Validate实现前端校验</h3><p>暂时没看</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/10/22/SpringMVC-06/" data-id="cjhhg8yzx003io4wrrk7rds57" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/10/22/SpringMVC-06/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/10/22/SpringMVC-06/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/10/22/SpringMVC-05/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    05-SpringMVC视图解析器
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/10/22/SpringMVC-07/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">07-文件上传</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IntelliJ IDEA使用技巧" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/工具使用/">工具使用</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="title">IntelliJ IDEA使用技巧</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:42.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/新一代构建工具Gradle/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="新一代构建工具Gradle" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/新一代构建工具Gradle/" class="title">新一代构建工具Gradle</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:28.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/全面解析Java注解/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="全面解析Java注解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java其他/">Java其他</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/全面解析Java注解/" class="title">全面解析Java注解</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:51:54.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java其他/">Java其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/工具使用/">工具使用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/慕课网/">慕课网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/10/22/SpringMVC-06/';
+        
+        this.page.identifier = 'SpringMVC-06';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

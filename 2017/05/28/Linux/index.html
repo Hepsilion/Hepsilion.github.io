@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Linux总结 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                54
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                23
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Linux" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Linux总结
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/05/28/Linux/">
+            <time datetime="2017-05-28T10:56:37.000Z" itemprop="datePublished">2017-05-28</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/计算机基础/">计算机基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/Linux/">Linux</a>, <a class="tag-link" href="/blog/tags/操作系统/">操作系统</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>Linux</p>
+<a id="more"></a>
+<h2 id="一、-进程管理"><a href="#一、-进程管理" class="headerlink" title="一、 进程管理"></a>一、 进程管理</h2><h3 id="问：Linux进程间的通信方式"><a href="#问：Linux进程间的通信方式" class="headerlink" title="问：Linux进程间的通信方式"></a>问：Linux进程间的通信方式</h3><p>Linux进程间通信方式有：消息队列，命名管道，信号量，共享内存，套接字等，临界区不能用于Linux中的进程间通信。</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8067759/1034?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8067759/1034?onlyWrong=0</a></p>
+<h3 id="问：终止一个前台进程可能用到的命令和操作"><a href="#问：终止一个前台进程可能用到的命令和操作" class="headerlink" title="问：终止一个前台进程可能用到的命令和操作"></a>问：终止一个前台进程可能用到的命令和操作</h3><p>终止一个前台进程用Ctrl+C；</p>
+<p>暂停一个前台进程用Ctrl+Z；</p>
+<p>终止一个后台进程：</p>
+<ul>
+<li>使用kill命令；</li>
+<li>或使用fg命令将后台进程变为前台进程，然后Ctrl+C。</li>
+</ul>
+<h3 id="问：ps"><a href="#问：ps" class="headerlink" title="问：ps"></a>问：ps</h3><h3 id="问：jobs"><a href="#问：jobs" class="headerlink" title="问：jobs"></a>问：jobs</h3><p>显示系统进程</p>
+<h2 id="二、-存储管理"><a href="#二、-存储管理" class="headerlink" title="二、 存储管理"></a>二、 存储管理</h2><h3 id="问：free"><a href="#问：free" class="headerlink" title="问：free"></a>问：free</h3><p>free是系统自带的、常用的监控工具，用于显示已使用物理内存和交换空间，相对于top命令，free可以更简洁的查看内存的使用情况。</p>
+<h2 id="三、-文件管理"><a href="#三、-文件管理" class="headerlink" title="三、 文件管理"></a>三、 文件管理</h2><center><br><img src="/blog/2017/05/28/Linux/SpecialDir.JPG" width="100%"><br></center>
+
+<p>Linux中，在所有目录下都会有存在两个目录：”.”和”..”，分别代表此层和上层目录的意思。</p>
+<p>目录与文件相关操作</p>
+<h3 id="1-cd"><a href="#1-cd" class="headerlink" title="1. cd"></a>1. cd</h3><p>cd是Change Directory的缩写，这是用来变换工作目录的指令。</p>
+<p>语法是：<code>cd  [目标目录]</code>，如：<code>cd /home</code></p>
+<p>cd指令可让用户在不同的目录间切换，但该用户必须拥有足够权限进入目标目录。</p>
+<h3 id="2-pwd"><a href="#2-pwd" class="headerlink" title="2. pwd"></a>2. pwd</h3><p>pwd是Print Working Directory的缩写，是显示当前所在目录的指令。</p>
+<h3 id="3-mkdir-建立新目录"><a href="#3-mkdir-建立新目录" class="headerlink" title="3. mkdir(建立新目录)"></a>3. mkdir(建立新目录)</h3><p>在默认情况下，你所需要的目录要一层一层建立才行。例如:假如你要建立一个目录为:<code>/home/bird/testing/test</code>，那么首先必须要有<code>/home</code>，然后要有<code>/home/bird</code>，再有<code>/home/bird/testing</code>，最后才可以建立<code>/home/bird/testing/test</code>这个目录。</p>
+<p>不过，加上<code>-p</code>这个选项就可以直接完成功能:<code>mkdir -p /home/bird/testing/test</code>。使用上述命令，系统会自动帮你将各个目录依次建立起来。</p>
+<h3 id="4-rmdir"><a href="#4-rmdir" class="headerlink" title="4. rmdir"></a>4. rmdir</h3><p>如果要将刚刚建立的test删掉，使用:<code>rmdir test</code>。但是目录需要一层一层删除，而且被删除的目录里面必定不能存在其他的目录或文件，也就是说只能删除空目录。</p>
+<p>如果需要删除非空目录，可以使用:<code>rm -r test</code></p>
+<h3 id="5-ls-文件与目录的查看"><a href="#5-ls-文件与目录的查看" class="headerlink" title="5. ls(文件与目录的查看)"></a>5. ls(文件与目录的查看)</h3><p>ls最常用的选项是”-l”。</p>
+<h3 id="6-cp"><a href="#6-cp" class="headerlink" title="6. cp"></a>6. cp</h3><p>要复制文件或目录，可以使用cp。如将当前目录下的<code>aaa</code>文件复制到<code>/tmp</code>下，并更名为<code>bbb</code>:<code>cp ./aaa /tmp/bbb</code></p>
+<p>复制目录时需要使用”-r”选项，如复制<code>/etc/</code>这个目录下的所有内容到<code>/tmp</code>下：<code>cp -r /etc/ /tmp</code></p>
+<h3 id="7-rm"><a href="#7-rm" class="headerlink" title="7. rm"></a>7. rm</h3><p>执行rm指令可删除文件或目录，如欲删除目录必须加上参数”-r”，否则默认仅会删除文件。</p>
+<h3 id="8-mv"><a href="#8-mv" class="headerlink" title="8. mv"></a>8. mv</h3><p>mv命令移动或更名现有的文件或目录。</p>
+<p>如何更改一个目录的名称，例如由<code>/home/test</code>变为<code>/tome/test2</code>？</p>
+<p>命令如下:<code>mv /home/test /home/test2</code></p>
+<p>例1: Linux的非root用户，在自己的目录中，解决不可以删除非空目录dirs的方法是()</p>
+<pre><code>A. rm dir dirs  B. rm -r dins  C. my dirs /dev/null  D. destroy dirs
+
+解答:B。C需要root权限，且只能对文件进行操作，而不能对目录进行操作。
+</code></pre><p>文本文件内容查看</p>
+<p>如果我们要查阅一个文件内容时，该如何是好呢？这里有相当多命令可以使用，最常使用的显示文件内容的命令可以说是cat, more及less了。</p>
+<h3 id="1-cat"><a href="#1-cat" class="headerlink" title="1. cat"></a>1. cat</h3><p>由第一行开始查看文件。cat是Concatenate(连续)的简写，主要的功能是将一个文件的内容连续输出在屏幕上。如显示当前目录下的aaa的内容:<code>cat ./aaa</code></p>
+<h3 id="2-tac"><a href="#2-tac" class="headerlink" title="2. tac"></a>2. tac</h3><p>从最后一行开始显示，可以看出。cat与tac是倒置的。cat是由第一行到最后一行连续显示在屏幕上，而tac则是由最后一行到第一行反向在屏幕上显示出来。</p>
+<h3 id="3-nl"><a href="#3-nl" class="headerlink" title="3. nl"></a>3. nl</h3><p>显示文件内容的时候，一起显示文件行号。</p>
+<h3 id="4-more"><a href="#4-more" class="headerlink" title="4. more"></a>4. more</h3><p>一页一页显示文件内容。前面提到的n1, cat, tac等，都是一次性将数据显示到屏幕上面，若是文件行数很多，前面的内容就会看不到，这时就需要使用more与less来一页一页查看文件内容。命令如下:<code>more ./aaa</code></p>
+<h3 id="5-less"><a href="#5-less" class="headerlink" title="5. less"></a>5. less</h3><p>less与more类似，但是比more更好的是，它可以向前翻页。命令如下:<code>less ./aaa</code></p>
+<h3 id="6-head"><a href="#6-head" class="headerlink" title="6. head"></a>6. head</h3><p>head命令查看文本文件时，只显示头几行。用法如下:<code>head -n number 文件名</code></p>
+<p>上述用法表示只显示文件的前number行。另外一n选项后而的参数如果接的是负数，代表列出前而的所有行数，但不包括后面number行。举例来说，<code>/etc/man.config</code>共有141行，则下述的指令:<code>head -n -100 /etc/man.config</code>就会列出前面41行，后面100行不会打印出来了。</p>
+<h3 id="7-tail"><a href="#7-tail" class="headerlink" title="7. tail"></a>7. tail</h3><p>tail命令查看文本文件时，只显示尾几行。tail的用法跟head很相似：<code>tail -n number 文件名</code></p>
+<p>当number前面有”+”号时，与<code>head -n -xx</code>有异曲同工之妙。如:<code>tail -n +100 /etc/man.config</code>代表该文件从100行以后都会被列出来，同样，在man.config共有141行，因此第100-141行就会被列出来，前面的99行都不会被显示出来。</p>
+<h3 id="8-touch"><a href="#8-touch" class="headerlink" title="8. touch"></a>8. touch</h3><p>touch这个指令最常被使用的情况是建立一个空的文件。</p>
+<p>若<code>aaa</code>不存在，则:<code>touch aaa</code>，将会新建一个名为”aaa”的文件。</p>
+<h3 id="9-grep"><a href="#9-grep" class="headerlink" title="9. grep"></a>9. grep</h3><p>grep是分析一行信息，若当中有我们所需要的信息，就将该行显示出来。</p>
+<p>grep常用在管道中。例如将文件aaa中包含”root”的行的内容显示出来的命令如<code>cat aaa grep &quot;root&quot;</code>或<code>grep &quot;root&quot; aaa</code></p>
+<p>当使用”grep -E”表示后面跟着的内容是延伸型正则表达式，等价于”egrep”。</p>
+<p>例1: 在Linux系统中，为找到文件try_grep中含有以a字母为行开头的内容，可以使用()命令。</p>
+<pre><code>A. grep -E #$ try_grep  B. grep -E #a try_grep
+C. grep -E ^$ try_grep  D. grep -E ^a try_grep
+
+答案：D。 ^M表示以M开头的行，^表示开始的意思；M$表示以M结尾的行，$表示结束的意思。
+</code></pre><p>查看系统信息</p>
+<h3 id="1-df"><a href="#1-df" class="headerlink" title="1. df"></a>1. df</h3><p>列出文件系统的整体磁盘使用量。</p>
+<h3 id="2-ps"><a href="#2-ps" class="headerlink" title="2. ps"></a>2. ps</h3><p>将某个时间点的程序运行情况显示出来。</p>
+<h3 id="3-top-动态观察程序的变化"><a href="#3-top-动态观察程序的变化" class="headerlink" title="3. top(动态观察程序的变化)"></a>3. top(动态观察程序的变化)</h3><p>top可以持续侦测程序运作的状态。</p>
+<h3 id="问：Linux文件目录"><a href="#问：Linux文件目录" class="headerlink" title="问：Linux文件目录"></a>问：Linux文件目录</h3><p>/bin  二进制执行文件，也就是命令文件</p>
+<p>/etc 下存放的是配置文件</p>
+<p>/dev 存放是时外部设备文件，硬盘，usb等</p>
+<p>/lib 存放的是库文件</p>
+<h3 id="问：常用文件介绍"><a href="#问：常用文件介绍" class="headerlink" title="问：常用文件介绍"></a>问：常用文件介绍</h3><ul>
+<li><strong>/etc/resolv.conf</strong><br>  DNS解析的设置文件</li>
+<li><strong>/etc/dhcpd.conf</strong><br>  DHCP的设置文件</li>
+<li><strong>/etc/gateways</strong><br>  网络路由的设置文件(建立动态路由需要用到)</li>
+<li><strong>/etc/mail.rc</strong><br>  邮件服务的设置文件</li>
+<li><strong>/etc/hosts</strong><br>  hosts文件是Linux系统上一个负责ip地址与域名快速解析的文件，以ascii格式保存在/etc/目录下。hosts文件包含了ip地址与主机名之间的映射，还包括主机的别名。在没有域名解析服务器的情况下，系统上的所有网络程序都通过查询该文件来解析对应于某个主机名的ip地址，否则就需要使用dns服务程序来解决。通过可以将常用的域名和ip地址映射加入到hosts文件中，实现快速方便的访问。</li>
+<li><strong>/etc/hostname</strong><br>  主机名设置文件</li>
+<li><strong> /etc/fstab</strong><br>  系统分区的配置文件，开机后系统会自动挂载文件中指定的设备</li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/22114?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8343455/22114?onlyWrong=0</a></p>
+<ul>
+<li><strong>/proc/interrupts</strong><br>  显示使用的中断</li>
+<li><strong>/proc/ioports</strong><br>  当前使用的I/O端口</li>
+<li><strong>/proc/kcore</strong><br>  系统物理内存映像。与物理内存大小完全一样，但不实际占用这么多的内存。</li>
+<li><strong>/proc/kmsg</strong><br>  内核输出的消息，也被送到syslog</li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/26137?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8148327/26137?onlyWrong=0</a></p>
+<h3 id="问：文件复制"><a href="#问：文件复制" class="headerlink" title="问：文件复制"></a>问：文件复制</h3><p>(1) cp命令：cp命令用于复制文件或目录。</p>
+<pre><code>将文件file1复制成文件file2命令如下：cp file1 file2
+</code></pre><p>(2) cat命令 ：cat命令是linux下的一个文本输出命令，通常是用于观看某个文件的内容的。</p>
+<pre><code>一次显示整个文件命令如下： cat filename
+</code></pre><ul>
+<li><blockquote>
+<p>: linux中的数据流重导向：输出导向，覆盖导向的文件内容。</p>
+</blockquote>
+</li>
+<li>&lt; : linux中的数据流重导向：输入导向，理解为原本由键盘输入改为文本输入</li>
+</ul>
+<p>(3) dd命令 : 作用是用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换。</p>
+<pre><code>参数：if 输入文件(或设备名称)  of 输出文件(或设备名称)
+将文件file1拷贝到文件file2中命令如下：  dd if=file1 of=file2
+</code></pre><p>(4) | ：管道命令操作符，处理经由前面一个指令传出的正确输出信息，然后，传递给下一个命令，作为标准的输入</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/3744?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>将文件file1复制为file2可以使用的命令：
+cp file1 file2
+cat file1 &gt;file2
+cat &lt; file1 &gt;file2
+dd if=file1 of=file2
+cat file1 | cat &gt;file2
+</code></pre><h3 id="问：Linux文件权限"><a href="#问：Linux文件权限" class="headerlink" title="问：Linux文件权限"></a>问：Linux文件权限</h3><center><br><img src="/blog/2017/05/28/Linux/file_permission.jpg" width="50%"><br></center>
+
+<p>Linux文件权限的长度为10位，分成四段：文件类型(1位) + 拥有者权限(3位) + 所属组权限(3位) + 其他用户权限(3位)</p>
+<h3 id="问：chmod-修改文件权限"><a href="#问：chmod-修改文件权限" class="headerlink" title="问：chmod 修改文件权限"></a>问：chmod 修改文件权限</h3><pre><code>chmod [who] [+|-|=][mode] 文件名
+</code></pre><p>(1) [who]的取值可以为u，g，o和a，</p>
+<ul>
+<li>u 表示”用户(user)”，即文件拥有者；</li>
+<li>g 表示”同组(group)用户”，即与文件拥有者有相同组ID的所有用户；</li>
+<li>o 表示”其他(others)用户”；</li>
+<li>a 表示”所有(all)用户”，它是系统默认值。</li>
+</ul>
+<p>(2) [+|-|=]</p>
+<ul>
+<li>+ 添加某个权限；</li>
+<li><ul>
+<li>取消某个权限；</li>
+</ul>
+</li>
+<li>= 赋予给定权限并取消其他所有权限（如果有的话）。 </li>
+</ul>
+<p>(3) [mode]</p>
+<ul>
+<li>当使用+或-时，权限从0到7的一个八进制数，例如7为4+2+1的组合，代表可读可写可执行权限；5为4+1的组合，代表可读可执行，等；</li>
+<li>当使用=时，权限为从0到7的3个八进制数，按(u)、(g)、(o)顺序组织，分别对应文件拥有着、同组用户和其他用户的权限。</li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/23228?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>文件file的访问权限为rw-r--r--，现要增加所有用户的执行权限和同组用户的写权限，其命令可以为：chmod a+x,g+w file 或 chmod 764 file
+</code></pre><p>注意为多种用户设置权限时，中间以”,”隔开，不可以加空格。如chmod a+x, g+w file为错误形式，逗号后面存在空格。</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/50976?onlyWrong=0" title="Title" target="_blank" rel="external">例2：</a></p>
+<pre><code>现在file文件的权限改为只有拥有着拥有执行权限的命令可以为：chmod u+x,g-x,o-x file 或 chmod 100 file
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/2914" title="Title" target="_blank" rel="external">例3：</a></p>
+<pre><code>在unix系统下执行chmod 753 file之后，该文件sample的访问权限为：拥有者可读写执行，同组用户可读可执行，其他用户可写可执行
+</code></pre><h3 id="问：umask"><a href="#问：umask" class="headerlink" title="问：umask"></a>问：umask</h3><pre><code>umask [-p] [-S] [mode]
+</code></pre><p>umask可用来指定在建立文件时预设的权限掩码。对于每一类用户(文件属主、同组用户、其他用户)在umask值mode中都存在一个相应的数字。</p>
+<ul>
+<li>对于文件来说，这一数字的最大值是6。系统不允许你在创建一个文本文件时就赋予它执行权限，必须在创建后用chmod命令增加这一权限；</li>
+<li>目录则允许设置执行权限，这样针对目录来说，umask中各个数字最大可以为7。</li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/7907952/15820?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>如果系统的umask设置为244，创建一个新文件后，它的权限为：-r---w--w-
+
+创建时，文件权限默认为666，目录权限默认777，减去umask的位就是结果权限。因此该文件权限为666-244=422，即为-r---w--w-
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/14511?onlyWrong=0" title="Title" target="_blank" rel="external">例2：</a></p>
+<pre><code>设umask为002, 则新建立的文件的权限是：-rw-rw-r--
+</code></pre><h3 id="问：tar-压缩和解压缩"><a href="#问：tar-压缩和解压缩" class="headerlink" title="问：tar 压缩和解压缩"></a>问：tar 压缩和解压缩</h3><p>tar [必选项+可选项] 文件或者目录</p>
+<p>必选项：</p>
+<ul>
+<li>-c 创建压缩包；</li>
+<li>-x 解开压缩包；</li>
+<li>-t 列出包中的内容；</li>
+<li>-r 增加文件到指定包中；</li>
+<li>-u 更新包中的文件</li>
+</ul>
+<p>可选项：</p>
+<ul>
+<li>-j 创建或解开压缩包包时使用bzip2进行压缩或解压缩；</li>
+<li>-z 创建或解开压缩包包时使用gzip进行压缩或解压缩；</li>
+<li>-Z 创建或解开压缩包包时使用compress进行压缩或解压；</li>
+<li>-f 后面跟指定的压缩包文件名；</li>
+<li>-v 显示创建压缩包/解开压缩包的过程；</li>
+<li>-C 指定解开压缩包的路径</li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/14711?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>在linux中如何使用tar命令将文件aaa打包为bak.tar：tar -cf bak.tar aaa
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/14346?onlyWrong=0" title="Title" target="_blank" rel="external">例2：</a></p>
+<pre><code>tar命令用于解压的参数是: -x
+</code></pre><h3 id="问：tar，gzip，compress，uncompress"><a href="#问：tar，gzip，compress，uncompress" class="headerlink" title="问：tar，gzip，compress，uncompress"></a>问：tar，gzip，compress，uncompress</h3><p>tar是操作.tar的命令</p>
+<p>gzip是压缩.gz压缩包的命令</p>
+<p>compress：压缩.Z文件</p>
+<p>uncompress：解压缩.Z文件</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/22109?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>一个文件名字为rr.Z，可以用来解压缩的命令是:uncompress
+</code></pre><h3 id="问：查看文件内容"><a href="#问：查看文件内容" class="headerlink" title="问：查看文件内容"></a>问：查看文件内容</h3><p>cat，less，more都可以查看文件内容</p>
+<p>less命令除了可以按空格键向下显示文件外，还可以用上下键来卷动文件</p>
+<p>cat是将文件中的内容全部输出，如果内容过多，鼠标光标自动移到最后一行</p>
+<p>more只能用enter键往下翻</p>
+<h3 id="问：cut"><a href="#问：cut" class="headerlink" title="问：cut"></a>问：cut</h3><p>从行当中截取所需要的内容进行显示</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/22098?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8343455/22098?onlyWrong=0</a></p>
+<h3 id="问：硬链接和软链接"><a href="#问：硬链接和软链接" class="headerlink" title="问：硬链接和软链接"></a>问：硬链接和软链接</h3><p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/" title="Title" target="_blank" rel="external">推荐阅读</a></p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/36414?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/36414?onlyWrong=0</a></p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/44623?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8343455/44623?onlyWrong=0</a></p>
+<h2 id="四、-网络管理"><a href="#四、-网络管理" class="headerlink" title="四、 网络管理"></a>四、 网络管理</h2><h3 id="问：ping-测试连通性"><a href="#问：ping-测试连通性" class="headerlink" title="问：ping 测试连通性"></a>问：ping 测试连通性</h3><p>ping命令用来测试主机之间网络的连通性，底层是ICMP协议。</p>
+<p>主机发出ICMP报文后，若主机与目的主机之间的网络连通正常，则目的主机会返回响应报文。</p>
+<p>我们经常会说”ping一下某机器，看是不是开着”、不能打开网页时会说”你先ping网关地址192.168.1.1试试”。它通过发送ICMP ECHO_REQUEST数据包到网络主机，并显示响应情况，这样我们就可以根据它输出的信息来确定目标主机是否可访问(但这不是绝对的)。有些服务器为了防止通过ping探测到，通过防火墙设置了禁止ping或者在内核参数中禁止ping，这样就不能通过ping确定该主机是否还处于开启状态。</p>
+<h3 id="问：traceroute-路径跟踪"><a href="#问：traceroute-路径跟踪" class="headerlink" title="问：traceroute 路径跟踪"></a>问：traceroute 路径跟踪</h3><p>traceroute是常用的路由查看命令，用来追踪数据包到达网络上某个主机在时经过的路径</p>
+<h3 id="问：route-查看路由表"><a href="#问：route-查看路由表" class="headerlink" title="问：route 查看路由表"></a>问：route 查看路由表</h3><p>route命令用来显示目前本机路由表的内容，并且还可以针对路由表中的记录进行相应的添加、删除或修改等操作。</p>
+<p>(1) route print 本命令用于显示路由表中的当前项目，由于用IP地址配置了网卡，因此所有的这些项目都是自动添加的。 </p>
+<p>(2) route add 本命令可以将新路由项目添加到路由表。</p>
+<p>(3) route change 使用本命令可以修改数据的传输路由，不过，你不能使用本命令来改变数据的目的地。 </p>
+<p>(4) route delete 使用本命令可以从路由表中删除路由。</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/22105?onlyWrong=0" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>局域网的网络地址192.168.1.0/24，局域网络连接其它网络的网关地址是192.168.1.1。
+主机192.168.1.20访问172.16.1.0/24网络时，其路由设置正确的是：route add –net 172.16.1.0 gw 192.168.1.1 netmask 255.255.255.0 metric 1
+
+路由信息是由{目的主机所在的网络地址，下一跳地址，子网掩码}组成，-net 后面跟的是目的网络，下一跳的地址就是局域网中连接外网的网关地址
+</code></pre><h3 id="问：ifconfig"><a href="#问：ifconfig" class="headerlink" title="问：ifconfig"></a>问：ifconfig</h3><p>ifconfig命令用来查看活动的网卡信息</p>
+<h3 id="问：telnet"><a href="#问：telnet" class="headerlink" title="问：telnet"></a>问：telnet</h3><p>telnet命令通常用来进行远程登录。telnet程序是基于TELNET协议的远程登录客户端程序。Telnet协议是TCP/IP协议族中的一员，是Internet远程登录服务的标准协议和主要方式。它为用户提供了在本地计算机上完成远程主机工作的能力。</p>
+<h3 id="问：netstat"><a href="#问：netstat" class="headerlink" title="问：netstat"></a>问：netstat</h3><p>netstat命令用于显示与IP、TCP、UDP和ICMP协议相关的统计数据，一般用于检验本机各端口的网络连接情况。 netstat是在内核中访问网络及相关信息的程序，它能提供TCP连接，TCP和UDP监听，进程内存管理的相关报告。 如果你的计算机有时候接收到的数据报导致出错数据或故障，你不必感到奇怪，TCP/IP可以容许这些类型的错误，并能够自动重发数据报。但如果累计的出错情况数目占到所接收的IP数据报相当大的百分比，或者它的数目正迅速增加，那么你就应该使用 netstat查一查为什么会出现这些情况了。</p>
+<h3 id="问：tcpdump"><a href="#问：tcpdump" class="headerlink" title="问：tcpdump"></a>问：tcpdump</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/14462?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8322129/14462?onlyWrong=0</a></p>
+<h2 id="五、-用户管理"><a href="#五、-用户管理" class="headerlink" title="五、 用户管理"></a>五、 用户管理</h2><h2 id="六、-系统管理"><a href="#六、-系统管理" class="headerlink" title="六、 系统管理"></a>六、 系统管理</h2><h3 id="问：uptime"><a href="#问：uptime" class="headerlink" title="问：uptime"></a>问：uptime</h3><p>uptime命令主要用于获取主机运行时间和查询linux系统负载等信息</p>
+<h3 id="问：top"><a href="#问：top" class="headerlink" title="问：top"></a>问：top</h3><h3 id="问：sar"><a href="#问：sar" class="headerlink" title="问：sar"></a>问：sar</h3><h3 id="问：Linux关机命令"><a href="#问：Linux关机命令" class="headerlink" title="问：Linux关机命令"></a>问：Linux关机命令</h3><ul>
+<li>halt init 0 </li>
+<li>poweroff   </li>
+<li>shutdown -h 时间 (例如，shutdown -h now)</li>
+</ul>
+<h3 id="问：Linux重启命令"><a href="#问：Linux重启命令" class="headerlink" title="问：Linux重启命令"></a>问：Linux重启命令</h3><ul>
+<li>reboot</li>
+<li>init 6</li>
+<li>shutdown -r 时间</li>
+</ul>
+<h2 id="七、-内核管理"><a href="#七、-内核管理" class="headerlink" title="七、 内核管理"></a>七、 内核管理</h2><h2 id="八、-帮助文档"><a href="#八、-帮助文档" class="headerlink" title="八、 帮助文档"></a>八、 帮助文档</h2><h3 id="问：man-查看Linux命令手册"><a href="#问：man-查看Linux命令手册" class="headerlink" title="问：man 查看Linux命令手册"></a>问：man 查看Linux命令手册</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/2914" title="Title" target="_blank" rel="external">例1：</a></p>
+<pre><code>命令man 5 passwd的作用：显示password文件的格式描述
+</code></pre><h2 id="九、-其他"><a href="#九、-其他" class="headerlink" title="九、 其他"></a>九、 其他</h2><h3 id="问：查看相关信息"><a href="#问：查看相关信息" class="headerlink" title="问：查看相关信息"></a>问：查看相关信息</h3><ul>
+<li>cat /proc/meminfo 查看物理内存的信息</li>
+</ul>
+<h3 id="问：常用命令介绍"><a href="#问：常用命令介绍" class="headerlink" title="问：常用命令介绍"></a>问：常用命令介绍</h3><ul>
+<li><strong>grep</strong></li>
+<li><p><strong>netstat</strong><br>  netstat命令用来查看本机的传输层连接状态，如TCP、UDP连接，端口等信息</p>
+</li>
+<li><p><strong>tcpdump</strong><br>  tcpdump是简单可靠网络监控的实用工具</p>
+</li>
+<li><strong>top</strong><br>  top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况</li>
+<li><strong>fg</strong><br>  将一个后台进程调至前台继续运行</li>
+<li><strong>bg</strong><br>  将一个在后台暂停的进程唤醒，继续执行</li>
+<li><strong>ctrl+z</strong><br>  可以将一个正在前台执行的进程放到后台，并且暂停，表示进程被挂起</li>
+</ul>
+<ul>
+<li><strong>dpkg</strong><br>  “dpkg”是”Debian Packager”的简写，是为”Debian”专门开发的套件管理系统，方便软件的安装、更新及移除。所有源自”Debian”的”Linux “发行版都使用”dpkg”，例如”Ubuntu”、”Knoppix”等。示例：dpkg -i avg71flm_r28-1_i386.deb</li>
+<li><strong>df</strong><br>  df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。 </li>
+</ul>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8078490/55441?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8078490/55441?onlyWrong=0</a></p>
+<h3 id="问：grep和find"><a href="#问：grep和find" class="headerlink" title="问：grep和find"></a>问：grep和find</h3><p>find是根据文件名进行查找，grep是对文件的内容进行搜索</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/14452?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/14452?onlyWrong=0</a></p>
+<h3 id="问：sed"><a href="#问：sed" class="headerlink" title="问：sed"></a>问：sed</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/14510?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/14510?onlyWrong=0</a></p>
+<h3 id="问："><a href="#问：" class="headerlink" title="问："></a>问：</h3><p>init命令是进程和作业管理命令，init命令是Linux下的进程初始化工具，init进程是所有Linux进程的父进程，它的进程号为1。init命令是 Linux操作系统中不可缺少的程序之一，init进程是Linux内核引导运行的，是系统中的第一个进程。</p>
+<h3 id="问：mount"><a href="#问：mount" class="headerlink" title="问：mount"></a>问：mount</h3><p>查看磁盘挂载状态</p>
+<h3 id="问：mkdir"><a href="#问：mkdir" class="headerlink" title="问：mkdir"></a>问：mkdir</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/23226?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/23226?onlyWrong=0</a></p>
+<h3 id="问：usermod"><a href="#问：usermod" class="headerlink" title="问：usermod"></a>问：usermod</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/22122?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/22122?onlyWrong=0</a></p>
+<h3 id="问：crontab，定时任务"><a href="#问：crontab，定时任务" class="headerlink" title="问：crontab，定时任务"></a>问：crontab，定时任务</h3><p>通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script脚本，该命令前五个域是指定命令被执行的时间，最后一个域是要被执行的命令，每个域之间使用空格或者制表符分隔。</p>
+<pre><code>格式如下： minute hour day-of-month month-of-year day-of-week command
+</code></pre><p>这些项都不能为空，必须填入。如果用户不需要指定其中的几项，那么可以使用*代替。因为*是统配符，可以代替任何字符，所以就可以认为是任何时间，也就是该项被忽略了。</p>
+<pre><code>第1列表示分钟(1～59)，每分钟用*或者*/1表示
+第2列表示小时(1～23，0表示0点)
+第3列表示日期(1～31)
+第4列表示月份(1～12)
+第5列标识号星期(0～6，0表示星期天) 
+第6列要运行的命令
+
+例如：*/5 * * * * exam，表示每5分钟运行一次任务exam。
+</code></pre><h3 id="问：Linux下的输入-输出重定向"><a href="#问：Linux下的输入-输出重定向" class="headerlink" title="问：Linux下的输入/输出重定向"></a>问：Linux下的输入/输出重定向</h3><p>在Linux中，每个打开的文件被赋予一个文件描述符(file descriptor)，包括标准输入(stdin)，标准输出(stdout)和标准错误输出(stderr)，分别由0，1，2描述。</p>
+<p>command &amp;&gt; file 表示将标准输出(stdout)和标准错误输出(stderr)重定向至指定的文件file中</p>
+<p>command &gt; file 2&gt;&amp;1，是由两部分组成。首先command&gt;file表示将标准输出(stdout)重定向到文件file中。接下来的2&gt;&amp;1表示将标准错误输出(stderr)输出到文件描述符1指定的位置，即标准输出(stdout)的位置，由于标准输出已经冲定向到文件file中，所以标准错误输出也会重定向到文件file中。</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/15827?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8343455/15827?onlyWrong=0</a></p>
+<h3 id="问：Shell命令"><a href="#问：Shell命令" class="headerlink" title="问：Shell命令"></a>问：Shell命令</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/14919?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/14919?onlyWrong=0</a></p>
+<h3 id="问：Linux内存划分"><a href="#问：Linux内存划分" class="headerlink" title="问：Linux内存划分"></a>问：Linux内存划分</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/25177?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/25177?onlyWrong=0</a></p>
+<h3 id="问：Nginx"><a href="#问：Nginx" class="headerlink" title="问：Nginx"></a>问：Nginx</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/26093?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/26093?onlyWrong=0</a></p>
+<h3 id="问：fork"><a href="#问：fork" class="headerlink" title="问：fork"></a>问：fork</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8114836/14836?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8114836/14836?onlyWrong=0</a></p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/26090?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8343455/26090?onlyWrong=0</a></p>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><pre><code>统计一个文件中&quot;牛客&quot;出现的行数: grep &quot;牛客&quot; 文件名 | wc -l
+</code></pre><p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/22524?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8148327/22524?onlyWrong=0</a></p>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/25705?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8148327/25705?onlyWrong=0</a></p>
+<h3 id="孤儿进程、僵尸进程"><a href="#孤儿进程、僵尸进程" class="headerlink" title="孤儿进程、僵尸进程"></a>孤儿进程、僵尸进程</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/14857?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8148327/14857?onlyWrong=0</a></p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8148327/25761?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8148327/25761?onlyWrong=0</a></p>
+<h3 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/36306?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8322129/36306?onlyWrong=0</a></p>
+<p>###　makefile</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8322129/15416?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8322129/15416?onlyWrong=0</a></p>
+<h3 id="Linux-X-Window-System-X11"><a href="#Linux-X-Window-System-X11" class="headerlink" title="Linux X Window System (X11)"></a>Linux X Window System (X11)</h3><p>Linux X Window System中X是一个开放的协议规范，当前版本为11，俗称X11。X Window System由客户端和服务端组成，服务端X Server负责图形显示，而客户端库X Client根据系统设置的DISPLAY环境变量，将图形显示请求发送给相应的X Server。</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8343455/26052?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8343455/26052?onlyWrong=0</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/05/28/Linux/" data-id="cjhhg8yz9002oo4wrgsp2dcus" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/05/28/Linux/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/Linux/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/05/28/Advanced-Algorithms/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Advanced Algorithms
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/05/28/软件工程/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">软件工程总结</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IntelliJ IDEA使用技巧" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/工具使用/">工具使用</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="title">IntelliJ IDEA使用技巧</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:42.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/新一代构建工具Gradle/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="新一代构建工具Gradle" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/新一代构建工具Gradle/" class="title">新一代构建工具Gradle</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:28.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/全面解析Java注解/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="全面解析Java注解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java其他/">Java其他</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/全面解析Java注解/" class="title">全面解析Java注解</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:51:54.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java其他/">Java其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/工具使用/">工具使用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/慕课网/">慕课网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/05/28/Linux/';
+        
+        this.page.identifier = 'Linux';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

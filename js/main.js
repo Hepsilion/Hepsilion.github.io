@@ -1,133 +1,63 @@
-$(function () {
+(function($){
+    var toTop = ($('#sidebar').height() - $(window).height()) + 60;
+    // Caption
+    $('.article-entry').each(function(i) {
+        $(this).find('img').each(function() {
+            if (this.alt && !(!!$.prototype.justifiedGallery && $(this).parent('.justified-gallery').length)) {
+                $(this).after('<span class="caption">' + this.alt + '</span>');
+            }
 
-	$('.post__main p > img').on('click', function () {
-		console.log(this);
-		var $img = $(this);
+            // 对于已经包含在链接内的图片不适用lightGallery
+            if ($(this).parent().prop("tagName") !== 'A') {
+                $(this).wrap('<a href="' + this.src + '" title="' + this.alt + '" class="gallery-item"></a>');
+            }
+        });
+    });
+    if (typeof lightGallery != 'undefined') {
+        var options = {
+            selector: '.gallery-item',
+        };
+        $('.article-entry').each(function(i, entry) {
+            lightGallery(entry, options);
+        });
+        lightGallery($('.article-gallery')[0], options);
+    }
+    if (!!$.prototype.justifiedGallery) {  // if justifiedGallery method is defined
+        var options = {
+            rowHeight: 140,
+            margins: 4,
+            lastRow: 'justify'
+        };
+        $('.justified-gallery').justifiedGallery(options);
+    }
 
-		$.fancybox.open([{
-			src: $img.attr('src'),
-			type: 'image'
-		}]);
-	});
+    // Profile card
+    $(document).on('click', function () {
+        $('#profile').removeClass('card');
+    }).on('click', '#profile-anchor', function (e) {
+        e.stopPropagation();
+        $('#profile').toggleClass('card');
+    }).on('click', '.profile-inner', function (e) {
+        e.stopPropagation();
+    });
 
-	$('[data-fancybox]').fancybox({
-		// closeClickOutside: false, 
-		image: {
-			protect: true
-		}
-	});
+    // To Top
+    if ($('#sidebar').length) {
+        $(document).on('scroll', function () {
+            if ($(document).width() >= 800) {
+                if(($(this).scrollTop() > toTop) && ($(this).scrollTop() > 0)) {
+                    $('#toTop').fadeIn();
+                    $('#toTop').css('left', $('#sidebar').offset().left);
+                } else {
+                    $('#toTop').fadeOut();
+                }
+            } else {
+                $('#toTop').fadeIn();
+                $('#toTop').css('right', 20);
+            }
+        }).on('click', '#toTop', function () {
+            $('body, html').animate({ scrollTop: 0 }, 600);
+        });
+    }
 
-	// key bind
-
-	// j  down
-	// k  top
-	// t  page top
-	// b  page bottom
-
-	// i  go index
-	var $body = $('html');
-
-	var isKeydown = false;
-	$body.on('keydown', function (e) {
-		// console.log(e.which, 'key down');
-
-		switch (e.which) {
-			case 74: // j down
-				if (!isKeydown) {
-					isKeydown = true;
-					requestAnimationFrame(function animate() {
-						var curTop = window.scrollY;
-						window.scrollTo(0, curTop + 15);
-
-						if (isKeydown) {
-							requestAnimationFrame(animate);
-						}
-					});
-				}
-
-				break;
-
-			case 75: // k up
-				if (!isKeydown) {
-					isKeydown = true;
-					requestAnimationFrame(function animate() {
-						var curTop = window.scrollY;
-						window.scrollTo(0, curTop - 15);
-
-						if (isKeydown) {
-							requestAnimationFrame(animate);
-						}
-					});
-				}
-
-				break;
-
-			case 191: // shift + / = ? show help modal
-				break;
-
-				// 16 shift
-			case 84: // t
-				window.scrollToTop(1);
-				break;
-
-			case 66: // b
-				window.scrollToBottom();
-				break;
-
-			case 78: // n half
-				window.scrollPageDown(1);
-				break;
-
-			case 77: // m
-				window.scrollPageUp(1);
-				break;
-		}
-
-	});
-
-	$body.on('keyup', function (e) {
-		isKeydown = false;
-	});
-
-	// print hint
-
-	var comments = [
-		'',
-		'                    .::::.            快捷键：',
-		'                  .::::::::.            j：下移',
-		'                 :::::::::::            k：上移',
-		"             ..:::::::::::'             t：移到最顶",
-		"           '::::::::::::'               b：移到最底",
-		'             .::::::::::                n：下移很多',
-		"        '::::::::::::::..               m：上移很多",
-		'             ..::::::::::::.',
-		'           ``::::::::::::::::',
-		"            ::::``:::::::::'        .:::.",
-		"           ::::'   ':::::'       .::::::::.",
-		"         .::::'      ::::     .:::::::'::::.",
-		"        .:::'       :::::  .::::::::'  ':::::.",
-		"       .::'        :::::::::::::::'      ':::::.",
-		"      .::'        :::::::::::::::'          ':::.",
-		"  ...:::          :::::::::::::'              ``::.",
-		" ```` ':.         '::::::::::'                  ::::..",
-		"                    ':::::'                    ':'````..",
-		''
-	];
-
-	comments.forEach(function (item) {
-		console.log('%c' + item, 'color: #399c9c');
-	});
-
-	$('.btn-reward').on('click', function (e) {
-		e.preventDefault();
-
-		var $reward = $('.reward-wrapper');
-		$reward.slideToggle();
-	});
-
-	$('body').addClass('queue-in');
-	setTimeout(function() {
-		$('body').css({ opacity: 1}).removeClass('queue-in');
-	}, 500);
-
-});
+})(jQuery);

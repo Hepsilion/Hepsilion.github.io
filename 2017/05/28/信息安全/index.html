@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>信息安全总结 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                54
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                23
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-信息安全" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            信息安全总结
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/05/28/信息安全/">
+            <time datetime="2017-05-28T11:01:20.000Z" itemprop="datePublished">2017-05-28</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/计算机基础/">计算机基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/信息安全/">信息安全</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>信息安全</p>
+<a id="more"></a>
+<h3 id="问：计算机病毒"><a href="#问：计算机病毒" class="headerlink" title="问：计算机病毒"></a>问：计算机病毒</h3><p>计算机病毒实质上是一种特殊的计算机程序，一般具有寄生性、破坏性、传染性、潜伏性和隐蔽性</p>
+<h3 id="问：加密算法是双向的，摘要算法是单向的"><a href="#问：加密算法是双向的，摘要算法是单向的" class="headerlink" title="问：加密算法是双向的，摘要算法是单向的"></a>问：加密算法是双向的，摘要算法是单向的</h3><p>摘要算法是单向的，即明文可以通过摘要算法生成摘要结果，但反之则不能通过摘要结果还原成明文，所以不可逆；加密算法是双向的，即可以从明文通过加密算法生成密文，反之也可以通过解密算法将密文还原成明文，所以可逆。</p>
+<p><strong>对称加密算法</strong></p>
+<ul>
+<li>DES</li>
+<li>3DES</li>
+<li>AES：高级加密标准，是下一代的加密算法标准，速度快，安全级别高。 AES的区块长度固定为128比特，密钥长度则可以是128、192或256比特。</li>
+<li>Blowfish：BlowFish算法用来加密64Bit长度的字符串，它使用两个盒，一个是unsigned long pbox[18]，一个是unsigned long sbox[4*256]。</li>
+<li>Twofish</li>
+<li>IDEA</li>
+<li>RC6</li>
+<li>CAST5</li>
+<li>Serpent</li>
+</ul>
+<p>攻击DES最有效方法是密钥穷举攻击，因为它使用56位密钥过短，已经被高级加密标准如AES所替代</p>
+<p><strong>非对称加密算法</strong></p>
+<ul>
+<li>DHA(差异哈希算法)</li>
+<li>RSA：TLS/SSL协议中RSA的公钥长度一般为1024或2048位，它的安全性依赖于大数分解。</li>
+<li>EIGamal</li>
+<li>DSA：数字签名算法，是一种标准的DSS(数字签名标准)。</li>
+<li>ECC</li>
+</ul>
+<p><strong>信息摘要算法</strong></p>
+<ul>
+<li>MD5</li>
+<li>SHA1</li>
+<li>SHA512</li>
+<li>CRC-32</li>
+</ul>
+<h3 id="问：RSA"><a href="#问：RSA" class="headerlink" title="问：RSA"></a>问：RSA</h3><p><a href="https://www.nowcoder.com/profile/7404313/test/8122789/46253?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8122789/46253?onlyWrong=0</a></p>
+<h3 id="问：MD5摘要算法，不是加密算法"><a href="#问：MD5摘要算法，不是加密算法" class="headerlink" title="问：MD5摘要算法，不是加密算法"></a>问：MD5摘要算法，不是加密算法</h3><p>MD5即Message-Digest Algorithm 5(信息-摘要算法5)，用于确保信息传输完整一致，是计算机广泛使用的杂凑算法之一(又译摘要算法、哈希算法)，主流编程语言普遍已有MD5实现。将数据(如汉字)运算为另一固定长度值，是杂凑算法的基础原理，MD5的前身有MD2、MD3和MD4。</p>
+<p>MD5算法具有以下特点：</p>
+<ul>
+<li>压缩性：任意长度的数据，算出的MD5值长度都是固定的。</li>
+<li>容易计算：从原数据计算出MD5值很容易。</li>
+<li>抗修改性：对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别。</li>
+<li>弱抗碰撞：已知原数据和其MD5值，想找到一个具有相同MD5值的数据(即伪造数据)是非常困难的。</li>
+<li>强抗碰撞：想找到两个不同的数据，使它们具有相同的MD5值，是非常困难的。</li>
+</ul>
+<p>MD5的作用是让大容量信息在用数字签名软件签署私人密钥前被”压缩”成一种保密的格式(就是把一个任意长度的字节串变换成一定长的十六进制数字串)。除了MD5以外，其中比较有名的还有SHA-1、RIPEMD以及Haval等。</p>
+<p>注意：由于MD5是单向不可逆的，所以不可以解密，<strong>不能用来对文本进行加密</strong>，只能用来签名，校验数据的完整性</p>
+<h3 id="问：Https"><a href="#问：Https" class="headerlink" title="问：Https"></a>问：Https</h3><p>HTTP协议通常承载于TCP协议之上，有时也承载于TLS(安全传输层协议)或SSL(安全套接层协议Secure Sockets Layer)协议层之上，这个时候，就成了我们常说的HTTPS。</p>
+<h3 id="问：常见的攻击方法"><a href="#问：常见的攻击方法" class="headerlink" title="问：常见的攻击方法"></a>问：常见的攻击方法</h3><ul>
+<li>Vulnerability scan，缺陷/弱点扫描</li>
+<li>SQL Injection，SQL注入攻击</li>
+<li>Drive-by downloading</li>
+<li>Brute force，暴力破解</li>
+</ul>
+<h3 id="问：实现防火墙的主流技术"><a href="#问：实现防火墙的主流技术" class="headerlink" title="问：实现防火墙的主流技术"></a>问：实现防火墙的主流技术</h3><p>(1) 包过滤技术</p>
+<p>包过滤是最早使用的一种防火墙技术，包过滤技术工作的地方就是各种基于TCP/IP协议的数据报文进出的通道，它把这两层作为数据监控的对象，对每个数据包的头部、协议、地址、端口、类型等信息进行分析，并与预先设定好的防火墙过滤规则(Filtering Rule)进行核对，一旦发现某个包的某个或多个部分与过滤规则匹配并且条件为”阻止”的时候，这个包就会被丢弃。</p>
+<p>(2) 应用代理技术</p>
+<p>由于包过滤技术无法提供完善的数据保护措施，而且一些特殊的报文攻击仅仅使用过滤的方法并不能消除危害(如SYN攻击、ICMP洪水等)，因此人们需要一种更全面的防火墙保护技术，在这样的需求背景下，采用”应用代理”(Application Proxy)技术的防火墙诞生了。一个完整的代理设备包含一个服务端和客户端，服务端接收来自用户的请求，调用自身的客户端模拟一个基于用户请求的连接到目标服务器，再把目标服务器返回的数据转发给用户，完成一次代理工作过程。应用级网关和代理服务器技术都是是应用代理技术实现防火墙。</p>
+<p>(3) 状态检测技术</p>
+<p>这种防火墙技术通过一种被称为”状态监视”的模块，在不影响网络安全正常工作的前提下采用抽取相关数据的方法对网络通信的各个层次实行监测，并根据各种过滤规则作出安全决策。</p>
+<h3 id="问：能加强家用路由器的网络安全的措施"><a href="#问：能加强家用路由器的网络安全的措施" class="headerlink" title="问：能加强家用路由器的网络安全的措施"></a>问：能加强家用路由器的网络安全的措施</h3><ul>
+<li>将wifi加密方式从wep改为wpa2</li>
+<li>关闭wan管理端口</li>
+<li>关闭upnp</li>
+<li>配置MAC地址绑定</li>
+<li>升级路由器固件</li>
+</ul>
+<h3 id="问：交换机攻击"><a href="#问：交换机攻击" class="headerlink" title="问：交换机攻击"></a>问：交换机攻击</h3><p>交换机攻击主要有以下5种类型：</p>
+<ul>
+<li>vlan跳跃攻击</li>
+<li>生成树攻击</li>
+<li>mac表洪水攻击</li>
+<li>arp攻击</li>
+<li>vtp攻击</li>
+</ul>
+<h3 id="问：DNS欺骗的方式"><a href="#问：DNS欺骗的方式" class="headerlink" title="问：DNS欺骗的方式"></a>问：DNS欺骗的方式</h3><p>hosts文件篡改， 本机DNS服务器IP地址篡改，DNS通讯包篡改</p>
+<p><a href="https://www.nowcoder.com/profile/7404313/test/8122845/15110?onlyWrong=0" target="_blank" rel="external">https://www.nowcoder.com/profile/7404313/test/8122845/15110?onlyWrong=0</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2017/05/28/信息安全/" data-id="cjhhg8yzz003ko4wrbuum6xsd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2017/05/28/信息安全/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2017/05/28/信息安全/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/05/28/软件测试/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    软件测试总结
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2017/05/28/Probability-Theory/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Probability Theory</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IntelliJ IDEA使用技巧" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/工具使用/">工具使用</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="title">IntelliJ IDEA使用技巧</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:42.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/新一代构建工具Gradle/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="新一代构建工具Gradle" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/新一代构建工具Gradle/" class="title">新一代构建工具Gradle</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:28.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/全面解析Java注解/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="全面解析Java注解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java其他/">Java其他</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/全面解析Java注解/" class="title">全面解析Java注解</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:51:54.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java其他/">Java其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/工具使用/">工具使用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/慕课网/">慕课网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2017/05/28/信息安全/';
+        
+        this.page.identifier = '信息安全';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

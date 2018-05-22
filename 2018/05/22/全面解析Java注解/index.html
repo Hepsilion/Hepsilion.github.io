@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>全面解析Java注解 | Hepsilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Hepsilion">
+    <meta name="email" content="2428091608@qq.com">
+    <meta name="keywords" lang="zh-cn" content="博客, 计算机, Java">
+    <meta name="description" content="Hepsilion的博客">
+
+    
+        <link rel="alternate" href="/" title="Hepsilion" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d08353c90accd3d0f9b4a0e8e62244ab";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hepsilion</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/home">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/.">Content</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/home">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Content</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer" id="mybody">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Hepsilion</h2>
+            <h3 id="title">Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shanghai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Hepsilion">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                54
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                23
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="weixin" class=tooltip>
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/u/2472060560" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/profile.php?id=100011380133616" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-全面解析Java注解" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            全面解析Java注解
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/05/22/全面解析Java注解/">
+            <time datetime="2018-05-22T08:51:54.000Z" itemprop="datePublished">2018-05-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Java其他/">Java其他</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/慕课网/">慕课网</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a>
+<h1 id="全面解析Java注解"><a href="#全面解析Java注解" class="headerlink" title="全面解析Java注解"></a>全面解析Java注解</h1><h2 id="一、-注解概述"><a href="#一、-注解概述" class="headerlink" title="一、  注解概述"></a>一、  注解概述</h2><h4 id="1-JDK自带注解"><a href="#1-JDK自带注解" class="headerlink" title="1. JDK自带注解"></a>1. JDK自带注解</h4><ul>
+<li>@Override 告诉编译器该方法覆盖了父类的方法</li>
+<li>@Deprecated 表示该方法已经过时</li>
+<li>@Suppvisewarnings 表示忽略了”deprecation”警告</li>
+</ul>
+<h4 id="2-常见第三方注解"><a href="#2-常见第三方注解" class="headerlink" title="2. 常见第三方注解"></a>2. 常见第三方注解</h4><p>Spring中常见注解：@Autowired， @Service，@Repository</p>
+<p>Mybatis中常见注解：@InsertProvider，@UpdataProvider，@Options</p>
+<h4 id="3-Java注解的分类"><a href="#3-Java注解的分类" class="headerlink" title="3. Java注解的分类"></a>3. Java注解的分类</h4><ul>
+<li>按运行机制分类<ul>
+<li>源码注解：注解只在源码中存在，编译成.class文件就不存在了。</li>
+<li>编译时注解：注解在源码和.class文件中都存在，如JDK自带注解。</li>
+<li>运行时注解：在运行阶段依然起作用，甚至会影响程序的运行逻辑。</li>
+</ul>
+</li>
+<li>按注解来源分类：<ul>
+<li>JDK自带注解</li>
+<li>第三方注解</li>
+<li>自定义注解</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、自定义注解"><a href="#二、自定义注解" class="headerlink" title="二、自定义注解"></a>二、自定义注解</h2><h4 id="1-定义注解"><a href="#1-定义注解" class="headerlink" title="1. 定义注解"></a>1. 定义注解</h4><h5 id="自定义注解的语法要求"><a href="#自定义注解的语法要求" class="headerlink" title="自定义注解的语法要求"></a>自定义注解的语法要求</h5><ul>
+<li>使用@interface关键字定义注解，其中成员必须以无参无异常方式声明，同时可以用default为成员指定一个默认值；</li>
+<li>自定义注解的成员类型是受限的，合法的类型包括原始类型、String、Class、Annotation和Enumeration；</li>
+<li>如果注解只有一个成员，那么成员名必须取名为value()，并且在使用时可以忽略成员名和赋值号(=)；</li>
+<li>注解类可以没有成员，没有成员的注解称为标识注解。</li>
+</ul>
+<h5 id="元注解说明"><a href="#元注解说明" class="headerlink" title="元注解说明"></a>元注解说明</h5><ul>
+<li>@Target： 指定注解的作用域：<ul>
+<li>CONSTRUCTOR，构造方法</li>
+<li>FIELD，属性</li>
+<li>LOCAL_VARIABLE,局部变量</li>
+<li>METHOD，方法</li>
+<li>PACKAGE，包</li>
+<li>PARAMETER，参数</li>
+<li>TYPE 类或接口</li>
+</ul>
+</li>
+<li>@Retention： 指定注解的生命周期<ul>
+<li>SOURCE，源码级别，编译时丢失</li>
+<li>CLASS，编译级别，运行时丢失</li>
+<li>RUNTIME，运行级别，可以通过反射获取</li>
+</ul>
+</li>
+<li>@Inherited： 标识注解允许子类继承</li>
+<li>@Documented： 指定生成javadoc时会包含注解</li>
+</ul>
+<h6 id="例1：-自定义注解的实例："><a href="#例1：-自定义注解的实例：" class="headerlink" title="例1： 自定义注解的实例："></a>例1： 自定义注解的实例：</h6><pre><code>@Target({ElementType.METHOD, ElementType.Type})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+    String desc();
+    String author();
+    int age() default 18;
+}
+</code></pre><h3 id="2-使用自定义注解"><a href="#2-使用自定义注解" class="headerlink" title="2. 使用自定义注解"></a>2. 使用自定义注解</h3><p>使用注解的语法： @&lt;注解名&gt;(&lt;成员名1&gt;=&lt;成员值1&gt;, &lt;成员名2&gt;=&lt;成员值2&gt;, …)</p>
+<h6 id="例2：使用自定义注解的实例"><a href="#例2：使用自定义注解的实例" class="headerlink" title="例2：使用自定义注解的实例"></a>例2：使用自定义注解的实例</h6><pre><code>@Description(desc=&quot;I am eyeColor&quot;, author=&quot;Mooc Boy&quot;, age=18)
+public String eyeColor() {
+    return &quot;red&quot;;
+}
+</code></pre><h2 id="三、解析注解"><a href="#三、解析注解" class="headerlink" title="三、解析注解"></a>三、解析注解</h2><p>解析注解：通过反射获取类、函数或成员上的运行时注解信息，从而实现动态控制程序的运行逻辑。</p>
+<h6 id="例1：下面通过实例演示解析注解的过程"><a href="#例1：下面通过实例演示解析注解的过程" class="headerlink" title="例1：下面通过实例演示解析注解的过程"></a>例1：下面通过实例演示解析注解的过程</h6><p>(1) 定义使用自定义注解的父类</p>
+<pre><code>@Description(desc = &quot;I am annotation in parent class&quot;, author = &quot;Parent&quot;)
+public class Parent {
+    @Description(desc = &quot;I am annotation in parent method&quot;, author = &quot;Parent&quot;)
+    public String name() {
+        return &quot;name:parent&quot;;
+    }
+}
+</code></pre><p>(2) 定义使用自定义注解的子类</p>
+<pre><code>@Description(desc = &quot;I am annotation in child class&quot;, author = &quot;Child&quot;)
+public class Child extends Parent {
+    @Description(desc = &quot;I am annotation in child method&quot;, author = &quot;Child&quot;)
+    @Override
+    public String name() {
+        return &quot;name:child&quot;;
+    }
+}
+</code></pre><p>(3) 解析类和方法上的注解</p>
+<pre><code>public class Analyzer {
+    public static void main(String[] args) {
+        try {
+            // 类注解解析方式
+            Class clazz = Class.forName(&quot;Child&quot;);
+            boolean exists = clazz.isAnnotationPresent(Description.class);
+            if(exists) {
+                Description description = (Description) clazz.getAnnotation(Description.class);
+                System.out.println(description.desc());
+            }
+
+            // 第一种方法注解解析方式
+            Method[] methods = clazz.getMethods();
+            for(Method method : methods) {
+                exists = method.isAnnotationPresent(Description.class);
+                if(exists) {
+                    Description description = method.getAnnotation(Description.class);
+                    System.out.println(description.desc());
+                }
+            }
+
+            // 第二种方法注解解析方法
+            for(Method method:methods) {
+                Annotation[] annotations = method.getAnnotations();
+                for(Annotation annotation:annotations) {
+                    if(annotation instanceof Description) {
+                        Description description = (Description) annotation;
+                        System.out.println(description.desc());
+                    }
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p>解析结果如下：</p>
+<pre><code>I am annotation in child class
+I am annotation in child method
+I am annotation in child method
+</code></pre><p>注意：</p>
+<ul>
+<li>@Inherited只能实现类上注解的继承，而无法实现接口上注解的继承，即接口的注解无法影响到实现接口的类上面。</li>
+<li>父类方法的注解也无法被子类继承。</li>
+</ul>
+<h6 id="例2：修改注解如下："><a href="#例2：修改注解如下：" class="headerlink" title="例2：修改注解如下："></a>例2：修改注解如下：</h6><pre><code>@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.CLASS)
+@Inherited
+@Documented
+public @interface Description {
+    String desc();
+    String author();
+    int age() default 18;
+}
+</code></pre><p>此时解析结果没有输出，说明该注解只作用于编译阶段，运行时注解丢失    </p>
+<h6 id="例3：修改子类如下"><a href="#例3：修改子类如下" class="headerlink" title="例3：修改子类如下"></a>例3：修改子类如下</h6><pre><code>public class Child extends Parent {
+    @Override
+    public String name() {
+        return &quot;name:child&quot;;
+    }
+}
+</code></pre><p>此时解析结果如下，说明父类方法的注解无法被子类方法继承：</p>
+<pre><code>I am annotation in parent class
+</code></pre><h6 id="例4：修改父类如下"><a href="#例4：修改父类如下" class="headerlink" title="例4：修改父类如下"></a>例4：修改父类如下</h6><pre><code>@Description(desc = &quot;I am annotation in parent interface&quot;, author = &quot;Parent&quot;)
+public interface Parent {
+    String name();
+}
+</code></pre><p>修改子类如下：</p>
+<pre><code>public class Child implements Parent {
+    @Override
+    public String name() {
+        return &quot;name:child&quot;;
+    }
+}
+</code></pre><p>此时解析结果没有输出，说明接口的注解无法影响到实现接口的类。</p>
+<h2 id="四、项目实战"><a href="#四、项目实战" class="headerlink" title="四、项目实战"></a>四、项目实战</h2><p>定义类：</p>
+<pre><code>public class User {
+    private int id;
+    private String username;
+    private String nickname;
+    private int age;
+    private String city;
+    private String email;
+    private String mobile;
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getMobile() {
+        return mobile;
+    }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+}
+</code></pre><p>需求：给定上面展示的实体类及设置了相关属性的对象，实现实体对象对应的SQL查询语句</p>
+<pre><code>public static void main(String[] args) {
+    // 查询id为10的用户信息
+    User user1 = new User();
+    user1.setId(10);
+
+    // 查询username为&quot;lucy&quot;的用户信息
+    User user2 = new User();
+    user2.setUsername(&quot;lucy&quot;);
+
+    // 查询email在&quot;liu@sina.com,zh@163.com,777@qq.com&quot;中的用户信息
+    User user3 = new User();
+    user3.setEmail(&quot;liu@sina.com,zh@163.com,777@qq.com&quot;);
+
+    String sql1 = query(user1);
+    String sql2 = query(user2);
+    String sql3 = query(user3);
+
+    System.out.println(sql1);
+    System.out.println(sql2);
+    System.out.println(sql3);
+}
+</code></pre><p>实现：通过自定义注解和注解解析实现SQL转化过程</p>
+<p>(1) 定义注解Table</p>
+<pre><code>@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Table {
+    String value();
+}
+</code></pre><p>(2) 定义注解Column</p>
+<pre><code>@Target({ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Column {
+    String value();
+}
+</code></pre><p>(3) 给实体类添加注解</p>
+<pre><code>@Table(&quot;user&quot;)
+public class User {
+    @Column(&quot;id&quot;)
+    private int id;
+    @Column(&quot;username&quot;)
+    private String username;
+    @Column(&quot;nickname&quot;)
+    private String nickname;
+    @Column(&quot;age&quot;)
+    private int age;
+    @Column(&quot;city&quot;)
+    private String city;
+    @Column(&quot;email&quot;)
+    private String email;
+    @Column(&quot;mobile&quot;)
+    private String mobile;
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getMobile() {
+        return mobile;
+    }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+}
+</code></pre><p>(4) 通过注解解析实现转化过程</p>
+<pre><code>private static String query(User user) {
+    StringBuilder sb = new StringBuilder();
+
+    Class clazz = user.getClass();
+    boolean exists = clazz.isAnnotationPresent(Table.class);
+    if(!exists)
+        return null;
+    Table table = (Table) clazz.getAnnotation(Table.class);
+    String tableName = table.value();
+    sb.append(&quot;select * from &quot;).append(tableName).append(&quot; where 1=1&quot;);
+
+    Field[] fields = clazz.getDeclaredFields();
+    for(Field field:fields) {
+        exists = field.isAnnotationPresent(Column.class);
+        if(!exists)
+            continue;
+        Column column = field.getAnnotation(Column.class);
+        String fieldName = field.getName();
+        String methodName = &quot;get&quot;+fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+        Object fieldValue=null;
+        try {
+            Method method = clazz.getMethod(methodName);
+            fieldValue = method.invoke(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(fieldValue==null || (fieldValue instanceof Integer &amp;&amp; (Integer)fieldValue==0)){
+            continue;
+        }
+        sb.append(&quot; and &quot;).append(fieldName);
+        if(fieldValue instanceof String) {
+            if(((String)fieldValue).contains(&quot;,&quot;)) {
+                String[] values = ((String)fieldValue).split(&quot;,&quot;);
+                sb.append(&quot; in (&quot;);
+                for(String value: values) {
+                    sb.append(&quot;&apos;&quot;).append(value).append(&quot;&apos;&quot;).append(&quot;,&quot;);
+                }
+                sb.deleteCharAt(sb.length()-1);
+                sb.append(&quot;)&quot;);
+            }else {
+                sb.append(&quot;=&quot;).append(&quot;&apos;&quot;).append(fieldValue).append(&quot;&apos;&quot;);
+            }
+        }else {
+            sb.append(&quot;=&quot;).append(fieldValue);
+        }
+    }
+    return sb.toString();
+}
+</code></pre><p>(4) 测试输出结果：</p>
+<pre><code>select * from user where 1=1 and id=10
+select * from user where 1=1 and username=&apos;lucy&apos;
+select * from user where 1=1 and email in (&apos;liu@sina.com&apos;,&apos;zh@163.com&apos;,&apos;777@qq.com&apos;)
+</code></pre>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hepsilion.github.io/2018/05/22/全面解析Java注解/" data-id="cjhhg8z02003oo4wryeuzws1r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://hepsilion.github.io/2018/05/22/全面解析Java注解/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hepsilion.github.io/2018/05/22/全面解析Java注解/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2017/10/22/SpringMVC-07/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    07-文件上传
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2018/05/22/新一代构建工具Gradle/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">新一代构建工具Gradle</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div> 
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-edit"></i>最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="IntelliJ IDEA使用技巧" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/工具使用/">工具使用</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/IntelliJ-IDEA使用技巧/" class="title">IntelliJ IDEA使用技巧</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:42.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/新一代构建工具Gradle/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="新一代构建工具Gradle" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/新一代构建工具Gradle/" class="title">新一代构建工具Gradle</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:53:28.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/22/全面解析Java注解/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="全面解析Java注解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java其他/">Java其他</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/22/全面解析Java注解/" class="title">全面解析Java注解</a></p>
+                            <p class="item-date"><time datetime="2018-05-22T08:51:54.000Z" itemprop="datePublished">2018-05-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="07-文件上传" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-07/" class="title">07-文件上传</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:55:13.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/10/22/SpringMVC-06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://wx2.sinaimg.cn/small/e3dde130ly1fft6ucav3vj20zk0iyq5v.jpg)" alt="06-Spring MVC验证器" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/SpringMVC/">SpringMVC</a></p>
+                            <p class="item-title"><a href="/blog/2017/10/22/SpringMVC-06/" class="title">06-Spring MVC验证器</a></p>
+                            <p class="item-date"><time datetime="2017-10-22T06:53:40.000Z" itemprop="datePublished">2017-10-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-folder"></i>分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android基础/">Android基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java-Web/">Java Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java其他/">Java其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java基础/">Java基础</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java高级/">Java高级</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/动态规划/">动态规划</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/工具使用/">工具使用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/并发/">并发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/概率论与数理统计/">概率论与数理统计</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/环境配置/">环境配置</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/计算机基础/">计算机基础</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-archive"></i>归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><i class="fa fa-tag"></i>标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java/">Java</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SpringMVC/">SpringMVC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Web/">Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hadoop/">hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/信息安全/">信息安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/慕课网/">慕课网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/操作系统/">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数理统计/">数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/概率论/">概率论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/计算机网络/">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件工程/">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软件测试/">软件测试</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><i class="fa fa-link"></i>友链</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://yuren.space/blog" target="_blank">渔人</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hepsilion<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://hepsilion.github.io/2018/05/22/全面解析Java注解/';
+        
+        this.page.identifier = '全面解析Java注解';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hepsilion-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
