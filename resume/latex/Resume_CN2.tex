@@ -1,0 +1,151 @@
+\documentclass[letterpaper, UTF8, 11pt]{article}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{sectsty}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{ctex}
+\usepackage{fontawesome}
+\usepackage{setspace}
+
+\def\name{\textbf{\textcolor[rgb]{0.00, 0.00, 0.00}{\fontsize{30pt}{30pt}吴庭明}} ~~~~~~~~~ \fontsize{15pt}{15pt}}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+	colorlinks = true,
+	urlcolor = black,
+	pdfauthor = {\name},
+	pdfkeywords = {economics, statistics, mathematics},
+	pdftitle = {\name: Curriculum Vitae},
+	pdfsubject = {Curriculum Vitae},
+	pdfpagemode = UseNone
+}
+
+\geometry{
+	body={7.0in, 8.5in},
+	top=0.5in,   %1.5
+	left=0.65in, %1.0
+	right=0.65in,
+	bottom=0.5in
+}
+
+% Customize page headers
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0em}
+
+% Make lists without bullets
+%\renewenvironment{itemize}{
+%	\begin{list}{}{
+%			\setlength{\leftmargin}{0pt}
+%			\setlength{\itemsep}{0pt}
+%			\setlength{\parsep}{0pt}
+%			\setlength{\parskip}{0pt}
+%		}
+%	}{
+%\end{list}
+%}
+
+%set margin between item
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+\begin{document}
+	
+	% Place name at left
+	\noindent{\bf \name} 
+	\vspace{0.1in}
+
+	\begin{minipage}{0.45\linewidth}
+		\begin{tabular}{ll}
+			电话:   & (+86) 15921576683 \\
+			微信:   & Hepsilion \\
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}{0.45\linewidth}
+		\begin{tabular}{ll}
+			邮箱:   & \href{mailto:wutingming@hotmail.com}{ wutingming@hotmail.com} \\
+			Github: & \href{https://github.com/Hepsilion}{https://github.com/Hepsilion}\\
+		\end{tabular}
+	\end{minipage}
+	\vspace{-0.1in}
+	
+	\section*{\textbf{求职意向}}\vspace{-0.12in}
+		\textbf{Java研发工程师}
+	\vspace{-0.25in}
+	
+	\section*{\textbf{专业技能}}\vspace{-0.12in}
+	\begin{itemize}
+		\item 熟练使用Java，对Java并发、JVM有较深入的理解
+		\item 翻阅过Spring、Netty、Tomcat等开源框架与工具的源码
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{教育经历}}\vspace{-0.12in}
+	\begin{itemize}
+		\item \textbf{硕士}，2015/09 - 2018/07 ~~~~~~~~华东师范大学，软件工程  ~~~~~~~~~
+		\item \textbf{本科}，2011/09 - 2015/07 ~~~~~~~~华东师范大学，软件工程  ~~~~~~~~~
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{荣誉}}\vspace{-0.12in}
+	\begin{itemize}
+		\item \textbf{2018年度上海市优秀毕业研究生}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2018/06}
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{工作经历}}\vspace{-0.12in}
+	\begin{itemize}
+		\item \textbf{百度}， \emph{研发工程师，智能云物联网部、地图开放平台业务部}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2018/07 $\sim$ 至今}
+		\item \textbf{英特尔}， \emph{实习，WebRTC开发组，软件开发与测试}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2017/07 $\sim$ 2017/12}
+		\item \textbf{惠普}， \emph{实习，软件开发与服务部门，软件开发}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\textbf{2014/08 $\sim$ 2014/11}
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{项目经历}}\vspace{-0.12in}
+	\begin{itemize}	
+		\item \textbf{物流地图}{相关应用系统}~\textbf{2020/02 $\sim$ 至今}
+		1. 物流货运路线规划与批量算路API
+		2. 
+		3. 
+		
+		\vspace{0.03in}
+
+		\item \textbf{物流智能调度}{基于Unity3D、Android和Arduino的虚拟自行车骑行系统。}~\textbf{2019/07 $\sim$ 2020/01}
+		1. 负责项目的\textbf{方案设计、通信协议制定、客户端及其与服务端通讯过程的实现}；\\
+		2. 使用Socket实现\textbf{Android}客户端与Unity服务程序之间的VR数据交互，支持多人在线场景。
+		\vspace{0.03in}
+
+		\item \textbf{微服务网关}{基于Unity3D、Android和Arduino的虚拟自行车骑行系统。}~\textbf{2019/04 $\sim$ 2019/06}
+		1. 基于Spring Cloud Gateway定制开发了网关，设计数据结构与算法对路由逻辑进行优化
+		2. 基于ETCD设计开发了服务注册与发现组件
+		3. 设计并开发了微服务客户端，简化各业务接入过程
+		\vspace{0.03in}
+		
+		\item \textbf{\href{https://cloud.baidu.com/product/dugo.html}{物联网车辆云}}{提供位置共享服务的App，类似于微信中的位置共享。}~~~~~~~~~~~~~~~~~\textbf{2018/07 $\sim$ 2019/02}
+		1. 设计并开发车联网设备接入系统
+		2. 基于Netty设计并开发了符合GB/T 32960协议的车载设备数据接入系统，支持数据上报与指令控制等功能
+		\vspace{0.03in}	
+		
+	\end{itemize}
+	\vspace{-0.32in}
+\end{document}
