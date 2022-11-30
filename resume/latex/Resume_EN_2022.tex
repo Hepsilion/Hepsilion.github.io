@@ -1,0 +1,168 @@
+\documentclass[letterpaper, UTF8]{article}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{sectsty}
+
+
+\def\name{Tingming Wu}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+	colorlinks = true,
+	urlcolor = black,
+	pdfauthor = {\name},
+	pdfkeywords = {economics, statistics, mathematics},
+	pdftitle = {\name: Curriculum Vitae},
+	pdfsubject = {Curriculum Vitae},
+	pdfpagemode = UseNone
+}
+
+\geometry{
+	body={7.0in, 8.5in},
+	top=0.5in,   %1.5
+	left=0.55in, %1.0
+	right=0.55in,
+	bottom=0.5in
+}
+
+% Customize page headers
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0em}
+
+% Make lists without bullets
+%\renewenvironment{itemize}{
+%	\begin{list}{}{
+%			\setlength{\leftmargin}{1.5em}
+%			\setlength{\itemsep}{0pt}
+%			%\setlength{\parsep}{0pt}
+%			%\setlength{\parskip}{0pt}
+%		}
+%	}{
+%\end{list}
+%}
+
+%set margin between item
+%\usepackage{enumitem}
+%\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+%\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+%\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+\begin{document}
+	
+	% Place name at left
+	{\huge \name}
+	
+	% Alternatively, print name centered and bold:
+	%\centerline{\huge \bf \name}
+	
+	\vspace{0.15in}  % add by Kevin Wu
+	
+	\begin{minipage}{0.45\linewidth}
+		\href{http://www.ecnu.edu.cn/}{East China Normal University} \\
+		\href{http://www.sei.ecnu.edu.cn}{Department of Computer Science}  \\
+		Putuo, Shanghai 200062
+	\end{minipage}
+	\begin{minipage}{0.45\linewidth}
+		\begin{tabular}{ll}
+			Phone: & (+86) 15921576683 \\
+			Email: & \href{mailto:wutingming@hotmail.com}{\tt wutingming@hotmail.com} \\
+			Github: &  \href{https://github.com/Hepsilion}{https://github.com/Hepsilion}\\
+		\end{tabular}
+	\end{minipage}
+	\vspace{-0.1in}
+	
+	\section*{\textbf{Job Objective}}\vspace{-0.05in}
+	\begin{itemize}
+		\item Java Development Engineer
+	\end{itemize}
+	\vspace{-0.25in}
+	
+	\section*{\textbf{Skills}}\vspace{-0.05in}
+	\begin{itemize}
+		\item Java, Android, SpringMVC, Python, HTML/CSS/JavaScript, C/C++, Linux
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{Education}}\vspace{-0.05in}
+	\begin{itemize}
+		\item M.S. (Software Engineering), 2015-2018, East China Normal University.
+		\item B.S. (Software Engineering), 2011-2015, East China Normal University.
+	\end{itemize}	
+	\vspace{-0.32in}
+	
+	\section*{\textbf{Honors}}\vspace{-0.05in}
+	\begin{itemize}
+		\item First prize in the Final Contest of TIIC National Undergraduate IOT Design Contest, 2017
+		\item Third prize in East China Area Contest of National Undergraduate Cloud Computing Application Contest
+		\item Third-class scholarship from East China Normal University
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{Working Experience}}\vspace{-0.05in}
+	\begin{itemize}
+		\item \textbf{Intel, Shanghai}, \emph{Intern in Intel WebRTC development team}, 07/2017 - present  \\
+		 1. We developed a WebRTC-based realtime communication solution to provide P2P and Conference services.\\
+		 2. I wrote Python scripts for building WebRTC source code and for compiling, packing, publishing and downloading SDK automatically.\\
+		 3. I engaged in implementing part of SDK features and repairing bugs existing in SDK souce code
+		\item \textbf{Hewlett-Packard, Shanghai}, \emph{Intern in Software development team}, 08/2014 - 11/2014  \\
+		 1. I enaged in developing an internal project management tool and implementing part of business logic using SpringMVC.
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{Projects}}
+	\begin{itemize}
+		\item \textbf{Virtual Reality Bike}. 12/2016 - 01/2017\\
+		1. It is a virtual reality bike system implemented using Unity3D, Android and Arduino.\\
+		2. I was responsible for project design, communication protocol design and implementing communication process between clients and server.\\
+		3. VR data communication between Android Client and Unity Server is implemented using Socket and our project supports multiple clients sharing the same scene.
+		
+		\item \textbf{Location Sharing Map}. 02/2013 - 06/2013\\
+		1. Its is An app providing location sharing like the function in WeChat.\\
+		1. I was responsible for project design and implement client program and server program.\\
+		2. Concurrent scene is implemented using thread and each communicate with server by a socket.\\
+		3. A client app fetches its location data using a Service and shares it with peer client through the server. 
+		
+		\item \textbf{Cloudsim}. 09/2015 - 01/2016\\
+		1. It is a simulation tool for cloud computing scheduling study.\\		
+		1. I engaged in project development, repair some bugs and implement some functions.\\
+		2. I used CloudSim to do some research and complete some papers, patents and software copyrights.		
+		
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\section*{\textbf{Research Experience}}\vspace{-0.15in}
+	\begin{itemize}	
+		\item \small Papers: (under review)\\
+		1. Energy-Aware Virtual Machine Allocation in the Cloud with Resource Reservation: An Evolutionary Approach.\\
+		2. Energy-Efficient Task Scheduling for Workflow Applications in DVFS-Enabled Cloud Considering Soft Errors.
+		\item Patent: A heuristic method for energy-efficient cloud resource scheduling and allocation (Patent number:201610966411.5)
+		\item Software Copyright: A software for energy-efficient cloud task scheduling (Acceptance number: 2017R11S093585)
+	\end{itemize}
+	\vspace{-0.32in}
+	
+	\bigskip
+	% Footer
+	%\begin{center}
+	%	\begin{footnotesize}
+	%		Last updated: \today 
+	%	\end{footnotesize}
+	%\end{center}
+\end{document}
